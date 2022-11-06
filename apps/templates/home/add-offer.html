@@ -32,6 +32,8 @@
 				</ul>
 			</div>
 			<div class="row">
+
+
 				<div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
@@ -45,63 +47,65 @@
 
 							<div class="form-group">
 							<tr>
-							<label>User ID</label>
-							<td><input type = "text" name = "usr_id" class="form-control" /></td>
+							<label>Customer Name</label>
+							<select name="main_usr_select" class="form-control input-fixed">
+								{% for user in users %}
+								<option>{{ user.customer_name }}</option>
+								{% endfor %}
+
+							</select>
 							</tr>
 							</div>
 
 
 							<div class="form-group">
 							<tr>
-							<label>NAME</label>
+							<label>Reference No</label>
 							<td><input type = "text" name = "usr_name" class="form-control" /></td>
 							</tr>
 							</div>
 
 
-							<div class="form-group" >
-							<tr>
-							<label>Password</label>
-							<td><input type = "text" name = "usr_password" class="form-control" /></td>
-							</tr>
-							</div>
-
-
 								</div>
 								<div class="col-md-6 col-lg-4">
 									<div class="form-group">
 										<tr>
-										<label >API KEY</label>
-										<td><input type = "text" name = "usr_api_key" class="form-control" /></td>
+										<label >Due Date</label>
+										<td><input type="date" id="start" name="trip-start"value="2018-07-22" min="2060-01-01" max="2018-12-31"></td>
 										</tr>
 									</div>
 									<div class="form-group">
 										<tr>
-										<label>API SECRET KEY</label>
+										<label>Marketing Person</label>
 										<td><input type = "text" name = "usr_api_secret_key" class="form-control" /></td>
 										</tr>
 									</div>
-									<div class="form-group">
-										<tr>
-										<label>TOTP KEY</label>
-										<td><input type = "text" name = "usr_totp_key" class="form-control" /></td>
-										</tr>
-									</div>
-
 								</div>
+
+
+
 								<div class="col-md-6 col-lg-4">
 									<div class="form-group">
 										<tr>
-										<label>AUTOLOGIN</label>
+										<label>Offer Type</label>
 										<td>
 										<select name="usr_autologin_status" class="form-control">
-										<option value="YES">YES</option>
-										<option value="NO">NO</option>
+										<option value="YES">Spares</option>
+										<option value="NO">Kits</option>
 										</select>
 										</td>
 										</tr>
 									</div>
-						</div>
+									<div class="form-group">
+										<tr>
+										<label>Currency Type</label>
+										<td><input type = "text" name = "usr_totp_key" class="form-control" /></td>
+										</tr>
+									</div>
+								</div>
+								
+
+
 						<div class="card-action">
 							<tr>
 								<td colspan="3">
@@ -114,6 +118,13 @@
 				</form>
 			</div>
 		</div>
+
+
+
+
+
+		
+
 	</div>
 </div>
 </div>

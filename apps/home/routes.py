@@ -25,7 +25,8 @@ def dashboard():
 @login_required
 def create():
     if request.method == 'GET':
-        return render_template('home/add-offer.html',segment='offer-addoffer')
+        users = CustomerMaster.query.all()
+        return render_template('home/add-offer.html',users=users,segment='offer-addoffer')
     if request.method == 'POST':
         usr_id = request.form['usr_id']
         usr_name = request.form['usr_name']
