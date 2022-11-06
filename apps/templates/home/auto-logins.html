@@ -1,0 +1,396 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Autologin {% endblock %}
+
+{% block stylesheets %}
+{% endblock stylesheets %}
+
+{% block content %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+
+<script type="text/javascript">
+$(document).ready(function($) 
+{
+
+	//--->deletel single row > start
+	function remove_curr_tbl_row(ele) 
+	{	 
+		ele.closest('tr').css('background-color', 'red');
+		
+		ele.closest('tr').fadeOut('slow', function()
+		{
+			$(this).remove();
+		}); 	
+	};
+
+	$(document).on('click', '.btn_delete', function(event) 
+	{
+		event.preventDefault();
+
+		remove_curr_tbl_row($(this));
+	}); 		
+	//--->deletel single row > start
+	 
+
+	//--->select/unselect all > start
+	 function select_unselect_checkbox (this_el, select_el) 
+	 {
+
+		if(this_el.prop("checked"))
+		{
+			select_el.prop('checked', true);
+		}
+		else
+		{ 
+			select_el.prop('checked', false);				 
+		}
+	 };
+
+	$(document).on('change', '.select_all_items', function(event) 
+	{
+		event.preventDefault();
+
+		var ele = $(document).find('.item_id'); 
+
+		select_unselect_checkbox($(this), ele); 
+	});
+	$(document).on('change', '.select_all_items1', function(event) 
+	{
+		event.preventDefault();
+
+		var ele = $(document).find('.item_id1'); 
+
+		select_unselect_checkbox($(this), ele); 
+	});
+	$(document).on('change', '.select_all_items2', function(event) 
+	{
+		event.preventDefault();
+
+		var ele = $(document).find('.item_id2'); 
+
+		select_unselect_checkbox($(this), ele); 
+	});
+	//--->select/unselect all > end
+
+
+
+	//--->deletel selected rows > start
+	function remove_all_checked_val(ele) 
+	{	 
+		ele.each(function(index, v1)
+		{   
+			if($(this).prop("checked")) 
+			 {
+				$(this).closest('tr').css('background-color', 'red');
+				
+				$(this).closest('tr').fadeOut('slow', function()
+				{
+					$(this).remove();
+				}); 
+			} 
+		});
+	};
+	$(document).on('click', '.btn_delete_val', function(event) 
+	{
+		event.preventDefault();
+
+		var ele = $(document).find('.item_id'); 
+		var v1 = remove_all_checked_val(ele);
+	});
+	//--->deletel selected rows > end
+
+	//--->get selected rows values > start
+
+	function get_all_checked_val(ele, attr_lookup) 
+	{  
+		var get_obj = [];
+		ele.each(function(index, v1)
+		{   
+			if($(this).prop("checked")) 
+			 {
+				get_obj.push($(this).attr(attr_lookup));
+			} 
+		});			
+		return get_obj;
+	};
+
+
+	$(document).on('click', '.btn_get_val', function(event) 
+	{
+		event.preventDefault();
+
+		var ele = $(document).find('.item_id'); 
+
+		var v1 = get_all_checked_val(ele, 'option_id');
+		var check_buttons = []
+		check_buttons.push(get_all_checked_val(ele, 'check_box_autologin'))
+		v1.push(check_buttons, 'btn_usr_autologin_selected')
+		console.log(v1); // Prints the variables to console window, which are in the JSON format
+		console.log(check_buttons); // Prints the variables to console window, which are in the JSON format
+
+        $.ajax({
+            url:"/print_data",
+            type:"POST",
+            contentType: "application/json",
+            data: JSON.stringify(v1)});
+
+	});		
+
+	$(document).on('click', '.btn_get_val1', function(event) 
+	{
+		event.preventDefault();
+
+		var ele = $(document).find('.item_id1'); 
+
+		var v1 = get_all_checked_val(ele, 'option_id1');
+
+		
+		var check_buttons = []
+		check_buttons.push(get_all_checked_val(ele, 'check_box_autoverify'))
+		v1.push(check_buttons, 'btn_usr_autoverify_selected')
+		console.log(v1); // Prints the variables to console window, which are in the JSON format
+		console.log(check_buttons); // Prints the variables to console window, which are in the JSON format
+
+        $.ajax({
+            url:"/print_data",
+            type:"POST",
+            contentType: "application/json",
+            data: JSON.stringify(v1)});
+
+	});	
+	
+	$(document).on('click', '.btn_get_val2', function(event) 
+	{
+		event.preventDefault();
+
+		var ele = $(document).find('.item_id2'); 
+
+		var v1 = get_all_checked_val(ele, 'option_id2');
+
+		var check_buttons = []
+		check_buttons.push(get_all_checked_val(ele, 'check_box_autologout'))
+		v1.push(check_buttons, 'btn_usr_autologout_selected')
+		console.log(v1); // Prints the variables to console window, which are in the JSON format
+
+        $.ajax({
+            url:"/print_data",
+            type:"POST",
+            contentType: "application/json",
+            data: JSON.stringify(v1)});
+
+	});	
+
+	//--->get selected rows values > end
+	
+
+
+});
+</script>
+
+<body>
+
+<div class="content">
+<div class="page-inner">
+	<div class="page-header">
+		<h4 class="page-title">USERS</h4>
+		<ul class="breadcrumbs">
+			<li class="nav-home">
+				<a href="/">
+					<i class="flaticon-home"></i>
+				</a>
+			</li>
+			<li class="separator">
+				<i class="flaticon-right-arrow"></i>
+			</li>
+			<li class="nav-item">
+				<a href="/usr-users">Users</a>
+			</li>
+			<li class="separator">
+				<i class="flaticon-right-arrow"></i>
+			</li>
+			<li class="nav-item">
+				<a href="/usr-autologins">Autologins</a>
+			</li>
+		</ul>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				
+				<div class="card-body">
+					<ul class="nav nav-pills nav-secondary nav-pills-no-bd" id="pills-tab" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="True">AUTO LOGIN</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">AUTO VERIFY</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">AUTO LOGOUT</a>
+						</li>
+					</ul>
+
+
+					<div class="tab-content mt-2 mb-3" id="pills-tabContent">
+						<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="add-row" class="display table table-striped table-hover" >
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>User ID</th>
+												<th>Name</th>
+												<th>Access_key_time</th>
+												<th>Autologin_status</th>
+												<th><input type="checkbox"  class="select_all_items"></th>
+												<th style="width: 10%">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+										{% for user in users %}
+											<tr
+											{% if loop.index %2==0 %}
+											style="background-color: rgb(255, 217, 247);"
+											{% else %}
+											style="background-color: rgb(248, 169, 231);"
+											{% endif %}
+											>
+											<tr>
+												<td>{{ loop.index }}</td>
+												<td>{{user.usr_id}}</td>
+												<td>{{user.usr_name}}</td>
+												<td>{{user.usr_access_key_time}}</td>
+												<td></td>
+												<td><input type="checkbox"  name= 'chk_usr_autologin' class="item_id" option_id={{user.usr_id}} check_box_autologin="chk_usr_autologin"></td>	
+													<td>
+													<span style="font-size: 24px;color:green;">
+													<a href="/{{user.id}}/login"> <i class="fas fa-sign-in-alt" ></i></a> </span>
+													</td>
+											</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+								</div>
+								<div class="card-action">
+								<tr>
+									<td colspan="3">
+										<div class="btn btn-secondary btn_get_val"  autologin_button = "btn_usr_autologin_selected" onclick="btn_get_val">Login Selected</div>
+	
+									</td>
+									</tr>
+							</div>
+							</div>
+						</div>
+	 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+		<div class="card-body">
+			<div class="table-responsive">
+				<table id="add-row1" class="display table table-striped table-hover" >
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>User ID</th>
+							<th>Name</th>
+							<th>Autoverify_status</th>
+							<th><input type="checkbox" class="select_all_items1"></th>
+							<th style="width: 10%">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for user in users %}
+						<tr
+						{% if loop.index %2==0 %}
+						style="background-color: rgb(255, 217, 247);"
+						{% else %}
+						style="background-color: rgb(248, 169, 231);"
+						{% endif %}
+						>
+						<tr>
+							<td>{{ loop.index }}</td>
+							<td>{{user.usr_id}}</td>
+							<td>{{user.usr_name}}</td>
+							<td></td>
+							<td><input type="checkbox" class="item_id1" name= 'chk_usr_autoverify' option_id1={{user.usr_id}} check_box_autoverify="chk_usr_autoverify"></td>
+								<td>
+								<span style="font-size: 24px;color:red;">
+								<a href=""> <i class="fas fa-check"></i></a>
+								</span>
+								</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<div class="card-action">
+			<tr>
+				<td colspan="3">
+					<div class="btn btn-secondary btn_get_val1" onclick="btn_get_val1">Verify Selected</div>
+				</td>
+				</tr>
+		</div>
+		</div>
+	</div>
+
+
+
+	<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+		<div class="card-body">
+			<div class="table-responsive">
+				<table id="add-row1" class="display table table-striped table-hover" >
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>User ID</th>
+							<th>Name</th>
+							<th>Autologin</th>
+							<th>Autologout_status</th>
+							<th><input type="checkbox"class="select_all_items2"></th>
+							<th style="width: 10%">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for user in users %}
+						<tr
+						{% if loop.index %2==0 %}
+						style="background-color: rgb(255, 217, 247);"
+						{% else %}
+						style="background-color: rgb(248, 169, 231);"
+						{% endif %}
+						>
+						<tr>
+							<td>{{ loop.index }}</td>
+							<td>{{user.usr_id}}</td>
+							<td>{{user.usr_name}}</td>
+							<td>{{user.usr_autologin_status}}</td>
+							<td></td>
+							<td><input type="checkbox" class="item_id2" option_id2={{user.usr_id}} name="chk_usr_autologout" check_box_autologout="chk_usr_autologout"></td>
+								<td>
+								<span style="font-size: 24px;color:red;">
+								<a href=""> <i class="fas fa-user-alt-slash"></i></a>
+								</span>
+								</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<div class="card-action">
+			<tr>
+				<td colspan="3">
+					<div class="btn btn-secondary btn_get_val2" onclick="btn_get_val2">Logout Selected</div>
+
+				</td>
+				</tr>
+		</div>
+		</div>
+
+	</div>
+
+	<div style="padding:10px;"></div>
+	<div class="post_msg"></div>
+
+ </div>
+</div>
+
+{% endblock content %}

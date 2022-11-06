@@ -1,0 +1,124 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add User {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Add Users</h4>
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="">Users</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="">Add Users</a>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Update Customer</div>
+						</div>
+
+						<form action='' method = "POST">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-6 col-lg-4">
+
+							<div class="form-group">
+							<tr>
+							<label>Customer Name</label>
+							<td><input type = "text" name = "customer_name" value="{{user.customer_name}}" class="form-control" /></td>
+							</tr>
+							</div>
+
+
+							<div class="form-group">
+							<tr>
+							<label>Primary Contact Person</label>
+							<td><input type = "text" name = "primary_contact_name" value="{{user.primary_contact_name}}" class="form-control" /></td>
+							</tr>
+							</div>
+
+
+							<div class="form-group" >
+							<tr>
+							<label>Secondary Contact Person</label>
+							<td><input type = "text" name = "secondary_contact_name" value="{{user.secondary_contact_name}}" class="form-control" /></td>
+							</tr>
+							</div>
+							</div>
+
+
+
+								<div class="col-md-6 col-lg-4">
+									<div class="form-group">
+										<tr>
+										<label >Email ID</label>
+										<td><input type = "text" name = "email_id" value="{{user.email_id}}" class="form-control" /></td>
+										</tr>
+									</div>
+									<div class="form-group">
+										<tr>
+										<label>CONTACT NO</label>
+										<td><input type = "text" name = "contact_number" value="{{user.contact_number}}"  class="form-control" /></td>
+										</tr>
+									</div>
+									<div class="form-group">
+										<tr>
+										<label>PAN NO</label>
+										<td><input type = "text" name = "pan_number" value="{{user.pan_number}}" class="form-control" /></td>
+										</tr>
+									</div>
+
+								</div>
+
+								
+								<div class="col-md-6 col-lg-4">
+									<div class="form-group">
+										<tr>
+										<label>GST NO</label>
+										<td><input type = "text" name = "gst_number" value="{{user.gst_number}}" class="form-control" /></td>
+										</tr>
+									</div>
+									<div class="form-group">
+										<tr>
+										<label>ADDRESS</label>
+										<td><input type = "text" name = "address" value="{{user.address}}" class="form-control" /></td>
+										</tr>
+									</div>
+								</div>
+						<div class="card-action">
+							<tr>
+								<td colspan="3">
+									<input type="submit" name="submit" value="submit" class="btn btn-success" >
+								</td>
+								</tr>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+{% endblock content %}

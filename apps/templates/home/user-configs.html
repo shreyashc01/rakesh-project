@@ -1,0 +1,293 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Config {% endblock %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+<style>
+	/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+</style>
+
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">User Configs</h4>
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="/">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+
+					<li class="nav-item">
+						<a href="/configs-common">Settings</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="/configs-users">User Configs</a>
+					</li>
+				</ul>
+			</div>
+
+
+	<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<form action='' method = "POST">
+					<div class="card-body">
+
+						
+						<div class="form-check">
+					<label>SET STRIKE</label><br/>
+					<select name="cmn_set_strike" class="form-control">
+					<option value="AUTO" {% if data=="AUTO" %} selected="selected"{% endif %}>AUTO</option>
+					<option value="MANUAL" {% if data=="MANUAL" %} selected="selected"{% endif %}>MANUAL</option>
+					</select>
+					<button class="btn btn-secondary" name="btn_cmn_set_strike_apply">Apply</button>
+				</div>
+				
+				
+				</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+					<td><p type = "text" style="font-size: 65px; font-family:courier;">{{data}}</p></td>
+			</div>
+
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-body">	
+						<ul class="nav nav-pills nav-secondary nav-pills-no-bd" id="pills-tab-without-border" role="tablist">
+
+							<li class="nav-item">
+								<a class="nav-link active" id="pills-profile-tab-nobd" data-toggle="pill" href="#pills-profile-nobd" role="tab" aria-controls="pills-profile-nobd" aria-selected="false">AUTO configs</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-contact-tab-nobd" data-toggle="pill" href="#pills-contact-nobd" role="tab" aria-controls="pills-contact-nobd" aria-selected="false">MANUAL configs</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-contact-tab-nobd1" data-toggle="pill" href="#pills-contact-nobd1" role="tab" aria-controls="pills-contact-nobd" aria-selected="false">OTHER CONFIGS</a>
+							</li>
+						</ul>
+						<div class="tab-content mt-2 mb-3" id="pills-without-border-tabContent">
+							<! $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<! $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+							<div class="tab-pane fade show active" id="pills-profile-nobd" role="tabpanel" aria-labelledby="pills-profile-tab-nobd">
+								
+					<div class="card-body">
+											
+						<div class="table-responsive">
+							<table id="add-row2" class="table table-bordered table-head-bg-secondary table-bordered-bd-info mt-4" >
+
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>User ID</th>
+										<th>Name</th>
+										<th>Premium to sell</th>
+										<th>Strike to buy</th>
+										<th>Actions </th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for user in users %}
+									<tr
+									{% if loop.index %2==0 %}
+									style="background-color: rgb(255, 217, 247);"
+									{% else %}
+									style="background-color: rgb(248, 169, 231);"
+									{% endif %}
+									>
+									<tr>
+										<td>{{ loop.index }}</td>
+										<td>{{user.usr_id}}</td>
+										<td>{{user.usr_name}}</td>
+
+										<td>
+										<div class="form-button-action">
+										<h>Nifty</h>
+										
+										<input type = "number" value="{{user.usr_aut_prem_to_sell_nifty}}" name= "{{'usr_aut_prem_to_sell_nifty'+user.usr_id}}" >
+										
+										</div>
+											&ensp;
+
+										<div class="form-button-action">
+										<h>Bank</h>
+										<input placeholder="" type = "number"  value="{{user.usr_aut_prem_to_sell_bank}}" name= "{{'usr_aut_prem_to_sell_bank'+user.usr_id}}">
+										</div>
+										&ensp;
+										</td>
+									
+
+										<td>
+										<div class="form-button-action">
+										<h>Nifty</h>
+										<input placeholder="" type = "number" value="{{user.usr_aut_stike_to_buy_nifty}}" name="{{'usr_aut_stike_to_buy_nifty'+user.usr_id}}">
+										</div>
+											&ensp;
+
+										<div class="form-button-action">
+										<h>Bank</h>
+										<input type = "number" value="{{user.usr_aut_stike_to_buy_bank}}" name="{{'usr_aut_stike_to_buy_bank'+user.usr_id}}">
+										</div>
+											&ensp;
+										</td>
+
+										<td>
+											<button class="btn btn-secondary" name=btn_usr_aut_apply value="{{user.usr_id}}">Apply</button>
+										</td>
+
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+							<td><button class="btn btn-secondary" name=btn_usr_aut_apply_all >Apply All</button></td>
+						
+					
+							</div>
+							
+							
+							
+							
+							<div class="tab-pane fade" id="pills-contact-nobd" role="tabpanel" aria-labelledby="pills-contact-tab-nobd">
+
+					<div class="card-body">
+						
+						<div class="table-responsive">
+							<table id="add-row1" class="table table-bordered table-head-bg-secondary table-bordered-bd-info mt-4" >
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>User ID</th>
+										<th>Name</th>
+										<th>Nifty Setting</th>
+										<th>Bank Nifty Setting</th>
+										<th>Actions </th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for user in users %}
+									<tr
+									{% if loop.index %2==0 %}
+									style="background-color: rgb(255, 217, 247);"
+									{% else %}
+									style="background-color: rgb(248, 169, 231);"
+									{% endif %}
+									>
+									<tr>
+										<td>{{ loop.index }}</td>
+										<td>{{user.usr_id}}</td>
+										<td>{{user.usr_name}}</td>
+										<td>
+										<div class="form-button-action">
+										<h>Order 1(BUY)</h>
+										<input type = "number" name="{{'usr_man_odr_1buy_nifty'+user.usr_id}}" value="{{user.usr_man_odr_1buy_nifty}}">
+										</div>
+											&ensp;
+											<div class="form-button-action">
+										<h>Order 2(SELL)</h>
+										<input type = "number" name="{{'usr_man_odr_2sell_nifty'+user.usr_id}}" value="{{user.usr_man_odr_2sell_nifty}}">
+											</div>
+											&ensp;
+										</td>
+										<td>
+
+										<div class="form-button-action">
+										<h>Order 1(BUY)</h>
+										<input type="number"  name="{{'usr_man_odr_1buy_bank'+user.usr_id}}" value="{{user.usr_man_odr_1buy_bank}}">
+										</div>
+										&ensp;
+										<div class="form-button-action">
+										<h>Order 2(SELL)</h>
+										<input type="number" name="{{'usr_man_odr_2sell_bank'+user.usr_id}}" value="{{user.usr_man_odr_2sell_bank}}">
+										</div>
+										<td>
+										<button class="btn btn-secondary" name=btn_usr_man_apply value="{{user.usr_id}}">Apply</button>
+										</td>
+
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<td><button class="btn btn-secondary" name=btn_usr_man_apply_all >Apply All</button></td>
+					</div>
+					<div class="tab-pane fade" id="pills-contact-nobd1" role="tabpanel" aria-labelledby="pills-contact-tab-nobd1">
+								
+					<div class="card-body">
+						<div class="table-responsive">
+							<table id="add-row3" class="table table-bordered table-head-bg-secondary table-bordered-bd-info mt-4" >
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>User ID</th>
+										<th>Name</th>
+										<th>Funds not to use</th>
+										<th>Max Qt</th>
+										<th>Actions </th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for user in users %}
+									<tr
+									{% if loop.index %2==0 %}
+									style="background-color: rgb(255, 217, 247);"
+									{% else %}
+									style="background-color: rgb(248, 169, 231);"
+									{% endif %}
+									>
+									<tr>
+										<td>{{ loop.index }}</td>
+										<td>{{user.usr_id}}</td>
+										<td>{{user.usr_name}}</td>
+										   <td><input type = "number" name="{{'usr_funds_not_to_use'+user.usr_id}}" value="{{user.usr_funds_not_to_use}}"></td>
+										   <td><input type = "number" name="{{'usr_max_qty'+user.usr_id}}" value="{{user.usr_max_qty}}"></td>
+										<td>
+										<button class="btn btn-secondary" name=btn_usr_oth_apply value="{{user.usr_id}}">Apply</button>
+										</td>
+
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+							<td><button class="btn btn-secondary" name=btn_usr_oth_apply_all >Apply All</button></td>
+					
+							</div>
+
+					<!$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+						</div>
+						</form>
+					</div>
+				</div>
+
+{% endblock content %}

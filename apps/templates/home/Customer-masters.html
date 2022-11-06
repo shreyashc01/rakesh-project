@@ -1,0 +1,235 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Datatables {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Customers</h4>
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Tables</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Datatables</a>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="d-flex align-items-center">
+								<h4 class="card-title">Add Customer</h4>
+								<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+									<i class="fa fa-plus"></i>
+									Add Customer
+								</button>
+							</div>
+						</div>
+						<div class="card-body">
+							<!-- Modal -->
+							<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header no-bd">
+											<h5 class="modal-title">
+												<span class="fw-mediumbold">
+													Customer
+												</span>
+											</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<form action='' method = "POST">
+										<div class="modal-body">
+											<p class="small">Add New Customer</p>
+											
+												<div class="row">
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>Customer Name</label>
+															<input name="customer_name" type="text" class="form-control" placeholder="Fill Customer name">
+														</div>
+													</div>
+													<div class="col-md-6 pr-0">
+														<div class="form-group form-group-default">
+															<label>Primary Contact Person</label>
+															<input name="primary_contact_name" type="text" class="form-control" placeholder="Fill Primary Contact Person">
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group form-group-default">
+															<label>Secondary Contact Person</label>
+															<input name="secondary_contact_name" type="text" class="form-control" placeholder="Fill Secondary Contact Person">
+														</div>
+													</div>
+                                                    <div class="col-md-6">
+														<div class="form-group form-group-default">
+															<label>Email ID</label>
+															<input name="email_id" type="text" class="form-control" placeholder="Fill Email ID">
+														</div>
+													</div>
+                                                    <div class="col-md-6">
+														<div class="form-group form-group-default">
+															<label>Contact No</label>
+															<input name="contact_number" type="text" class="form-control" placeholder="Fill Contact No">
+														</div>
+													</div>
+                                                    <div class="col-md-6">
+														<div class="form-group form-group-default">
+															<label>PAN No</label>
+															<input name="pan_number" type="text" class="form-control" placeholder="Fill PAN No">
+														</div>
+													</div>
+                                                    <div class="col-md-6">
+														<div class="form-group form-group-default">
+															<label>GST No</label>
+															<input name="gst_number" type="text" class="form-control" placeholder="Fill GST No">
+														</div>
+													</div>
+                                                    <div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>Address</label>
+															<input name="address" type="text" class="form-control">
+														</div>
+													</div>
+												</div>
+										</div>
+										<div class="card-action">
+											<button class="btn btn-secondary">Add</button>
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+										</div>
+
+									</form>
+									</div>
+								</div>
+							</div>
+
+							<div class="table-responsive">
+								<table id="add-row" class="display table table-striped table-hover" >
+									<thead>
+										<tr>
+											<th>Customer Name</th>
+											<th>Address</th>
+                                            <th>Primary Contact Person</th>
+											<th>Email ID</th>
+											<th>Contact No</th>
+											
+											<th style="width: 10%">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										
+									{% for user in users %}
+											<tr
+											{% if loop.index %2==0 %}
+											{% else %}
+											{% endif %}
+											>
+											<td>{{user.customer_name}}</td>
+											<td>{{user.address}}</td>
+											<td>{{user.primary_contact_name}}</td>
+											<td>{{user.email_id}}</td>
+											<td>{{user.contact_number}}</td>
+											<td>
+											<div class="form-button-action">
+											<span style="font-size: 24px;color:green;">
+											<a href="/{{user.id}}/editcustomer" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fas fa-edit" ></i></a> 
+											</span>
+											<span style="font-size: 24px;color:red;">
+											<a href="/{{user.id}}/deletecustomer" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fas fa-times"></i></a>
+											</span>
+											</div>
+											</td>
+										</tr>
+									{% endfor %}
+
+
+									</tbody>
+
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script >
+		$(document).ready(function() {
+			$('#basic-datatables').DataTable({
+			});
+
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+
+			// Add Row
+			$('#add-row').DataTable({
+				"pageLength": 5,
+			});
+
+			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+			$('#addRowButton').click(function() {
+				$('#add-row').dataTable().fnAddData([
+					$("#addName").val(),
+					$("#addPosition").val(),
+					$("#addOffice").val(),
+					action
+					]);
+				$('#addRowModal').modal('hide');
+
+			});
+		});
+	</script>
+
+{% endblock javascripts %}

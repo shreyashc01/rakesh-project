@@ -1,0 +1,243 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Running Config {% endblock %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<style>
+	/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+</style>
+
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Common Configs</h4>
+				<ul class="breadcrumbs">
+
+					<li class="nav-home">
+						<a href="/">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+
+					<li class="nav-item">
+						<a href="/configs-common">Settings</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="/configs-common">Common Configs</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+				<div class="col-md-6">
+					<div class="card">
+						<form action='' method = "POST">
+						<div class="card-body">
+							<tbody>
+								{% for user in users %}
+									<tr
+									{% if loop.index %2==0 %}
+									{% else %}
+									{% endif %}
+									>
+
+							<div class="form-check">
+										<label>Fetch Auto Expiry at Autologin</label><br/>
+										<select name="cmn_fetch_autoexpiry" class="form-control">
+											<option value="YES" {% if user.cmn_fetch_autoexpiry=="YES" %} selected="selected"{% endif %}>YES</option>
+											<option value="NO" {% if user.cmn_fetch_autoexpiry=="NO" %} selected="selected"{% endif %}>NO</option>
+											</select>
+										
+								<button class="btn btn-secondary" name="btn_cmn_fetch_autoexpiry_at_autologin_apply">Apply</button>
+									</div>
+
+
+							<div class="form-group">
+										<tr>
+										<label>EXPIRY</label>
+										<td><input type = "text" name = "cmn_expiry" value="{{user.cmn_expiry}}" class="form-control" /></td>
+										</tr>
+									</div>
+							<button class="btn btn-secondary" name="btn_cmn_get_latest_expiry">Get Lastest Expiry</button>
+							<button class="btn btn-secondary" name="btn_cmn_expiry_apply">Apply</button>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-body">
+							<table class="table mt-3">
+								<thead>
+									<tr>
+										<th scope="col">AUTOSWITCH PREMIUM</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>NIFTY </td>
+										<div class="form-group">
+										<td><input value="{{user.cmn_autoswitch_premium_nifty}}" type = "number" name = "cmn_autoswitch_premium_nifty" class="form-control" /></td>
+										</div>
+
+									</tr>
+									<tr>
+										<td>BANKNIFTY</td>
+										<div class="form-group">
+										<td><input placeholder=""  value="{{user.cmn_autoswitch_premium_bank}}" type = "number" name = "cmn_autoswitch_premium_bank" class="form-control" /></td>
+										</div>
+
+									</tr>
+
+								</tbody>
+							</table>
+							<button class="btn btn-secondary" name="btn_cmn_autoswitch_premium_apply">Apply</button>
+						</div>
+					</div>
+
+
+					<div class="card">
+						<div class="card-body">
+							<table class="table mt-3">
+								<thead>
+									<tr>
+										<th scope="col">MAX NIFTY QTY PER TRADE</th>
+										<th scope="col">MAX BANK NIFTY QTY PER TRADE</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<div class="form-group">
+										<td><input value="{{user.cmn_max_qty_trade_nifty}}"  type = "number" name = "cmn_max_qty_trade_nifty" class="form-control" /></td>
+										</div>
+										<div class="form-group">
+										<td><input value="{{user.cmn_max_qty_trade_bank}}"  type = "number" name = "cmn_max_qty_trade_bank" class="form-control" /></td>
+										</div>
+									</tr>
+								</tbody>
+							</table>
+							<button class="btn btn-secondary" name="btn_cmn_max_qty_trade_apply">Apply</button>
+						</div>
+
+					</tr>
+					</tbody>
+					</div>
+				</div>
+
+					<div class="col-md-6">
+						<div class="card">
+							<div class="card-body">
+								<table class="table mt-3">
+									<thead>
+										<tr>
+											<th scope="col"></th>
+											<th scope="col">NIFTY ROUND</th>
+											<th scope="col">BANK NIFTY ROUND</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>ROUND </td>
+											<div class="form-group">
+											<td><input placeholder=""  value="{{user.cmn_round_nifty}}" type = "number" name = "cmn_round_nifty" class="form-control" /></td>
+											<td><input placeholder=""  value="{{user.cmn_round_bank}}" type = "number" name = "cmn_round_bank" class="form-control" /></td>
+										</div>
+										</tr>
+										<tr>
+											<td>MAX STRIKE PRICES</td>
+											<div class="form-group">
+											<td><input placeholder=""  value="{{user.cmn_max_strike_prices_nifty}}" type = "number" name = "cmn_max_strike_prices_nifty" class="form-control" /></td>
+											<td><input placeholder=""  value="{{user.cmn_max_strike_prices_bank}}" type = "number" name = "cmn_max_strike_prices_bank" class="form-control" /></td>
+											
+										</div>
+	
+										</tr>
+									</tbody>
+								</table>
+								<button class="btn btn-secondary" name="btn_cmn_round_max_strike_prices_apply">Apply</button>
+							</div>
+	
+						</tr>
+						</tbody>
+						</div>
+					<div class="card">
+						<div class="card-body">
+							<table class="table mt-3">
+								<thead>
+									<tr>
+										<th scope="col">MANUAL</th>
+										<th scope="col">BUY</th>
+										<th scope="col">SELL</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>TYPE </td>
+										<div class="form-group">
+										<td><input placeholder=""  value="PE" type = "text" name = "896" class="form-control" /></td>
+										<td><input placeholder=""  value="CE" type = "text" name = "125" class="form-control" /></td>
+										</div>
+
+									</tr>
+									<tr>
+										<td>OD1</td>
+										<div class="form-group">
+										<td><input placeholder=""  value="BUY" type = "text" name = "785" class="form-control" /></td>
+										<td><input placeholder=""  value="BUY" type = "text" name = "785" class="form-control" /></td>
+										</div>
+									</tr>
+									<tr>
+										<td>OD2</td>
+										<div class="form-group">
+										<td><input placeholder=""  value="SELL" type = "text" name = "658" class="form-control" /></td>
+										<td><input placeholder=""  value="SELL" type = "text" name = "658" class="form-control" /></td>
+										</div>
+									</tr>
+									<tr>
+										<td>IN/OUT</td>
+										<div class="form-group">
+										<td><input placeholder=""  value="-1" type = "text" name = "auto_switch_banknifty" class="form-control" /></td>
+										<td><input placeholder=""  value="1" type = "text" name = "auto_switch_banknifty" class="form-control" /></td>
+										</div>
+									</tr>
+
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+
+				</div>
+
+
+
+				{% endfor %}
+				</form>
+				
+					</div>
+				</div>
+			</div>
+
+
+{% endblock content %}
+
