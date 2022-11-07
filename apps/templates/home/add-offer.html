@@ -43,17 +43,18 @@
 						<form action='' method = "POST">
 						<div class="card-body">
 							<div class="row">
-								<div class="col-md-12 col-lg-4">
+								<div class="col-md-6 col-lg-4">
 
 							<div class="form-group">
 							<tr>
 							<label>Customer Name</label>
-							<select name="main_usr_select" class="form-control input-fixed">
+							<select name="main_usr_select" class="form-control">
 								{% for user in users %}
 								<option>{{ user.customer_name }}</option>
 								{% endfor %}
 
 							</select>
+
 							</tr>
 							</div>
 
