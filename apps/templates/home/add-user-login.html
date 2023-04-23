@@ -1,0 +1,207 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add User {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">OFFER</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+                    <a href="/">
+                        <i class="flaticon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="/offer-addoffer">Offers</a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="/offer-offerlist">Add Offer</a>
+                </li>
+            </ul>
+        </div>
+        <form action='' method="POST">
+
+            <section _ngcontent-xdd-c65="" class="content">
+                <div _ngcontent-xdd-c65="" class="row">
+                    <div _ngcontent-xdd-c65="" class="col-sm-12">
+                        <div _ngcontent-xdd-c65="" class="card">
+                            <div _ngcontent-xdd-c65="" class="card-header"> Add User </div>
+                            <div _ngcontent-xdd-c65="" class="card-body">
+                                <div _ngcontent-xdd-c65="" class="col-sm-12">
+                                    <p _ngcontent-xdd-c65=""><b _ngcontent-xdd-c65="">User Details:-</b></p>
+                                    <hr _ngcontent-xdd-c65="">
+                                    <div _ngcontent-xdd-c65="" class="row"><input _ngcontent-xdd-c65="" type="hidden"
+                                            formcontrolname="userId" value=""
+                                            class="ng-untouched ng-pristine ng-valid"><input _ngcontent-xdd-c65=""
+                                            type="hidden" formcontrolname="createdBy" value=""
+                                            class="ng-untouched ng-pristine ng-valid"><input _ngcontent-xdd-c65=""
+                                            type="hidden" formcontrolname="modifiedBy" value=""
+                                            class="ng-untouched ng-pristine ng-valid"><input _ngcontent-xdd-c65=""
+                                            type="hidden" formcontrolname="userImageFile" value=""
+                                            class="ng-untouched ng-pristine ng-valid">
+                                        <div _ngcontent-xdd-c65="" class="form-group col-sm-4"><label
+                                                _ngcontent-xdd-c65="" for="bookTitle">First Name<span
+                                                    _ngcontent-xdd-c65="" style="color: red;">*</span></label><input
+                                                _ngcontent-xdd-c65="" formcontrolname="firstName" type="text"
+                                                maxlength="200" autocomplete="off"
+                                                class="form-control ng-untouched ng-pristine ng-invalid"></div>
+                                        <div _ngcontent-xdd-c65="" class="form-group col-sm-4"><label
+                                                _ngcontent-xdd-c65="" for="publisher">Last Name</label><input
+                                                _ngcontent-xdd-c65="" formcontrolname="lastName" type="text"
+                                                maxlength="200" autocomplete="off"
+                                                class="form-control ng-untouched ng-pristine ng-valid"></div>
+                                        <div _ngcontent-xdd-c65="" class="form-group col-sm-4"><label
+                                                _ngcontent-xdd-c65="" for="publisher">Contact No</label><input
+                                                _ngcontent-xdd-c65="" formcontrolname="contactNo" type="text"
+                                                maxlength="200" autocomplete="off"
+                                                class="form-control ng-untouched ng-pristine ng-valid"></div>
+                                    </div>
+                                    <div _ngcontent-xdd-c65="" class="row">
+                                        <div _ngcontent-xdd-c65="" class="form-group col-sm-4"><label
+                                                _ngcontent-xdd-c65="" for="publisher">Email ID</label><input
+                                                _ngcontent-xdd-c65="" formcontrolname="emailId" type="text"
+                                                maxlength="200" autocomplete="off"
+                                                class="form-control ng-untouched ng-pristine ng-valid"></div>
+                                        <div _ngcontent-xdd-c65="" class="form-group col-sm-4"><label
+                                                _ngcontent-xdd-c65="" for="publisher">User Name<span
+                                                    _ngcontent-xdd-c65="" style="color: red;">*</span></label><input
+                                                _ngcontent-xdd-c65="" formcontrolname="userName" type="text"
+                                                maxlength="200" autocomplete="off"
+                                                class="form-control ng-untouched ng-pristine ng-invalid"></div>
+                                        <div _ngcontent-xdd-c65="" class="form-group col-sm-4"><label
+                                                _ngcontent-xdd-c65="" for="publisher">Password<span
+                                                    _ngcontent-xdd-c65="" style="color: red;">*</span></label><input
+                                                _ngcontent-xdd-c65="" formcontrolname="password" type="password"
+                                                maxlength="200" autocomplete="off"
+                                                class="form-control ng-untouched ng-pristine ng-invalid"></div>
+                                    </div>
+                                    <div _ngcontent-xdd-c65="" class="row">
+                                        <div _ngcontent-xdd-c65="" class="form-group col-sm-4"><label
+                                                _ngcontent-xdd-c65="" for="publisher">Confirm Password<span
+                                                    _ngcontent-xdd-c65="" style="color: red;">*</span></label><input
+                                                _ngcontent-xdd-c65="" formcontrolname="confirmPassword" type="password"
+                                                maxlength="200" autocomplete="off"
+                                                class="form-control ng-untouched ng-pristine ng-invalid"></div>
+                                        <div _ngcontent-xdd-c65="" class="form-group col-sm-4"><label
+                                                _ngcontent-xdd-c65="" for="publisher">User Role<span
+                                                    _ngcontent-xdd-c65="" style="color: red;">*</span></label><select
+                                                _ngcontent-xdd-c65="" formcontrolname="userRole"
+                                                class="form-control ng-untouched ng-pristine ng-invalid">
+                                                <option _ngcontent-xdd-c65="" value="">Select Role</option>
+                                                <option _ngcontent-xdd-c65="" value="1"> Director </option>
+                                                <option _ngcontent-xdd-c65="" value="2"> Admin </option>
+                                                <option _ngcontent-xdd-c65="" value="5"> sales </option>
+                                                <option _ngcontent-xdd-c65="" value="6"> stores </option>
+                                                <option _ngcontent-xdd-c65="" value="7"> marketing </option>
+                                                <option _ngcontent-xdd-c65="" value="10"> Quality </option>
+                                                <option _ngcontent-xdd-c65="" value="11"> Finance </option>
+                                                <option _ngcontent-xdd-c65="" value="12"> MD </option>
+                                                <option _ngcontent-xdd-c65="" value="13"> Purchase </option>
+                                                <option _ngcontent-xdd-c65="" value="1012"> Stores-1 </option>
+                                                <option _ngcontent-xdd-c65="" value="1013"> Quality-1 </option>
+                                                <option _ngcontent-xdd-c65="" value="1014"> one time </option>
+                                                <option _ngcontent-xdd-c65="" value="1015"> Territory Manager </option>
+                                                <option _ngcontent-xdd-c65="" value="1016"> Sales Engineer </option>
+                                                <option _ngcontent-xdd-c65="" value="2015"> General Manager-Marketing
+                                                </option>
+                                                <option _ngcontent-xdd-c65="" value="2016"> Production </option>
+                                            </select></div>
+                                        <div _ngcontent-xdd-c65="" class="form-group col-sm-4"><label
+                                                _ngcontent-xdd-c65="" for="bookTitle">Reporting To</label><select
+                                                _ngcontent-xdd-c65="" formcontrolname="reportingTo"
+                                                class="form-control ng-untouched ng-pristine ng-valid">
+                                                <option _ngcontent-xdd-c65="" value="">Select Reporting Person</option>
+                                                <option _ngcontent-xdd-c65="" value="1007"> Praveen J </option>
+                                                <option _ngcontent-xdd-c65="" value="1010"> Balasubramanya M.V </option>
+                                                <option _ngcontent-xdd-c65="" value="1011"> Jacob Mathews </option>
+                                                <option _ngcontent-xdd-c65="" value="1012"> Priya Kumar </option>
+                                                <option _ngcontent-xdd-c65="" value="1013"> Sreejith C </option>
+                                                <option _ngcontent-xdd-c65="" value="1014"> Roshan R </option>
+                                                <option _ngcontent-xdd-c65="" value="1016"> Krishna Kumar S </option>
+                                                <option _ngcontent-xdd-c65="" value="1017"> Swamy M </option>
+                                                <option _ngcontent-xdd-c65="" value="1019"> Ganesh E M </option>
+                                                <option _ngcontent-xdd-c65="" value="1020"> Kiran M G </option>
+                                                <option _ngcontent-xdd-c65="" value="1022"> Ranjith T </option>
+                                                <option _ngcontent-xdd-c65="" value="1023"> Kavitha BL </option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <hr _ngcontent-xdd-c65="" class="mb-4">
+                                <div _ngcontent-xdd-c65="" style="text-align: center;"><button _ngcontent-xdd-c65=""
+                                        id="btnSave" type="submit" class="btn btn-primary btn-sm">Save</button> &nbsp;
+                                    <a _ngcontent-xdd-c65="" routerlink="/User_List" queryparamshandling="preserve"
+                                        class="btn btn-danger btn-sm" href="/User_List?p=1">Cancel</a></div>
+                            </div>
+                            <div _ngcontent-xdd-c65="" class="card-footer"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+<script>
+    let lineNo = 1;
+
+    function myButtonClick() {
+        console.log("clask")
+        var table = document.getElementById('emptbl');
+        var rowCount = table.rows.length;
+        console.log(rowCount)
+        var cellCount = table.rows[0].cells.length;
+        markup = $('<tr _ngcontent-owj-c93=""> <td _ngcontent-owj-c93="" style="width: 400px;"><ng-select _ngcontent-owj-c93="" bindlabel="value" bindvalue="id" class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-touched ng-dirty ng-valid ng-select-top"> <input _ngcontent-owj-c93="" numberonly="" class="form-control ng-touched ng-dirty ng-valid"> </ng-select></td> <td _ngcontent-yms-c134="" style="width: 5%;"> <a _ngcontent-yms-c134="" class="btn btn-secondary active" onclick="SomeDeleteRowFunction(this)" id=' + lineNo + '> <i _ngcontent-yms-c134="" class="fas fa-trash-alt"> </i> </a> </td> </tr>')
+        tableBody = $("table tbody");
+        tableBody.append(markup);
+        lineNo++;
+    }
+
+
+    function SomeDeleteRowFunction(btndel) {
+        if (typeof (btndel) == "object") {
+            $(btndel).closest("tr").remove();
+        }
+        else {
+            return false;
+        }
+    }
+</script>
+
+<style>
+    th,
+    td {
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    .container[_ngcontent-owj-c93] {
+        width: 100%
+    }
+</style>
+
+<style>
+    .bs-example {
+        margin: 20px;
+    }
+
+    .form-control:focus {
+        border-color: #ff80ff;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+    }
+</style>
+{% endblock javascripts %}

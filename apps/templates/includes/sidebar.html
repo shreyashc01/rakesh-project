@@ -6,7 +6,7 @@
 				{% if current_user.is_authenticated %}	
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
-							<img src="/static/assets/img/download.jpg" alt="..." class="avatar-img rounded-circle">
+							<img src="/static/assets/img/logo.jpg" alt="..." class="avatar-img rounded-circle">
 						</div>
 						<div class="info">
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -72,55 +72,145 @@
 							</div>
 						</li>
 
-						<li class="nav-item {% if 'configs' in segment %} active {% endif %}">
-							<a data-toggle="collapse" href="#sidebarLayouts">
-								<i  style="color:black;" class="fas fa-cog"></i>
-								<p  style="color:black;">Contract Review</p>
-								<span class="caret"></span>
-							</a>
-						</li>
-						<li class="nav-item {% if 'trade' in segment %} active {% endif %}">
-							<a data-toggle="collapse" href="#trades">
-								<i  style="color:black;" class="fas fa-pencil-ruler"></i>
-								<p  style="color:black;">OC Registration</p>
-								<span class="caret"></span>
-							</a>
-						</li>
-
-						<li class="nav-item {% if 'orderbook' in segment %} active {% endif %}">
-							<a data-toggle="collapse" href="#orderbook">
-								<i  style="color:black;" class="fas fa-table"></i>
-								<p  style="color:black;">Marketing Register</p>
-								<span class="caret"></span>
-							</a>
-						</li>
-
-						<li class="nav-item {% if 'logs' in segment %} active {% endif %}">
-							<a data-toggle="collapse" href="#logs">
-								<i  style="color:black;" class="fas fa-bars"></i>
+						<li class="nav-item {% if 'invoice' in segment %} active {% endif %}">
+							<a data-toggle="collapse" href="#invoice">
+								<i  style="color:black;" class="far fa-chart-bar"></i>
 								<p  style="color:black;">Invoice</p>
 								<span class="caret"></span>
 							</a>
-							<div class="collapse {% if 'logs' in segment %} show {% endif %}" id="logs">
+							<div class="collapse {% if 'invoice' in segment %} show {% endif %}" id="invoice">
 								<ul class="nav nav-collapse">
-									<li class="{% if 'autologions-logs' in segment %} active {% endif %}">
-										<a href="/autologions-logs.html">
-											<span  style="color:black;" class="sub-item">Invoice List</span>
+									<li class="{% if 'add-invoice' in segment %} active {% endif %}">
+										<a href="/invoice-addinvoice">
+											<span  style="color:black;" class="sub-item">Add Invoice</span>
+										</a>
+									</li>
+									<li class="{% if 'list-invoice' in segment %} active {% endif %}">
+										<a href="/invoice-invoiceslist">
+											<span  style="color:black;"class="sub-item">Invoice List</span>
 										</a>
 									</li>
 								</ul>
 							</div>
 						</li>
-						<li class="nav-item {% if 'analysis' in segment %} active {% endif %}">
-							<a data-toggle="collapse" href="#analysis">
-								<i  style="color:black;" class="far fa-chart-bar"></i>
-								<p  style="color:black;">Dispatch</p>
+
+						<li class="nav-item {% if 'purchaseorder' in segment %} active {% endif %}">
+							<a data-toggle="collapse" href="#purchaseorder">
+								<i  style="color:black;" class="fas fa-bars"></i>
+								<p  style="color:black;">Purchase Order</p>
 								<span class="caret"></span>
 							</a>
+							<div class="collapse {% if 'purchaseorder' in segment %} show {% endif %}" id="purchaseorder">
+								<ul class="nav nav-collapse">
+									<li class="{% if 'add-purchaseorder' in segment %} active {% endif %}">
+										<a href="/PO-addpo">
+											<span  style="color:black;" class="sub-item">Add Purchase Order</span>
+										</a>
+									</li>
+									<li class="{% if 'list-purchaseorder' in segment %} active {% endif %}">
+										<a href="/PO-POlist">
+											<span  style="color:black;" class="sub-item">Purchase Order List</span>
+										</a>
+									</li>
+									<li class="{% if 'BOM-List' in segment %} active {% endif %}">
+										<a href="/BOM-List">
+											<span  style="color:black;" class="sub-item">BOM List</span>
+										</a>
+									</li>
+									<li class="{% if 'Purchase-Order-Request' in segment %} active {% endif %}">
+										<a href="/Purchase-Order-Request">
+											<span  style="color:black;" class="sub-item">ADD PO Request</span>
+										</a>
+									</li>
+									<li class="{% if 'Purchase-Order-Request-List' in segment %} active {% endif %}">
+										<a href="/Purchase-Order-Request-List">
+											<span  style="color:black;" class="sub-item">PO Request List</span>
+										</a>
+									</li>
+								</ul>
+							</div>
 						</li>
+
+						<li class="nav-item {% if 'contractreview' in segment %} active {% endif %}">
+							<a data-toggle="collapse" href="#contractreview">
+								<i  style="color:black;" class="fas fa-cog fa-spin"></i>
+								<p  style="color:black;">Contract Review</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse {% if 'contractreview' in segment %} show {% endif %}" id="contractreview">
+								<ul class="nav nav-collapse">
+									<li class="{% if 'contractreview' in segment %} active {% endif %}">
+										<a href="/Contract-Review-list">
+											<span  style="color:black;" class="sub-item">Contract Review</span>
+										</a>
+									</li>
+									
+								</ul>
+							</div>
+						</li>
+
+
+						<li class="nav-item {% if 'OcRegister' in segment %} active {% endif %}">
+							<a data-toggle="collapse" href="#OcRegister">
+								<i  style="color:black;" class="fas fa-cog fa-spin"></i>
+								<p  style="color:black;">OC Register</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse {% if 'OcRegister' in segment %} show {% endif %}" id="OcRegister">
+								<ul class="nav nav-collapse">
+									<li class="{% if 'OcRegister' in segment %} active {% endif %}">
+										<a href="/OC-Register-list">
+											<span  style="color:black;" class="sub-item">OC Register</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="nav-item {% if 'BOMRegister' in segment %} active {% endif %}">
+							<a data-toggle="collapse" href="#BOMRegister">
+								<i  style="color:black;" class="fas fa-cog fa-spin"></i>
+								<p  style="color:black;">BOM Register</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse {% if 'BOMRegister' in segment %} show {% endif %}" id="BOMRegister">
+								<ul class="nav nav-collapse">
+									<li class="{% if 'BOMRegister' in segment %} active {% endif %}">
+										<a href="/BOM-Register-List">
+											<span  style="color:black;" class="sub-item">BOM Register</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="nav-item {% if 'MarketingRegister' in segment %} active {% endif %}">
+							<a data-toggle="collapse" href="#MarketingRegister">
+								<i  style="color:black;" class="fas fa-cog fa-spin"></i>
+								<p  style="color:black;">Marketing Register</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse {% if 'MarketingRegister' in segment %} show {% endif %}" id="MarketingRegister">
+								<ul class="nav nav-collapse">
+									<li class="{% if 'MarketingRegisterList' in segment %} active {% endif %}">
+										<a href="/Marketing-RegisterList">
+											<span  style="color:black;" class="sub-item">Marketing Register List</span>
+										</a>
+									</li>
+									<li class="{% if 'MarketingRegisterReport' in segment %} active {% endif %}">
+										<a href="/Marketing-Register-Report">
+											<span  style="color:black;" class="sub-item">Marketing Register Report</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+
+
 						<li class="nav-item {% if 'masters' in segment %} active {% endif %}">
 							<a data-toggle="collapse" href="#masters">
-								<i  style="color:black;" class="far fa-chart-bar"></i>
+								<i  style="color:black;" class="fas fa-cog fa-spin"></i>
 								<p  style="color:black;">Masters</p>
 								<span class="caret"></span>
 							</a>
@@ -139,6 +229,51 @@
 									<li class="{% if 'Customer-masters' in segment %} active {% endif %}">
 										<a href="/Customer-masters">
 											<span  style="color:black;" class="sub-item">Customer Master</span>
+										</a>
+									</li>
+									<li class="{% if 'Country-masters' in segment %} active {% endif %}">
+										<a href="/Country-masters">
+											<span  style="color:black;" class="sub-item">Country Master</span>
+										</a>
+									</li>
+									<li class="{% if 'State-masters' in segment %} active {% endif %}">
+										<a href="/State-masters">
+											<span  style="color:black;" class="sub-item">State Master</span>
+										</a>
+									</li>
+									<li class="{% if 'City-masters' in segment %} active {% endif %}">
+										<a href="/City-masters">
+											<span  style="color:black;" class="sub-item">City Master</span>
+										</a>
+									</li>
+									<li class="{% if 'Role-masters' in segment %} active {% endif %}">
+										<a href="/Role-masters">
+											<span  style="color:black;" class="sub-item">Role Master</span>
+										</a>
+									</li>
+									<li class="{% if 'User-masters' in segment %} active {% endif %}">
+										<a href="/User-masters">
+											<span  style="color:black;" class="sub-item">User Master</span>
+										</a>
+									</li>
+									<li class="{% if 'BOM-Category-masters' in segment %} active {% endif %}">
+										<a href="/BOM-Category-masters">
+											<span  style="color:black;" class="sub-item">BOM Category Master</span>
+										</a>
+									</li>
+									<li class="{% if 'BOM-masters' in segment %} active {% endif %}">
+										<a href="/BOM-masters">
+											<span  style="color:black;" class="sub-item">BOM Master</span>
+										</a>
+									</li>
+									<li class="{% if 'Supplier-masters' in segment %} active {% endif %}">
+										<a href="/Supplier-masters">
+											<span  style="color:black;" class="sub-item">Supplier Master</span>
+										</a>
+									</li>
+									<li class="{% if 'Currency-masters' in segment %} active {% endif %}">
+										<a href="/Currency-masters">
+											<span  style="color:black;" class="sub-item">Currency Master</span>
 										</a>
 									</li>
 								</ul>

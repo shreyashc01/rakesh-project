@@ -89,10 +89,9 @@
 											<tr>
 												<label>Offer Type</label>
 												<td>
-													<select name="usr_autologin_status" class="form-control offertype_id">
-														<option selected>Add offer</option>
-														<option value="Spares">Spares</option>
-														<option value="Kits">Kits</option>
+													<select name="usr_autologin_status" class="form-control">
+														<option value="YES" selected>Spares</option>
+														<option value="NO">Kits</option>
 													</select>
 												</td>
 											</tr>
@@ -138,7 +137,58 @@
 					<div _ngcontent-owj-c93="" class="card card-fluid">
 						<div _ngcontent-owj-c93="" class="card-body">
 							<table _ngcontent-owj-c93="" style="width: 100%;" id="emptbl">
-								
+								<thead _ngcontent-owj-c93="">
+									<th _ngcontent-owj-c93="">Product<span _ngcontent-owj-c93=""
+											style="color: red;">*</span></th>
+									<th _ngcontent-owj-c93="">UOM<span _ngcontent-owj-c93="" style="color: red;"></span>
+									</th>
+									<th _ngcontent-owj-c93="">Quantity<span _ngcontent-owj-c93=""
+											style="color: red;">*</span></th>
+									<th _ngcontent-owj-c93="">Unit Price<span _ngcontent-owj-c93=""
+											style="color: red;">*</span></th>
+									<th _ngcontent-owj-c93="">Total Price</th>
+									<th _ngcontent-owj-c93=""><a _ngcontent-owj-c93=""
+											class="btn btn-secondary active add-row"><i _ngcontent-owj-c93=""
+												class="fa fa-plus"></i></a></th>
+								</thead>
+								<tbody _ngcontent-owj-c93="" style="padding: 5%;">
+									<tr _ngcontent-owj-c93="">
+										<td _ngcontent-owj-c93="" style="width: 400px;"><ng-select _ngcontent-owj-c93=""
+												bindlabel="value" bindvalue="id"
+												class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-touched ng-dirty ng-valid ng-select-top">
+												<div class="ng-select-container ng-has-value">
+													<div class="ng-value-container">
+														<div class="ng-placeholder">
+															<select name="main_usr_select" class="form-control"> {% for
+																user in user1 %}
+																<option>{{ user.product_name }}</option> {% endfor %}
+															</select>
+														</div>
+													</div>
+												</div>
+											</ng-select></td>
+										<td _ngcontent-owj-c93="" style="width: 15%;"><select _ngcontent-owj-c93=""
+												class="form-control ng-untouched ng-pristine ng-valid">
+												<option _ngcontent-owj-c93="" value="">Select UOM</option>
+												<option _ngcontent-owj-c93="" value="Nos">Nos</option>
+												<option _ngcontent-owj-c93="" value="Meters">Meters</option>
+												<option _ngcontent-owj-c93="" value="Millimeter">Millimeter</option>
+												<option _ngcontent-owj-c93="" value="Bundle">Bundle</option>
+												<option _ngcntent-owj-c93="" value="Pack">Pack</option>
+												<option _ngcontent-owj-c93="" value="Kg">Kg</option>
+												<option _ngcontent-owj-c93="" value="Set">Set</option>
+												<option _ngcontent-owj-c93="" value="Meter(MOQ)">Meter(MOQ)</option>
+												<option _ngcontent-owj-c93="" value="NOS.(MOQ)">NOS.(MOQ)</option>
+											</select></td>
+										<td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93=""
+												numberonly="" class="form-control ng-touched ng-dirty ng-valid"></td>
+										<td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93=""
+												decimalonly="" class="form-control ng-dirty ng-touched ng-valid"> </td>
+										<td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93=""
+												class="form-control ng-untouched ng-pristine" disabled=""></td>
+										<td _ngcontent-yms-c134="" style="width: 5%;"> </td>
+									</tr>
+								</tbody>
 							</table>
 						</div>
 					</div>
@@ -250,6 +300,7 @@
 				</div>
 			</section>
 
+
 			<section _ngcontent-owj-c93="" class="content">
 				<div _ngcontent-owj-c93="" class="page-section">
 					<div _ngcontent-owj-c93="" class="card card-fluid">
@@ -353,43 +404,8 @@
 {% block javascripts %}
 <script>
 	let lineNo = 1;
-
 	$(document).ready(function () {
-		$(".offertype_id").on("change", function () {
-			var selectedOption = $(this).val();
-			switch (selectedOption) {
-				case "Spares":
-				console.log("Kits")
-				var table = document.getElementById('emptbl');
-				console.log(table)
-				markup = $('<thead _ngcontent-owj-c93=""> <th _ngcontent-owj-c93="">Product<span _ngcontent-owj-c93="" style="color: red;">*</span></th> <th _ngcontent-owj-c93="">UOM<span _ngcontent-owj-c93="" style="color: red;"></span> </th> <th _ngcontent-owj-c93="">Quantity<span _ngcontent-owj-c93="" style="color: red;">*</span></th> <th _ngcontent-owj-c93="">Unit Price<span _ngcontent-owj-c93="" style="color: red;">*</span></th> <th _ngcontent-owj-c93="">Total Price</th> <th _ngcontent-owj-c93=""><a _ngcontent-owj-c93="" class="btn btn-secondary active add-row" onclick="myButtonClick()"><i _ngcontent-owj-c93="" class="fa fa-plus"></i></a></th> </thead> <tbody _ngcontent-owj-c93="" style="padding: 5%;"> <tr _ngcontent-owj-c93=""> <td _ngcontent-owj-c93="" style="width: 400px;"><ng-select _ngcontent-owj-c93="" bindlabel="value" bindvalue="id" class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-touched ng-dirty ng-valid ng-select-top"> <div class="ng-select-container ng-has-value"> <div class="ng-value-container"> <div class="ng-placeholder"> <select name="main_usr_select" class="form-control"> {% for user in user1 %} <option>{{ user.product_name }}</option> {% endfor %} </select> </div> </div> </div> </ng-select></td> <td _ngcontent-owj-c93="" style="width: 15%;"><select _ngcontent-owj-c93="" class="form-control ng-untouched ng-pristine ng-valid"> <option _ngcontent-owj-c93="" value="">Select UOM</option> <option _ngcontent-owj-c93="" value="Nos">Nos</option> <option _ngcontent-owj-c93="" value="Meters">Meters</option> <option _ngcontent-owj-c93="" value="Millimeter">Millimeter</option> <option _ngcontent-owj-c93="" value="Bundle">Bundle</option> <option _ngcntent-owj-c93="" value="Pack">Pack</option> <option _ngcontent-owj-c93="" value="Kg">Kg</option> <option _ngcontent-owj-c93="" value="Set">Set</option> <option _ngcontent-owj-c93="" value="Meter(MOQ)">Meter(MOQ)</option> <option _ngcontent-owj-c93="" value="NOS.(MOQ)">NOS.(MOQ)</option> </select></td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" numberonly="" class="form-control ng-touched ng-dirty ng-valid"></td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" decimalonly="" class="form-control ng-dirty ng-touched ng-valid"> </td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" class="form-control ng-untouched ng-pristine" disabled=""></td> <td _ngcontent-yms-c134="" style="width: 5%;"> </td> </tr> </tbody>')
-				console.log(markup)
-				tableBody = $("table");
-				console.log(tableBody)
-				tableBody.empty();
-				tableBody.append(markup);
-				break;
-				
-				case "Kits":
-
-				console.log("Spares")
-				var table = document.getElementById('emptbl');
-				console.log(table)
-				markup = $('<thead _ngcontent-owj-c93=""> <th _ngcontent-owj-c93="">Kit description<span _ngcontent-owj-c93="" style="color: red;">*</span></th> <th _ngcontent-owj-c93="">Kit No<span _ngcontent-owj-c93="" style="color: red;">*</span></th> <th _ngcontent-owj-c93="">Quantity<span _ngcontent-owj-c93="" style="color: red;">*</span></th> <th _ngcontent-owj-c93="">Unit Price<span _ngcontent-owj-c93="" style="color: red;">*</span></th> <th _ngcontent-owj-c93="">Total Price</th> <th _ngcontent-owj-c93=""><a _ngcontent-owj-c93="" class="btn btn-secondary active add-row" onclick="myButtonClick()"><i _ngcontent-owj-c93="" class="fa fa-plus"></i></a></th> </thead> <tbody _ngcontent-owj-c93="" style="padding: 5%;"> <tr _ngcontent-owj-c93=""> <td _ngcontent-owj-c93="" style="width: 400px;"><ng-select _ngcontent-owj-c93="" bindlabel="value" bindvalue="id" class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-touched ng-dirty ng-valid ng-select-top"> <div class="ng-select-container ng-has-value"> <div class="ng-value-container"> <div class="ng-placeholder"> <select name="main_usr_select" class="form-control"> {% for user in user1 %} <option>{{ user.product_name }}</option> {% endfor %} </select> </div> </div> </div> </ng-select></td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" numberonly="" class="form-control ng-touched ng-dirty ng-valid"></td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" numberonly="" class="form-control ng-touched ng-dirty ng-valid"></td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" numberonly="" class="form-control ng-touched ng-dirty ng-valid"></td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" class="form-control ng-untouched ng-pristine" disabled=""></td> <td _ngcontent-yms-c134="" style="width: 5%;"> </td> </tr> </tbody>')
-				console.log(markup)
-				tableBody = $("table");
-				tableBody.empty();
-				console.log(tableBody)
-				tableBody.append(markup);
-				break;
-			}
-
-		});
-	});
-
-
-	function myButtonClick() {
-		console.log("clask")
+		$(".add-row").click(function () {
 			var table = document.getElementById('emptbl');
 			var rowCount = table.rows.length;
 			console.log(rowCount)
@@ -398,8 +414,8 @@
 			tableBody = $("table tbody");
 			tableBody.append(markup);
 			lineNo++;
-	}
-
+		});
+	});
 
 	function SomeDeleteRowFunction(btndel) {
 		if (typeof (btndel) == "object") {

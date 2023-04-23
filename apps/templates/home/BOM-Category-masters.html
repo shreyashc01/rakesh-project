@@ -10,7 +10,7 @@
 	<div class="content">
 		<div class="page-inner">
 			<div class="page-header">
-				<h4 class="page-title">ADD OFFER</h4>
+				<h4 class="page-title">STATES</h4>
 				<ul class="breadcrumbs">
 					<li class="nav-home">
 						<a href="#">
@@ -21,13 +21,13 @@
 						<i class="flaticon-right-arrow"></i>
 					</li>
 					<li class="nav-item">
-						<a href="#">Offer</a>
+						<a href="#">Masters</a>
 					</li>
 					<li class="separator">
 						<i class="flaticon-right-arrow"></i>
 					</li>
 					<li class="nav-item">
-						<a href="#">Offer List</a>
+						<a href="#">States Masters</a>
 					</li>
 				</ul>
 			</div>
@@ -37,52 +37,90 @@
 					<div class="card">
 						<div class="card-header">
 							<div class="d-flex align-items-center">
-								<h4 class="card-title">Offers</h4>
-								<a href="/offer-addoffer" class="ml-auto">
-									<button class="btn btn-primary btn-round ml-auto" data-toggle="modal"
-										data-target="#addRowModal">
-										<i class="fa fa-plus"></i>
-										Add Offer
-									</button>
-								</a>
+								<h4 class="card-title">States</h4>
+								<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+									<i class="fa fa-plus"></i>
+									Add States
+								</button>
 							</div>
 						</div>
 						<div class="card-body">
+							<!-- Modal -->
+							<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header no-bd">
+											<h5 class="modal-title">
+												<span class="fw-mediumbold">
+													State
+												</span>
+											</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<form action='' method = "POST">
+										<div class="modal-body">
+											<p class="small">Add New State</p>
+											
+												<div class="row">
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>Country Name</label>
+															<input name="product_name" type="text" class="form-control" placeholder="Fill Country name">
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>State Name</label>
+															<input name="product_name" type="text" class="form-control" placeholder="Fill State name">
+														</div>
+													</div>
+												</div>
+											
+										</div>
+										<div class="modal-footer no-bd">
+											<button class="btn btn-secondary">Add</button>
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+										</div>
+
+									</form>
+									</div>
+								</div>
+							</div>
+
 							<div class="table-responsive">
 								<table id="add-row" class="display table table-striped table-hover" >
 									<thead>
 										<tr>
-											<th>Quation No</th>
-											<th>Customer name</th>
-                                            <th>Address</th>
-											<th>Offer Type</th>
-											<th>Due Date</th>
-											
+											<th>Country</th>
+                                            <th>State</th>
 											<th style="width: 10%">Action</th>
 										</tr>
 									</thead>
 									<tbody>
-											<tr>
-											<td>{{"Quation No"}}</td>
-											<td>{{"Cuostomer Name"}}</td>
-											<td>{{"adress"}}</td>
-											<td>{{"Offer type"}}</td>
-											<td>{{"Due date"}}</td>
+										{% for user in users %}
+											<tr
+											{% if loop.index %2==0 %}
+											{% else %}
+											{% endif %}
+											>
+											<td>{{user.product_name}}</td>
+                                            <td>{{user.product_name}}</td>
 											<td>
 											<div class="form-button-action">
 											<span style="font-size: 24px;color:green;">
-											<a href="/" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fas fa-edit" ></i></a> 
+											<a href="/{{user.id}}/editproduct" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fas fa-edit" ></i></a> 
 											</span>
 											<span style="font-size: 24px;color:red;">
-											<a href="/sample.html" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="view"> <i class="fa fa-eye"></i></a>
+											<a href="/{{user.id}}/deleteproduct" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fas fa-times"></i></a>
 											</span>
 											</div>
 											</td>
 										</tr>
-
-
+									{% endfor %}
+										
 									</tbody>
-
 								</table>
 							</div>
 						</div>

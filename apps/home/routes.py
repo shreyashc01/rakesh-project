@@ -6,13 +6,10 @@ from flask import render_template, request, redirect
 from flask_login import login_required
 from jinja2 import TemplateNotFound
 from apps import db
-from apps.home.forms import CreateUserForm
 from apps.home.models import UserModel
-from apps.home.models import commonconfig
 from apps.home.models import MainUser
 from apps.home.models import ProductMaster
 from apps.home.models import CustomerMaster
-from apps.home.models import ManualUser
 
 
 @blueprint.route('/dashboard')
@@ -26,84 +23,149 @@ def dashboard():
 def create():
     if request.method == 'GET':
         users = CustomerMaster.query.all()
-        return render_template('home/add-offer.html',users=users,segment='offer-addoffer')
+        user1 = ProductMaster.query.all()
+        return render_template('home/add-offer.html',users=users,user1=user1,segment='offer-addoffer')
     if request.method == 'POST':
-        usr_id = request.form['usr_id']
-        usr_name = request.form['usr_name']
-        usr_password = request.form['usr_password']
-        usr_api_key = request.form['usr_api_key']
-        usr_api_secret_key = request.form['usr_api_secret_key']
-        usr_totp_key = request.form['usr_totp_key']
-        usr_access_key = ""
-        usr_access_key_time = ""
-        usr_autologin_status = request.form['usr_autologin_status']
-        usr_autoverify_status = ""
-        usr_autologin = ""
-        usr_autologout_status = ""
-        usr_aut_prem_to_sell_nifty = ""
-        usr_aut_prem_to_sell_bank = ""
-        usr_aut_stike_to_buy_nifty = ""
-        usr_aut_stike_to_buy_bank = ""
-        usr_man_odr_1buy_nifty = ""
-        usr_man_odr_2sell_nifty = ""
-        usr_man_odr_1buy_bank = ""
-        usr_man_odr_2sell_bank = ""
-        usr_funds_not_to_use = ""
-        usr_max_qty = ""
-        usr_disp_open_post = ""
-        usr_disp_net_day = ""
-        usr_disp_funds_avil = ""
+        # usr_id = request.form['usr_id']
+        # usr_name = request.form['usr_name']
+        # usr_password = request.form['usr_password']
+        # usr_api_key = request.form['usr_api_key']
+        # usr_api_secret_key = request.form['usr_api_secret_key']
+        # usr_totp_key = request.form['usr_totp_key']
+        # usr_access_key = ""
+        # usr_access_key_time = ""
+        # usr_autologin_status = request.form['usr_autologin_status']
+        # usr_autoverify_status = ""
+        # usr_autologin = ""
+        # usr_autologout_status = ""
+        # usr_aut_prem_to_sell_nifty = ""
+        # usr_aut_prem_to_sell_bank = ""
+        # usr_aut_stike_to_buy_nifty = ""
+        # usr_aut_stike_to_buy_bank = ""
+        # usr_man_odr_1buy_nifty = ""
+        # usr_man_odr_2sell_nifty = ""
+        # usr_man_odr_1buy_bank = ""
+        # usr_man_odr_2sell_bank = ""
+        # usr_funds_not_to_use = ""
+        # usr_max_qty = ""
+        # usr_disp_open_post = ""
+        # usr_disp_net_day = ""
+        # usr_disp_funds_avil = ""
 
-        # else we can create the user
-        user = UserModel(usr_id=usr_id,
-            usr_name=usr_name,
-            usr_password=usr_password,
-            usr_api_key=usr_api_key,
-            usr_api_secret_key=usr_api_secret_key,
-            usr_totp_key=usr_totp_key,
-            usr_access_key=usr_access_key,
-            usr_access_key_time=usr_access_key_time,
-            usr_autologin_status=usr_autologin_status,
-            usr_autoverify_status=usr_autoverify_status,
-            usr_autologin=usr_autologin,
-            usr_autologout_status = usr_autologout_status,
-            usr_aut_prem_to_sell_nifty = usr_aut_prem_to_sell_nifty,
-            usr_aut_prem_to_sell_bank = usr_aut_prem_to_sell_bank,
-            usr_aut_stike_to_buy_nifty = usr_aut_stike_to_buy_nifty,
-            usr_aut_stike_to_buy_bank = usr_aut_stike_to_buy_bank,
-            usr_man_odr_1buy_nifty = usr_man_odr_1buy_nifty,
-            usr_man_odr_2sell_nifty =usr_man_odr_2sell_nifty,
-            usr_man_odr_1buy_bank = usr_man_odr_1buy_bank,
-            usr_man_odr_2sell_bank = usr_man_odr_2sell_bank,
-            usr_funds_not_to_use = usr_funds_not_to_use,
-            usr_max_qty = usr_max_qty,
-            usr_disp_open_post =usr_disp_open_post,
-            usr_disp_net_day = usr_disp_net_day,
-            usr_disp_funds_avil = usr_disp_funds_avil )
-        db.session.add(user)
-        db.session.commit()
+        # # else we can create the user
+        # user = UserModel(usr_id=usr_id,
+        #     usr_name=usr_name,
+        #     usr_password=usr_password,
+        #     usr_api_key=usr_api_key,
+        #     usr_api_secret_key=usr_api_secret_key,
+        #     usr_totp_key=usr_totp_key,
+        #     usr_access_key=usr_access_key,
+        #     usr_access_key_time=usr_access_key_time,
+        #     usr_autologin_status=usr_autologin_status,
+        #     usr_autoverify_status=usr_autoverify_status,
+        #     usr_autologin=usr_autologin,
+        #     usr_autologout_status = usr_autologout_status,
+        #     usr_aut_prem_to_sell_nifty = usr_aut_prem_to_sell_nifty,
+        #     usr_aut_prem_to_sell_bank = usr_aut_prem_to_sell_bank,
+        #     usr_aut_stike_to_buy_nifty = usr_aut_stike_to_buy_nifty,
+        #     usr_aut_stike_to_buy_bank = usr_aut_stike_to_buy_bank,
+        #     usr_man_odr_1buy_nifty = usr_man_odr_1buy_nifty,
+        #     usr_man_odr_2sell_nifty =usr_man_odr_2sell_nifty,
+        #     usr_man_odr_1buy_bank = usr_man_odr_1buy_bank,
+        #     usr_man_odr_2sell_bank = usr_man_odr_2sell_bank,
+        #     usr_funds_not_to_use = usr_funds_not_to_use,
+        #     usr_max_qty = usr_max_qty,
+        #     usr_disp_open_post =usr_disp_open_post,
+        #     usr_disp_net_day = usr_disp_net_day,
+        #     usr_disp_funds_avil = usr_disp_funds_avil )
+        # db.session.add(user)
+        # db.session.commit()
         return redirect('/offer-offerlist')
 
+
+@blueprint.route('/add-kits', methods=['GET', 'POST'])
+@login_required
+def kit_add():
+    if request.method == 'GET':
+        users = CustomerMaster.query.all()
+        user1 = ProductMaster.query.all()
+        return render_template('home/add-kit.html',users=users,user1=user1)
+    if request.method == 'POST':
+        return redirect('/Kit-masters')
+
+@blueprint.route('/add-user-login', methods=['GET', 'POST'])
+@login_required
+def add_user_login():
+    if request.method == 'GET':
+        users = CustomerMaster.query.all()
+        user1 = ProductMaster.query.all()
+        return render_template('home/add-user-login.html',users=users,user1=user1)
+    if request.method == 'POST':
+        return redirect('/User-masters')
+    
+@blueprint.route('/invoice-addinvoice', methods=['GET', 'POST'])
+@login_required
+def addinvoice():
+    if request.method == 'GET':
+        users = CustomerMaster.query.all()
+        user1 = ProductMaster.query.all()
+        return render_template('home/add-invoice.html',users=users,user1=user1,segment='add-invoice')
+
+@blueprint.route('/invoice-invoiceslist', methods=['GET', 'POST'])
+@login_required
+def listinvoices():
+    return render_template('home/invoices.html', segment='list-invoice')
+
+
+
+@blueprint.route('/PO-addpo', methods=['GET', 'POST'])
+@login_required
+def addpo():
+    if request.method == 'GET':
+        users = CustomerMaster.query.all()
+        user1 = ProductMaster.query.all()
+        return render_template('home/add-purchaseorder.html',users=users,user1=user1,segment='add-purchaseorder')
+
+@blueprint.route('/PO-POlist', methods=['GET', 'POST'])
+@login_required
+def listpo():
+    return render_template('home/purchaseorder.html', segment='list-purchaseorder')
+
+@blueprint.route('/BOM-List', methods=['GET', 'POST'])
+@login_required
+def BOM_List():
+    return render_template('home/BOM-Lists.html', segment='BOM-List')
+
+@blueprint.route('/Purchase-Order-Request', methods=['GET', 'POST'])
+@login_required
+def Add_PO_REQ():
+    return render_template('home/ADD-PO-Request.html', segment='Purchase-Order-Request')
+
+@blueprint.route('/Purchase-Order-Request-List', methods=['GET', 'POST'])
+@login_required
+def PO_REQ_LIST():
+    return render_template('home/PO-Request-List.html', segment='Purchase-Order-Request-List')
 
 @blueprint.route('/offer-offerlist', methods=['GET', 'POST'])
 @login_required
 def retrieve_list():
-    if MainUser.query.filter_by(id=1).first() == None:
-        users = MainUser(
-            main_usr_id = "main_usr_id",
-            main_usr_name = "main_usr_name")
-        db.session.add(users)
-        db.session.commit()
-    if "main_usr_apply" in request.form:
-        all_users = UserModel.query.filter_by(usr_id=request.form.get('main_usr_select')).first()
-        main_user = MainUser.query.filter_by(id=1).first()
-        if all_users != None:
-            main_user.main_usr_id = all_users.usr_id
-            main_user.main_usr_name = all_users.usr_name
-            db.session.commit()
+    # if MainUser.query.filter_by(id=1).first() == None:
+    #     users = MainUser(
+    #         main_usr_id = "main_usr_id",
+    #         main_usr_name = "main_usr_name")
+    #     db.session.add(users)
+    #     db.session.commit()
+    # if "main_usr_apply" in request.form:
+        # all_users = UserModel.query.filter_by(usr_id=request.form.get('main_usr_select')).first()
+        # main_user = MainUser.query.filter_by(id=1).first()
+        # if all_users != None:
+        #     main_user.main_usr_id = all_users.usr_id
+        #     main_user.main_usr_name = all_users.usr_name
+        #     db.session.commit()
     users = UserModel.query.all()
     main_user = MainUser.query.filter_by(id=1).first()
     return render_template('home/users.html', main_user= main_user, users=users, segment='offer-offerlist')
+
 
 
 @blueprint.route('/<int:id>/editcustomer', methods=['GET', 'POST'])
@@ -143,251 +205,6 @@ def update2(id):
         return redirect('/Product-masters')
 
     return render_template('home/updateproduct.html', user=user, segment='Product-masters')
-
-
-@blueprint.route('/configs-common', methods=['GET', 'POST'])
-@login_required
-def config():
-    if request.method == 'GET': 
-        user = commonconfig.query.all()
-        if commonconfig.query.filter_by(id=1).first() == None:
-            cmn_fetch_autoexpiry = "cmn_fetch_autoexpiry"
-            cmn_expiry = "cmn_expiry"
-            cmn_autoswitch_premium_nifty = "cmn_autoswitch_premium_nifty"
-            cmn_autoswitch_premium_bank = "cmn_autoswitch_premium_bank"
-            cmn_max_qty_trade_nifty =  "cmn_max_qty_trade_nifty"
-            cmn_max_qty_trade_bank =  "cmn_max_qty_trade_bank"
-            cmn_round_nifty = "cmn_round_nifty"
-            cmn_round_bank = "cmn_round_bank"
-            cmn_max_strike_prices_nifty = "cmn_max_strike_prices_nifty"
-            cmn_max_strike_prices_bank = "cmn_max_strike_prices_bank"
-            cmn_set_strike = "cmn_set_strike"
-
-
-            users = commonconfig(
-            cmn_fetch_autoexpiry = cmn_fetch_autoexpiry,
-            cmn_expiry = cmn_expiry,
-            cmn_autoswitch_premium_nifty = cmn_autoswitch_premium_nifty,
-            cmn_autoswitch_premium_bank = cmn_autoswitch_premium_bank,
-            cmn_max_qty_trade_nifty =  cmn_max_qty_trade_nifty,
-            cmn_max_qty_trade_bank =  cmn_max_qty_trade_bank,
-            cmn_round_nifty = cmn_round_nifty,
-            cmn_round_bank = cmn_round_bank,
-            cmn_max_strike_prices_nifty = cmn_max_strike_prices_nifty,
-            cmn_max_strike_prices_bank = cmn_max_strike_prices_bank,
-            cmn_set_strike = cmn_set_strike
-            )
-            db.session.add(users)
-            db.session.commit()
-        return render_template('home/common-configs.html', users=user, segment='configs-common')
-    if request.method == 'POST':
-        users5 = commonconfig.query.filter_by(id=1).first()
-
-        if "btn_cmn_fetch_autoexpiry_at_autologin_apply" in request.form:
-            users5.cmn_fetch_autoexpiry = request.form['cmn_fetch_autoexpiry']
-        if "btn_cmn_expiry_apply" in request.form:
-            users5.cmn_expiry = request.form['cmn_expiry']
-        if "btn_cmn_autoswitch_premium_apply" in request.form:
-            users5.cmn_autoswitch_premium_nifty = request.form['cmn_autoswitch_premium_nifty']
-            users5.cmn_autoswitch_premium_bank = request.form['cmn_autoswitch_premium_bank']
-        if "btn_cmn_max_qty_trade_apply" in request.form:
-            users5.cmn_max_qty_trade_nifty =  request.form['cmn_max_qty_trade_nifty']
-            users5.cmn_max_qty_trade_bank =  request.form['cmn_max_qty_trade_bank']
-        if "btn_cmn_round_max_strike_prices_apply" in request.form:
-            users5.cmn_round_nifty =  request.form['cmn_round_nifty']
-            users5.cmn_round_bank =  request.form['cmn_round_bank']
-            users5.cmn_max_strike_prices_nifty =  request.form['cmn_max_strike_prices_nifty']
-            users5.cmn_max_strike_prices_bank =  request.form['cmn_max_strike_prices_bank']
-
-
-        db.session.commit()   
-        return redirect('/configs-common')
-
-    
-
-@blueprint.route('/configs-users', methods=['GET', 'POST'])
-@login_required
-def running_config():
-    if request.method == 'GET':
-        users = UserModel.query.all()
-        data = commonconfig.query.filter_by(id=1).first()
-        return render_template('home/user-configs.html', data=data.cmn_set_strike, users=users, segment='configs-users')
-    if request.method == 'POST':
-        if "btn_usr_aut_apply" in request.form:
-            users5 = UserModel.query.filter_by(usr_id=request.form['btn_usr_aut_apply']).first()
-            users5.usr_aut_prem_to_sell_nifty = request.form['usr_aut_prem_to_sell_nifty'+str(users5.usr_id)]
-            users5.usr_aut_prem_to_sell_bank = request.form['usr_aut_prem_to_sell_bank'+str(users5.usr_id)]
-            users5.usr_aut_stike_to_buy_nifty = request.form['usr_aut_stike_to_buy_nifty'+str(users5.usr_id)]
-            users5.usr_aut_stike_to_buy_bank =  request.form['usr_aut_stike_to_buy_bank'+str(users5.usr_id)]
-            db.session.commit()   
-        if "btn_usr_man_apply" in request.form:
-            users5 = UserModel.query.filter_by(usr_id=request.form['btn_usr_man_apply']).first()
-            users5.usr_man_odr_1buy_nifty = request.form['usr_man_odr_1buy_nifty'+str(users5.usr_id)]
-            users5.usr_man_odr_2sell_nifty = request.form['usr_man_odr_2sell_nifty'+str(users5.usr_id)]
-            users5.usr_man_odr_1buy_bank = request.form['usr_man_odr_1buy_bank'+str(users5.usr_id)]
-            users5.usr_man_odr_2sell_bank =  request.form['usr_man_odr_2sell_bank'+str(users5.usr_id)]
-            db.session.commit()  
-        if "btn_usr_oth_apply" in request.form:
-            users5 = UserModel.query.filter_by(usr_id=request.form['btn_usr_oth_apply']).first()
-            users5.usr_funds_not_to_use = request.form['usr_funds_not_to_use'+str(users5.usr_id)]
-            users5.usr_max_qty = request.form['usr_max_qty'+str(users5.usr_id)]
-            db.session.commit()  
-        if "btn_cmn_set_strike_apply" in request.form:
-            users5 = commonconfig.query.filter_by(id=1).first()
-            users5.cmn_set_strike = request.form['cmn_set_strike']
-            db.session.commit()  
-        if "btn_usr_aut_apply_all" in request.form:
-            users = UserModel.query.all()
-            for i in range(1, len(users)+1):
-                users5 = UserModel.query.filter_by(id=i).first()
-                users5.usr_aut_prem_to_sell_nifty = request.form['usr_aut_prem_to_sell_nifty'+str(users5.usr_id)]
-                users5.usr_aut_prem_to_sell_bank = request.form['usr_aut_prem_to_sell_bank'+str(users5.usr_id)]
-                users5.usr_aut_stike_to_buy_nifty = request.form['usr_aut_stike_to_buy_nifty'+str(users5.usr_id)]
-                users5.usr_aut_stike_to_buy_bank =  request.form['usr_aut_stike_to_buy_bank'+str(users5.usr_id)]
-                db.session.commit()  
-                
-        if "btn_usr_man_apply_all" in request.form:
-            users = UserModel.query.all()
-            for i in range(1, len(users)+1):
-                users5 = UserModel.query.filter_by(id=i).first()
-                users5.usr_man_odr_1buy_nifty = request.form['usr_man_odr_1buy_nifty'+str(users5.usr_id)]
-                users5.usr_man_odr_2sell_nifty = request.form['usr_man_odr_2sell_nifty'+str(users5.usr_id)]
-                users5.usr_man_odr_1buy_bank = request.form['usr_man_odr_1buy_bank'+str(users5.usr_id)]
-                users5.usr_man_odr_2sell_bank =  request.form['usr_man_odr_2sell_bank'+str(users5.usr_id)]
-                db.session.commit()
-
-        if "btn_usr_oth_apply_all" in request.form:
-            users = UserModel.query.all()
-            for i in range(1, len(users)+1):
-                users5 = UserModel.query.filter_by(id=i).first()
-                users5.usr_funds_not_to_use = request.form['usr_funds_not_to_use'+str(users5.usr_id)]
-                users5.usr_max_qty = request.form['usr_max_qty'+str(users5.usr_id)]
-                db.session.commit() 
-
-        return redirect('/configs-users')
-
-
-@blueprint.route('/trade-close')
-@login_required
-def switch():
-    users = UserModel.query.all()
-    return render_template('home/close-trade.html', users=users, segment='trade-close')
-
-
-@blueprint.route('/trade-manual', methods=['GET', 'POST'])
-@login_required
-def close():
-    if request.method == 'GET':
-        users = UserModel.query.all()
-        manualuser = ManualUser.query.filter_by(id=1).first()
-        return render_template('home/manual-trade.html', users=users, manualuser=manualuser,  segment='trade-manual')
-
-    if request.method == 'POST':
-        if ManualUser.query.filter_by(id=1).first() == None:
-            users = ManualUser(
-                man_opt_usr_id = "man_opt_usr_id",
-                man_opt_nam = "man_opt_nam",
-                man_opt_expiry = "man_opt_expiry",
-                man_opt_mis_nrml = "man_opt_mis_nrml",
-                man_opt_buy_1_ord = "man_opt_buy_1_ord",
-                man_opt_sell_2_ord = "man_opt_sell_2_ord",
-                man_opt_buy_PECE = "man_opt_buy_PECE",
-                man_opt_sell_PECE = "man_opt_sell_PECE",
-                man_opt_qty_buy = "man_opt_qty_buy",
-                man_opt_qty_sell = "man_opt_qty_sell",
-                man_opt_nif_banknif = "man_opt_nif_banknif",
-                man_usr_id = "man_usr_id",
-                man_name = "man_name",
-                man_symb = "man_symb",
-                man_qty = "man_qty",
-                man_buysell = "man_buysell",
-                man_mis_nrml = "man_mis_nrml"
-    )
-            db.session.add(users)
-            db.session.commit()
-        if "man_opt_drpdwn_apply" in request.form:
-            all_users = UserModel.query.filter_by(usr_id=request.form.get('man_opt_drpdwn')).first()
-            manualuser = ManualUser.query.filter_by(id=1).first()
-            if all_users != None:
-                manualuser.man_opt_usr_id = all_users.usr_id
-                manualuser.man_opt_nam = all_users.usr_name
-                db.session.commit()
-        if "man_drpdwn_apply" in request.form:
-            all_users = UserModel.query.filter_by(usr_id=request.form.get('man_drpdwn')).first()
-            manualuser = ManualUser.query.filter_by(id=1).first()
-            if all_users != None:
-                manualuser.man_usr_id = all_users.usr_id
-                manualuser.man_name = all_users.usr_name
-                db.session.commit()
-        if "btn_man_opt_apply" in request.form:
-            manualuser = ManualUser.query.filter_by(id=1).first()
-            manualuser.man_opt_expiry = request.form['man_opt_expiry']
-            manualuser.man_opt_nif_banknif = request.form['man_opt_nif_banknif']
-            manualuser.man_opt_mis_nrml = request.form['man_opt_mis_nrml']
-            manualuser.man_opt_buy_1_ord = request.form['man_opt_buy_1_ord']
-            manualuser.man_opt_buy_PECE = request.form['man_opt_buy_PECE']
-            manualuser.man_opt_qty_buy = request.form['man_opt_qty_buy']
-            manualuser.man_opt_sell_2_ord = request.form['man_opt_sell_2_ord']
-            manualuser.man_opt_sell_PECE = request.form['man_opt_sell_PECE']
-            manualuser.man_opt_qty_sell = request.form['man_opt_qty_sell']
-            db.session.commit()  
-        if "btn_man_apply" in request.form:
-            manualuser = ManualUser.query.filter_by(id=1).first()
-            manualuser.man_symb = request.form['man_symb']
-            manualuser.man_qty = request.form['man_qty']
-            manualuser.man_buysell = request.form['man_buysell']
-            manualuser.man_mis_nrml = request.form['man_mis_nrml']
-            db.session.commit() 
-        if "man_opt_select_all_user" in request.form:
-            manualuser = ManualUser.query.filter_by(id=1).first()
-            manualuser.man_opt_usr_id = "ALL"
-            manualuser.man_opt_nam = "ALL"
-            db.session.commit() 
-        if "man_select_all_user" in request.form:
-            manualuser = ManualUser.query.filter_by(id=1).first()
-            manualuser.man_usr_id = "ALL"
-            manualuser.man_name = "ALL"
-            db.session.commit() 
-        if "btn_man_opt_plc_odr" in request.form:
-            manualuser = ManualUser.query.filter_by(id=1).first()
-            print("Details")
-            print(manualuser.man_opt_expiry)
-            print(manualuser.man_opt_nif_banknif)
-            print(manualuser.man_opt_mis_nrml)
-            print(manualuser.man_opt_buy_1_ord)
-            print(manualuser.man_opt_buy_PECE)
-            print(manualuser.man_opt_qty_buy)
-            print(manualuser.man_opt_sell_2_ord)
-            print(manualuser.man_opt_sell_PECE)
-            print(manualuser.man_opt_qty_sell)
-        if "btn_man_plc_odr" in request.form:
-            manualuser = ManualUser.query.filter_by(id=1).first()
-            print("Details")
-            print(manualuser.man_usr_id)
-            print(manualuser.man_name)
-            print(manualuser.man_symb)
-            print(manualuser.man_qty)
-            print(manualuser.man_buysell)
-            print(manualuser.man_mis_nrml)
-        return redirect('/trade-manual')
-
-@blueprint.route('/print_data', methods=['POST'])
-@login_required
-def print_data():
-    userinfo=request.get_json()
-    print()
-    print()
-    print(userinfo)
-    print()
-    print()
-    return str(userinfo)
-
-
-@blueprint.route('/trade-switch')
-@login_required
-def balance():
-    users = UserModel.query.all()
-    return render_template('home/switch-trade.html', users=users, segment='trade-switch')
 
 
 @blueprint.route('/Product-masters', methods=['GET', 'POST'])
@@ -451,6 +268,95 @@ def Customer_masters():
         db.session.add(offer)
         db.session.commit()
         return redirect('/Customer-masters')
+
+
+@blueprint.route('/Country-masters')
+@login_required
+def Country_masters():
+    users = UserModel.query.all()
+    return render_template('home/Country-masters.html', users=users, segment='Country-masters')
+
+
+@blueprint.route('/State-masters')
+@login_required
+def State_masters():
+    users = UserModel.query.all()
+    return render_template('home/State-masters.html', users=users, segment='State-masters')
+
+@blueprint.route('/City-masters')
+@login_required
+def City_masters():
+    users = UserModel.query.all()
+    return render_template('home/City-masters.html', users=users, segment='City-masters')
+
+@blueprint.route('/Role-masters')
+@login_required
+def Role_masters():
+    users = UserModel.query.all()
+    return render_template('home/Role-masters.html', users=users, segment='Role-masters')
+
+@blueprint.route('/User-masters')
+@login_required
+def user_masters():
+    users = UserModel.query.all()
+    return render_template('home/User-masters.html', users=users, segment='User-masters')
+
+@blueprint.route('/BOM-Category-masters')
+@login_required
+def BOM_Category_masters():
+    users = UserModel.query.all()
+    return render_template('home/BOM-Category-masters.html', users=users, segment='BOM-Category-masters')
+
+
+@blueprint.route('/BOM-masters')
+@login_required
+def BOM_masters():
+    users = UserModel.query.all()
+    return render_template('home/BOM-masters.html', users=users, segment='BOM-masters')
+
+@blueprint.route('/Supplier-masters')
+@login_required
+def Supplier_masters():
+    users = UserModel.query.all()
+    return render_template('home/Supplier-masters.html', users=users, segment='Supplier-masters')
+
+@blueprint.route('/Currency-masters')
+@login_required
+def Currency_masters():
+    users = UserModel.query.all()
+    return render_template('home/Currency-masters.html', users=users, segment='Currency-masters')
+
+
+@blueprint.route('/Contract-Review-list')
+@login_required
+def Contract_Review_list():
+    users = UserModel.query.all()
+    return render_template('home/Contract-Review.html', users=users, segment='contractreview')
+
+@blueprint.route('/OC-Register-list')
+@login_required
+def OC_Register_list():
+    users = UserModel.query.all()
+    return render_template('home/OC-Register-List.html', users=users, segment='OcRegister')
+
+@blueprint.route('/BOM-Register-List')
+@login_required
+def BOM_Register_list():
+    users = UserModel.query.all()
+    return render_template('home/BOM-Register-List.html', users=users, segment='BOMRegister')
+
+@blueprint.route('/Marketing-RegisterList')
+@login_required
+def Marketing_RegisterList():
+    users = UserModel.query.all()
+    return render_template('home/Marketing-Register-List.html', users=users, segment='MarketingRegisterList')
+
+
+@blueprint.route('/Marketing-Register-Report')
+@login_required
+def Marketing_Register_Report():
+    users = UserModel.query.all()
+    return render_template('home/Marketing-Register-Report.html', users=users, segment='MarketingRegisterReport')
 
 
 @blueprint.route('/<int:id>/delete', methods=['GET', 'POST'])
