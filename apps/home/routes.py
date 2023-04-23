@@ -103,6 +103,27 @@ def add_user_login():
     if request.method == 'POST':
         return redirect('/User-masters')
     
+    
+@blueprint.route('/add-bom-master', methods=['GET', 'POST'])
+@login_required
+def add_bom_master():
+    if request.method == 'GET':
+        users = CustomerMaster.query.all()
+        user1 = ProductMaster.query.all()
+        return render_template('home/add-bom-master.html',users=users,user1=user1)
+    if request.method == 'POST':
+        return redirect('/BOM-masters')
+    
+@blueprint.route('/add-supplier-master', methods=['GET', 'POST'])
+@login_required
+def add_supplier_master():
+    if request.method == 'GET':
+        users = CustomerMaster.query.all()
+        user1 = ProductMaster.query.all()
+        return render_template('home/add-supplier.html',users=users,user1=user1)
+    if request.method == 'POST':
+        return redirect('/BOM-masters')
+    
 @blueprint.route('/invoice-addinvoice', methods=['GET', 'POST'])
 @login_required
 def addinvoice():

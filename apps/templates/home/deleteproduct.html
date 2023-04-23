@@ -9,11 +9,40 @@
 
 
 <div class="content">
-<form action='' method="post">
-    Click YES to confirm
-    <input type = "submit" value="YES" class="btn btn-danger">
-    <a href='/Product-masters'>Cancel</a>
-</form>
+    <div class="page-inner">
+        <div class="page-header">
+            <div class="term-conditions">
+                <h1>Click YES to confirm</h1><br>
+                <form action='' method="post">
+                    <input type="submit" value="YES" class="btn btn-primary">
+                    <a href='/Product-masters' class="btn btn-danger">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .term-conditions {
+            background-color: #ffffff;
+            border: 1px solid #110f0f;
+            padding: 30px;
+            color: #333;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: auto;
+            width: 30%;
+            border: 3px solid rgb(19, 28, 19);
+            text-align: center;
+
+        }
+
+        .term-conditions h4 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+
 </div>
 
 {% endblock content %}
