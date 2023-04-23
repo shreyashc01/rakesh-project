@@ -149,3 +149,23 @@ class ProductMaster(db.Model):
         return f"{self.product_name}:{self.part_no}"
 
 
+class KitMaster(db.Model):
+    __tablename__ = "kitmaster"
+
+    id = db.Column(db.Integer, primary_key=True)
+    kit_description = db.Column(db.String())
+    kit_no = db.Column(db.INT())
+    hsn_code = db.Column(db.Float())
+    lubricant_points = db.Column(db.INT())
+    kit_products = db.Column(db.String())
+
+    def __init__(self, kit_description, kit_no, hsn_code, lubricant_points, kit_products):
+        self.kit_description = kit_description
+        self.kit_no = kit_no
+        self.hsn_code = hsn_code
+        self.lubricant_points = lubricant_points
+        self.kit_products = kit_products
+        
+
+    def __repr__(self):
+        return f"{self.kit_description}:{self.kit_no}"

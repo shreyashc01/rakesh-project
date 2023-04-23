@@ -108,13 +108,9 @@
 								<table id="add-row" class="display table table-striped table-hover" >
 									<thead>
 										<tr>
-											<th>Product Name</th>
-											<th>Part No</th>
-											<th>Rack No</th>
-											<th>Bin No</th>
-											<th>Minimum Qty</th>
-											<th>Maximum Order</th>
-											<th>Description</th>
+											<th>Kit description</th>
+											<th>kit No</th>
+											<th>HSN No</th>
 											<th style="width: 10%">Action</th>
 										</tr>
 									</thead>
@@ -125,13 +121,9 @@
 											{% else %}
 											{% endif %}
 											>
-											<td>{{user.product_name}}</td>
-											<td>{{user.part_no}}</td>
-											<td>{{user.rack_no}}</td>
-											<td>{{user.bin_no}}</td>
-											<td>{{user.minimum_qty}}</td>
-											<td>{{user.maximum_order}}</td>
-											<td>{{user.description}}</td>
+											<td>{{user.kit_description}}</td>
+											<td>{{user.kit_no}}</td>
+											<td>{{user.hsn_code}}</td>
 											<td>
 											<div class="form-button-action">
 											<span style="font-size: 24px;color:green;">

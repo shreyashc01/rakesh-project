@@ -2,12 +2,13 @@ import imp
 import json
 from re import U
 from apps.home import blueprint
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, jsonify
 from flask_login import login_required
 from jinja2 import TemplateNotFound
 from apps import db
 from apps.home.models import UserModel
 from apps.home.models import MainUser
+from apps.home.models import KitMaster
 from apps.home.models import ProductMaster
 from apps.home.models import CustomerMaster
 
@@ -87,10 +88,23 @@ def create():
 @login_required
 def kit_add():
     if request.method == 'GET':
-        users = CustomerMaster.query.all()
-        user1 = ProductMaster.query.all()
-        return render_template('home/add-kit.html',users=users,user1=user1)
+        users = KitMaster.query.all()
+        return render_template('home/add-kit.html',users=users)
     if request.method == 'POST':
+        kit_description = request.form['kit_description']
+        kit_no = request.form['kit_no']
+        hsn_code = request.form['hsn_code']
+        lubricant_points = request.form['lubricant_points']
+        kit_products = "shc"
+        kit_master_add = KitMaster(kit_description=kit_description,
+            kit_no=kit_no,
+            hsn_code=hsn_code,
+            lubricant_points=lubricant_points,
+            kit_products = kit_products
+            )
+        
+        db.session.add(kit_master_add)
+        db.session.commit()
         return redirect('/Kit-masters')
 
 @blueprint.route('/add-user-login', methods=['GET', 'POST'])
@@ -257,9 +271,9 @@ def product_masters():
 @blueprint.route('/Kit-masters')
 @login_required
 def kit_masters():
-    users = UserModel.query.all()
-    return render_template('home/Kit-masters.html', users=users, segment='Kit-masters')
-
+    if request.method == 'GET':
+        users = KitMaster.query.all()
+        return render_template('home/Kit-masters.html', users=users, segment='Kit-masters')
 
 
 @blueprint.route('/Customer-masters', methods=['GET', 'POST'])
@@ -417,6 +431,13 @@ def delete2(id):
             return redirect('/Product-masters')
     return render_template('home/deleteproduct.html')
 
+@blueprint.route('/store_data', methods=['POST'])
+@login_required
+def store_data():
+    data = request.form.get('data')  # Retrieve data from the POST request
+    # Store data in the database (you would need to import and use a database library, such as SQLAlchemy or pymongo, here)
+    print(data)
+    return jsonify({'result': 'success'})
 
 @blueprint.route('/<template>')
 @login_required
