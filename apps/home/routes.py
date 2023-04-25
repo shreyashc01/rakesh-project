@@ -7,6 +7,9 @@ from flask_login import login_required
 from jinja2 import TemplateNotFound
 from apps import db
 from apps.home.models import UserModel
+from apps.home.models import CountryMaster
+from apps.home.models import StateMaster
+from apps.home.models import CityMaster
 from apps.home.models import MainUser
 from apps.home.models import KitMaster
 from apps.home.models import ProductMaster
@@ -323,93 +326,128 @@ def Customer_masters():
         return redirect('/Customer-masters')
 
 
-@blueprint.route('/Country-masters')
+@blueprint.route('/Country-masters', methods=['GET', 'POST'])
 @login_required
 def Country_masters():
-    users = UserModel.query.all()
-    return render_template('home/Country-masters.html', users=users, segment='Country-masters')
+    if request.method == 'GET':
+        users = CountryMaster.query.all()
+        return render_template('home/Country-masters.html', users=users, segment='Country-masters')
+    if request.method == 'POST':
+        country_name_temp = request.form['country_name_temp']
+        offer = CountryMaster(country_name_temp=country_name_temp)
+        db.session.add(offer)
+        db.session.commit()
+        return redirect('/Country-masters')
 
-
-@blueprint.route('/State-masters')
+@blueprint.route('/State-masters', methods=['GET', 'POST'])
 @login_required
 def State_masters():
-    users = UserModel.query.all()
-    return render_template('home/State-masters.html', users=users, segment='State-masters')
+    if request.method == 'GET':
+        users = StateMaster.query.all()
+        return render_template('home/State-masters.html', users=users, segment='State-masters')
+    if request.method == 'POST':
+        state_name_temp = request.form['state_name_temp']
+        offer = StateMaster(state_name_temp=state_name_temp)
+        db.session.add(offer)
+        db.session.commit()
+        return redirect('/State-masters')
 
-@blueprint.route('/City-masters')
+@blueprint.route('/City-masters', methods=['GET', 'POST'])
 @login_required
 def City_masters():
-    users = UserModel.query.all()
-    return render_template('home/City-masters.html', users=users, segment='City-masters')
+    if request.method == 'GET':
+        users = CityMaster.query.all()
+        states = StateMaster.query.all()
+        countries = CountryMaster.query.all()
+        return render_template('home/City-masters.html', users=users, states=states, countries=countries,segment='City-masters')
+    if request.method == 'POST':
+        country_name = request.form['country_name']
+        state_name = request.form['state_name']
+        city_name = request.form['city_name']
+        offer = CityMaster(country_name=country_name,state_name=state_name,city_name=city_name )
+        db.session.add(offer)
+        db.session.commit()
+        return redirect('/City-masters')
 
-@blueprint.route('/Role-masters')
+@blueprint.route('/Role-masters', methods=['GET', 'POST'])
 @login_required
 def Role_masters():
-    users = UserModel.query.all()
-    return render_template('home/Role-masters.html', users=users, segment='Role-masters')
+    if request.method == 'GET':
+        users = UserModel.query.all()
+        return render_template('home/Role-masters.html', users=users, segment='Role-masters')
 
-@blueprint.route('/User-masters')
+@blueprint.route('/User-masters', methods=['GET', 'POST'])
 @login_required
 def user_masters():
-    users = UserModel.query.all()
-    return render_template('home/User-masters.html', users=users, segment='User-masters')
+    if request.method == 'GET':
+        users = UserModel.query.all()
+        return render_template('home/User-masters.html', users=users, segment='User-masters')
 
-@blueprint.route('/BOM-Category-masters')
+@blueprint.route('/BOM-Category-masters', methods=['GET', 'POST'])
 @login_required
 def BOM_Category_masters():
-    users = UserModel.query.all()
-    return render_template('home/BOM-Category-masters.html', users=users, segment='BOM-Category-masters')
+    if request.method == 'GET':
+        users = UserModel.query.all()
+        return render_template('home/BOM-Category-masters.html', users=users, segment='BOM-Category-masters')
 
 
-@blueprint.route('/BOM-masters')
+@blueprint.route('/BOM-masters', methods=['GET', 'POST'])
 @login_required
 def BOM_masters():
-    users = UserModel.query.all()
-    return render_template('home/BOM-masters.html', users=users, segment='BOM-masters')
+    if request.method == 'GET':
+        users = UserModel.query.all()
+        return render_template('home/BOM-masters.html', users=users, segment='BOM-masters')
 
-@blueprint.route('/Supplier-masters')
+@blueprint.route('/Supplier-masters', methods=['GET', 'POST'])
 @login_required
 def Supplier_masters():
-    users = UserModel.query.all()
-    return render_template('home/Supplier-masters.html', users=users, segment='Supplier-masters')
+    if request.method == 'GET':
+        users = UserModel.query.all()
+        return render_template('home/Supplier-masters.html', users=users, segment='Supplier-masters')
 
-@blueprint.route('/Currency-masters')
+@blueprint.route('/Currency-masters', methods=['GET', 'POST'])
 @login_required
 def Currency_masters():
-    users = UserModel.query.all()
-    return render_template('home/Currency-masters.html', users=users, segment='Currency-masters')
+    if request.method == 'GET':
+        users = UserModel.query.all()
+        return render_template('home/Currency-masters.html', users=users, segment='Currency-masters')
 
 
-@blueprint.route('/Contract-Review-list')
+@blueprint.route('/Contract-Review-list', methods=['GET', 'POST'])
 @login_required
 def Contract_Review_list():
-    users = UserModel.query.all()
-    return render_template('home/Contract-Review.html', users=users, segment='contractreview')
+    if request.method == 'GET':
+        users = UserModel.query.all()
+        return render_template('home/Contract-Review.html', users=users, segment='contractreview')
 
-@blueprint.route('/OC-Register-list')
+@blueprint.route('/OC-Register-list', methods=['GET', 'POST'])
 @login_required
 def OC_Register_list():
-    users = UserModel.query.all()
-    return render_template('home/OC-Register-List.html', users=users, segment='OcRegister')
+    if request.method == 'GET':
+        users = UserModel.query.all()
+        return render_template('home/OC-Register-List.html', users=users, segment='OcRegister')
 
-@blueprint.route('/BOM-Register-List')
+@blueprint.route('/BOM-Register-List', methods=['GET', 'POST'])
 @login_required
 def BOM_Register_list():
-    users = UserModel.query.all()
-    return render_template('home/BOM-Register-List.html', users=users, segment='BOMRegister')
+    if request.method == 'GET':
+        users = UserModel.query.all()
+        return render_template('home/BOM-Register-List.html', users=users, segment='BOMRegister')
 
-@blueprint.route('/Marketing-RegisterList')
+@blueprint.route('/Marketing-RegisterList', methods=['GET', 'POST'])
 @login_required
 def Marketing_RegisterList():
-    users = UserModel.query.all()
-    return render_template('home/Marketing-Register-List.html', users=users, segment='MarketingRegisterList')
+    if request.method == 'GET':
+        users = UserModel.query.all()
+        return render_template('home/Marketing-Register-List.html', users=users, segment='MarketingRegisterList')
 
 
-@blueprint.route('/Marketing-Register-Report')
+@blueprint.route('/Marketing-Register-Report', methods=['GET', 'POST'])
 @login_required
 def Marketing_Register_Report():
-    users = UserModel.query.all()
-    return render_template('home/Marketing-Register-Report.html', users=users, segment='MarketingRegisterReport')
+    if request.method == 'GET':
+        users = UserModel.query.all()
+        return render_template('home/Marketing-Register-Report.html', users=users, segment='MarketingRegisterReport')
 
 
 @blueprint.route('/<int:id>/delete', methods=['GET', 'POST'])

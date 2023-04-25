@@ -67,19 +67,28 @@
 													<div class="col-sm-12">
 														<div class="form-group form-group-default">
 															<label>Country Name</label>
-															<input name="product_name" type="text" class="form-control" placeholder="Fill Country name">
+															<select name="country_name" class="form-control">
+																{% for user in countries %}
+																<option>{{ user.country_name }}</option>
+																{% endfor %}
+															</select>
 														</div>
 													</div>
 													<div class="col-sm-12">
 														<div class="form-group form-group-default">
 															<label>State Name</label>
-															<input name="product_name" type="text" class="form-control" placeholder="Fill State name">
+															<select name="state_name" class="form-control">
+																{% for user in states %}
+																<option>{{ user.state_name }}</option>
+																{% endfor %}
+															</select>
 														</div>
 													</div>
+
                                                     <div class="col-sm-12">
 														<div class="form-group form-group-default">
 															<label>City Name</label>
-															<input name="product_name" type="text" class="form-control" placeholder="Fill City name">
+															<input name="city_name" type="text" class="form-control" placeholder="Fill City name">
 														</div>
 													</div>
 												</div>
@@ -112,9 +121,9 @@
 											{% else %}
 											{% endif %}
 											>
-											<td>{{user.product_name}}</td>
-											<td>{{user.product_name}}</td>
-											<td>{{user.product_name}}</td>
+											<td>{{user.country_name}}</td>
+											<td>{{user.state_name}}</td>
+											<td>{{user.city_name}}</td>
 
 											<td>
 											<div class="form-button-action">

@@ -66,14 +66,8 @@
 												<div class="row">
 													<div class="col-sm-12">
 														<div class="form-group form-group-default">
-															<label>Country Name</label>
-															<input name="product_name" type="text" class="form-control" placeholder="Fill Country name">
-														</div>
-													</div>
-													<div class="col-sm-12">
-														<div class="form-group form-group-default">
 															<label>State Name</label>
-															<input name="product_name" type="text" class="form-control" placeholder="Fill State name">
+															<input name="state_name_temp" type="text" class="form-control" placeholder="Fill State name">
 														</div>
 													</div>
 												</div>
@@ -93,8 +87,7 @@
 								<table id="add-row" class="display table table-striped table-hover" >
 									<thead>
 										<tr>
-											<th>Country</th>
-                                            <th>State</th>
+											<th>State</th>
 											<th style="width: 10%">Action</th>
 										</tr>
 									</thead>
@@ -105,8 +98,7 @@
 											{% else %}
 											{% endif %}
 											>
-											<td>{{user.product_name}}</td>
-                                            <td>{{user.product_name}}</td>
+											<td>{{user.state_name_temp}}</td>
 											<td>
 											<div class="form-button-action">
 											<span style="font-size: 24px;color:green;">
