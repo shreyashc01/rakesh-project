@@ -248,7 +248,7 @@ class CurrencyMaster(db.Model):
         return f"{self.currency_name}:{self.currency_name}"
 
 class SupplierMaster(db.Model):
-    __tablename__ = "CurrencyMaster"
+    __tablename__ = "SupplierMaster"
 
     id = db.Column(db.Integer, primary_key=True)
     supplier_name = db.Column(db.String())
@@ -282,7 +282,7 @@ class SupplierMaster(db.Model):
         return f"{self.supplier_name}:{self.supplier_primary_contact}"
     
 class BomMaster(db.Model):
-    __tablename__ = "CurrencyMaster"
+    __tablename__ = "BomMaster"
 
     id = db.Column(db.Integer, primary_key=True)
     bom_description = db.Column(db.String())
