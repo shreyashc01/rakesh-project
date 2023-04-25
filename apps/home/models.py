@@ -169,3 +169,149 @@ class KitMaster(db.Model):
 
     def __repr__(self):
         return f"{self.kit_description}:{self.kit_no}"
+
+class CountryMaster(db.Model):
+    __tablename__ = "CountryMaster"
+
+    id = db.Column(db.Integer, primary_key=True)
+    country_name_temp = db.Column(db.String())
+
+    def __init__(self, country_name_temp):
+        self.country_name_temp = country_name_temp
+
+    def __repr__(self):
+        return f"{self.country_name_temp}:{self.country_name_temp}"
+
+class StateMaster(db.Model):
+    __tablename__ = "StateMaster"
+
+    id = db.Column(db.Integer, primary_key=True)
+    state_name_temp = db.Column(db.String())
+
+    def __init__(self, state_name_temp):
+        self.state_name_temp = state_name_temp
+        
+
+    def __repr__(self):
+        return f"{self.state_name_temp}:{self.state_name_temp}"
+
+class CityMaster(db.Model):
+    __tablename__ = "CityMaster"
+
+    id = db.Column(db.Integer, primary_key=True)
+    country_name = db.Column(db.String())
+    state_name = db.Column(db.String())
+    city_name = db.Column(db.String())
+
+    def __init__(self, country_name, state_name, city_name):
+        self.country_name = country_name
+        self.state_name = state_name
+        self.city_name = city_name
+
+    def __repr__(self):
+        return f"{self.country_name}:{self.state_name}"
+
+class RoleMaster(db.Model):
+    __tablename__ = "RoleMaster"
+
+    id = db.Column(db.Integer, primary_key=True)
+    role_name = db.Column(db.String())
+
+    def __init__(self, role_name):
+        self.role_name = role_name
+
+    def __repr__(self):
+        return f"{self.role_name}:{self.role_name}"
+
+class BomCategoryMaster(db.Model):
+    __tablename__ = "BomCategoryMaster"
+
+    id = db.Column(db.Integer, primary_key=True)
+    bom_category_name = db.Column(db.String())
+
+    def __init__(self, bom_category_name):
+        self.bom_category_name = bom_category_name
+
+    def __repr__(self):
+        return f"{self.bom_category_name}:{self.bom_category_name}"
+
+class CurrencyMaster(db.Model):
+    __tablename__ = "CurrencyMaster"
+
+    id = db.Column(db.Integer, primary_key=True)
+    currency_name = db.Column(db.String())
+
+    def __init__(self, currency_name):
+        self.currency_name = currency_name
+
+    def __repr__(self):
+        return f"{self.currency_name}:{self.currency_name}"
+
+class SupplierMaster(db.Model):
+    __tablename__ = "CurrencyMaster"
+
+    id = db.Column(db.Integer, primary_key=True)
+    supplier_name = db.Column(db.String())
+    supplier_primary_contact = db.Column(db.String())
+    supplier_secondary_contact = db.Column(db.String())
+    supplier_email_id = db.Column(db.String())
+    supplier_contact_no = db.Column(db.String())
+    supplier_country = db.Column(db.String())
+    supplier_state = db.Column(db.String())
+    supplier_city = db.Column(db.String())
+    supplier_address = db.Column(db.String())
+    supplier_gst_no = db.Column(db.String())
+    supplier_pan = db.Column(db.String())
+
+    def __init__(self, supplier_name, supplier_primary_contact, supplier_secondary_contact, supplier_email_id,supplier_contact_no,
+                 supplier_country,supplier_state,supplier_city,supplier_address,supplier_gst_no,supplier_pan):
+        self.supplier_name = supplier_name
+        self.supplier_primary_contact = supplier_primary_contact
+        self.supplier_secondary_contact = supplier_secondary_contact
+        self.supplier_email_id = supplier_email_id
+        self.supplier_contact_no = supplier_contact_no
+        self.supplier_country = supplier_country
+        self.supplier_state = supplier_state
+        self.supplier_city = supplier_city
+        self.supplier_address = supplier_address
+        self.supplier_gst_no = supplier_gst_no
+        self.supplier_pan = supplier_pan
+
+
+    def __repr__(self):
+        return f"{self.supplier_name}:{self.supplier_primary_contact}"
+    
+class BomMaster(db.Model):
+    __tablename__ = "CurrencyMaster"
+
+    id = db.Column(db.Integer, primary_key=True)
+    bom_description = db.Column(db.String())
+    bom_no = db.Column(db.INT())
+    bom_model_no = db.Column(db.String())
+    bom_cls = db.Column(db.String())
+    bom_lube_points = db.Column(db.String())
+    bom_type = db.Column(db.String())
+    bom_notes = db.Column(db.String())
+    bom_serial_no = db.Column(db.String())
+    bom_category = db.Column(db.String())
+    bom_product = db.Column(db.String())
+    bom_quantity = db.Column(db.String())
+    bom_uom = db.Column(db.String())
+
+    def __init__(self, bom_description, bom_no, bom_model_no, bom_cls,bom_lube_points,
+                 bom_type,bom_notes,bom_serial_no,bom_category,bom_product,bom_quantity, bom_uom):
+        self.bom_description = bom_description
+        self.bom_no = bom_no
+        self.bom_model_no = bom_model_no
+        self.bom_cls = bom_cls
+        self.bom_lube_points = bom_lube_points
+        self.bom_type = bom_type
+        self.bom_notes = bom_notes
+        self.bom_serial_no = bom_serial_no
+        self.bom_category = bom_category
+        self.bom_product = bom_product
+        self.bom_quantity = bom_quantity
+        self.bom_uom = bom_uom
+
+    def __repr__(self):
+        return f"{self.bom_description}:{self.bom_no}"
