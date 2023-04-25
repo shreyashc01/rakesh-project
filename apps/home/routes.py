@@ -95,7 +95,8 @@ def kit_add():
         kit_no = request.form['kit_no']
         hsn_code = request.form['hsn_code']
         lubricant_points = request.form['lubricant_points']
-        kit_products = "shc"
+        kit_products_temp = request.form.getlist('kit_products')
+        kit_products = ','.join(kit_products_temp)
         kit_master_add = KitMaster(kit_description=kit_description,
             kit_no=kit_no,
             hsn_code=hsn_code,
@@ -241,6 +242,23 @@ def update2(id):
 
     return render_template('home/updateproduct.html', user=user, segment='Product-masters')
 
+
+@blueprint.route('/<int:id>/editkit', methods=['GET', 'POST'])
+@login_required
+def update3(id):
+    user = KitMaster.query.filter_by(id=id).first()
+    values_list = user.kit_products.split(',')
+    if request.method == 'POST':
+        user.kit_description = request.form['kit_description']
+        user.kit_no = request.form['kit_no']
+        user.hsn_code = request.form['hsn_code']
+        user.lubricant_points = request.form['lubricant_points']
+        kit_products_temp = request.form.getlist('kit_products')
+        user.kit_products = ','.join(kit_products_temp)
+        db.session.commit()
+        return redirect('/Kit-masters')
+
+    return render_template('home/edit-kit.html', user=user,values_list=values_list, segment='Kit-masters')
 
 @blueprint.route('/Product-masters', methods=['GET', 'POST'])
 @login_required
@@ -431,13 +449,16 @@ def delete2(id):
             return redirect('/Product-masters')
     return render_template('home/deleteproduct.html')
 
-@blueprint.route('/store_data', methods=['POST'])
+@blueprint.route('/<int:id>/deletekit', methods=['GET', 'POST'])
 @login_required
-def store_data():
-    data = request.form.get('data')  # Retrieve data from the POST request
-    # Store data in the database (you would need to import and use a database library, such as SQLAlchemy or pymongo, here)
-    print(data)
-    return jsonify({'result': 'success'})
+def delete3(id):
+    users = KitMaster.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        if users:
+            db.session.delete(users)
+            db.session.commit()
+            return redirect('/Kit-masters')
+    return render_template('home/delete-kit.html')
 
 @blueprint.route('/<template>')
 @login_required
