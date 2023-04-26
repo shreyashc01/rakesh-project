@@ -359,7 +359,8 @@ def City_masters():
         users = CityMaster.query.all()
         states = StateMaster.query.all()
         countries = CountryMaster.query.all()
-        return render_template('home/City-masters.html', users=users, states=states, countries=countries,segment='City-masters')
+        print(users,states,countries)
+        return render_template('home/City-masters.html', len_country= len(countries), users=users, len_state=len(states), states=states, countries=countries,segment='City-masters')
     if request.method == 'POST':
         country_name = request.form['country_name']
         state_name = request.form['state_name']
@@ -497,6 +498,18 @@ def delete3(id):
             db.session.commit()
             return redirect('/Kit-masters')
     return render_template('home/delete-kit.html')
+
+@blueprint.route('/<int:id>/deletecity', methods=['GET', 'POST'])
+@login_required
+def delete4(id):
+    users = CityMaster.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        if users:
+            db.session.delete(users)
+            db.session.commit()
+            return redirect('/City-masters')
+    return render_template('home/delete-city.html')
+
 
 @blueprint.route('/<template>')
 @login_required

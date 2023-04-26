@@ -180,7 +180,7 @@ class CountryMaster(db.Model):
         self.country_name_temp = country_name_temp
 
     def __repr__(self):
-        return f"{self.country_name_temp}:{self.country_name_temp}"
+        return self.country_name_temp
 
 class StateMaster(db.Model):
     __tablename__ = "StateMaster"
@@ -193,7 +193,7 @@ class StateMaster(db.Model):
         
 
     def __repr__(self):
-        return f"{self.state_name_temp}:{self.state_name_temp}"
+        return self.state_name_temp 
 
 class CityMaster(db.Model):
     __tablename__ = "CityMaster"
