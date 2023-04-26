@@ -221,7 +221,7 @@ class RoleMaster(db.Model):
         self.role_name = role_name
 
     def __repr__(self):
-        return f"{self.role_name}:{self.role_name}"
+        return f"{self.id}:{self.role_name}"
 
 class BomCategoryMaster(db.Model):
     __tablename__ = "BomCategoryMaster"

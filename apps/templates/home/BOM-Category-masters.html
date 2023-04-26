@@ -67,7 +67,7 @@
 													<div class="col-sm-12">
 														<div class="form-group form-group-default">
 															<label>BOM Name</label>
-															<input name="product_name" type="text" class="form-control" placeholder="Fill BOM Category">
+															<input name="bom_category_name" type="text" class="form-control" placeholder="Fill BOM Category">
 														</div>
 													</div>
 												</div>
@@ -98,14 +98,11 @@
 											{% else %}
 											{% endif %}
 											>
-											<td>{{user.product_name}}</td>
+											<td>{{user.bom_category_name}}</td>
 											<td>
 											<div class="form-button-action">
-											<span style="font-size: 24px;color:green;">
-											<a href="/{{user.id}}/editproduct" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fas fa-edit" ></i></a> 
-											</span>
 											<span style="font-size: 24px;color:red;">
-											<a href="/{{user.id}}/deleteproduct" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fas fa-times"></i></a>
+											<a href="/{{user.id}}/deletebomcategory" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fas fa-times"></i></a>
 											</span>
 											</div>
 											</td>

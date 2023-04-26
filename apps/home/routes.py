@@ -8,6 +8,8 @@ from jinja2 import TemplateNotFound
 from apps import db
 from apps.home.models import UserModel
 from apps.home.models import CountryMaster
+from apps.home.models import RoleMaster
+from apps.home.models import BomCategoryMaster
 from apps.home.models import StateMaster
 from apps.home.models import CityMaster
 from apps.home.models import MainUser
@@ -374,9 +376,15 @@ def City_masters():
 @login_required
 def Role_masters():
     if request.method == 'GET':
-        users = UserModel.query.all()
+        users = RoleMaster.query.all()
         return render_template('home/Role-masters.html', users=users, segment='Role-masters')
-
+    if request.method == 'POST':
+        role_name = request.form['role_name']
+        offer = RoleMaster(role_name=role_name)
+        db.session.add(offer)
+        db.session.commit()
+        return redirect('/Role-masters')
+    
 @blueprint.route('/User-masters', methods=['GET', 'POST'])
 @login_required
 def user_masters():
@@ -388,9 +396,14 @@ def user_masters():
 @login_required
 def BOM_Category_masters():
     if request.method == 'GET':
-        users = UserModel.query.all()
+        users = BomCategoryMaster.query.all()
         return render_template('home/BOM-Category-masters.html', users=users, segment='BOM-Category-masters')
-
+    if request.method == 'POST':
+        bom_category_name = request.form['bom_category_name']
+        offer = BomCategoryMaster(bom_category_name=bom_category_name)
+        db.session.add(offer)
+        db.session.commit()
+        return redirect('/BOM-Category-masters')
 
 @blueprint.route('/BOM-masters', methods=['GET', 'POST'])
 @login_required
@@ -510,6 +523,50 @@ def delete4(id):
             return redirect('/City-masters')
     return render_template('home/delete-city.html')
 
+
+@blueprint.route('/<int:id>/deletestate', methods=['GET', 'POST'])
+@login_required
+def delete5(id):
+    users = StateMaster.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        if users:
+            db.session.delete(users)
+            db.session.commit()
+            return redirect('/State-masters')
+    return render_template('home/delete-state.html')
+
+@blueprint.route('/<int:id>/deletecountry', methods=['GET', 'POST'])
+@login_required
+def delete6(id):
+    users = CountryMaster.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        if users:
+            db.session.delete(users)
+            db.session.commit()
+            return redirect('/Country-masters')
+    return render_template('home/delete-country.html')
+
+@blueprint.route('/<int:id>/deleterole', methods=['GET', 'POST'])
+@login_required
+def delete7(id):
+    users = RoleMaster.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        if users:
+            db.session.delete(users)
+            db.session.commit()
+            return redirect('/Role-masters')
+    return render_template('home/delete-role.html')
+
+@blueprint.route('/<int:id>/deletebomcategory', methods=['GET', 'POST'])
+@login_required
+def delete8(id):
+    users = BomCategoryMaster.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        if users:
+            db.session.delete(users)
+            db.session.commit()
+            return redirect('/BOM-Category-masters')
+    return render_template('home/delete-category.html')
 
 @blueprint.route('/<template>')
 @login_required
