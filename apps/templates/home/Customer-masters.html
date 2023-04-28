@@ -112,6 +112,39 @@
 															<input name="address" type="text" class="form-control">
 														</div>
 													</div>
+													<div class="col-md-6">
+														<div class="form-group form-group-default">
+															<label>Country</label>
+															<select name="customer_country_name" class="form-control">
+																<option value="None">Select Country</option>
+																{% for user in city_master %}
+																	<option>{{ user.country_name }}</option>
+																{% endfor %}
+															</select>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group form-group-default">
+															<label>State</label>
+															<select name="customer_state_name" class="form-control">
+																<option value="None">Select State</option>
+																{% for user in city_master %}
+																	<option>{{ user.state_name }}</option>
+																{% endfor %}
+															</select>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group form-group-default">
+															<label>City</label>
+															<select name="customer_city_name" class="form-control">
+																<option value="None">Select City</option>
+																{% for user in city_master %}
+																	<option>{{ user.city_name }}</option>
+																{% endfor %}
+															</select>
+														</div>
+													</div>
 												</div>
 										</div>
 										<div class="card-action">
@@ -185,33 +218,6 @@
 	<script src="/static/assets/js/setting-demo2.js"></script>
 	<script >
 		$(document).ready(function() {
-			$('#basic-datatables').DataTable({
-			});
-
-			$('#multi-filter-select').DataTable( {
-				"pageLength": 5,
-				initComplete: function () {
-					this.api().columns().every( function () {
-						var column = this;
-						var select = $('<select class="form-control"><option value=""></option></select>')
-						.appendTo( $(column.footer()).empty() )
-						.on( 'change', function () {
-							var val = $.fn.dataTable.util.escapeRegex(
-								$(this).val()
-								);
-
-							column
-							.search( val ? '^'+val+'$' : '', true, false )
-							.draw();
-						} );
-
-						column.data().unique().sort().each( function ( d, j ) {
-							select.append( '<option value="'+d+'">'+d+'</option>' )
-						} );
-					} );
-				}
-			});
-
 			// Add Row
 			$('#add-row').DataTable({
 				"pageLength": 5,

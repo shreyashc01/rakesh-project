@@ -84,9 +84,12 @@ class CustomerMaster(db.Model):
     pan_number = db.Column(db.String())
     gst_number = db.Column(db.String())
     address = db.Column(db.String())
+    customer_country_name = db.Column(db.String())
+    customer_state_name = db.Column(db.String())
+    customer_city_name = db.Column(db.String())
 
     def __init__(self, customer_name, primary_contact_name, secondary_contact_name, email_id, contact_number, pan_number, gst_number,
-                 address):
+                 address,customer_country_name,customer_state_name,customer_city_name):
         self.customer_name = customer_name
         self.primary_contact_name = primary_contact_name
         self.secondary_contact_name = secondary_contact_name
@@ -95,7 +98,9 @@ class CustomerMaster(db.Model):
         self.pan_number = pan_number
         self.gst_number = gst_number
         self.address = address
-        
+        customer_country_name=customer_country_name
+        customer_state_name=customer_state_name
+        customer_city_name=customer_city_name
 
     def __repr__(self):
         return f"{self.customer_name}:{self.primary_contact_name}"
@@ -111,15 +116,17 @@ class ProductMaster(db.Model):
     bin_no = db.Column(db.INT())
     minimum_qty = db.Column(db.INT())
     maximum_order = db.Column(db.INT())
+    product_hsn_no = db.Column(db.INT())
     description = db.Column(db.String())
 
-    def __init__(self, product_name, part_no, rack_no, bin_no, minimum_qty, maximum_order, description):
+    def __init__(self, product_name, part_no, rack_no, bin_no, minimum_qty, maximum_order, product_hsn_no,description):
         self.product_name = product_name
         self.part_no = part_no
         self.rack_no = rack_no
         self.bin_no = bin_no
         self.minimum_qty = minimum_qty
         self.maximum_order = maximum_order
+        self.product_hsn_no = product_hsn_no
         self.description = description
         
 

@@ -299,6 +299,7 @@ def retrieve_list():
 @login_required
 def update(id):
     user = CustomerMaster.query.filter_by(id=id).first()
+    city_master = CityMaster.query.all()
     if request.method == 'POST':
         user.customer_name = request.form['customer_name']
         user.primary_contact_name = request.form['primary_contact_name']
@@ -312,7 +313,7 @@ def update(id):
         db.session.commit()
         return redirect('/Customer-masters')
 
-    return render_template('home/updatecustomer.html', user=user, segment='Customer-masters')
+    return render_template('home/updatecustomer.html', user=user,city_master=city_master, segment='Customer-masters')
 
 
 @blueprint.route('/<int:id>/editproduct', methods=['GET', 'POST'])
@@ -327,7 +328,7 @@ def update2(id):
         user.minimum_qty = request.form['minimum_qty']
         user.maximum_order = request.form['maximum_order']
         user.description = request.form['description']
-
+        user.product_hsn_no = request.form['product_hsn_no']
         db.session.commit()
         return redirect('/Product-masters')
 
@@ -364,6 +365,7 @@ def product_masters():
         bin_no = request.form['bin_no']
         minimum_qty = request.form['minimum_qty']
         maximum_order = request.form['maximum_order']
+        product_hsn_no = request.form['product_hsn_no']
         description = request.form['description']
         offer = ProductMaster(product_name=product_name,
             part_no=part_no,
@@ -371,6 +373,7 @@ def product_masters():
             bin_no=bin_no,
             minimum_qty=minimum_qty,
             maximum_order=maximum_order,
+            product_hsn_no=product_hsn_no,
             description=description)
         
         db.session.add(offer)
@@ -390,7 +393,8 @@ def kit_masters():
 def Customer_masters():
     if request.method == 'GET':
         users = CustomerMaster.query.all()
-        return render_template('home/Customer-masters.html',users=users, segment='Customer-masters')
+        city_master = CityMaster.query.all()
+        return render_template('home/Customer-masters.html',users=users,city_master=city_master, segment='Customer-masters')
     if request.method == 'POST':
         customer_name = request.form['customer_name']
         primary_contact_name = request.form['primary_contact_name']
@@ -400,6 +404,9 @@ def Customer_masters():
         pan_number = request.form['pan_number']
         gst_number = request.form['gst_number']
         address = request.form['address']
+        customer_country_name = request.form['customer_country_name']
+        customer_state_name = request.form['customer_state_name']
+        customer_city_name = request.form['customer_city_name']
         offer = CustomerMaster(customer_name=customer_name,
             primary_contact_name=primary_contact_name,
             secondary_contact_name=secondary_contact_name,
@@ -407,7 +414,11 @@ def Customer_masters():
             contact_number=contact_number,
             pan_number=pan_number,
             gst_number=gst_number,
-            address=address)
+            address=address,
+            customer_country_name=customer_country_name,
+            customer_state_name=customer_state_name,
+            customer_city_name=customer_city_name
+            )
         
         db.session.add(offer)
         db.session.commit()
