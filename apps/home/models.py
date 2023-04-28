@@ -1,6 +1,6 @@
 from apps import db
 
-class UserModel(db.Model):
+class OfferModel(db.Model):
     __tablename__ = "use"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -71,28 +71,6 @@ class UserModel(db.Model):
     def __repr__(self):
         return f"{self.quation_no}:{self.customer_name_offer}"
 
-
-
-class MainUser(db.Model):
-    __tablename__ = "mainuser"
-
-    id = db.Column(db.Integer, primary_key=True)
-    product_offer = db.Column(db.String())
-    UOM_offer = db.Column(db.String())
-    quantity_offer = db.Column(db.String())
-    unit_price_offer = db.Column(db.String())
-    total_price_offer = db.Column(db.String())
- 
-
-    def __init__(self, product_offer, UOM_offer, quantity_offer,unit_price_offer, total_price_offer):
-        self.product_offer = product_offer
-        self.UOM_offer = UOM_offer
-        self.quantity_offer = quantity_offer
-        self.unit_price_offer = unit_price_offer
-        self.total_price_offer = total_price_offer
-
-    def __repr__(self):
-        return f"{self.product_offer}:{self.UOM_offer}"
 
 class CustomerMaster(db.Model):
     __tablename__ = "customermaster"
@@ -209,7 +187,7 @@ class CityMaster(db.Model):
         self.city_name = city_name
 
     def __repr__(self):
-        return f"{self.country_name}:{self.state_name}"
+        return self.country_name
 
 class RoleMaster(db.Model):
     __tablename__ = "RoleMaster"
@@ -247,6 +225,35 @@ class CurrencyMaster(db.Model):
     def __repr__(self):
         return f"{self.currency_name}:{self.currency_name}"
 
+class UserModel(db.Model):
+    __tablename__ = "UserModel"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_first_name = db.Column(db.String())
+    user_last_name = db.Column(db.String())
+    user_contact_no = db.Column(db.String())
+    user_email_id = db.Column(db.String())
+    user_name_master = db.Column(db.String())
+    password_master = db.Column(db.String())
+    confirm_password = db.Column(db.String())
+    user_role_master = db.Column(db.String())
+    user_reporting_person = db.Column(db.String())
+
+
+    def __init__(self, user_first_name,user_last_name,user_contact_no,user_email_id,user_name_master,password_master,confirm_password,user_role_master,user_reporting_person):
+        self.user_first_name = user_first_name
+        self.user_last_name = user_last_name
+        self.user_contact_no =user_contact_no
+        self.user_email_id =user_email_id
+        self.user_name_master = user_name_master
+        self.password_master =password_master
+        self.confirm_password =confirm_password
+        self.user_role_master =user_role_master
+        self.user_reporting_person =user_reporting_person
+
+    def __repr__(self):
+        return self.user_first_name
+    
 class SupplierMaster(db.Model):
     __tablename__ = "SupplierMaster"
 

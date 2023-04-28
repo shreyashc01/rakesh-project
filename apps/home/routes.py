@@ -6,16 +6,19 @@ from flask import render_template, request, redirect, jsonify
 from flask_login import login_required
 from jinja2 import TemplateNotFound
 from apps import db
-from apps.home.models import UserModel
+from apps.home.models import OfferModel
 from apps.home.models import CountryMaster
 from apps.home.models import RoleMaster
 from apps.home.models import BomCategoryMaster
 from apps.home.models import StateMaster
 from apps.home.models import CityMaster
-from apps.home.models import MainUser
 from apps.home.models import KitMaster
 from apps.home.models import ProductMaster
 from apps.home.models import CustomerMaster
+from apps.home.models import BomMaster
+from apps.home.models import SupplierMaster
+from apps.home.models import UserModel
+from apps.home.models import CurrencyMaster
 
 
 @blueprint.route('/dashboard')
@@ -59,7 +62,7 @@ def create():
         # usr_disp_funds_avil = ""
 
         # # else we can create the user
-        # user = UserModel(usr_id=usr_id,
+        # user = OfferModel(usr_id=usr_id,
         #     usr_name=usr_name,
         #     usr_password=usr_password,
         #     usr_api_key=usr_api_key,
@@ -117,32 +120,116 @@ def kit_add():
 @login_required
 def add_user_login():
     if request.method == 'GET':
-        users = CustomerMaster.query.all()
-        user1 = ProductMaster.query.all()
-        return render_template('home/add-user-login.html',users=users,user1=user1)
+        role_master = RoleMaster.query.all()
+        user_master_login = UserModel.query.all()
+        return render_template('home/add-user-login.html',role_master=role_master,user_master_login=user_master_login)
     if request.method == 'POST':
+        user_first_name = request.form['user_first_name']
+        user_last_name = request.form['user_last_name']
+        user_contact_no =request.form['user_contact_no']
+        user_email_id =request.form['user_email_id']
+        user_name_master = request.form['user_name_master']
+        password_master =request.form['password_master']
+        confirm_password =request.form['confirm_password']
+        user_role_master =request.form['user_role_master']
+        user_reporting_person =request.form['user_reporting_person']
+
+        user_master_add = UserModel(user_first_name = user_first_name,
+            user_last_name = user_last_name,
+            user_contact_no =user_contact_no,
+            user_email_id =user_email_id,
+            user_name_master=user_name_master,
+            password_master =password_master,
+            confirm_password =confirm_password,
+            user_role_master =user_role_master,
+            user_reporting_person =user_reporting_person
+        )
+        db.session.add(user_master_add)
+        db.session.commit()
         return redirect('/User-masters')
-    
+        
     
 @blueprint.route('/add-bom-master', methods=['GET', 'POST'])
 @login_required
 def add_bom_master():
     if request.method == 'GET':
-        users = CustomerMaster.query.all()
-        user1 = ProductMaster.query.all()
-        return render_template('home/add-bom-master.html',users=users,user1=user1)
+        Bom_category = BomCategoryMaster.query.all()
+        Product_category = ProductMaster.query.all()
+        return render_template('home/add-bom-master.html',Bom_category=Bom_category,Product_category=Product_category)
     if request.method == 'POST':
+        bom_description = request.form['bom_description']
+        bom_no = request.form['bom_no']
+        bom_model_no = request.form['bom_model_no']
+        bom_cls = request.form['bom_cls']
+        bom_lube_points = request.form['bom_lube_points']
+        bom_type = request.form['bom_type']
+        bom_notes = request.form['bom_notes']
+
+        bom_serial_no_temp = request.form.getlist('bom_serial_no')
+        bom_serial_no = ','.join(bom_serial_no_temp)
+        bom_category_temp = request.form.getlist('bom_category')
+        bom_category = ','.join(bom_category_temp)
+        bom_product_temp = request.form.getlist('bom_product')
+        bom_product = ','.join(bom_product_temp)
+        bom_quantity_temp = request.form.getlist('bom_quantity')
+        bom_quantity = ','.join(bom_quantity_temp)
+        bom_uom_temp = request.form.getlist('bom_uom')
+        bom_uom = ','.join(bom_uom_temp)
+
+        bom_master = BomMaster(
+            bom_description = bom_description,
+        bom_no = bom_no,
+        bom_model_no = bom_model_no,
+        bom_cls = bom_cls,
+        bom_lube_points = bom_lube_points,
+        bom_type = bom_type,
+        bom_notes = bom_notes,
+        bom_serial_no = bom_serial_no,
+        bom_category = bom_category,
+        bom_product = bom_product,
+        bom_quantity = bom_quantity,
+        bom_uom = bom_uom
+            )
+        
+        db.session.add(bom_master)
+        db.session.commit()
         return redirect('/BOM-masters')
     
 @blueprint.route('/add-supplier-master', methods=['GET', 'POST'])
 @login_required
 def add_supplier_master():
     if request.method == 'GET':
-        users = CustomerMaster.query.all()
-        user1 = ProductMaster.query.all()
-        return render_template('home/add-supplier.html',users=users,user1=user1)
+        Citymaster_main = CityMaster.query.all()
+        return render_template('home/add-supplier.html',Citymaster_main=Citymaster_main)
     if request.method == 'POST':
-        return redirect('/BOM-masters')
+        supplier_name = request.form['supplier_name']
+        supplier_primary_contact =  request.form['supplier_primary_contact']
+        supplier_secondary_contact =  request.form['supplier_secondary_contact']
+        supplier_email_id =  request.form['supplier_email_id']
+        supplier_contact_no =  request.form['supplier_contact_no']
+        supplier_country =  request.form['supplier_country']
+        supplier_state =  request.form['supplier_state']
+        supplier_city =  request.form['supplier_city']
+        supplier_address =  request.form['supplier_address']
+        supplier_gst_no =  request.form['supplier_gst_no']
+        supplier_pan =  request.form['supplier_pan']
+
+        supplier_main = SupplierMaster(
+            supplier_name = supplier_name,
+            supplier_primary_contact = supplier_primary_contact,
+            supplier_secondary_contact = supplier_secondary_contact,
+            supplier_email_id = supplier_email_id,
+            supplier_contact_no = supplier_contact_no,
+            supplier_country = supplier_country,
+            supplier_state = supplier_state,
+            supplier_city = supplier_city,
+            supplier_address = supplier_address,
+            supplier_gst_no = supplier_gst_no,
+            supplier_pan = supplier_pan
+            )
+        db.session.add(supplier_main)
+        db.session.commit()
+        return redirect('/Supplier-masters')
     
 @blueprint.route('/invoice-addinvoice', methods=['GET', 'POST'])
 @login_required
@@ -197,15 +284,14 @@ def retrieve_list():
     #     db.session.add(users)
     #     db.session.commit()
     # if "main_usr_apply" in request.form:
-        # all_users = UserModel.query.filter_by(usr_id=request.form.get('main_usr_select')).first()
+        # all_users = OfferModel.query.filter_by(usr_id=request.form.get('main_usr_select')).first()
         # main_user = MainUser.query.filter_by(id=1).first()
         # if all_users != None:
         #     main_user.main_usr_id = all_users.usr_id
         #     main_user.main_usr_name = all_users.usr_name
         #     db.session.commit()
-    users = UserModel.query.all()
-    main_user = MainUser.query.filter_by(id=1).first()
-    return render_template('home/users.html', main_user= main_user, users=users, segment='offer-offerlist')
+    users = OfferModel.query.all()
+    return render_template('home/users.html', users=users, segment='offer-offerlist')
 
 
 
@@ -409,50 +495,55 @@ def BOM_Category_masters():
 @login_required
 def BOM_masters():
     if request.method == 'GET':
-        users = UserModel.query.all()
-        return render_template('home/BOM-masters.html', users=users, segment='BOM-masters')
+        BomMaster_main = BomMaster.query.all()
+        return render_template('home/BOM-masters.html', BomMaster_main=BomMaster_main, segment='BOM-masters')
 
 @blueprint.route('/Supplier-masters', methods=['GET', 'POST'])
 @login_required
 def Supplier_masters():
     if request.method == 'GET':
-        users = UserModel.query.all()
+        users = SupplierMaster.query.all()
         return render_template('home/Supplier-masters.html', users=users, segment='Supplier-masters')
 
 @blueprint.route('/Currency-masters', methods=['GET', 'POST'])
 @login_required
 def Currency_masters():
     if request.method == 'GET':
-        users = UserModel.query.all()
+        users = CurrencyMaster.query.all()
         return render_template('home/Currency-masters.html', users=users, segment='Currency-masters')
-
+    if request.method == 'POST':
+        currency_name = request.form['currency_name']
+        currency_model_add = CurrencyMaster(currency_name=currency_name)
+        db.session.add(currency_model_add)
+        db.session.commit()
+        return redirect('/Currency-masters')
 
 @blueprint.route('/Contract-Review-list', methods=['GET', 'POST'])
 @login_required
 def Contract_Review_list():
     if request.method == 'GET':
-        users = UserModel.query.all()
+        users = OfferModel.query.all()
         return render_template('home/Contract-Review.html', users=users, segment='contractreview')
 
 @blueprint.route('/OC-Register-list', methods=['GET', 'POST'])
 @login_required
 def OC_Register_list():
     if request.method == 'GET':
-        users = UserModel.query.all()
+        users = OfferModel.query.all()
         return render_template('home/OC-Register-List.html', users=users, segment='OcRegister')
 
 @blueprint.route('/BOM-Register-List', methods=['GET', 'POST'])
 @login_required
 def BOM_Register_list():
     if request.method == 'GET':
-        users = UserModel.query.all()
+        users = OfferModel.query.all()
         return render_template('home/BOM-Register-List.html', users=users, segment='BOMRegister')
 
 @blueprint.route('/Marketing-RegisterList', methods=['GET', 'POST'])
 @login_required
 def Marketing_RegisterList():
     if request.method == 'GET':
-        users = UserModel.query.all()
+        users = OfferModel.query.all()
         return render_template('home/Marketing-Register-List.html', users=users, segment='MarketingRegisterList')
 
 
@@ -460,19 +551,17 @@ def Marketing_RegisterList():
 @login_required
 def Marketing_Register_Report():
     if request.method == 'GET':
-        users = UserModel.query.all()
+        users = OfferModel.query.all()
         return render_template('home/Marketing-Register-Report.html', users=users, segment='MarketingRegisterReport')
 
 
 @blueprint.route('/<int:id>/delete', methods=['GET', 'POST'])
 @login_required
 def profile(id):
-    users = UserModel.query.filter_by(id=id).first()
-    main_user = MainUser.query.filter_by(id=1).first()
+    users = OfferModel.query.filter_by(id=id).first()
     if request.method == 'POST':
         if users:
             db.session.delete(users)
-            db.session.delete(main_user)
             db.session.commit()
             return redirect('/offer-offerlist')
     return render_template('home/delete.html')
@@ -567,6 +656,17 @@ def delete8(id):
             db.session.commit()
             return redirect('/BOM-Category-masters')
     return render_template('home/delete-category.html')
+
+@blueprint.route('/<int:id>/deletecurrency', methods=['GET', 'POST'])
+@login_required
+def delete9(id):
+    users = CurrencyMaster.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        if users:
+            db.session.delete(users)
+            db.session.commit()
+            return redirect('/Currency-masters')
+    return render_template('home/deletecurrency.html')
 
 @blueprint.route('/<template>')
 @login_required

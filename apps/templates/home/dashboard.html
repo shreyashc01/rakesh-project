@@ -3,120 +3,230 @@
 {% block title %} Dashboard {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+
+<style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .navbar {
+      background-color: #007bff;
+    }
+
+    .navbar-brand {
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .container {
+      margin-top: 30px;
+    }
+
+    .section-title {
+      color: #007bff;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background-color: #fff;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+      background-color: #007bff;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-title {
+      color: #007bff;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .card-text {
+      color: #777;
+      font-size: 14px;
+    }
+
+    .img-fluid {
+      max-width: 100%;
+      height: auto;
+    }
+
+    #chart {
+      height: 300px;
+    }
+  </style>
+  
+{% endblock stylesheets %}
 
 {% block content %}
 
-	<div class="content">
-		<div class="panel-header bg-primary-gradient">
-			<div class="page-inner py-5">
-				<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
-					<div>
-						<h2 class="text-white pb-2 fw-bold">Sample App</h2>
-						<h5 class="text-white op-7 mb-2">Application</h5>
+<div class="container">
+	<div class="page-inner">
+	<section id="sales" class="mt-5">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="card-title">Sales Overview</h5>
+					</div>
+					<div class="card-body">
+						<canvas id="chart"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="card-title">Order Summary</h5>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-6">
+								<img src="https://via.placeholder.com/150" alt="Order Summary" class="img-fluid">
+							</div>
+							<div class="col-md-6">
+								<h6 class="card-title">Total Orders</h6>
+								<p class="card-text">150</p>
+								<h6 class="card-title">Pending Orders</h6>
+								<p class="card-text">20</p>
+								<h6 class="card-title">Completed Orders</h6>
+								<p class="card-text">130</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
+	<section id="inventory" class="mt-5">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="card-title">Inventory Overview</h5>
+					</div>
+					<div class="card-body">
+						<canvas id="chart2"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="card-title">Top Products</h5>
+					</div>
+					<div class="card-body">
+						<ul class="list-group">
+							<li class="list-group-item d-flex justify-content-between">
+								<div>
+									<h6 class="card-title">Product 1</h6>
+									<p class="card-text">100 units</p>
+								</div>
+								<img src="https://via.placeholder.com/50" alt="Product 1" class="img-fluid">
+							</li>
+							<li class="list-group-item d-flex justify-content-between">
+								<div>
+									<h6 class="card-title">Product 2</h6>
+									<p class="card-text">80 units</p>
+								</div>
+								<img src="https://via.placeholder.com/50" alt="Product 2" class="img-fluid">
+							</li>
+							<li class="list-group-item d-flex justify-content-between">
+								<div>
+									<h6 class="card-title">Product 3</h6>
+									<p class="card-text">60 units</p>
+								</div>
+								<img src="https://via.placeholder.com/50" alt="Product 3" class="img-fluid">
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+</div>
 
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
-	<script>
-		Circles.create({
-			id:'circles-1',
-			radius:45,
-			value:60,
-			maxValue:100,
-			width:7,
-			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
 
-		Circles.create({
-			id:'circles-2',
-			radius:45,
-			value:70,
-			maxValue:100,
-			width:7,
-			text: 36,
-			colors:['#f1f1f1', '#2BB930'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-		Circles.create({
-			id:'circles-3',
-			radius:45,
-			value:40,
-			maxValue:100,
-			width:7,
-			text: 12,
-			colors:['#f1f1f1', '#F25961'],
-			duration:400,
-			wrpClass:'circles-wrp',
-			textClass:'circles-text',
-			styleWrapper:true,
-			styleText:true
-		})
-
-		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-		var mytotalIncomeChart = new Chart(totalIncomeChart, {
-			type: 'bar',
-			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false,
-				},
-				scales: {
-					yAxes: [{
-						ticks: {
-							display: false //this will remove only the label
-						},
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}],
-					xAxes : [ {
-						gridLines : {
-							drawBorder: false,
-							display : false
-						}
-					}]
-				},
-			}
-		});
-
-		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-			type: 'line',
-			height: '70',
-			width: '100%',
-			lineWidth: '2',
-			lineColor: '#ffa534',
-			fillColor: 'rgba(255, 165, 52, .14)'
-		});
-	</script>
+<script>
+	// Chart 1
+	var ctx = document.getElementById('chart').getContext('2d');
+	var chart = new Chart(ctx, {
+	  type: 'bar',
+	  data: {
+		labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+		datasets: [{
+		  label: 'Sales',
+		  data: [12, 19, 3, 5, 2,3],
+		  backgroundColor: [
+		  'rgba(75, 192, 192, 0.2)',
+		  'rgba(54, 162, 235, 0.2)',
+		  'rgba(255, 99, 132, 0.2)',
+		  'rgba(255, 205, 86, 0.2)',
+		  'rgba(153, 102, 255, 0.2)',
+		  'rgba(255, 159, 64, 0.2)'
+		  ],
+		  borderColor: [
+		  'rgba(75, 192, 192, 1)',
+		  'rgba(54, 162, 235, 1)',
+		  'rgba(255, 99, 132, 1)',
+		  'rgba(255, 205, 86, 1)',
+		  'rgba(153, 102, 255, 1)',
+		  'rgba(255, 159, 64, 1)'
+		  ],
+		  borderWidth: 1
+		  }]
+		  },
+		  options: {
+		  scales: {
+		  y: {
+		  beginAtZero: true
+		  }
+		  }
+		  }
+		  });
+		  // Chart 2
+var ctx2 = document.getElementById('chart2').getContext('2d');
+var chart2 = new Chart(ctx2, {
+type: 'doughnut',
+data: {
+  labels: ['In Stock', 'Out of Stock'],
+  datasets: [{
+	data: [80, 20],
+	backgroundColor: [
+	  'rgba(75, 192, 192, 0.8)',
+	  'rgba(255, 99, 132, 0.8)'
+	],
+	borderColor: [
+	  'rgba(75, 192, 192, 1)',
+	  'rgba(255, 99, 132, 1)'
+	],
+	borderWidth: 1
+  }]
+}
+});
+</script>
 
 {% endblock javascripts %}
