@@ -26,6 +26,16 @@ from apps.home.models import CurrencyMaster
 def dashboard():
     return render_template('home/dashboard.html', segment='dashboard')
 
+@blueprint.route('/get_kit_details', methods=['POST'])
+@login_required
+def get_kit_details():
+    if request.method == 'POST':
+        kit_description = request.form.get('kit_description')
+        kit = KitMaster.query.filter_by(kit_description=kit_description).first()
+        kit_no = kit.kit_no
+        kit_products = kit.kit_products.replace(",", ",\n") 
+        return jsonify({'kit_no': kit_no, 'kit_product': kit_products})
+
 
 @blueprint.route('/offer-addoffer', methods=['GET', 'POST'])
 @login_required
@@ -33,7 +43,14 @@ def create():
     if request.method == 'GET':
         users = CustomerMaster.query.all()
         user1 = ProductMaster.query.all()
-        return render_template('home/add-offer.html',users=users,user1=user1,segment='offer-addoffer')
+        user2 = KitMaster.query.all()
+
+        user2_json = json.dumps([{'kit_description': user.kit_description, 'kit_no': user.kit_no} for user in user2])
+        print(user2_json)
+        role_manager_offer = UserModel.query.all()
+        currency_master_offer = CurrencyMaster.query.all()
+        return render_template('home/add-offer.html',users=users,user1=user1,user2=user2,user2_json=user2_json,role_manager_offer=role_manager_offer,currency_master_offer=currency_master_offer,
+                               segment='offer-addoffer')
     if request.method == 'POST':
         # usr_id = request.form['usr_id']
         # usr_name = request.form['usr_name']
@@ -250,8 +267,8 @@ def listinvoices():
 @login_required
 def addpo():
     if request.method == 'GET':
-        users = CustomerMaster.query.all()
-        user1 = ProductMaster.query.all()
+        users = SupplierMaster.query.all()
+        user1 = CurrencyMaster.query.all()
         return render_template('home/add-purchaseorder.html',users=users,user1=user1,segment='add-purchaseorder')
 
 @blueprint.route('/PO-POlist', methods=['GET', 'POST'])
@@ -534,7 +551,7 @@ def Currency_masters():
 def Contract_Review_list():
     if request.method == 'GET':
         users = OfferModel.query.all()
-        return render_template('home/Contract-Review.html', users=users, segment='contractreview')
+        return render_template('home/editcontract.html', users=users, segment='contractreview')
 
 @blueprint.route('/OC-Register-list', methods=['GET', 'POST'])
 @login_required

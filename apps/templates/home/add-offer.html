@@ -31,53 +31,57 @@
 				</li>
 			</ul>
 		</div>
+
 		<form action='' method="POST">
-			<section _ngcontent-owj-c93="" class="content">
-				<div _ngcontent-owj-c93="" class="page-section">
-					<div _ngcontent-owj-c93="" class="card card-fluid">
-						<div _ngcontent-owj-c93="" class="card-body">
+			<section class="content">
+				<div class="page-section">
+					<div class="card card-fluid">
+						<div class="card-body">
 							<div class="card-block">
 								<div class="card-title">Add Offers</div>
 							</div>
 							<div class="card-body">
 								<div class="row">
-									<div class="col-md-6 col-lg-4">
 
+									<div class="col-md-6 col-lg-4">
 										<div class="form-group">
 											<tr>
 												<label>Customer Name</label>
-												<select name="main_usr_select" class="form-control">
+												<select name="customer_name_offer" class="form-control">
 													{% for user in users %}
 													<option>{{ user.customer_name }}</option>
 													{% endfor %}
 												</select>
-
 											</tr>
 										</div>
-
-
 										<div class="form-group">
 											<tr>
 												<label>Reference No</label>
-												<td><input type="text" name="usr_name" class="form-control" /></td>
+												<td><input type="text" name="quation_no" class="form-control"
+														disabled /></td>
 											</tr>
 										</div>
-
-
 									</div>
+
 									<div class="col-md-6 col-lg-4">
 										<div class="form-group">
 											<tr>
 												<label>Due Date</label>
-												<td><input type="date" class="form-control" id="start" name="trip-start"
-														value="2018-07-22" min="2018-01-01" max="2060-12-31"></td>
+												<td>
+													<input type="date" name="due_date" class="form-control">
+												</td>
 											</tr>
 										</div>
 
 										<div class="form-group">
 											<tr>
 												<label>Marketing Person</label>
-												<td><input type="text" name="usr_api_secret_key" class="form-control" />
+												<td>
+													<select name="marketing_person" class="form-control">
+														{% for user in role_manager_offer %}
+														<option>{{ user.user_first_name }}</option>
+														{% endfor %}
+													</select>
 												</td>
 											</tr>
 										</div>
@@ -88,8 +92,8 @@
 											<tr>
 												<label>Offer Type</label>
 												<td>
-													<select name="usr_autologin_status" class="form-control offertype_id">
-														<option selected>Add offer</option>
+													<select name="offer_type" class="form-control offertype_id">
+														<option value="None" selected>Add offer</option>
 														<option value="Spares">Spares</option>
 														<option value="Kits">Kits</option>
 													</select>
@@ -100,30 +104,109 @@
 											<tr>
 												<label>Currency Type</label>
 												<td>
-													<select class="form-control">
+													<select name="currency_type" class="form-control">
 														<option value="" selected>Select Currency Type</option>
-														<option value="USD">USD</option>
-														<option value="EUR">EUR</option>
-														<option value="SGD">SGD</option>
-														<option value="AUD">AUD</option>
-														<option value="INR">INR</option>
-														<option value="GBP">GBP</option>
-														<option value="CAD">CAD</option>
-														<option value="CHF">CHF</option>
-														<option value="NZD">NZD</option>
-														<option value="ZAR">ZAR</option>
-														<option value="IDR">IDR</option>
-														<option value="SRA">SRA</option>
-														<option value="MYR">MYR</option>
-														<option value="CNY">CNY</option>
-														<option value="JPY">JPY</option>
-														<option value="HKD">HKD</option>
-														<option value="EGP">EGP</option>
-														<option value="RVB">RVB</option>
+														{% for user in currency_master_offer %}
+														<option>{{ user.currency_name }}</option>
+														{% endfor %}
 													</select>
 												</td>
 											</tr>
 										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+			<section class="content">
+				<div class="page-section">
+					<div class="card card-fluid">
+						<div class="card-body">
+							<table id="product-table" class="table">
+
+							</table>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="content">
+				<div class="page-section">
+					<div class="card card-fluid">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-6 col-lg-4">
+									<div class="form-group">
+										<tr>
+											<label for="total_amount">Total Amount:</label>
+											<td>
+												<input type="number"
+													class="form-control ng-pristine ng-valid ng-touched"
+													id="total_amount" name="total_amount" readonly>
+											</td>
+										</tr>
+									</div>
+									<div class="form-group">
+										<tr>
+											<label for="pfpercent">P&amp;F Percentage:</label>
+											<td>
+												<input type="number"
+													class="pfpercent form-control ng-pristine ng-valid ng-touched"
+													id="pfpercent" name="pfpercent">
+											</td>
+										</tr>
+									</div>
+								</div>
+								<div class="col-md-6 col-lg-4">
+									<div class="form-group">
+										<tr>
+											<label for="freight">Freight:</label>
+											<td>
+												<input type="number"
+													class="freight form-control ng-pristine ng-valid ng-touched"
+													id="freight">
+											</td>
+										</tr>
+									</div>
+									<div class="form-group">
+										<tr>
+											<label for="gst">GST:</label>
+											<td>
+												<input type="number"
+													class="form-control ng-pristine ng-valid ng-touched" id="gst"
+													name="gst" readonly>
+											</td>
+										</tr>
+									</div>
+								</div>
+								<div class="col-md-6 col-lg-4">
+									<div class="form-group">
+										<tr>
+											<label for="cgst_igst">CGST/IGST:</label>
+											<td>
+												<select class="form-control ng-pristine ng-valid ng-touched"
+													id="cgst_igst" name="cgst_igst">
+													<option value="None" selected>Select GST Type</option>
+													<option value="igst">IGST</option>
+													<option value="igst">CGST/SGST</option>
+												</select>
+											</td>
+										</tr>
+									</div>
+									<div class="form-group">
+										<tr>
+											<label for="grand_total">Grand Total:</label>
+											<td>
+												<input type="number"
+													class="form-control ng-pristine ng-valid ng-touched"
+													id="grand_total" name="grand_total" readonly>
+											</td>
+										</tr>
 									</div>
 								</div>
 							</div>
@@ -132,88 +215,11 @@
 				</div>
 			</section>
 
-			<section _ngcontent-owj-c93="" class="content">
-				<div _ngcontent-owj-c93="" class="page-section">
-					<div _ngcontent-owj-c93="" class="card card-fluid">
-						<div _ngcontent-owj-c93="" class="card-body">
-							<table _ngcontent-owj-c93="" style="width: 100%;" id="emptbl">
-								
-							</table>
-						</div>
-					</div>
-			</section>
 
-			<section _ngcontent-owj-c93="" class="content">
-				<div _ngcontent-owj-c93="" class="page-section">
-					<div _ngcontent-owj-c93="" class="card card-fluid">
-						<div _ngcontent-owj-c93="" class="card-body">
-							<tfoot _ngcontent-owj-c93="" style="width: 100%;">
-								<div class="form-group">
-									<tr _ngcontent-owj-c93="">
-										<td _ngcontent-owj-c93=""> Total </td>
-										<td _ngcontent-owj-c93=""></td>
-										<td _ngcontent-owj-c93=""><input _ngcontent-owj-c93="" formcontrolname="total"
-												type="hidden" value="30"
-												class="ng-untouched ng-pristine ng-valid"><label _ngcontent-owj-c93=""
-												class="form-control"
-												style="background-color: rgb(246, 247, 249);">0</label></td>
-									</tr>
-									<tr _ngcontent-owj-c93="">
-										<td _ngcontent-owj-c93=""> P &amp; F % </td>
-										<td _ngcontent-owj-c93=""><input _ngcontent-owj-c93=""
-												formcontrolname="pAndfPercentage" type="text" maxlength="50"
-												autocomplete="off" decimalonly=""
-												class="form-control ng-valid ng-dirty ng-touched"></td>
-										<td _ngcontent-owj-c93=""><input _ngcontent-owj-c93="" formcontrolname="pAndF"
-												type="hidden" value="1.50"
-												class="ng-untouched ng-pristine ng-valid"><label _ngcontent-owj-c93=""
-												class="form-control"
-												style="background-color: rgb(246, 247, 249);">0</label></td>
-									</tr>
-									<tr _ngcontent-owj-c93="">
-										<td _ngcontent-owj-c93=""> Freight </td>
-										<td _ngcontent-owj-c93=""></td>
-										<td _ngcontent-owj-c93=""><input _ngcontent-owj-c93=""
-												formcontrolname="freightCost" type="text" maxlength="50"
-												autocomplete="off" decimalonly=""
-												class="form-control ng-pristine ng-valid ng-touched"></td>
-									</tr>
-									<tr _ngcontent-owj-c93="">
-										<td _ngcontent-owj-c93=""> GST<span _ngcontent-owj-c93=""
-												style="color: red;">*</span></td>
-										<td _ngcontent-owj-c93=""><select _ngcontent-owj-c93=""
-												formcontrolname="gstType"
-												class="form-control ng-dirty ng-valid ng-touched">
-												<option _ngcontent-owj-c93="" value="">Select GST Type</option>
-												<option _ngcontent-owj-c93="" value="1" selected>IGST</option>
-												<option _ngcontent-owj-c93="" value="2">CGST/SGST</option>
-											</select></td>
-										<td _ngcontent-owj-c93=""><input _ngcontent-owj-c93=""
-												formcontrolname="gstValue" type="hidden" value="5.67"
-												class="ng-untouched ng-pristine ng-valid"><label _ngcontent-owj-c93=""
-												class="form-control"
-												style="background-color: rgb(246, 247, 249);">0</label></td>
-									</tr>
-									<tr _ngcontent-owj-c93="">
-										<td _ngcontent-owj-c93=""> Grand Total </td>
-										<td _ngcontent-owj-c93=""></td>
-										<td _ngcontent-owj-c93=""><input _ngcontent-owj-c93=""
-												formcontrolname="grandTotal" type="hidden" value="37"
-												class="ng-untouched ng-pristine ng-valid"><label _ngcontent-owj-c93=""
-												class="form-control"
-												style="background-color: rgb(246, 247, 249);">0</label></td>
-									</tr>
-								</div>
-							</tfoot>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<section _ngcontent-owj-c93="" class="content">
-				<div _ngcontent-owj-c93="" class="page-section">
-					<div _ngcontent-owj-c93="" class="card card-fluid">
-						<div _ngcontent-owj-c93="" class="card-body">
+			<section  class="content">
+				<div  class="page-section">
+					<div  class="card card-fluid">
+						<div  class="card-body">
 							<div class="form-group">
 								<tr>
 									<label>Subject</label>
@@ -249,86 +255,70 @@
 				</div>
 			</section>
 
-			<section _ngcontent-owj-c93="" class="content">
-				<div _ngcontent-owj-c93="" class="page-section">
-					<div _ngcontent-owj-c93="" class="card card-fluid">
-						<div _ngcontent-owj-c93="" class="card-body">
+
+			<section  class="content">
+				<div  class="page-section">
+					<div  class="card card-fluid">
+						<div  class="card-body">
 							<div class="card-header">
 								<div class="card-title">Terms and Conditions :</div>
 							</div>
 							<div class="form-group">
 								<tr>
-									<input type="checkbox"
-										onmousedown="this.form.PriceBasis.disabled=this.checked" />&nbsp;&nbsp;<label>
-										Price Basis </label>
-									<td><input type="text" name="PriceBasis" id="PriceBasis" class="form-control"
-											disabled /></td>
+									<label>Price Basis </label>
+									<td><input type="text" name="PriceBasis" id="PriceBasis" class="form-control"/></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
-									<input type="checkbox"
-										onmousedown="this.form.Charges.disabled=this.checked" />&nbsp;&nbsp;<label>P&F
-										Charges</label>
-									<td><input type="text" name="Charges" id="Charges" class="form-control" disabled />
+									<label>P&F Charges</label>
+									<td><input type="text" name="Charges" id="Charges" class="form-control"/>
 									</td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
-									<input type="checkbox"
-										onmousedown="this.form.IGST.disabled=this.checked" />&nbsp;&nbsp;<label>IGST</label>
-									<td><input type="text" name="IGST" id="IGST" class="form-control" disabled /></td>
+									<label>IGST</label>
+									<td><input type="text" name="IGST" id="IGST" class="form-control"/></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
-									<input type="checkbox"
-										onmousedown="this.form.HSN.disabled=this.checked" />&nbsp;&nbsp;<label>HSN
-										CODE</label>
-									<td><input type="text" name="HSN" id="HSN" class="form-control" disabled /></td>
+									<label>HSN CODE</label>
+									<td><input type="text" name="HSN" id="HSN" class="form-control"/></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
-									<input type="checkbox"
-										onmousedown="this.form.Payment.disabled=this.checked" />&nbsp;&nbsp;<label>Payment
-										Terms</label>
-									<td><input type="text" name="Payment" id="Payment" class="form-control" disabled />
+									<label>Payment Terms</label>
+									<td><input type="text" name="Payment" id="Payment" class="form-control"/>
 									</td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
-									<input type="checkbox"
-										onmousedown="this.form.Delivery.disabled=this.checked" />&nbsp;&nbsp;<label>Delivery</label>
-									<td><input type="text" name="Delivery" id="Delivery" class="form-control"
-											disabled /></td>
+									<label>Delivery</label>
+									<td><input type="text" name="Delivery" id="Delivery" class="form-control"/></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
-									<input type="checkbox"
-										onmousedown="this.form.Freight.disabled=this.checked" />&nbsp;&nbsp;<label>Freight</label>
-									<td><input type="text" name="Freight" id="Freight" class="form-control" disabled />
+									<label>Freight</label>
+									<td><input type="text" name="Freight" id="Freight" class="form-control"/>
 									</td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
-									<input type="checkbox"
-										onmousedown="this.form.Validity.disabled=this.checked" />&nbsp;&nbsp;<label>Validity</label>
-									<td><input type="text" name="Validity" id="Validity" class="form-control"
-											disabled /></td>
+									<label>Validity</label>
+									<td><input type="text" name="Validity" id="Validity" class="form-control"/></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<form>
-										<input type="checkbox"
-											onmousedown="this.form.Warranty.disabled=this.checked" />&nbsp;&nbsp;<label>Warranty</label>
-										<td><input type="text" id="Warranty" name="Warranty" class="form-control"
-												disabled /></td>
+										<label>Warranty</label>
+										<td><input type="text" id="Warranty" name="Warranty" class="form-control"/></td>
 									</form>
 								</tr>
 							</div>
@@ -338,8 +328,10 @@
 					</div>
 				</div>
 			</section>
+
+			
 			<div style="text-align: center;">
-				<button id="btnSave" type="submit" class="btn btn-primary btn-sm" fdprocessedid="11p0ic">Save</button>
+				<button type="submit" class="btn btn-primary btn-sm" fdprocessedid="11p0ic">Save</button>
 				&nbsp;
 				<a routerlink="/offer-offerlist" queryparamshandling="preserve" class="btn btn-danger btn-sm"
 					href="/offer-offerlist">Cancel </a>
@@ -351,63 +343,226 @@
 
 {% block javascripts %}
 <script>
-	let lineNo = 1;
 
+
+	function addProductRow() {
+		const tableBody = document.querySelector('#product-table tbody');
+		const newRow = document.createElement('tr');
+		newRow.innerHTML = `
+		<td><select name="main_usr_select" class="form-control"> {% for user in user1 %} <option>{{ user.product_name }}</option>{% endfor %}</select></td>
+		<td><input type="number" class="quantity form-control" value="0"></td>
+		<td><input type="number" class="unit-price form-control" value="0"></td>
+		<td class="total">0</td>
+		<td><button class="btn btn-danger" onclick="removeProductRow(this)">Remove</button></td>
+		`;
+		tableBody.appendChild(newRow);
+		newRow.querySelectorAll('.quantity, .unit-price').forEach(input => {
+			input.addEventListener('input', updateTotal);
+		});
+		updateTotal();
+	}
+
+	function getKitDetails(newRow) {
+		const kitDescription = $('#kit_name_sample').val();
+		$.ajax({
+			url: '/get_kit_details',
+			type: 'POST',
+			data: { kit_description: kitDescription },
+			success: function (response) {
+			// response should be a JSON object containing the kit details
+			const kitNo = response.kit_no;
+			const kitProduct = kitDescription + "\n" + response.kit_product;
+
+			// update the HTML elements with the new values
+			const kitProductMainInput = newRow.querySelector('.kit_product_main');
+			const kitProductNumberInput = newRow.querySelector('.kit_product_number');
+			kitProductMainInput.value = kitProduct;
+			kitProductNumberInput.value = kitNo;
+
+			// update the height of the textarea based on the content
+			// kitProductMainInput.style.height = kitProductMainInput.scrollHeight + 'px';
+			},
+		});
+}
+
+
+
+	function addKitRow() {
+		const tableBody = document.querySelector('#product-table tbody');
+		const newRow = document.createElement('tr');
+		const selectedKit = document.querySelector('#kit_name_sample').value;
+		// ${selectedKitNo}	
+		newRow.innerHTML = `
+		<td style="width: 350px; padding: 10px !important;">
+    <textarea id="kit_product_main" name="kit_product_main" class="kit_product_main form-control" readonly style="height: 360px !important; width: 100%; resize: none;"></textarea>
+</td>
+
+		<td><input id="kit_product_number" name="kit_product_number" class="kit_product_number form-control" value="0" readonly></td>
+		<td><input type="number" class="quantity form-control" value="0"></td>
+		<td><input type="number" class="unit-price form-control" value="0"></td>
+		<td class="total">0</td>
+		<td><button class="btn btn-danger" onclick="removeProductRow(this)">Remove</button></td>
+		`;
+		tableBody.appendChild(newRow);
+		newRow.querySelectorAll('.quantity, .unit-price').forEach(input => {
+			input.addEventListener('input', updateTotal);
+		});
+		getKitDetails(newRow);
+		const kitProductMainInput = newRow.querySelector('.kit_product_main');
+		const kitProductNumberInput = newRow.querySelector('.kit_product_number');
+		kitProductMainInput.value = $('#kit_product_main').val();
+		kitProductNumberInput.value = $('#kit_product_number').val();
+		// kitProductMainInput.style.height = kitProductMainInput.scrollHeight + 'px';
+		updateTotal();
+		
+	}
+
+	function removeProductRow(button) {
+		const row = button.closest('tr');
+		row.remove();
+		updateTotal();
+	}
+
+	function updateTotal() {
+		const rows = document.querySelectorAll('#product-table tbody tr');
+		let total = 0;
+		rows.forEach(row => {
+			const quantity = Number(row.querySelector('.quantity').value);
+			const unitPrice = Number(row.querySelector('.unit-price').value);
+			const rowTotal = quantity * unitPrice;
+			row.querySelector('.total').textContent = `${rowTotal}`;
+			total += rowTotal;
+		});
+		$('#total_amount').val(total);
+
+		const pfInput = document.querySelector('#pfpercent');
+		const freightInput = document.querySelector('#freight');
+
+		let pfAmount = 0;
+		if (pfInput.value) {
+			pfAmount = total * (Number(pfInput.value) / 100);
+		}
+
+		let freightAmount = 0;
+		if (freightInput.value) {
+			freightAmount = Number(freightInput.value);
+		}
+
+		let subTotal = total + pfAmount + freightAmount;
+
+		var gst = ((subTotal) * 18) / 100;
+		$('#gst').val(gst.toFixed(2));
+
+		var grandTotal = subTotal + gst;
+		$('#grand_total').val(grandTotal.toFixed(2));
+
+		pfInput.addEventListener('input', () => {
+			const pfPercentage = Number(pfInput.value);
+			pfAmount = total * (pfPercentage / 100);
+			subTotal = total + pfAmount + freightAmount;
+			gst = ((subTotal) * 18) / 100;
+			grandTotal = subTotal + gst;
+			$('#gst').val(gst.toFixed(2));
+			$('#grand_total').val(grandTotal.toFixed(2));
+		});
+
+		freightInput.addEventListener('input', () => {
+			freightAmount = Number(freightInput.value);
+			subTotal = total + pfAmount + freightAmount;
+			gst = ((subTotal) * 18) / 100;
+			grandTotal = subTotal + gst;
+			$('#gst').val(gst.toFixed(2));
+			$('#grand_total').val(grandTotal.toFixed(2));
+		});
+
+		const newRow = document.querySelector('#product-table tfoot tr');
+		newRow.querySelector('.total').textContent = `${total}`;
+		newRow.querySelectorAll('.quantity, .unit-price').forEach(input => {
+			input.addEventListener('input', updateTotal);
+		});
+
+		$('#grand_total').val(grandTotal.toFixed(2));
+	}
+
+
+	document.querySelectorAll('.quantity, .unit-price').forEach(input => {
+		input.addEventListener('input', updateTotal);
+	});
+
+	let lineNo = 1;
 	$(document).ready(function () {
 		$(".offertype_id").on("change", function () {
 			var selectedOption = $(this).val();
 			switch (selectedOption) {
 				case "Spares":
-				console.log("Kits")
-				var table = document.getElementById('emptbl');
-				console.log(table)
-				markup = $('<thead _ngcontent-owj-c93=""> <th _ngcontent-owj-c93="">Product<span _ngcontent-owj-c93="" style="color: red;">*</span></th> <th _ngcontent-owj-c93="">UOM<span _ngcontent-owj-c93="" style="color: red;"></span> </th> <th _ngcontent-owj-c93="">Quantity<span _ngcontent-owj-c93="" style="color: red;">*</span></th> <th _ngcontent-owj-c93="">Unit Price<span _ngcontent-owj-c93="" style="color: red;">*</span></th> <th _ngcontent-owj-c93="">Total Price</th> <th _ngcontent-owj-c93=""><a _ngcontent-owj-c93="" class="btn btn-secondary active add-row" onclick="myButtonClick()"><i _ngcontent-owj-c93="" class="fa fa-plus"></i></a></th> </thead> <tbody _ngcontent-owj-c93="" style="padding: 5%;"> <tr _ngcontent-owj-c93=""> <td _ngcontent-owj-c93="" style="width: 400px;"><ng-select _ngcontent-owj-c93="" bindlabel="value" bindvalue="id" class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-touched ng-dirty ng-valid ng-select-top"> <div class="ng-select-container ng-has-value"> <div class="ng-value-container"> <div class="ng-placeholder"> <select name="main_usr_select" class="form-control"> {% for user in user1 %} <option>{{ user.product_name }}</option> {% endfor %} </select> </div> </div> </div> </ng-select></td> <td _ngcontent-owj-c93="" style="width: 15%;"><select _ngcontent-owj-c93="" class="form-control ng-untouched ng-pristine ng-valid"> <option _ngcontent-owj-c93="" value="">Select UOM</option> <option _ngcontent-owj-c93="" value="Nos">Nos</option> <option _ngcontent-owj-c93="" value="Meters">Meters</option> <option _ngcontent-owj-c93="" value="Millimeter">Millimeter</option> <option _ngcontent-owj-c93="" value="Bundle">Bundle</option> <option _ngcntent-owj-c93="" value="Pack">Pack</option> <option _ngcontent-owj-c93="" value="Kg">Kg</option> <option _ngcontent-owj-c93="" value="Set">Set</option> <option _ngcontent-owj-c93="" value="Meter(MOQ)">Meter(MOQ)</option> <option _ngcontent-owj-c93="" value="NOS.(MOQ)">NOS.(MOQ)</option> </select></td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" numberonly="" class="form-control ng-touched ng-dirty ng-valid"></td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" decimalonly="" class="form-control ng-dirty ng-touched ng-valid"> </td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" class="form-control ng-untouched ng-pristine" disabled=""></td> <td _ngcontent-yms-c134="" style="width: 5%;"> </td> </tr> </tbody>')
-				console.log(markup)
-				tableBody = $("table");
-				console.log(tableBody)
-				tableBody.empty();
-				tableBody.append(markup);
-				break;
-				
-				case "Kits":
+					var table = document.getElementById('emptbl');
+					markup = $(`
+								<thead>
+									<tr>
+										<th>Product</th>
+										<th>Quantity</th>
+										<th>Unit Price</th>
+										<th>Total</th>
+										<th><a class="btn btn-success" onclick="addProductRow()" value="">Add Product</a></th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+					`)
+					tableBody = $("table");
+					tableBody.empty();
+					tableBody.append(markup);
+					break;
 
-				console.log("Spares")
-				var table = document.getElementById('emptbl');
-				console.log(table)
-				markup = $('<thead _ngcontent-owj-c93=""> <th _ngcontent-owj-c93="">Kit description<span _ngcontent-owj-c93="" style="color: red;">*</span></th> <th _ngcontent-owj-c93="">Kit No<span _ngcontent-owj-c93="" style="color: red;">*</span></th> <th _ngcontent-owj-c93="">Quantity<span _ngcontent-owj-c93="" style="color: red;">*</span></th> <th _ngcontent-owj-c93="">Unit Price<span _ngcontent-owj-c93="" style="color: red;">*</span></th> <th _ngcontent-owj-c93="">Total Price</th> <th _ngcontent-owj-c93=""><a _ngcontent-owj-c93="" class="btn btn-secondary active add-row" onclick="myButtonClick()"><i _ngcontent-owj-c93="" class="fa fa-plus"></i></a></th> </thead> <tbody _ngcontent-owj-c93="" style="padding: 5%;"> <tr _ngcontent-owj-c93=""> <td _ngcontent-owj-c93="" style="width: 400px;"><ng-select _ngcontent-owj-c93="" bindlabel="value" bindvalue="id" class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-touched ng-dirty ng-valid ng-select-top"> <div class="ng-select-container ng-has-value"> <div class="ng-value-container"> <div class="ng-placeholder"> <select name="main_usr_select" class="form-control"> {% for user in user1 %} <option>{{ user.product_name }}</option> {% endfor %} </select> </div> </div> </div> </ng-select></td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" numberonly="" class="form-control ng-touched ng-dirty ng-valid"></td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" numberonly="" class="form-control ng-touched ng-dirty ng-valid"></td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" numberonly="" class="form-control ng-touched ng-dirty ng-valid"></td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" class="form-control ng-untouched ng-pristine" disabled=""></td> <td _ngcontent-yms-c134="" style="width: 5%;"> </td> </tr> </tbody>')
-				console.log(markup)
-				tableBody = $("table");
-				tableBody.empty();
-				console.log(tableBody)
-				tableBody.append(markup);
-				break;
+				case "Kits":
+					var table = document.getElementById('emptbl');
+					markup = $(`
+					<div class="card">
+						<div class="card-body">
+							<label for="kit_name_sample">Select a user:</label>
+
+							<select name="kit_name_sample" id="kit_name_sample" class="form-control">
+							{% for user in user2 %}
+								<option value="{{ user.kit_description }}">{{ user.kit_description }}</option>
+							{% endfor %}
+							</select>
+
+							<a class="btn btn-success" onclick="addKitRow()" value="">Add kit</a>
+						</div>
+						</div>
+
+						<div class="card">
+						<div class="card-body">
+							<table>
+							<thead>
+								<tr>
+								<th>Kit description*</th>
+								<th>Kit No*</th>
+								<th>Quantity*</th>
+								<th>Unit Price*</th>
+								<th>Total Price</th>
+								<th>Actions</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<!-- table rows go here -->
+							</tbody>
+							</table>
+						</div>
+					</div>
+
+								`)
+					
+					tableBody = $("table");
+					tableBody.empty();
+					tableBody.append(markup);
+					break;
 			}
 
 		});
 	});
 
-
-	function myButtonClick() {
-		console.log("clask")
-			var table = document.getElementById('emptbl');
-			var rowCount = table.rows.length;
-			console.log(rowCount)
-			var cellCount = table.rows[0].cells.length;
-			markup = $('<tr _ngcontent-owj-c93=""> <td _ngcontent-owj-c93="" style="width: 400px;"><ng-select _ngcontent-owj-c93="" bindlabel="value" bindvalue="id" class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-touched ng-dirty ng-valid ng-select-top"> <div class="ng-select-container ng-has-value"> <div class="ng-value-container"> <div class="ng-placeholder"> <select name="main_usr_select_' + lineNo + '" class="form-control"> {% for user in user1 %} <option>{{ user.product_name }}</option> {% endfor %} </select> </div> </div> </div> </ng-select></td> <td _ngcontent-owj-c93="" style="width: 15%;"><select _ngcontent-owj-c93="" class="form-control ng-untouched ng-pristine ng-valid"> <option _ngcontent-owj-c93="" value="">Select UOM</option> <option _ngcontent-owj-c93="" value="Nos">Nos</option> <option _ngcontent-owj-c93="" value="Meters">Meters</option> <option _ngcontent-owj-c93="" value="Millimeter">Millimeter</option> <option _ngcontent-owj-c93="" value="Bundle">Bundle</option> <option _ngcntent-owj-c93="" value="Pack">Pack</option> <option _ngcontent-owj-c93="" value="Kg">Kg</option> <option _ngcontent-owj-c93="" value="Set">Set</option> <option _ngcontent-owj-c93="" value="Meter(MOQ)">Meter(MOQ)</option> <option _ngcontent-owj-c93="" value="NOS.(MOQ)">NOS.(MOQ)</option> </select></td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" numberonly="" class="form-control ng-touched ng-dirty ng-valid"></td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" decimalonly="" class="form-control ng-dirty ng-touched ng-valid"> </td> <td _ngcontent-owj-c93="" style="width: 50px;"><input _ngcontent-owj-c93="" class="form-control ng-untouched ng-pristine" disabled=""></td><td _ngcontent-yms-c134="" style="width: 5%;"> <a _ngcontent-yms-c134="" class="btn btn-secondary active" onclick="SomeDeleteRowFunction(this)" id = ' + lineNo + '> <i _ngcontent-yms-c134="" class="fas fa-trash-alt"> </i> </a> </td>  </tr>')
-			tableBody = $("table tbody");
-			tableBody.append(markup);
-			lineNo++;
-	}
-
-
-	function SomeDeleteRowFunction(btndel) {
-		if (typeof (btndel) == "object") {
-			$(btndel).closest("tr").remove();
-		}
-		else {
-			return false;
-		}
-	}
 </script>
 
 <style>

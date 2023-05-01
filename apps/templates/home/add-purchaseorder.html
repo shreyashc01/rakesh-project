@@ -31,133 +31,77 @@
 			</ul>
 		</div>
 
-		<section _ngcontent-nng-c117="" class="content">
+		<section class="content">
 			<div _ngcontent-owj-c93="" class="page-section">
 				<div _ngcontent-owj-c93="" class="card card-fluid">
-					<div _ngcontent-nng-c117="" class="card-header"> Purchase Order
+					<div class="card-header"> Purchase Order
 						Details </div>
-					<div _ngcontent-nng-c117="" class="card-body">
-						<div _ngcontent-nng-c117="" class="col-sm-12">
-							<div _ngcontent-nng-c117="" class="row"><input _ngcontent-nng-c117="" type="hidden"
-									formcontrolname="po_Id" value="" class="ng-untouched ng-pristine ng-valid"><input
-									_ngcontent-nng-c117="" type="hidden" formcontrolname="createdBy" value=""
-									class="ng-untouched ng-pristine ng-valid"><input _ngcontent-nng-c117=""
-									type="hidden" formcontrolname="modifiedBy" value=""
-									class="ng-untouched ng-pristine ng-valid">
-								<div _ngcontent-nng-c117="" class="form-group col-sm-4">
-									<label _ngcontent-nng-c117="" for="bookTitle">Supplier Name<span
-											_ngcontent-nng-c117="" style="color: red;">*</span></label><ng-select
-										_ngcontent-nng-c117="" bindlabel="value" bindvalue="id"
-										formcontrolname="supplierId"
-										class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-select-bottom ng-touched ng-dirty ng-valid">
-										<div class="ng-select-container ng-has-value">
-											<div class="ng-value-container">
-												<div class="ng-placeholder">
-													<select name="main_usr_select" class="form-control">
-														{% for user in users %}
-														<option>{{ user.product_name }}
-														</option>
-														{% endfor %}
-													</select>
-												</div>
+					<div class="card-body">
+						<div class="col-sm-12">
+							<div class="row">
+
+								<div class="form-group col-sm-4">
+									<label>Supplier Name<span style="color: red;">*</span></label>
+									<div class="ng-select-container ng-has-value">
+										<div class="ng-value-container">
+											<div class="ng-placeholder">
+												<select name="main_usr_select" class="form-control">
+													{% for user in users %}
+													<option>{{ user.supplier_name }}
+													</option>
+													{% endfor %}
+												</select>
 											</div>
-										</div>
-									</ng-select>
-								</div>
-								<div _ngcontent-nng-c117="" class="form-group col-sm-4">
-									<label _ngcontent-nng-c117="" for="serialNo">Reference No</label><input
-										_ngcontent-nng-c117="" formcontrolname="referenceNo" type="text" maxlength="200"
-										autocomplete="off" class="form-control ng-pristine ng-valid ng-touched"
-										fdprocessedid="x4sqz">
-								</div>
-								<div _ngcontent-nng-c117="" class="form-group col-sm-4">
-									<label _ngcontent-nng-c117="" for="publisher">Date</label>
-									<div _ngcontent-nng-c117="" class="input-group date"><input _ngcontent-nng-c117=""
-											type="text" formcontrolname="referenceDate" bsdatepicker=""
-											autocomplete="off"
-											class="form-control pull-right ng-untouched ng-pristine ng-valid"
-											fdprocessedid="t0a4de">
-										<div _ngcontent-nng-c117="" class="input-group-append"><a _ngcontent-nng-c117=""
-												class="input-group-text" aria-expanded="false"><i _ngcontent-nng-c117=""
-													class="fa fa-calendar"></i></a>
 										</div>
 									</div>
 								</div>
+								<div class="form-group col-sm-4">
+									<label for="serialNo">Reference No</label>
+									<input type="text" maxlength="200" autocomplete="off"
+										class="form-control ng-pristine ng-valid ng-touched">
+								</div>
+								<div class="form-group col-sm-4">
+									<label for="publisher">Date</label>
+									<div class="input-group date">
+										<input type="date" autocomplete="off"
+											class="form-control pull-right ng-untouched ng-pristine ng-valid">
+									</div>
+								</div>
 							</div>
-							<div _ngcontent-nng-c117="" class="row">
-								<div _ngcontent-nng-c117="" class="form-group col-sm-4">
-									<label _ngcontent-nng-c117="" for="bookTitle">PO
-										Type<span _ngcontent-nng-c117="" style="color: red;">*</span></label><select
-										_ngcontent-nng-c117="" formcontrolname="poType"
-										class="form-control ng-dirty ng-valid ng-touched" fdprocessedid="kblsw">
-										<option _ngcontent-nng-c117="" value="">Select
-											PO Type</option>
-										<option _ngcontent-nng-c117="" value="1">
-											Standard</option>
-										<option _ngcontent-nng-c117="" value="2">
-											Customized</option>
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<label for="bookTitle">PO Type<span style="color: red;">*</span></label>
+									<select class="form-control offertype_id">
+										<option value="">Select PO Type</option>
+										<option value="Standard"> Standard</option>
+										<option value="Customized"> Customized</option>
 									</select>
 								</div>
-								<div _ngcontent-nng-c117="" class="form-group col-sm-3">
-									<label _ngcontent-nng-c117="">Currency Types<span _ngcontent-nng-c117=""
-											style="color: red;">*</span></label><select _ngcontent-nng-c117=""
-										formcontrolname="currencyType" class="form-control ng-dirty ng-valid ng-touched"
-										fdprocessedid="6wnbz">
-										<option _ngcontent-nng-c117="" value="">Select
-											Currency Type</option>
-										<option _ngcontent-nng-c117="" value="USD">USD
+								<div class="form-group col-sm-3">
+									<label>Currency Types<span style="color: red;">*</span></label>
+									<select class="form-control ng-dirty ng-valid ng-touched">
+										<option value="None">Select Currency Type</option>
+										{% for user in user1 %}
+										<option>{{ user.currency_name }}
 										</option>
-										<option _ngcontent-nng-c117="" value="EUR">EUR
-										</option>
-										<option _ngcontent-nng-c117="" value="SGD">SGD
-										</option>
-										<option _ngcontent-nng-c117="" value="AUD">AUD
-										</option>
-										<option _ngcontent-nng-c117="" value="INR">INR
-										</option>
-										<option _ngcontent-nng-c117="" value="GBP">GBP
-										</option>
-										<option _ngcontent-nng-c117="" value="CAD">CAD
-										</option>
-										<option _ngcontent-nng-c117="" value="CHF">CHF
-										</option>
-										<option _ngcontent-nng-c117="" value="NZD">NZD
-										</option>
-										<option _ngcontent-nng-c117="" value="ZAR">ZAR
-										</option>
-										<option _ngcontent-nng-c117="" value="IDR">IDR
-										</option>
-										<option _ngcontent-nng-c117="" value="SRA">SRA
-										</option>
-										<option _ngcontent-nng-c117="" value="MYR">MYR
-										</option>
-										<option _ngcontent-nng-c117="" value="CNY">CNY
-										</option>
-										<option _ngcontent-nng-c117="" value="JPY">JPY
-										</option>
-										<option _ngcontent-nng-c117="" value="HKD">HKD
-										</option>
-										<option _ngcontent-nng-c117="" value="EGP">EGP
-										</option>
-										<option _ngcontent-nng-c117="" value="RVB">RVB
-										</option>
+										{% endfor %}
 									</select>
 								</div>
 							</div>
-							<div _ngcontent-nng-c117="" class="row">
-								<div _ngcontent-nng-c117="" class="form-group col-sm-2">
-									<label _ngcontent-nng-c117="">OC / BOM
-										Type</label><select _ngcontent-nng-c117="" formcontrolname="ocType"
+							<!-- <div  class="row">
+								<div  class="form-group col-sm-2">
+									<label >OC / BOM
+										Type</label><select  formcontrolname="ocType"
 										class="form-control ng-valid ng-dirty ng-touched" fdprocessedid="9ttnx8">
-										<option _ngcontent-nng-c117="" value="">Select
+										<option  value="">Select
 											Type</option>
-										<option _ngcontent-nng-c117="" value="1">OC
+										<option  value="1">OC
 										</option>
-										<option _ngcontent-nng-c117="" value="2">BOM
+										<option  value="2">BOM
 										</option>
 									</select>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -165,151 +109,55 @@
 		</section>
 
 
-		<section _ngcontent-nng-c117="" class="content">
+		<section class="content">
 			<div _ngcontent-owj-c93="" class="page-section">
-				<div _ngcontent-nng-c117="" class="card card-fluid">
-					<div _ngcontent-nng-c117="" class="card-body">
-						<div _ngcontent-nng-c117="" style="overflow-x: auto;">
-							<table _ngcontent-nng-c117="" style="width: 130%;">
-								<thead _ngcontent-nng-c117="">
-									<th _ngcontent-nng-c117="">Product<span _ngcontent-nng-c117=""
-											style="color: red;">*</span>
-									</th>
-									<th _ngcontent-nng-c117="">HSN Code</th>
-									<th _ngcontent-nng-c117="">DRW No</th>
-									<th _ngcontent-nng-c117="">Due Date</th>
-									<th _ngcontent-nng-c117="">Max Order Qty</th>
-									<th _ngcontent-nng-c117="">Qty.<span _ngcontent-nng-c117=""
-											style="color: red;">*</span></th>
-									<th _ngcontent-nng-c117="">UOM<span _ngcontent-nng-c117=""
-											style="color: red;">*</span></th>
-									<th _ngcontent-nng-c117="">Rate<span _ngcontent-nng-c117=""
-											style="color: red;">*</span></th>
-									<th _ngcontent-nng-c117="">Disc%</th>
-									<th _ngcontent-nng-c117="">Amount (Rs)</th>
-									<th _ngcontent-nng-c117=""><a _ngcontent-nng-c117=""
-											class="btn btn-secondary active add-row"><i _ngcontent-nng-c117=""
-												class="fa fa-plus"></i></a></th>
-								</thead>
-								<tbody _ngcontent-nng-c117="">
-									<tr _ngcontent-nng-c117="">
-										<td _ngcontent-nng-c117="" style="width: 25%;">
-											<ng-select _ngcontent-nng-c117="" bindlabel="value" bindvalue="id"
-												class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-untouched ng-pristine ng-invalid">
-												<div class="ng-select-container ng-has-value">
-													<div class="ng-value-container">
-														<div class="ng-placeholder">
-															<select name="main_usr_select" class="form-control">
-																{% for user in users %}
-																<option>{{ user.product_name }}
-																</option>
-																{% endfor %}
-															</select>
-														</div>
-													</div>
-												</div>
-											</ng-select>
-										</td>
-										<td _ngcontent-nng-c117="" style="width: 5%;"><input _ngcontent-nng-c117=""
-												class="form-control ng-untouched ng-pristine ng-valid"
-												fdprocessedid="3vfeh1">
-										</td>
-										<td _ngcontent-nng-c117="" style="width: 5%;"><input _ngcontent-nng-c117=""
-												class="form-control ng-untouched ng-pristine ng-valid"
-												fdprocessedid="5qyyf">
-										</td>
-										<td _ngcontent-nng-c117="" style="width: 8%;">
-											<div _ngcontent-nng-c117="" class="input-group date"><input
-													_ngcontent-nng-c117="" type="text" bsdatepicker=""
-													autocomplete="off"
-													class="form-control pull-right ng-untouched ng-pristine ng-valid"
-													fdprocessedid="4rb7nq">
-												<div _ngcontent-nng-c117="" class="input-group-append"><a
-														_ngcontent-nng-c117="" class="input-group-text"
-														aria-expanded="false"><i _ngcontent-nng-c117=""
-															class="fa fa-calendar"></i></a>
-												</div>
-											</div>
-										</td>
-										<td _ngcontent-nng-c117="" style="width: 3%;"><label _ngcontent-nng-c117=""
-												class="form-control" style="background-color: #f6f7f9;"></label>
-										</td>
-										<td _ngcontent-nng-c117="" style="width: 5%;"><input _ngcontent-nng-c117=""
-												decimalonly="" class="form-control ng-untouched ng-pristine ng-invalid"
-												fdprocessedid="q4vqp"></td>
-										<td _ngcontent-nng-c117="" style="width: 7%;">
-											<select _ngcontent-nng-c117=""
-												class="form-control ng-untouched ng-pristine ng-invalid"
-												fdprocessedid="3nklso">
-												<option _ngcontent-nng-c117="" value="">
-													UOM </option>
-												<option _ngcontent-nng-c117="" value="Nos">
-													Nos</option>
-												<option _ngcontent-nng-c117="" value="Meters">
-													Meters</option>
-												<option _ngcontent-nng-c117="" value="Millimeter">Millimeter</option>
-												<option _ngcontent-nng-c117="" value="Bundle">
-													Bundle</option>
-												<option _ngcontent-nng-c117="" value="Pack">
-													Pack</option>
-												<option _ngcontent-nng-c117="" value="Kg">Kg
-												</option>
-												<option _ngcontent-nng-c117="" value="Set">
-													Set</option>
-											</select>
-										</td>
-										<td _ngcontent-nng-c117="" style="width: 6%;"><input _ngcontent-nng-c117=""
-												decimalonly="" class="form-control ng-untouched ng-pristine ng-invalid"
-												fdprocessedid="0cfseo"></td>
-										<td _ngcontent-nng-c117="" style="width: 3%;"><input _ngcontent-nng-c117=""
-												numberonly="" class="form-control ng-untouched ng-pristine ng-valid">
-										</td>
-										<td _ngcontent-nng-c117="" style="width: 6%;"><input _ngcontent-nng-c117=""
-												class="form-control ng-untouched ng-pristine" disabled=""><input
-												_ngcontent-nng-c117="" type="hidden" value=""
-												class="ng-untouched ng-pristine ng-valid">
-										</td>
-										<td _ngcontent-nng-c117="" style="width: 5%;"></td>
-									</tr>
-								</tbody>
-							</table><br _ngcontent-nng-c117=""><br _ngcontent-nng-c117="">
+				<div class="card card-fluid">
+					<div class="card-body">
+						<div style="overflow-x: auto;">
+							<table id="product-table" style="width: 130%;">
+
+							</table>
+							<br><br>
+						</div>
 					</div>
 				</div>
-			</div>
 		</section>
 
 		<section _ngcontent-owj-c93="" class="content">
 			<div _ngcontent-owj-c93="" class="page-section">
 				<div _ngcontent-owj-c93="" class="card card-fluid">
 					<div _ngcontent-owj-c93="" class="card-body">
-                        <tr _ngcontent-nng-c117="">
-                            <td _ngcontent-nng-c117="" style="width: 30%;"> Kind Attn. </td>
-                            <td _ngcontent-nng-c117="" style="width: 70%;"><textarea
-                                    _ngcontent-nng-c117="" rows="1" formcontrolname="subject"
-                                    class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                            </td>
-                        </tr>
-                        <tr _ngcontent-nng-c117="">
-                            <td _ngcontent-nng-c117="" style="width: 30%;"> Description </td>
-                            <td _ngcontent-nng-c117="" style="width: 70%;"><textarea
-                                    _ngcontent-nng-c117="" rows="1" formcontrolname="description"
-                                    class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                            </td>
-                        </tr>
-                        <tr _ngcontent-nng-c117="">
-                            <td _ngcontent-nng-c117="" style="width: 30%;"> Remarks </td>
-                            <td _ngcontent-nng-c117="" style="width: 70%;"><textarea
-                                    _ngcontent-nng-c117="" rows="1" formcontrolname="remarks"
-                                    class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                            </td>
-                        </tr>
+						<div class="form-group">
+							<tr>
+								<label> Kind Attn. </label>
+								<td style="width: 70%;"><textarea rows="2" formcontrolname="subject"
+										class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+								</td>
+							</tr>
+						</div>
+						<div class="form-group">
+							<tr>
+								<label> Description </label>
+								<td style="width: 70%;"><textarea rows="2" formcontrolname="description"
+										class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+								</td>
+							</tr>
+						</div>
+						<div class="form-group">
+							<tr>
+								<label> Remarks </label>
+								<td style="width: 70%;"><textarea rows="2" formcontrolname="remarks"
+										class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+								</td>
+							</tr>
+						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 
 
-          <section _ngcontent-owj-c93="" class="content">
+		<section _ngcontent-owj-c93="" class="content">
 			<div _ngcontent-owj-c93="" class="page-section">
 				<div _ngcontent-owj-c93="" class="card card-fluid">
 					<div _ngcontent-owj-c93="" class="card-body">
@@ -318,37 +166,37 @@
 						</div>
 						<div class="form-group">
 							<tr>
-								<input type="checkbox"/>&nbsp;&nbsp;<label> Taxes </label>
+								<label> Taxes </label>
 								<td><input type="text" name="usr_name" class="form-control" /></td>
 							</tr>
 						</div>
 						<div class="form-group">
 							<tr>
-								<input type="checkbox"/>&nbsp;&nbsp;<label>Delivery</label>
+								<label>Delivery</label>
 								<td><input type="text" name="usr_name" class="form-control" /></td>
 							</tr>
 						</div>
 						<div class="form-group">
 							<tr>
-								<input type="checkbox"/>&nbsp;&nbsp;<label>TOP</label>
+								<label>TOP</label>
 								<td><input type="text" name="usr_name" class="form-control" /></td>
 							</tr>
 						</div>
 						<div class="form-group">
 							<tr>
-								<input type="checkbox"/>&nbsp;&nbsp;<label>Notes</label>
+								<label>Notes</label>
 								<td><input type="text" name="usr_name" class="form-control" /></td>
 							</tr>
 						</div>
 						<div class="form-group">
 							<tr>
-								<input type="checkbox"/>&nbsp;&nbsp;<label>Packing Instruction</label>
+								<label>Packing Instruction</label>
 								<td><input type="text" name="usr_name" class="form-control" /></td>
 							</tr>
 						</div>
 						<div class="form-group">
 							<tr>
-								<input type="checkbox"/>&nbsp;&nbsp;<label>Transportation</label>
+								<label>Transportation</label>
 								<td><input type="text" name="usr_name" class="form-control" /></td>
 							</tr>
 						</div>
@@ -357,11 +205,11 @@
 			</div>
 		</section>
 		<div style="text-align: center;">
-            <button id="btnSave" type="submit" class="btn btn-primary btn-sm" fdprocessedid="11p0ic">Save</button>
-            &nbsp;
-            <a routerlink="/PO-POlist" queryparamshandling="preserve" class="btn btn-danger btn-sm"
-                href="/PO-POlist">Cancel </a>
-        </div>
+			<button id="btnSave" type="submit" class="btn btn-primary btn-sm" fdprocessedid="11p0ic">Save</button>
+			&nbsp;
+			<a routerlink="/PO-POlist" queryparamshandling="preserve" class="btn btn-danger btn-sm"
+				href="/PO-POlist">Cancel </a>
+		</div>
 	</div>
 </div>
 {% endblock content %}
@@ -369,35 +217,64 @@
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 <script>
+
+
+	function removeProductRow(button) {
+		const row = button.closest('tr');
+		row.remove();
+		updateTotal();
+	}
+
+	function addProductRow() {
+		const tableBody = document.querySelector('#product-table tbody');
+		const newRow = document.createElement('tr');
+		newRow.innerHTML = `
+		<td style="width: 25%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 5%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 5%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 8%;"> <input type="date" autocomplete="off" class="form-control pull-right ng-untouched ng-pristine ng-valid"> </td> <td style="width: 3%;"> <input class="form-control"> </td> <td style="width: 5%;"> <input class="form-control"> </td> <td style="width: 7%;"> <select class="form-control ng-untouched ng-pristine ng-invalid"> <option value="">UOM </option> <option value="Nos">Nos</option> <option value="Meters">Meters</option> <option value="Millimeter">Millimeter</option> <option value="Bundle">Bundle</option> <option value="Pack">Pack</option> <option value="Kg">Kg</option> <option value="Set">Set</option> </select> </td> <td style="width: 6%;"><input class="form-control ng-untouched ng-pristine ng-invalid"></td> <td style="width: 3%;"><input class="form-control ng-untouched ng-pristine ng-valid"></td> <td style="width: 6%;"><input class="form-control ng-untouched ng-pristine" disabled=""> </td> <td ><button class="btn btn-danger" onclick="removeProductRow(this)">Remove</button></td>
+		`;
+		tableBody.appendChild(newRow);
+		newRow.querySelectorAll('.quantity, .unit-price').forEach(input => {
+			input.addEventListener('input', updateTotal);
+		});
+		// updateTotal();
+	}
+
+
 	let lineNo = 1;
 	$(document).ready(function () {
-		$(".add-row").click(function () {
-			markup = $('<tr _ngcontent-nng-c117=""> <td _ngcontent-nng-c117="" style="width: 25%;"> <ng-select _ngcontent-nng-c117="" bindlabel="value" bindvalue="id" class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-untouched ng-pristine ng-invalid"> <div class="ng-select-container ng-has-value"> <div class="ng-value-container"> <div class="ng-placeholder"> <select name="main_usr_select" class="form-control"> {% for user in users %} <option>{{ user.product_name }} </option> {% endfor %} </select> </div> </div> </div> </ng-select> </td> <td _ngcontent-nng-c117="" style="width: 5%;"><input _ngcontent-nng-c117="" class="form-control ng-untouched ng-pristine ng-valid" fdprocessedid="3vfeh1"> </td> <td _ngcontent-nng-c117="" style="width: 5%;"><input _ngcontent-nng-c117="" class="form-control ng-untouched ng-pristine ng-valid" fdprocessedid="5qyyf"> </td> <td _ngcontent-nng-c117="" style="width: 8%;"> <div _ngcontent-nng-c117="" class="input-group date"><input _ngcontent-nng-c117="" type="text" bsdatepicker="" autocomplete="off" class="form-control pull-right ng-untouched ng-pristine ng-valid" fdprocessedid="4rb7nq"> <div _ngcontent-nng-c117="" class="input-group-append"><a _ngcontent-nng-c117="" class="input-group-text" aria-expanded="false"><i _ngcontent-nng-c117="" class="fa fa-calendar"></i></a> </div> </div> </td> <td _ngcontent-nng-c117="" style="width: 3%;"><label _ngcontent-nng-c117="" class="form-control" style="background-color: #f6f7f9;"></label> </td> <td _ngcontent-nng-c117="" style="width: 5%;"><input _ngcontent-nng-c117="" decimalonly="" class="form-control ng-untouched ng-pristine ng-invalid" fdprocessedid="q4vqp"></td> <td _ngcontent-nng-c117="" style="width: 7%;"> <select _ngcontent-nng-c117="" class="form-control ng-untouched ng-pristine ng-invalid" fdprocessedid="3nklso"> <option _ngcontent-nng-c117="" value=""> UOM</option> <option _ngcontent-nng-c117="" value="Nos"> Nos</option> <option _ngcontent-nng-c117="" value="Meters"> Meters</option> <option _ngcontent-nng-c117="" value="Millimeter">Millimeter</option> <option _ngcontent-nng-c117="" value="Bundle"> Bundle</option> <option _ngcontent-nng-c117="" value="Pack"> Pack</option> <option _ngcontent-nng-c117="" value="Kg">Kg </option> <option _ngcontent-nng-c117="" value="Set"> Set</option> </select> </td> <td _ngcontent-nng-c117="" style="width: 6%;"><input _ngcontent-nng-c117="" decimalonly="" class="form-control ng-untouched ng-pristine ng-invalid" fdprocessedid="0cfseo"></td> <td _ngcontent-nng-c117="" style="width: 3%;"><input _ngcontent-nng-c117="" numberonly="" class="form-control ng-untouched ng-pristine ng-valid"> </td> <td _ngcontent-nng-c117="" style="width: 6%;"><input _ngcontent-nng-c117="" class="form-control ng-untouched ng-pristine" disabled=""><input _ngcontent-nng-c117="" type="hidden" value="" class="ng-untouched ng-pristine ng-valid"> </td> <td _ngcontent-nng-c117="" style="width: 5%;"></td> </tr>')
-			tableBody = $("table tbody");
-			tableBody.append(markup);
-			lineNo++;
+		$(".offertype_id").on("change", function () {
+			var selectedOption = $(this).val();
+			switch (selectedOption) {
+				case "Standard":
+					var table = document.getElementById('emptbl');
+					markup = $('<thead> <th >Product<span style="color: red;">*</span></th> <th >HSN Code</th> <th >DRW No</th> <th >Due Date</th> <th>Max Order Qty</th> <th >Qty.<span style="color: red;">*</span></th> <th >UOM<span style="color: red;">*</span></th> <th >Rate<span style="color: red;">*</span></th> <th >Disc%</th> <th >Amount (Rs)</th> <th ><a class="btn btn-secondary active add-row"><i class="fa fa-plus"></i></a></th> </thead> <tbody > <tr > <td style="width: 25%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 5%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 5%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 8%;"> <input type="date" autocomplete="off" class="form-control pull-right ng-untouched ng-pristine ng-valid"> </td> <td style="width: 3%;"> <input class="form-control"> </td> <td style="width: 5%;"> <input class="form-control"> </td> <td style="width: 7%;"> <select class="form-control ng-untouched ng-pristine ng-invalid"> <option value="">UOM </option> <option value="Nos">Nos</option> <option value="Meters">Meters</option> <option value="Millimeter">Millimeter</option> <option value="Bundle">Bundle</option> <option value="Pack">Pack</option> <option value="Kg">Kg</option> <option value="Set">Set</option> </select> </td> <td style="width: 6%;"><input class="form-control ng-untouched ng-pristine ng-invalid"></td> <td style="width: 3%;"><input class="form-control ng-untouched ng-pristine ng-valid"></td> <td style="width: 6%;"><input class="form-control ng-untouched ng-pristine" disabled=""> </td> <td style="width: 5%;"></td> </tr> </tbody>')
+					tableBody = $("table");
+					tableBody.empty();
+					tableBody.append(markup);
+					break;
+
+				case "Customized":
+					var table = document.getElementById('emptbl');
+					markup = $('<thead> <th >Product<span style="color: red;">*</span></th> <th >HSN Code</th> <th >DRW No</th> <th >Due Date</th> <th>Max Order Qty</th> <th >Qty.<span style="color: red;">*</span></th> <th >UOM<span style="color: red;">*</span></th> <th >Rate<span style="color: red;">*</span></th> <th >Disc%</th> <th >Amount (Rs)</th> <th ><a class="btn btn-secondary active " onclick="addProductRow()"><i class="fa fa-plus"></i></a></th> </thead> <tbody > <tr > <td style="width: 25%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 5%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 5%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 8%;"> <input type="date" autocomplete="off" class="form-control pull-right ng-untouched ng-pristine ng-valid"> </td> <td style="width: 3%;"> <input class="form-control"> </td> <td style="width: 5%;"> <input class="form-control"> </td> <td style="width: 7%;"> <select class="form-control ng-untouched ng-pristine ng-invalid"> <option value="">UOM </option> <option value="Nos">Nos</option> <option value="Meters">Meters</option> <option value="Millimeter">Millimeter</option> <option value="Bundle">Bundle</option> <option value="Pack">Pack</option> <option value="Kg">Kg</option> <option value="Set">Set</option> </select> </td> <td style="width: 6%;"><input class="form-control ng-untouched ng-pristine ng-invalid"></td> <td style="width: 3%;"><input class="form-control ng-untouched ng-pristine ng-valid"></td> <td style="width: 6%;"><input class="form-control ng-untouched ng-pristine" disabled=""> </td> <td style="width: 5%;"></td> </tr> </tbody>')
+
+					tableBody = $("table");
+					tableBody.empty();
+					tableBody.append(markup);
+					break;
+			}
+
 		});
 	});
 
-	function reSum() {
-		unit_price_offer = "unit_price_offer" + (lineNo - 1);
-		quantity_offer = "quantity_offer" + (lineNo - 1);
-		totalprice = "totalprice" + (lineNo - 1);
-		var num1 = parseInt(document.getElementById(unit_price_offer).value);
-		var num2 = parseInt(document.getElementById(quantity_offer).value);
-		document.getElementById(totalprice).value = num1 * num2;
-	}
-
 </script>
 <style>
-    th,
-    td {
-        border: 1px solid black;
-        padding: 5px;
-    }
+	th,
+	td {
+		border: 1px solid black;
+		padding: 5px;
+	}
 
-    .container[_ngcontent-owj-c93] {
-        width: 100%
-    }
+	.container[_ngcontent-owj-c93] {
+		width: 100%
+	}
 </style>
 {% endblock javascripts %}
