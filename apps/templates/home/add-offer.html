@@ -522,8 +522,8 @@
 							<label for="kit_name_sample">Select a user:</label>
 
 							<select name="kit_name_sample" id="kit_name_sample" class="form-control">
-							{% for user in user2 %}
-								<option value="{{ user.kit_description }}">{{ user.kit_description }}</option>
+							{% for user in users_product %}
+								<option value="{{ user.product_name }}">{{ user.product_name }}</option>
 							{% endfor %}
 							</select>
 
