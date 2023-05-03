@@ -92,12 +92,35 @@
 								<div class="row">
 									<div class="form-group col-sm-2">
 										<label>OC / BOM Type</label>
-										<select formcontrolname="ocType" class="form-control ng-valid ng-dirty ng-touched" fdprocessedid="9ttnx8">
+										<select id="type-select" class="form-control ng-valid ng-dirty ng-touched" fdprocessedid="9ttnx8">
 											<option value="">Select Type</option>
 											<option value="1">OC</option>
 											<option value="2">BOM</option>
 										</select>
 									</div>
+								</div>
+							</div>
+
+							<div class="row" id="oc-type" style="display:none;">
+								<div class="form-group col-sm-4">
+									<label>OC Type</label>
+									<select formControlName="ocType" class="form-control" fdprocessedid="9ttnx8">
+										<option value="">Select OC Type</option>
+										<option value="1">OC</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="row" id="bom-type" style="display:none;">
+								<div class="form-group col-sm-4">
+									<label>BOM Type</label>
+									<select formControlName="bomType" class="form-control" fdprocessedid="9ttnx8">
+										<option value="">Select BOM Type</option>
+										{% for user in bom_PO %}
+										<option>{{ user.bom_description, user.bom_no }}
+										</option>
+										{% endfor %}
+									</select>
 								</div>
 							</div>
 						</div>
@@ -341,18 +364,17 @@
 	}
 
 	function toggleOCBOM(select) {
-  	var ocbom = document.getElementById("oc-bom");
-  	if (select.value == "Standard") {
-    	ocbom.style.display = "block";
-  	
-	} 
-	else 
-	{
-    	ocbom.style.display = "none";
-  	
+		var ocbom = document.getElementById("oc-bom");
+		if (select.value == "Standard") {
+			ocbom.style.display = "block";
+
+		}
+		else {
+			ocbom.style.display = "none";
+
+		}
+
 	}
-	
-}
 
 
 	function addofer_standard() {
@@ -434,6 +456,22 @@
 		} else if (selectElement.value === 'Subtract') {
 			symbolElement.textContent = ' (-)';
 		}
+	});
+
+	$(document).ready(function () {
+		$('#type-select').change(function () {
+			var selected = $(this).val();
+			if (selected == 1) {
+				$('#oc-type').show();
+				$('#bom-type').hide();
+			} else if (selected == 2) {
+				$('#oc-type').hide();
+				$('#bom-type').show();
+			} else {
+				$('#oc-type').hide();
+				$('#bom-type').hide();
+			}
+		});
 	});
 
 

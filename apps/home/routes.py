@@ -270,7 +270,8 @@ def addpo():
         users = SupplierMaster.query.all()
         users_product = ProductMaster.query.all()
         user1 = CurrencyMaster.query.all()
-        return render_template('home/add-purchaseorder.html',users=users,user1=user1,users_product=users_product,segment='add-purchaseorder')
+        bom_PO = BomMaster.query.all()
+        return render_template('home/add-purchaseorder.html',bom_PO=bom_PO,users=users,user1=user1,users_product=users_product,segment='add-purchaseorder')
 
 @blueprint.route('/PO-POlist', methods=['GET', 'POST'])
 @login_required
