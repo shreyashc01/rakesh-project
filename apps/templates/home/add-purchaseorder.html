@@ -92,7 +92,8 @@
 								<div class="row">
 									<div class="form-group col-sm-2">
 										<label>OC / BOM Type</label>
-										<select id="type-select" class="form-control ng-valid ng-dirty ng-touched" fdprocessedid="9ttnx8">
+										<select id="type-select" class="form-control ng-valid ng-dirty ng-touched"
+											fdprocessedid="9ttnx8">
 											<option value="">Select Type</option>
 											<option value="1">OC</option>
 											<option value="2">BOM</option>
@@ -114,15 +115,18 @@
 							<div class="row" id="bom-type" style="display:none;">
 								<div class="form-group col-sm-4">
 									<label>BOM Type</label>
-									<select formControlName="bomType" class="form-control" fdprocessedid="9ttnx8">
-										<option value="">Select BOM Type</option>
+									<select formControlName="bomType" class="form-control" fdprocessedid="9ttnx8" {% if
+										bom_PO|length> 10 %}
+										size="{{ bom_PO|length }}"
+										{% endif %}>
+										<option value="" selected>Select BOM Type</option>
 										{% for user in bom_PO %}
-										<option>{{ user.bom_description, user.bom_no }}
-										</option>
+										<option>{{ user.bom_no}} {{user.bom_description }}</option>
 										{% endfor %}
 									</select>
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>
@@ -474,6 +478,152 @@
 		});
 	});
 
+
+	function updateTotal() {
+		const rows = document.querySelectorAll('#product-table tbody tr');
+		let total = 0;
+		rows.forEach(row => {
+			const quantity = Number(row.querySelector('.quantity').value);
+			const unitPrice = Number(row.querySelector('.unit-price').value);
+			const rowTotal = quantity * unitPrice;
+			row.querySelector('.total').textContent = `${rowTotal}`;
+			total += rowTotal;
+		});
+		$('#total_amount').val(total);
+
+		const pfInput = document.querySelector('#pfpercent');
+		const freightInput = document.querySelector('#freight');
+
+		let pfAmount = 0;
+		if (pfInput.value) {
+			pfAmount = total * (Number(pfInput.value) / 100);
+		}
+
+		let freightAmount = 0;
+		if (freightInput.value) {
+			freightAmount = Number(freightInput.value);
+		}
+
+		let subTotal = total + pfAmount + freightAmount;
+
+		let centralGST = 0;
+		const centralGSTInput = document.querySelector('#central-gst');
+		if (centralGSTInput.value) {
+			centralGST = subTotal * (Number(centralGSTInput.value) / 100);
+		}
+
+		let stateGST = 0;
+		const stateGSTInput = document.querySelector('#state-gst');
+		if (stateGSTInput.value) {
+			stateGST = subTotal * (Number(stateGSTInput.value) / 100);
+		}
+
+		let interStateGST = 0;
+		const interStateGSTInput = document.querySelector('#interstate-gst');
+		if (interStateGSTInput.value) {
+			interStateGST = subTotal * (Number(interStateGSTInput.value) / 100);
+		}
+
+		let totalWithGST = subTotal + centralGST + stateGST + interStateGST;
+		$('#total_with_gst').val(totalWithGST.toFixed(2));
+
+		let roundedOff = 0;
+		const roundedOffInput = document.querySelector('#rounded-off');
+		if (roundedOffInput.value) {
+			roundedOff = Number(roundedOffInput.value);
+		}
+
+		let addAmount = 0;
+		const addInput = document.querySelector('#add-amount');
+		if (addInput.value) {
+			addAmount = Number(addInput.value);
+		}
+
+		let grandTotal = totalWithGST + roundedOff + addAmount;
+		$('#grand_total').val(grandTotal.toFixed(2));
+
+		pfInput.addEventListener('input', () => {
+			const pfPercentage = Number(pfInput.value);
+			pfAmount = total * (pfPercentage / 100);
+			subTotal = total + pfAmount + freightAmount;
+			centralGST = subTotal * (Number(centralGSTInput.value) / 100);
+			stateGST = subTotal * (Number(stateGSTInput.value) / 100);
+			interStateGST = subTotal * (Number(interStateGSTInput.value) / 100);
+			totalWithGST = subTotal + centralGST + stateGST + interStateGST;
+			roundedOff = Number(roundedOffInput.value);
+			addAmount = Number(addInput.value);
+			grandTotal = totalWithGST + roundedOff + addAmount;
+			$('#total_with_gst').val(totalWithGST.toFixed(2));
+			$('#grand_total').val(grandTotal.toFixed(2));
+		});
+
+		freightInput.addEventListener('input', () => {
+			freightAmount = Number(freightInput.value);
+			subTotal = total + pfAmount + freightAmount;
+			centralGST = subTotal * (Number(centralGSTInput.value) / 100);
+			stateGST = subTotal * (Number(stateGSTInput.value) / 100);
+			interStateGST = subTotal * (Number(interStateGSTInput.value) / 100);
+			totalWithGST = subTotal + centralGST + stateGST + interStateGST;
+			roundedOff = Number(roundedOffInput.value);
+			addAmount = Number(addInput.value);
+			grandTotal = totalWithGST + roundedOff + addAmount;
+			$('#total_with_gst').val(totalWithGST.toFixed(2));
+			$('#grand_total').val(grandTotal.toFixed(2));
+		});
+
+		centralGSTInput.addEventListener('input', () => {
+			centralGST = subTotal * (Number(centralGSTInput.value) / 100);
+			totalWithGST = subTotal + centralGST + stateGST + interStateGST;
+			roundedOff = Number(roundedOffInput.value);
+			addAmount = Number(addInput.value);
+			grandTotal = totalWithGST + roundedOff + addAmount;
+			$('#total_with_gst').val(totalWithGST.toFixed(2));
+			$('#grand_total').val(grandTotal.toFixed(2));
+		});
+
+		stateGSTInput.addEventListener('input', () => {
+			stateGST = subTotal * (Number(stateGSTInput.value) / 100);
+			totalWithGST = subTotal + centralGST + stateGST + interStateGST;
+			roundedOff = Number(roundedOffInput.value);
+			addAmount = Number(addInput.value);
+			grandTotal = totalWithGST + roundedOff + addAmount;
+			$('#total_with_gst').val(totalWithGST.toFixed(2));
+			$('#grand_total').val(grandTotal.toFixed(2));
+		});
+
+		interStateGSTInput.addEventListener('input', () => {
+			interStateGST = subTotal * (Number(interStateGSTInput.value) / 100);
+			totalWithGST = subTotal + centralGST + stateGST + interStateGST;
+			roundedOff = Number(roundedOffInput.value);
+			addAmount = Number(addInput.value);
+			grandTotal = totalWithGST + roundedOff + addAmount;
+			$('#total_with_gst').val(totalWithGST.toFixed(2));
+			$('#grand_total').val(grandTotal.toFixed(2));
+		});
+
+		roundedOffInput.addEventListener('input', () => {
+			roundedOff = Number(roundedOffInput.value);
+			grandTotal = totalWithGST + roundedOff + addAmount;
+			$('#grand_total').val(grandTotal.toFixed(2));
+		});
+
+		addInput.addEventListener('input', () => {
+			addAmount = Number(addInput.value);
+			grandTotal = totalWithGST + roundedOff + addAmount;
+			$('#grand_total').val(grandTotal.toFixed(2));
+		});
+	}
+
+
+
+	$(document).ready(function () {
+		// Adjust select tag width based on selected option
+		$('#bom-select').change(function () {
+			var selectedOption = $(this).find('option:selected');
+			var selectedOptionWidth = selectedOption.width();
+			$(this).width(selectedOptionWidth + 20); // add some padding
+		});
+	});
 
 </script>
 <style>

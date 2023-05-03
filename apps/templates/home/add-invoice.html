@@ -31,157 +31,137 @@
             </ul>
         </div>
 
-        <section _ngcontent-arr-c134="" class="content">
-            <div _ngcontent-arr-c134="" class="row">
-                <div _ngcontent-arr-c134="" class="col-sm-12">
-                    <div _ngcontent-arr-c134="" class="card">
-                        <div _ngcontent-arr-c134="" class="card-header"> Invoice Details </div>
-                        <div _ngcontent-arr-c134="" class="card-body">
-                            <div _ngcontent-arr-c134="" class="col-sm-12">
-                                <div _ngcontent-arr-c134="" class="row"><input _ngcontent-arr-c134="" type="hidden"
-                                        formcontrolname="dispatch_Id" value=""
-                                        class="ng-untouched ng-pristine ng-valid"><input _ngcontent-arr-c134=""
-                                        type="hidden" formcontrolname="createdBy" value=""
-                                        class="ng-untouched ng-pristine ng-valid"><input _ngcontent-arr-c134=""
-                                        type="hidden" formcontrolname="modifiedBy" value=""
-                                        class="ng-untouched ng-pristine ng-valid">
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-3"><label
-                                            _ngcontent-arr-c134="" for="serialNo">Invoice No<span _ngcontent-arr-c134=""
-                                                style="color: red;">*</span></label><input _ngcontent-arr-c134=""
-                                            formcontrolname="invoiceNo" type="text" maxlength="200" autocomplete="off"
-                                            numberonly="" class="form-control ng-untouched ng-pristine ng-invalid">
+        <section class="content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header"> Invoice Details </div>
+                        <div class="card-body">
+                            <div class="col-sm-12">
+                                <div class="row">
+
+                                    <div class="form-group col-sm-3">
+                                        <label>Invoice No<span style="color: red;">*</span>
+                                        </label>
+                                        <input type="text" maxlength="200" autocomplete="off" numberonly=""
+                                            class="form-control ng-untouched ng-pristine ng-invalid">
                                     </div>
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-3"><label
-                                            _ngcontent-arr-c134="" for="publisher">Invoice Date<span
-                                                _ngcontent-arr-c134="" style="color: red;">*</span></label>
-                                        <div _ngcontent-arr-c134="" class="input-group date"><input
-                                                _ngcontent-arr-c134="" type="text" formcontrolname="invoiceDate"
-                                                bsdatepicker="" autocomplete="off"
+                                    <div class="form-group col-sm-3">
+                                        <label>Invoice Date<span style="color: red;">*</span>
+                                        </label>
+                                        <div class="input-group date">
+                                            <input type="date" bsdatepicker="" autocomplete="off"
                                                 class="form-control pull-right ng-untouched ng-pristine ng-invalid">
-                                            <div _ngcontent-arr-c134="" class="input-group-append"><a
-                                                    _ngcontent-arr-c134="" class="input-group-text"
-                                                    aria-expanded="false"><i _ngcontent-arr-c134=""
-                                                        class="fa fa-calendar"></i></a></div>
+
                                         </div>
                                     </div>
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-3"><label
-                                            _ngcontent-arr-c134="">Supplier Code</label><input _ngcontent-arr-c134=""
-                                            formcontrolname="supplierCode" type="text" maxlength="200"
-                                            autocomplete="off" class="form-control ng-untouched ng-pristine ng-valid">
+                                    <div class="form-group col-sm-3">
+                                        <label>Supplier Code</label>
+                                        <input type="text" maxlength="200" autocomplete="off"
+                                            class="form-control ng-untouched ng-pristine ng-valid">
                                     </div>
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-3"><label
-                                            _ngcontent-arr-c134="">Invoice Type<span _ngcontent-arr-c134=""
-                                                style="color: red;">*</span></label><select _ngcontent-arr-c134=""
-                                            formcontrolname="dispatchType"
-                                            class="form-control ng-untouched ng-pristine ng-invalid">
-                                            <option _ngcontent-arr-c134="" value="">Select Invoice Type</option>
-                                            <option _ngcontent-arr-c134="" value="1">Standard</option>
-                                            <option _ngcontent-arr-c134="" value="2">Export</option>
-                                        </select></div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Invoice Type<span style="color: red;">*</span></label>
+                                        <select class="form-control ng-untouched ng-pristine ng-invalid">
+                                            <option value="">Select Invoice Type</option>
+                                            <option value="Standard">Standard</option>
+                                            <option value="Export">Export</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div _ngcontent-arr-c134="" class="row">
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-4"><label
-                                            _ngcontent-arr-c134="">OC Type<span _ngcontent-arr-c134=""
-                                                style="color: red;">*</span></label><select _ngcontent-arr-c134=""
-                                            formcontrolname="ocType" class="form-control ng-dirty ng-valid ng-touched">
-                                            <option _ngcontent-arr-c134="" value="">Select OC Type</option>
-                                            <option _ngcontent-arr-c134="" value="1">OC</option>
-                                            <option _ngcontent-arr-c134="" value="2">None OC</option>
-                                        </select></div>
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-4"><label
-                                            _ngcontent-arr-c134="">Buyer's Name<span _ngcontent-arr-c134=""
-                                                style="color: red;">*</span></label><ng-select _ngcontent-arr-c134=""
-                                            bindlabel="value" bindvalue="id" formcontrolname="buyersId"
-                                            class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-untouched ng-pristine ng-invalid">
-                                            <div class="ng-select-container ng-has-value">
-                                                <div class="ng-value-container">
-                                                    <div class="ng-placeholder">
-                                                        <select name="main_usr_select" class="form-control">
-                                                            {% for user in users %}
-                                                            <option>{{ user.product_name }}
-                                                            </option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-4">
+                                        <label>OC Type<span style="color: red;">*</span></label>
+                                        <select class="form-control ng-dirty ng-valid ng-touched">
+                                            <option value="">Select OC Type</option>
+                                            <option value="OC">OC</option>
+                                            <option value="None_OC">None OC</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>Buyer's Name<span style="color: red;">*</span>
+                                        </label>
+                                        <div class="ng-select-container ng-has-value">
+                                            <div class="ng-value-container">
+                                                <div class="ng-placeholder">
+                                                    <select name="main_usr_select" class="form-control">
+                                                        {% for user in users %}
+                                                        <option>{{ user.customer_name }}
+                                                        </option>
+                                                        {% endfor %}
+                                                    </select>
                                                 </div>
                                             </div>
-                                        </ng-select></div>
-                                </div>
-                                <div _ngcontent-arr-c134="" class="row">
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-6"><label
-                                            _ngcontent-arr-c134="" for="billingAddress">Details of Receipt (Billing
-                                            Address)
-                                        </label><textarea _ngcontent-arr-c134="" formcontrolname="billingAddress"
-                                            class="form-control ng-untouched ng-pristine ng-valid"></textarea></div>
-                                </div>
-                                <div _ngcontent-arr-c134="" class="row">
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-6"><label
-                                            _ngcontent-arr-c134="" for="deliveryAddress">Details of Receipt (Delivery
-                                            Address) </label><textarea _ngcontent-arr-c134=""
-                                            formcontrolname="deliveryAddress"
-                                            class="form-control ng-untouched ng-pristine ng-valid"></textarea></div>
-                                </div>
-                                <div _ngcontent-arr-c134="" class="row">
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-3"><label
-                                            _ngcontent-arr-c134="">Buyer's GSTIN No</label><input _ngcontent-arr-c134=""
-                                            formcontrolname="buyers_GSTIN_No" type="text" maxlength="200"
-                                            autocomplete="off" class="form-control ng-untouched ng-pristine ng-valid">
-                                    </div>
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-3"><label
-                                            _ngcontent-arr-c134="">Buyer's Pan No</label><input _ngcontent-arr-c134=""
-                                            formcontrolname="buyers_Pan_No" type="text" maxlength="200"
-                                            autocomplete="off" class="form-control ng-untouched ng-pristine ng-valid">
-                                    </div>
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-3"><label
-                                            _ngcontent-arr-c134="">Buyer's Order No</label><input _ngcontent-arr-c134=""
-                                            formcontrolname="buyers_Order_No" type="text" maxlength="200"
-                                            autocomplete="off" class="form-control ng-untouched ng-pristine ng-valid">
-                                    </div>
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-3"><label
-                                            _ngcontent-arr-c134="">Buyer's Order Date</label>
-                                        <div _ngcontent-arr-c134="" class="input-group date"><input
-                                                _ngcontent-arr-c134="" type="text" formcontrolname="buyers_Order_Date"
-                                                bsdatepicker="" autocomplete="off"
-                                                class="form-control pull-right ng-untouched ng-pristine ng-valid">
-                                            <div _ngcontent-arr-c134="" class="input-group-append"><a
-                                                    _ngcontent-arr-c134="" class="input-group-text"
-                                                    aria-expanded="false"><i _ngcontent-arr-c134=""
-                                                        class="fa fa-calendar"></i></a></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div _ngcontent-arr-c134="" class="row">
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-3"><label
-                                            _ngcontent-arr-c134="">Buyer's State Code</label><input
-                                            _ngcontent-arr-c134="" formcontrolname="buyers_State_Code" type="text"
-                                            maxlength="200" autocomplete="off"
-                                            class="form-control ng-untouched ng-pristine ng-valid"></div>
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-3"><label
-                                            _ngcontent-arr-c134="">Buyer's Place of Supply</label><input
-                                            _ngcontent-arr-c134="" formcontrolname="buyers_Place_of_Supply" type="text"
-                                            maxlength="200" autocomplete="off"
-                                            class="form-control ng-untouched ng-pristine ng-valid"></div>
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-3"><label
-                                            _ngcontent-arr-c134="">Transporter Details /LR No /Date</label><input
-                                            _ngcontent-arr-c134="" formcontrolname="transporter_Details" type="text"
-                                            maxlength="200" autocomplete="off"
-                                            class="form-control ng-untouched ng-pristine ng-valid"></div>
-                                </div>
-                                <div _ngcontent-arr-c134="" class="row">
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-4"><label
-                                            _ngcontent-arr-c134="">Payment Terms</label><input _ngcontent-arr-c134=""
-                                            formcontrolname="payment_Terms" type="text" maxlength="200"
-                                            autocomplete="off" class="form-control ng-untouched ng-pristine ng-valid">
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label>Details of Receipt (Billing Address)</label>
+                                        <textarea class="form-control ng-untouched ng-pristine ng-valid"></textarea>
                                     </div>
-                                    <div _ngcontent-arr-c134="" class="form-group col-sm-3"><label
-                                            _ngcontent-arr-c134="">Kit / Spare<span _ngcontent-arr-c134=""
-                                                style="color: red;">*</span></label><select _ngcontent-arr-c134=""
-                                            formcontrolname="kit_or_Spare"
-                                            class="form-control ng-dirty ng-valid ng-touched">
-                                            <option _ngcontent-arr-c134="" value="">Select kit/Spare</option>
-                                            <option _ngcontent-arr-c134="" value="1">Kit</option>
-                                            <option _ngcontent-arr-c134="" value="2" selected>Spare</option>
-                                        </select></div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label>Details of Receipt (Delivery Address) </label>
+                                        <textarea class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-3">
+                                        <label>Buyer's GSTIN No</label>
+                                        <input type="text" maxlength="200" autocomplete="off"
+                                            class="form-control ng-untouched ng-pristine ng-valid">
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Buyer's Pan No</label>
+                                        <input type="text" maxlength="200" autocomplete="off"
+                                            class="form-control ng-untouched ng-pristine ng-valid">
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Buyer's Order No</label>
+                                        <input type="text" maxlength="200" autocomplete="off"
+                                            class="form-control ng-untouched ng-pristine ng-valid">
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Buyer's Order Date</label>
+                                        <div class="input-group date">
+                                            <input type="date" bsdatepicker="" autocomplete="off"
+                                                class="form-control pull-right ng-untouched ng-pristine ng-valid">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-3">
+                                        <label>Buyer's State Code</label>
+                                        <input type="text" maxlength="200" autocomplete="off"
+                                            class="form-control ng-untouched ng-pristine ng-valid">
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Buyer's Place of Supply</label>
+                                        <input type="text" maxlength="200" autocomplete="off"
+                                            class="form-control ng-untouched ng-pristine ng-valid">
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Transporter Details /LR No /Date</label>
+                                        <input type="text" maxlength="200" autocomplete="off"
+                                            class="form-control ng-untouched ng-pristine ng-valid">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-4">
+                                        <label>Payment Terms</label>
+                                        <input type="text" maxlength="200" autocomplete="off"
+                                            class="form-control ng-untouched ng-pristine ng-valid">
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>Kit / Spare<span style="color: red;">*</span></label>
+                                        <select class="form-control ng-dirty ng-valid ng-touched">
+                                            <option value="">Select kit/Spare</option>
+                                            <option value="1">Kit</option>
+                                            <option value="2" selected>Spare</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -191,33 +171,27 @@
         </section>
 
 
-        <section _ngcontent-arr-c134="" class="content">
-            <div _ngcontent-arr-c134="" class="page-section">
-                <div _ngcontent-arr-c134="" class="card card-fluid">
-                    <div _ngcontent-arr-c134="" class="card-body">
-                        <table _ngcontent-arr-c134="" style="width: 100%;" id="emptbl">
-                            <thead _ngcontent-arr-c134="">
-                                <th _ngcontent-arr-c134="">Customer<br _ngcontent-arr-c134="">Part No</th>
-                                <th _ngcontent-arr-c134="">Product<span _ngcontent-arr-c134=""
-                                        style="color: red;">*</span></th>
-                                <th _ngcontent-arr-c134="">HSN Code</th>
-                                <th _ngcontent-arr-c134="">Qty<span _ngcontent-arr-c134="" style="color: red;">*</span>
+        <section class="content">
+            <div class="page-section">
+                <div class="card card-fluid">
+                    <div class="card-body">
+                        <table style="width: 100%;" id="emptbl">
+                            <thead>
+                                <th>Customer<br>Part No</th>
+                                <th>Product<span style="color: red;">*</span></th>
+                                <th>HSN Code</th>
+                                <th>Qty<span style="color: red;">*</span>
                                 </th>
-                                <th _ngcontent-arr-c134="">UOM</th>
-                                <th _ngcontent-arr-c134="">Unit Price<span _ngcontent-arr-c134=""
-                                        style="color: red;">*</span></th>
-                                <th _ngcontent-arr-c134="">Total Price</th>
-                                <th _ngcontent-arr-c134=""><a _ngcontent-arr-c134=""
-                                        class="btn btn-secondary active add-row"><i _ngcontent-arr-c134=""
-                                            class="fa fa-plus"></i></a></th>
+                                <th>UOM</th>
+                                <th>Unit Price<span style="color: red;">*</span></th>
+                                <th>Total Price</th>
+                                <th><a class="btn btn-secondary active add-row"><i class="fa fa-plus"></i></a></th>
                             </thead>
-                            <tbody _ngcontent-arr-c134="">
-                                <tr _ngcontent-arr-c134="">
-                                    <td _ngcontent-arr-c134="" style="width: 10%;"><input _ngcontent-arr-c134=""
+                            <tbody>
+                                <tr>
+                                    <td style="width: 10%;"><input
                                             class="form-control ng-untouched ng-pristine ng-valid"></td>
-                                    <td _ngcontent-arr-c134="" style="width: 25%;"><span
-                                            _ngcontent-arr-c134=""><ng-select _ngcontent-arr-c134="" bindlabel="value"
-                                                bindvalue="id"
+                                    <td style="width: 25%;"><span><ng-select bindlabel="value" bindvalue="id"
                                                 class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-untouched ng-pristine ng-invalid">
                                                 <div class="ng-select-container ng-has-value">
                                                     <div class="ng-value-container">
@@ -232,33 +206,31 @@
                                                     </div>
                                                 </div>
                                             </ng-select></span></td>
-                                    <td _ngcontent-arr-c134="" style="width: 10%;"><span _ngcontent-arr-c134=""><select
-                                                _ngcontent-arr-c134=""
+                                    <td style="width: 10%;"><span><select
                                                 class="form-control ng-untouched ng-pristine ng-valid">
-                                                <option _ngcontent-arr-c134="" value="">HSN Code</option>
-                                                <option _ngcontent-arr-c134="" value="84798999">84798999</option>
-                                                <option _ngcontent-arr-c134="" value="84799090">84799090</option>
-                                                <option _ngcontent-arr-c134="" value="998717">998717</option>
+                                                <option value="">HSN Code</option>
+                                                <option value="84798999">84798999</option>
+                                                <option value="84799090">84799090</option>
+                                                <option value="998717">998717</option>
                                             </select></span></td>
-                                    <td _ngcontent-arr-c134="" style="width: 7%;"><input _ngcontent-arr-c134=""
+                                    <td style="width: 7%;"><input
                                             class="form-control ng-untouched ng-pristine ng-invalid"></td>
-                                    <td _ngcontent-arr-c134="" style="width: 7%;"><span _ngcontent-arr-c134=""><select
-                                                _ngcontent-arr-c134=""
+                                    <td style="width: 7%;"><span><select
                                                 class="form-control ng-untouched ng-pristine ng-valid">
-                                                <option _ngcontent-arr-c134="" value="">UOM</option>
-                                                <option _ngcontent-arr-c134="" value="Nos">Nos</option>
-                                                <option _ngcontent-arr-c134="" value="Meters">Meters</option>
-                                                <option _ngcontent-arr-c134="" value="Millimeter">Millimeter</option>
-                                                <option _ngcontent-arr-c134="" value="Bundle">Bundle</option>
-                                                <option _ngcontent-arr-c134="" value="Pack">Pack</option>
-                                                <option _ngcontent-arr-c134="" value="Kg">Kg</option>
-                                                <option _ngcontent-arr-c134="" value="Set">Set</option>
+                                                <option value="">UOM</option>
+                                                <option value="Nos">Nos</option>
+                                                <option value="Meters">Meters</option>
+                                                <option value="Millimeter">Millimeter</option>
+                                                <option value="Bundle">Bundle</option>
+                                                <option value="Pack">Pack</option>
+                                                <option value="Kg">Kg</option>
+                                                <option value="Set">Set</option>
                                             </select></span></td>
-                                    <td _ngcontent-arr-c134="" style="width: 7%;"><input _ngcontent-arr-c134=""
+                                    <td style="width: 7%;"><input
                                             class="form-control ng-untouched ng-pristine ng-invalid"></td>
 
-                                    <td _ngcontent-arr-c134="" style="width: 7%;"><input _ngcontent-arr-c134=""
-                                            class="form-control" style="background-color: #f6f7f9;"></input></td>
+                                    <td style="width: 7%;"><input class="form-control"
+                                            style="background-color: #f6f7f9;"></input></td>
 
                                     <td _ngcontent-yms-c134="" style="width: 5%;">
                                         <a _ngcontent-yms-c134="">
@@ -272,115 +244,155 @@
         </section>
 
 
-        <section _ngcontent-arr-c134="" class="content">
-            <div _ngcontent-arr-c134="" class="page-section">
-                <div _ngcontent-arr-c134="" class="card card-fluid">
-                    <div _ngcontent-arr-c134="" class="card-body">
-                        <tfoot _ngcontent-arr-c134="" style="width: 100%;">
-                            <div class="form-group">
-                                <tr _ngcontent-arr-c134="">
-                                    <td _ngcontent-arr-c134=""> Gross Amount </td>
-                                    <td _ngcontent-arr-c134="" style="width: 20%;"></td>
-                                    <td _ngcontent-arr-c134="" style="width: 30%;"><input _ngcontent-arr-c134=""
-                                            formcontrolname="totalCost" type="hidden" value=""
-                                            class="ng-untouched ng-pristine ng-valid"><label _ngcontent-arr-c134=""
-                                            class="form-control" style="background-color: #f6f7f9;">0</label></td>
+        <section class="content">
+            <div class="page-section">
+                <div class="card card-fluid">
+                    <div class="card-body">
+                        <table style="width: 100%;" id="">
+                            <tbody>
+                                <tr>
+                                    <td> Gross Amount </td>
+                                    <td style="width: 20%;"></td>
+                                    <td style="width: 30%;">
+                                        <input type="number" maxlength="50" autocomplete="off" decimalonly=""
+                                            class="form-control ng-pristine ng-valid ng-touched" disabled>
+                                    </td>
                                 </tr>
-                                <tr _ngcontent-arr-c134="">
-                                    <td _ngcontent-arr-c134=""> Discount </td>
-                                    <td _ngcontent-arr-c134=""><select _ngcontent-arr-c134=""
-                                            formcontrolname="discountType"
+                                <tr>
+                                    <td> Discount </td>
+                                    <td>
+                                        <select class="form-control ng-valid ng-touched ng-dirty">
+                                            <option value="Percentage">Percentage</option>
+                                            <option value="Value">Value</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <input type="number" maxlength="50" autocomplete="off" decimalonly=""
+                                                    class="form-control ng-untouched ng-pristine ng-valid">
+
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> Total Assessable Value </td>
+                                    <td></td>
+                                    <td>
+                                        <input type="number" maxlength="50" autocomplete="off" decimalonly=""
                                             class="form-control ng-untouched ng-pristine ng-valid">
-                                            <option _ngcontent-arr-c134="" value="Percentage">Percentage</option>
-                                            <option _ngcontent-arr-c134="" value="Value">Value</option>
-                                        </select></td>
-                                    <td _ngcontent-arr-c134="">
-                                <tr _ngcontent-arr-c134="">
-                                    <td _ngcontent-arr-c134=""></td>
+                                    </td>
                                 </tr>
-                                </td>
+                                <tr>
+                                    <td> P &amp; F % </td>
+                                    <td>
+                                        <select class="form-control ng-valid ng-dirty ng-touched">
+                                            <option value="Percentage">Percentage</option>
+                                            <option value="Value">Value</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <input type="number" maxlength="50" autocomplete="off" decimalonly=""
+                                                    class="form-control ng-untouched ng-pristine ng-valid">
+
+                                            </tr>
+                                        </table>
+                                    </td>
                                 </tr>
-                                <tr _ngcontent-arr-c134="">
-                                    <td _ngcontent-arr-c134=""> Total Assessable Value </td>
-                                    <td _ngcontent-arr-c134=""></td>
-                                    <td _ngcontent-arr-c134=""><input _ngcontent-arr-c134=""
-                                            formcontrolname="totalAssessableValue" type="hidden" value=""
-                                            class="ng-untouched ng-pristine ng-valid"><label _ngcontent-arr-c134=""
-                                            class="form-control" style="background-color: #f6f7f9;">0</label></td>
+                                <tr>
+                                    <td> Freight </td>
+                                    <td></td>
+                                    <td>
+                                        <input type="number" maxlength="50" autocomplete="off" decimalonly=""
+                                            class="form-control ng-pristine ng-valid ng-touched">
+                                    </td>
                                 </tr>
-                                <tr _ngcontent-arr-c134="">
-                                    <td _ngcontent-arr-c134=""> P &amp; F % </td>
-                                    <td _ngcontent-arr-c134=""><select _ngcontent-arr-c134=""
-                                            formcontrolname="pAndF_Type"
+                                <tr class="ng-star-inserted">
+                                    <td> GST </td>
+                                    <td>
+                                        <select class="form-control ng-valid ng-dirty ng-touched">
+                                            <option value="">Select GST Type</option>
+                                            <option value="1">IGST</option>
+                                            <option value="2">CGST/SGST</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="number" class="form-control ng-untouched ng-pristine ng-valid">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> TCS Charges </td>
+                                    <td><input type="number" maxlength="50" autocomplete="off" decimalonly=""
+                                            class="form-control ng-pristine ng-valid ng-touched">
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control ng-untouched ng-pristine ng-valid">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> Total </td>
+                                    <td></td>
+                                    <td>
+                                        <input formcontrolname="totalWithTCS" type="number"
                                             class="form-control ng-untouched ng-pristine ng-valid">
-                                            <option _ngcontent-arr-c134="" value="Percentage">Percentage</option>
-                                            <option _ngcontent-arr-c134="" value="Value">Value</option>
-                                        </select></td>
-                                    <td _ngcontent-arr-c134="">
-                                <tr _ngcontent-arr-c134="">
-                                    <td _ngcontent-arr-c134=""></td>
+                                    </td>
                                 </tr>
-                                </td>
+                                <tr>
+                                    <td> Round off </td>
+                                    <td>
+                                        <select class="form-control ng-valid ng-dirty ng-touched">
+                                            <option value="Add">Add</option>
+                                            <option value="Subtract">Subtract</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td class="ng-star-inserted"> (+)</td>
+                                                <td class="ng-star-inserted">
+                                                    <input type="text" maxlength="200" autocomplete="off" decimalonly=""
+                                                        class="form-control ng-untouched ng-pristine ng-valid">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
                                 </tr>
-                                <tr _ngcontent-arr-c134="">
-                                    <td _ngcontent-arr-c134=""> Freight </td>
-                                    <td _ngcontent-arr-c134=""></td>
-                                    <td _ngcontent-arr-c134=""><input _ngcontent-arr-c134=""
-                                            formcontrolname="freightCost" type="text" maxlength="50" autocomplete="off"
-                                            decimalonly="" class="form-control ng-untouched ng-pristine ng-valid"></td>
-                                </tr>
-                                <tr _ngcontent-arr-c134="">
-                                    <td _ngcontent-arr-c134=""> TCS Charges </td>
-                                    <td _ngcontent-arr-c134=""><input _ngcontent-arr-c134=""
-                                            formcontrolname="tcsChargesPercentage" type="text" maxlength="50"
-                                            autocomplete="off" decimalonly=""
-                                            class="form-control ng-untouched ng-pristine ng-valid"></td>
-                                    <td _ngcontent-arr-c134=""><input _ngcontent-arr-c134=""
-                                            formcontrolname="tcsCharges" type="hidden" value=""
-                                            class="ng-untouched ng-pristine ng-valid"><label _ngcontent-arr-c134=""
-                                            class="form-control" style="background-color: #f6f7f9;">0</label></td>
-                                </tr>
-                                <tr _ngcontent-arr-c134="">
-                                    <td _ngcontent-arr-c134=""> Total </td>
-                                    <td _ngcontent-arr-c134=""></td>
-                                    <td _ngcontent-arr-c134=""><input _ngcontent-arr-c134=""
-                                            formcontrolname="totalWithTCS" type="hidden" value=""
-                                            class="ng-untouched ng-pristine ng-valid"><label _ngcontent-arr-c134=""
-                                            class="form-control" style="background-color: #f6f7f9;">0</label></td>
-                                </tr>
-                                <tr _ngcontent-arr-c134="">
-                                    <td _ngcontent-arr-c134=""> Round off </td>
-                                    <td _ngcontent-arr-c134=""><select _ngcontent-arr-c134=""
-                                            formcontrolname="roundedOffType"
+                                <tr>
+                                    <td> Grand Total </td>
+                                    <td></td>
+                                    <td>
+                                        <input formcontrolname="grandTotal" type="number"
                                             class="form-control ng-untouched ng-pristine ng-valid">
-                                            <option _ngcontent-arr-c134="" value="Add">Add</option>
-                                            <option _ngcontent-arr-c134="" value="Subtract">Subtract</option>
-                                        </select></td>
-                                    <td _ngcontent-arr-c134="">
-                                <tr _ngcontent-arr-c134=""></tr>
-                                </td>
+                                    </td>
                                 </tr>
-                                <tr _ngcontent-arr-c134="">
-                                    <td _ngcontent-arr-c134=""> Grand Total </td>
-                                    <td _ngcontent-arr-c134=""></td>
-                                    <td _ngcontent-arr-c134=""><input _ngcontent-arr-c134=""
-                                            formcontrolname="grandTotal" type="hidden" value=""
-                                            class="ng-untouched ng-pristine ng-valid"><label _ngcontent-arr-c134=""
-                                            class="form-control" style="background-color: #f6f7f9;">0</label></td>
+                                <tr>
+                                    <td colspan="3">
+                                        <input formcontrolname="grandTotalInText" type="text" value=""
+                                            class="form-control ng-untouched ng-pristine ng-valid" disabled>
+                                    </td>
                                 </tr>
-                            </div>
-                        </tfoot>
+                            </tbody>
+
+
+
+
+                        </table>
                     </div>
                 </div>
             </div>
-        </section>
-        <div style="text-align: center;">
-            <button id="btnSave" type="submit" class="btn btn-primary btn-sm" fdprocessedid="11p0ic">Save</button>
-            &nbsp;
-            <a routerlink="/invoice-invoiceslist" queryparamshandling="preserve" class="btn btn-danger btn-sm"
-                href="/invoice-invoiceslist">Cancel </a>
-        </div>
     </div>
+    </section>
+
+
+    <div style="text-align: center;">
+        <button id="btnSave" type="submit" class="btn btn-primary btn-sm" fdprocessedid="11p0ic">Save</button>
+        &nbsp;
+        <a routerlink="/invoice-invoiceslist" queryparamshandling="preserve" class="btn btn-danger btn-sm"
+            href="/invoice-invoiceslist">Cancel </a>
+    </div>
+</div>
 </div>
 {% endblock content %}
 
@@ -396,7 +408,7 @@
             console.log(rowCount)
             var cellCount = table.rows[0].cells.length;
             console.log(cellCount)
-            markup = $('<tr _ngcontent-arr-c134=""> <td _ngcontent-arr-c134="" style="width: 10%;"><input _ngcontent-arr-c134="" class="form-control ng-untouched ng-pristine ng-valid"></td> <td _ngcontent-arr-c134="" style="width: 25%;"><span _ngcontent-arr-c134=""><ng-select _ngcontent-arr-c134="" bindlabel="value" bindvalue="id" class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-untouched ng-pristine ng-invalid"> <div class="ng-select-container ng-has-value"> <div class="ng-value-container"> <div class="ng-placeholder"> <select name="main_usr_select" class="form-control"> {% for user in users %} <option>{{ user.product_name }} </option> {% endfor %} </select> </div> </div> </div> </ng-select></span></td> <td _ngcontent-arr-c134="" style="width: 10%;"><span _ngcontent-arr-c134=""><select _ngcontent-arr-c134="" class="form-control ng-untouched ng-pristine ng-valid"> <option _ngcontent-arr-c134="" value="">HSN Code</option> <option _ngcontent-arr-c134="" value="84798999">84798999</option> <option _ngcontent-arr-c134="" value="84799090">84799090</option> <option _ngcontent-arr-c134="" value="998717">998717</option> </select></span></td> <td _ngcontent-arr-c134="" style="width: 7%;"><input _ngcontent-arr-c134="" class="form-control ng-untouched ng-pristine ng-invalid"></td> <td _ngcontent-arr-c134="" style="width: 7%;"><span _ngcontent-arr-c134=""><select _ngcontent-arr-c134="" class="form-control ng-untouched ng-pristine ng-valid"> <option _ngcontent-arr-c134="" value="">UOM</option> <option _ngcontent-arr-c134="" value="Nos">Nos</option> <option _ngcontent-arr-c134="" value="Meters">Meters</option> <option _ngcontent-arr-c134="" value="Millimeter">Millimeter</option> <option _ngcontent-arr-c134="" value="Bundle">Bundle</option> <option _ngcontent-arr-c134="" value="Pack">Pack</option> <option _ngcontent-arr-c134="" value="Kg">Kg</option> <option _ngcontent-arr-c134="" value="Set">Set</option> </select></span></td> <td _ngcontent-arr-c134="" style="width: 7%;"><input _ngcontent-arr-c134="" class="form-control ng-untouched ng-pristine ng-invalid"></td> <td _ngcontent-arr-c134="" style="width: 7%;"><input _ngcontent-arr-c134="" class="form-control" style="background-color: #f6f7f9;"></input></td> <td _ngcontent-yms-c134="" style="width: 5%;"> <a _ngcontent-yms-c134="" class="btn btn-secondary active"> <i _ngcontent-yms-c134="" class="fas fa-trash-alt"> </i> </a> </td> </tr>')
+            markup = $('<tr> <td style="width: 10%;"><input class="form-control ng-untouched ng-pristine ng-valid"></td> <td style="width: 25%;"><span><ng-select bindlabel="value" bindvalue="id" class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-untouched ng-pristine ng-invalid"> <div class="ng-select-container ng-has-value"> <div class="ng-value-container"> <div class="ng-placeholder"> <select name="main_usr_select" class="form-control"> {% for user in users %} <option>{{ user.product_name }} </option> {% endfor %} </select> </div> </div> </div> </ng-select></span></td> <td style="width: 10%;"><span><select class="form-control ng-untouched ng-pristine ng-valid"> <option value="">HSN Code</option> <option value="84798999">84798999</option> <option value="84799090">84799090</option> <option value="998717">998717</option> </select></span></td> <td style="width: 7%;"><input class="form-control ng-untouched ng-pristine ng-invalid"></td> <td style="width: 7%;"><span><select class="form-control ng-untouched ng-pristine ng-valid"> <option value="">UOM</option> <option value="Nos">Nos</option> <option value="Meters">Meters</option> <option value="Millimeter">Millimeter</option> <option value="Bundle">Bundle</option> <option value="Pack">Pack</option> <option value="Kg">Kg</option> <option value="Set">Set</option> </select></span></td> <td style="width: 7%;"><input class="form-control ng-untouched ng-pristine ng-invalid"></td> <td style="width: 7%;"><input class="form-control" style="background-color: #f6f7f9;"></input></td> <td _ngcontent-yms-c134="" style="width: 5%;"> <a _ngcontent-yms-c134="" class="btn btn-secondary active"> <i _ngcontent-yms-c134="" class="fas fa-trash-alt"> </i> </a> </td> </tr>')
             tableBody = $("table tbody");
             tableBody.append(markup);
             lineNo++;
