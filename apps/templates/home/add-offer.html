@@ -317,8 +317,10 @@
 							<div class="form-group">
 								<tr>
 									<form>
-										<label>Warranty</label>
-										<td><input type="text" id="Warranty" name="Warranty" class="form-control"/></td>
+										<input type="checkbox"
+											onmousedown="this.form.Warranty.disabled=this.checked" />&nbsp;&nbsp;<label>Warranty</label>
+										<td><input type="text" id="Warranty" name="Warranty" class="form-control"
+												disabled /></td>
 									</form>
 								</tr>
 							</div>
@@ -522,8 +524,8 @@
 							<label for="kit_name_sample">Select a user:</label>
 
 							<select name="kit_name_sample" id="kit_name_sample" class="form-control">
-							{% for user in users_product %}
-								<option value="{{ user.product_name }}">{{ user.product_name }}</option>
+							{% for user in user2 %}
+								<option value="{{ user.kit_description }}">{{ user.kit_description }}</option>
 							{% endfor %}
 							</select>
 
