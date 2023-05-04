@@ -254,7 +254,8 @@ def addinvoice():
     if request.method == 'GET':
         users = CustomerMaster.query.all()
         user1 = ProductMaster.query.all()
-        return render_template('home/add-invoice.html',users=users,user1=user1,segment='add-invoice')
+        currency_user_invoice = CurrencyMaster.query.all()
+        return render_template('home/add-invoice.html',users=users,user1=user1,currency_user_invoice=currency_user_invoice,segment='add-invoice')
 
 @blueprint.route('/invoice-invoiceslist', methods=['GET', 'POST'])
 @login_required

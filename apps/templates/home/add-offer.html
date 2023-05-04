@@ -491,13 +491,12 @@
 		input.addEventListener('input', updateTotal);
 	});
 
-	let lineNo = 1;
 	$(document).ready(function () {
 		$(".offertype_id").on("change", function () {
 			var selectedOption = $(this).val();
 			switch (selectedOption) {
 				case "Spares":
-					var table = document.getElementById('emptbl');
+					var table = document.getElementById('#product-table');
 					markup = $(`
 								<thead>
 									<tr>
@@ -511,13 +510,13 @@
 								<tbody>
 								</tbody>
 					`)
-					tableBody = $("table");
+					tableBody = $("#product-table");
 					tableBody.empty();
 					tableBody.append(markup);
 					break;
 
 				case "Kits":
-					var table = document.getElementById('emptbl');
+					var table = document.getElementById('#product-table');
 					markup = $(`
 					<div class="card">
 						<div class="card-body">
@@ -556,7 +555,7 @@
 
 								`)
 					
-					tableBody = $("table");
+					tableBody = $("#product-table");
 					tableBody.empty();
 					tableBody.append(markup);
 					break;
