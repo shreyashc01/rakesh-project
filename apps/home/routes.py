@@ -6,7 +6,6 @@ from flask import render_template, request, redirect, jsonify
 from flask_login import login_required
 from jinja2 import TemplateNotFound
 from apps import db
-from apps.home.models import OfferModel
 from apps.home.models import CountryMaster
 from apps.home.models import RoleMaster
 from apps.home.models import BomCategoryMaster
@@ -19,6 +18,7 @@ from apps.home.models import BomMaster
 from apps.home.models import SupplierMaster
 from apps.home.models import UserModel
 from apps.home.models import CurrencyMaster
+from apps.home.models import AddOffer
 
 
 @blueprint.route('/dashboard')
@@ -45,12 +45,135 @@ def create():
         user1 = ProductMaster.query.all()
         user2 = KitMaster.query.all()
         user2_json = json.dumps([{'kit_description': user.kit_description, 'kit_no': user.kit_no} for user in user2])
-        print(user2_json)
         role_manager_offer = UserModel.query.all()
         currency_master_offer = CurrencyMaster.query.all()
         return render_template('home/add-offer.html',users=users,user1=user1,user2=user2,user2_json=user2_json,role_manager_offer=role_manager_offer,currency_master_offer=currency_master_offer,
                                segment='offer-addoffer')
     if request.method == 'POST':
+       # Retrieve the data from the HTML form and create a new AddOffer object
+        customer_name_offer = request.form['customer_name_offer']
+        due_date_offer = request.form['due_date_offer']
+        offer_type_offer = request.form['offer_type_offer']
+        quotation_number_offer = request.form['quotation_number_offer']
+        marketing_person_offer = "request.form['marketing_person_offer']"
+        currency_type_offer = request.form['currency_type_offer']
+        
+        print(offer_type_offer,currency_type_offer,marketing_person_offer,due_date_offer,customer_name_offer)
+
+        product_kit_offer = []
+        if offer_type_offer == "Spares":
+            product_offers = request.form.getlist('product_offer')
+            quantity_list = request.form.getlist('quantity_product_offer')
+            unit_price_list = request.form.getlist('unit_price_product_offer')
+            total_price_product_offer = 0
+            # json.loads(request.form.get('total_price_product_offer'))
+
+            product_kit_offer = []
+            for i in range(len(product_offers)):
+                product_offer = {
+                    'product_name': product_offers[i],
+                    'quantity': quantity_list[i],
+                    'unit_price': unit_price_list[i],
+                    'total_price': total_price_product_offer,
+                }
+                product_kit_offer.append(product_offer)
+
+            # Convert the list to JSON
+            product_kit_offer_json = json.dumps(product_kit_offer)
+            print(product_kit_offer_json)
+        if offer_type_offer == "Kits":
+            kit_description_offer = request.form.getlist('kit_description_offer')
+            kit_number_offer = request.form.getlist('kit_number_offer')
+            quantity_kit_offer = request.form.getlist('quantity_kit_offer')
+            unit_price_kit_offer = request.form.getlist('unit_price_kit_offer')
+            total_price_kit_offer = 0
+
+            product_kit_offer = []
+            for i in range(len(product_offers)):
+                kit_offer = {
+                    'kit_name': kit_description_offer[i],
+                    'Kit_number': kit_number_offer[i],
+                    'quantity': quantity_kit_offer[i],
+                    'unit_price': unit_price_kit_offer[i],
+                    'total_price': total_price_kit_offer,
+                }
+            product_kit_offer.append(kit_offer)
+
+            # Convert the list to JSON
+            product_kit_offer_json = json.dumps(product_kit_offer)
+            print(product_kit_offer_json)
+        print("**********************************************************")
+        print(product_kit_offer_json)
+        print("**********************************************************")
+
+        total_amount_offer = request.form['total_amount_offer']
+        freight_offer = request.form['freight_offer']
+        cgst_igst_type_offer = request.form['cgst_igst_type_offer']
+        pf_percentage_offer = request.form['pf_percentage_offer']
+        gst_offer = request.form['gst_offer']
+        grand_total_offer = request.form['grand_total_offer']
+
+        subject_offer = request.form['subject_offer']
+        reference_offer = request.form['reference_offer']
+        description_offer = request.form['description_offer']
+        footer_description_offer = request.form['footer_description_offer']
+        notes_offer = request.form['notes_offer']
+
+        price_basis_offer = request.form['price_basis_offer']
+        PandFcharges_offer = request.form['PandFcharges_offer']
+        igst_terms_offer = request.form['igst_terms_offer']
+        hsn_code_offer = request.form['hsn_code_offer']
+        payment_terms_offer = request.form['payment_terms_offer']
+        delivery_terms_offer = request.form['delivery_terms_offer']
+        freight_terms_offer = request.form['freight_terms_offer']
+        validity_terms_offer = request.form['validity_terms_offer']
+        warrenty_terms_offer = request.form['warrenty_terms_offer']
+        
+        new_offer = AddOffer(
+            customer_name_offer=customer_name_offer,
+            due_date_offer=due_date_offer,
+            offer_type_offer=offer_type_offer,
+            quotation_number_offer=quotation_number_offer,
+            marketing_person_offer=marketing_person_offer,
+            currency_type_offer=currency_type_offer,
+
+            # product_offer=product_offer,
+            # quantity_product_offer=quantity_product_offer,
+            # unit_price_product_offer=unit_price_product_offer,
+            # total_price_product_offer=total_price_product_offer,
+            product_kit_offer_json=product_kit_offer_json,
+            # product_offers_json=product_offers_json,
+            # kit_description_offer=kit_description_offer,
+            # kit_number_offer=kit_number_offer,
+            # quantity_kit_offer=quantity_kit_offer,
+            # unit_price_kit_offer=unit_price_kit_offer,
+            # total_price_kit_offer=total_price_kit_offer,
+
+            total_amount_offer=total_amount_offer,
+            freight_offer=freight_offer,
+            cgst_igst_type_offer=cgst_igst_type_offer,
+            pf_percentage_offer=pf_percentage_offer,
+            gst_offer=gst_offer,
+            grand_total_offer=grand_total_offer,
+            subject_offer=subject_offer,
+            reference_offer=reference_offer,
+            description_offer=description_offer,
+            footer_description_offer=footer_description_offer,
+            notes_offer=notes_offer,
+            price_basis_offer=price_basis_offer,
+            PandFcharges_offer=PandFcharges_offer,
+            igst_terms_offer=igst_terms_offer,
+            hsn_code_offer=hsn_code_offer,
+            payment_terms_offer=payment_terms_offer,
+            delivery_terms_offer=delivery_terms_offer,
+            freight_terms_offer=freight_terms_offer,
+            validity_terms_offer=validity_terms_offer,
+            warrenty_terms_offer=warrenty_terms_offer
+        )
+
+        # Add the new offer to the database
+        db.session.add(new_offer)
+        db.session.commit()
         return redirect('/offer-offerlist')
 
 
@@ -242,10 +365,32 @@ def PO_REQ_LIST():
 @blueprint.route('/offer-offerlist', methods=['GET', 'POST'])
 @login_required
 def retrieve_list():
-    users = OfferModel.query.all()
-    return render_template('home/users.html', users=users, segment='offer-offerlist')
+    add_user = AddOffer.query.all()
+    return render_template('home/users.html',add_user=add_user, segment='offer-offerlist')
 
+@blueprint.route('/<int:id>/offer_pdf', methods=['GET', 'POST'])
+@login_required
+def offer_pdf(id):
+    if request.method == 'GET':
+        add_user = AddOffer.query.filter_by(id=id).first()
+        print(add_user.product_kit_offer_json)
 
+        data = json.loads(add_user.product_kit_offer_json)
+
+        html_rows = ""
+        counter = 0
+        # Access the data as a Python object
+        for item in data:
+            product_name = item['product_name']
+            quantity = item['quantity']
+            unit_price = item['unit_price']
+            total_price = item['total_price']
+            counter += 1
+            html_row = f"<tr><td>{counter}</td><td>{product_name}</td><td>{quantity}</td><td>{unit_price}</td><td>{total_price}</td></tr>"
+            html_rows += html_row
+            
+
+        return render_template('home/pdf_add_offer.html',add_user=add_user,html_rows=html_rows, segment='offer-offerlist')
 
 @blueprint.route('/<int:id>/editcustomer', methods=['GET', 'POST'])
 @login_required
@@ -485,49 +630,44 @@ def Currency_masters():
 @login_required
 def Contract_Review_list():
     if request.method == 'GET':
-        users = OfferModel.query.all()
-        return render_template('home/Contract-Review.html', users=users, segment='contractreview')
+        return render_template('home/Contract-Review.html', segment='contractreview')
 
 @blueprint.route('/OC-Register-list', methods=['GET', 'POST'])
 @login_required
 def OC_Register_list():
     if request.method == 'GET':
-        users = OfferModel.query.all()
-        return render_template('home/OC-Register-List.html', users=users, segment='OcRegister')
+        return render_template('home/OC-Register-List.html', segment='OcRegister')
 
 @blueprint.route('/BOM-Register-List', methods=['GET', 'POST'])
 @login_required
 def BOM_Register_list():
     if request.method == 'GET':
-        users = OfferModel.query.all()
-        return render_template('home/BOM-Register-List.html', users=users, segment='BOMRegister')
+        return render_template('home/BOM-Register-List.html', segment='BOMRegister')
 
 @blueprint.route('/Marketing-RegisterList', methods=['GET', 'POST'])
 @login_required
 def Marketing_RegisterList():
     if request.method == 'GET':
-        users = OfferModel.query.all()
-        return render_template('home/Marketing-Register-List.html', users=users, segment='MarketingRegisterList')
+        return render_template('home/Marketing-Register-List.html', segment='MarketingRegisterList')
 
 
 @blueprint.route('/Marketing-Register-Report', methods=['GET', 'POST'])
 @login_required
 def Marketing_Register_Report():
     if request.method == 'GET':
-        users = OfferModel.query.all()
-        return render_template('home/Marketing-Register-Report.html', users=users, segment='MarketingRegisterReport')
+        return render_template('home/Marketing-Register-Report.html',  segment='MarketingRegisterReport')
 
 
-@blueprint.route('/<int:id>/delete', methods=['GET', 'POST'])
-@login_required
-def profile(id):
-    users = OfferModel.query.filter_by(id=id).first()
-    if request.method == 'POST':
-        if users:
-            db.session.delete(users)
-            db.session.commit()
-            return redirect('/offer-offerlist')
-    return render_template('home/delete.html')
+# @blueprint.route('/<int:id>/delete', methods=['GET', 'POST'])
+# @login_required
+# def profile(id):
+#     users = OfferModel.query.filter_by(id=id).first()
+#     if request.method == 'POST':
+#         if users:
+#             db.session.delete(users)
+#             db.session.commit()
+#             return redirect('/offer-offerlist')
+#     return render_template('home/delete.html')
 
 
 @blueprint.route('/<int:id>/deletecustomer', methods=['GET', 'POST'])

@@ -1,77 +1,5 @@
 from apps import db
 
-class OfferModel(db.Model):
-    __tablename__ = "use"
-
-    id = db.Column(db.Integer, primary_key=True)
-    quation_no = db.Column(db.String())
-    customer_name_offer = db.Column(db.String())
-    adress_name_offer = db.Column(db.String())
-    due_date = db.Column(db.String())
-    offer_type = db.Column(db.String())
-    reference_no = db.Column(db.String())
-    marketing_person = db.Column(db.String())
-    currency_type = db.Column(db.String())
-    total_cost = db.Column(db.String())
-    pfpercent = db.Column(db.String(80))
-    freight = db.Column(db.String(80))
-    gst = db.Column(db.String(80))
-    grand_total = db.Column(db.String(80))
-
-    Subject = db.Column(db.String())
-    reference = db.Column(db.String())
-    description = db.Column(db.String())
-    footer_description = db.Column(db.String())
-    notes = db.Column(db.String())
-
-    price_basis = db.Column(db.String())
-    pfcharges = db.Column(db.String())
-    igst = db.Column(db.String())
-    hsn_code = db.Column(db.String())
-    payment_terms = db.Column(db.String())
-    delivery = db.Column(db.String())
-    freight_tc = db.Column(db.String())
-    validity = db.Column(db.String())
-    warrantly = db.Column(db.String())
-
-    def __init__(self, quation_no, customer_name_offer,adress_name_offer, due_date, offer_type, reference_no, marketing_person, currency_type,
-                 total_cost, pfpercent, freight, gst, grand_total,
-                 Subject, reference, description, footer_description,
-                 notes, price_basis, pfcharges, igst,
-                 hsn_code, payment_terms, delivery, freight_tc, validity,warrantly):
-        self.quation_no = quation_no
-        self.customer_name_offer = customer_name_offer
-        self.adress_name_offer = adress_name_offer
-        self.due_date = due_date
-        self.offer_type = offer_type
-        self.reference_no = reference_no
-        self.marketing_person = marketing_person
-        self.currency_type = currency_type
-        self.total_cost = total_cost
-        self.pfpercent = pfpercent
-        self.freight = freight
-        self.gst = gst
-        self.grand_total = grand_total
-        self.Subject = Subject
-        self.reference = reference
-        self.description = description
-        self.footer_description = footer_description
-        self.notes = notes
-        self.price_basis = price_basis
-        self.pfcharges = pfcharges
-        self.igst = igst
-        self.hsn_code = hsn_code
-        self.payment_terms = payment_terms
-        self.delivery = delivery
-        self.freight_tc = freight_tc
-        self.validity = validity
-        self.warrantly = warrantly
-        
-
-    def __repr__(self):
-        return f"{self.quation_no}:{self.customer_name_offer}"
-
-
 class CustomerMaster(db.Model):
     __tablename__ = "customermaster"
 
@@ -105,6 +33,95 @@ class CustomerMaster(db.Model):
     def __repr__(self):
         return f"{self.customer_name}:{self.primary_contact_name}"
 
+class AddOffer(db.Model):
+    __tablename__ = "addoffer"
+
+    id = db.Column(db.Integer, primary_key=True)
+    customer_name_offer = db.Column(db.String())
+    due_date_offer = db.Column(db.String())
+    offer_type_offer = db.Column(db.String())
+    quotation_number_offer = db.Column(db.Integer())
+    marketing_person_offer = db.Column(db.String())
+    currency_type_offer = db.Column(db.String())
+
+    product_kit_offer_json = db.Column(db.String())
+    # product_offers_json =  db.Column(db.String())
+    # kit_description_offer = db.Column(db.String())
+    # kit_number_offer = db.Column(db.String())
+    # quantity_kit_offer = db.Column(db.Integer())
+    # unit_price_kit_offer = db.Column(db.Float())
+    # total_price_kit_offer = db.Column(db.Float())
+
+    total_amount_offer = db.Column(db.Float())
+    freight_offer = db.Column(db.Float())
+    cgst_igst_type_offer = db.Column(db.String())
+    pf_percentage_offer = db.Column(db.Float())
+    gst_offer = db.Column(db.Float())
+    grand_total_offer = db.Column(db.Float())
+
+    subject_offer = db.Column(db.String())
+    reference_offer = db.Column(db.String())
+    description_offer = db.Column(db.String())
+    footer_description_offer = db.Column(db.String())
+    notes_offer = db.Column(db.String())
+    price_basis_offer = db.Column(db.String())
+    PandFcharges_offer = db.Column(db.String())
+    igst_terms_offer = db.Column(db.String())
+    hsn_code_offer = db.Column(db.String())
+    payment_terms_offer = db.Column(db.String())
+    delivery_terms_offer = db.Column(db.String())
+    freight_terms_offer = db.Column(db.String())
+    validity_terms_offer = db.Column(db.String())
+    warrenty_terms_offer = db.Column(db.String())
+
+    def __init__(self, customer_name_offer, due_date_offer, offer_type_offer, quotation_number_offer, marketing_person_offer,
+                 currency_type_offer, product_kit_offer_json, total_amount_offer, freight_offer, cgst_igst_type_offer,
+                 pf_percentage_offer, gst_offer, grand_total_offer, subject_offer, reference_offer, description_offer,
+                 footer_description_offer, notes_offer, price_basis_offer, PandFcharges_offer, igst_terms_offer,
+                 hsn_code_offer, payment_terms_offer, delivery_terms_offer, freight_terms_offer, validity_terms_offer,
+                 warrenty_terms_offer):
+        self.customer_name_offer = customer_name_offer
+        self.due_date_offer = due_date_offer
+        self.offer_type_offer = offer_type_offer
+        self.quotation_number_offer = quotation_number_offer
+        self.marketing_person_offer = marketing_person_offer
+        self.currency_type_offer = currency_type_offer
+
+        self.product_kit_offer_json = product_kit_offer_json
+        # self.product_offers_json = product_offers_json
+
+        # self.kit_description_offer = kit_description_offer
+        # self.kit_number_offer = kit_number_offer
+        # self.quantity_kit_offer = quantity_kit_offer
+        # self.unit_price_kit_offer = unit_price_kit_offer
+        # self.total_price_kit_offer = total_price_kit_offer
+
+        self.total_amount_offer = total_amount_offer
+        self.freight_offer = freight_offer
+        self.cgst_igst_type_offer = cgst_igst_type_offer
+        self.pf_percentage_offer = pf_percentage_offer
+        self.gst_offer = gst_offer
+        self.grand_total_offer = grand_total_offer
+
+        self.subject_offer = subject_offer
+        self.reference_offer = reference_offer
+        self.description_offer = description_offer
+        self.footer_description_offer = footer_description_offer
+        self.notes_offer = notes_offer
+        self.price_basis_offer = price_basis_offer
+
+        self.PandFcharges_offer = PandFcharges_offer
+        self.igst_terms_offer = igst_terms_offer
+        self.hsn_code_offer = hsn_code_offer
+        self.payment_terms_offer = payment_terms_offer
+        self.delivery_terms_offer = delivery_terms_offer
+        self.freight_terms_offer = freight_terms_offer
+        self.validity_terms_offer = validity_terms_offer
+        self.warrenty_terms_offer = warrenty_terms_offer
+
+    def __repr__(self):
+        return f"{self.id}:{self.customer_name_offer}"
+        
 
 class ProductMaster(db.Model):
     __tablename__ = "productmaster"

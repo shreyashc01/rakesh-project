@@ -62,24 +62,29 @@
 										</tr>
 									</thead>
 									<tbody>
-											<tr>
-											<td>{{"Quation No"}}</td>
-											<td>{{"Cuostomer Name"}}</td>
-											<td>{{"adress"}}</td>
-											<td>{{"Offer type"}}</td>
-											<td>{{"Due date"}}</td>
+										{% for user in add_user %}
+											<tr 
+											{% if loop.index %2==0 %}
+											{% else %}
+											{% endif %}
+											>
+											<td>{{user.quotation_number_offer}}</td>
+											<td>{{user.customer_name_offer}}</td>
+											<td>{{user.quotation_number_offer}}</td>
+											<td>{{user.offer_type_offer}}</td>
+											<td>{{user.due_date_offer}}</td>
 											<td>
 											<div class="form-button-action">
 											<span style="font-size: 24px;color:green;">
 											<a href="/" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fas fa-edit" ></i></a> 
 											</span>
 											<span style="font-size: 24px;color:red;">
-											<a href="/sample.html" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="view"> <i class="fa fa-eye"></i></a>
+											<a href="/{{user.id}}/offer_pdf" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="view"> <i class="fa fa-eye"></i></a>
 											</span>
 											</div>
 											</td>
 										</tr>
-
+									{% endfor %}
 
 									</tbody>
 
