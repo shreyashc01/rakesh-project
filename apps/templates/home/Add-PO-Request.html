@@ -1,0 +1,263 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<div class="content">
+	<div class="page-inner">
+		<div class="page-header">
+			<h4 class="page-title">Purchase Order Request Details</h4>
+			<ul class="breadcrumbs">
+				<li class="nav-home">
+					<a href="/">
+						<i class="flaticon-home"></i>
+					</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="/offer-addoffer">Purchase Order Request Details</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="/offer-offerlist">Add Purchase Order Request</a>
+				</li>
+			</ul>
+		</div>
+
+		<section class="content">
+			<div class="page-section">
+				<div class="card card-fluid">
+					<div class="card-header"> Purchase Order Request Details </div>
+					<div class="card-body">
+						<div class="col-sm-12">
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<label for="bookTitle">PO Type<span style="color: red;">*</span></label>
+									<select class="form-control select_offer" onchange="toggleOCBOM(this)">
+										<option value="">Select PO Type</option>
+										<option value="Standard"> Standard</option>
+										<option value="Customized"> Customized</option>
+									</select>
+								</div>
+							</div>
+							<div id="oc-bom" style="display: none;">
+								<div class="row">
+									<div class="form-group col-sm-2">
+										<label>OC / BOM Type</label>
+										<select id="type-select" class="form-control ng-valid ng-dirty ng-touched"
+											fdprocessedid="9ttnx8">
+											<option value="">Select Type</option>
+											<option value="1">OC</option>
+											<option value="2">BOM</option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="row" id="oc-type" style="display:none;">
+								<div class="form-group col-sm-4">
+									<label>OC Type</label>
+									<select formControlName="ocType" class="form-control" fdprocessedid="9ttnx8">
+										<option value="">Select OC Type</option>
+										<option value="1">OC</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="row" id="bom-type" style="display:none;">
+								<div class="form-group col-sm-4">
+									<label>BOM Type</label>
+									<select formControlName="bomType" class="form-control" fdprocessedid="9ttnx8" {% if
+										bom_PO|length> 10 %}
+										size="{{ bom_PO|length }}"
+										{% endif %}>
+										<option value="" selected>Select BOM Type</option>
+										{% for user in bom_PO %}
+										<option>{{ user.bom_no}} {{user.bom_description }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		<section class="content">
+			<div class="page-section">
+				<div class="card card-fluid">
+					<div class="card-body">
+						<div style="overflow-x: auto;">
+							<table id="product-table" style="width: 130%;">
+
+							</table>
+							<br><br>
+						</div>
+					</div>
+				</div>
+		</section>
+
+		<div style="text-align: center;">
+			<button id="btnSave" type="submit" class="btn btn-primary btn-sm" fdprocessedid="11p0ic">Save</button>
+			&nbsp;
+			<a routerlink="/PO-POlist" queryparamshandling="preserve" class="btn btn-danger btn-sm"
+				href="/PO-POlist">Cancel </a>
+		</div>
+
+
+	</div>
+</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+
+	function removeoffer(button) {
+		const row = button.closest('tr');
+		row.remove();
+		updateTotal();
+	}
+
+	function addofer_customized() {
+		const tableBody = document.querySelector('#product-table tbody');
+		const newRow = document.createElement('tr');
+		newRow.innerHTML = `
+		<td style="width: 25%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 5%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 5%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 8%;"> <input type="date" autocomplete="off" class="form-control pull-right ng-untouched ng-pristine ng-valid"> </td> <td style="width: 3%;"> <input class="form-control"> </td> <td style="width: 5%;"> <input class="form-control"> </td> <td style="width: 7%;"> <select class="form-control ng-untouched ng-pristine ng-invalid"> <option value="">UOM </option> <option value="Nos">Nos</option> <option value="Meters">Meters</option> <option value="Millimeter">Millimeter</option> <option value="Bundle">Bundle</option> <option value="Pack">Pack</option> <option value="Kg">Kg</option> <option value="Set">Set</option> </select> </td> <td style="width: 6%;"><input class="form-control ng-untouched ng-pristine ng-invalid"></td> <td style="width: 3%;"><input class="form-control ng-untouched ng-pristine ng-valid"></td> <td style="width: 6%;"><input class="form-control ng-untouched ng-pristine" disabled=""> </td> <td ><button class="btn btn-danger" onclick="removeoffer(this)">Remove</button></td>
+		`;
+		tableBody.appendChild(newRow);
+		newRow.querySelectorAll('.quantity, .unit-price').forEach(input => {
+			input.addEventListener('input', updateTotal);
+		});
+		// updateTotal();
+	}
+
+	function toggleOCBOM(select) {
+		var ocbom = document.getElementById("oc-bom");
+		if (select.value == "Standard") {
+			ocbom.style.display = "block";
+
+		}
+		else {
+			ocbom.style.display = "none";
+
+		}
+
+	}
+
+
+	function addofer_standard() {
+		const tableBody = document.querySelector('#product-table tbody');
+		const newRow = document.createElement('tr');
+		newRow.innerHTML = `
+			<td style="width: 25%;"> 
+				<select name="" id="" class="form-control">
+				{% for user in users_product %}
+					<option value="{{ user.product_name }}">{{ user.product_name }}</option>
+				{% endfor %}
+				</select>
+			</td>
+			<td style="width: 5%;"> 
+			<input class="form-control ng-untouched ng-pristine ng-valid"> 
+			</td>
+			<td style="width: 5%;"> 
+			<input class="form-control ng-untouched ng-pristine ng-valid"> 
+			</td>
+			<td style="width: 8%;"> 
+			<input type="date" autocomplete="off" class="form-control pull-right ng-untouched ng-pristine ng-valid"> 
+			</td>
+			<td style="width: 5%;"> <input class="form-control"> 
+			</td>
+			<td style="width: 7%;">
+			<select class="form-control ng-untouched ng-pristine ng-invalid">
+				<option value="">UOM </option>
+				<option value="Nos">Nos</option>
+				<option value="Meters">Meters</option>
+				<option value="Millimeter">Millimeter</option>
+				<option value="Bundle">Bundle</option>
+				<option value="Pack">Pack</option>
+				<option value="Kg">Kg</option>
+				<option value="Set">Set</option>
+			</select>
+			</td>
+			<td style="width: 6%;"><input class="form-control ng-untouched ng-pristine ng-invalid"></td>
+			<td style="width: 3%;"><input class="form-control ng-untouched ng-pristine ng-valid"></td>
+			<td style="width: 6%;"><input class="form-control ng-untouched ng-pristine" disabled="">
+			</td>
+			<td><button class="btn btn-danger" onclick="removeoffer(this)">Remove</button>
+			</td>
+		`;
+		tableBody.appendChild(newRow);
+		newRow.querySelectorAll('.quantity, .unit-price').forEach(input => {
+			input.addEventListener('input', updateTotal);
+		});
+		// updateTotal();
+	}
+
+	$(document).ready(function () {
+		$(".select_offer").on("change", function () {
+			var selectedOption = $(this).val();
+			switch (selectedOption) {
+				case "Standard":
+					markup = $('<thead> <th>Product<span style="color: red;">*</span></th> <th>HSN Code</th> <th>DRW No</th> <th>Due Date</th> <th>Qty.<span style="color: red;">*</span></th> <th>UOM<span style="color: red;">*</span></th> <th>Rate<span style="color: red;">*</span></th> <th>Disc%</th> <th>Amount (Rs)</th> <th><a class="btn btn-secondary active " onclick="addofer_standard()"><i class="fa fa-plus"></i></a></th> </thead> <tbody> <tr> <td style="width: 25%;"> <select name="" id="" class="form-control">{% for user in users_product %}<option value="{{ user.product_name }}">{{ user.product_name }}</option>{% endfor %}</select></td> <td style="width: 5%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 5%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 8%;"> <input type="date" autocomplete="off" class="form-control pull-right ng-untouched ng-pristine ng-valid"> </td> <td style="width: 5%;"> <input class="form-control"> </td> <td style="width: 7%;"> <select class="form-control ng-untouched ng-pristine ng-invalid"> <option value="">UOM </option> <option value="Nos">Nos</option> <option value="Meters">Meters</option> <option value="Millimeter">Millimeter</option> <option value="Bundle">Bundle</option> <option value="Pack">Pack</option> <option value="Kg">Kg</option> <option value="Set">Set</option> </select> </td> <td style="width: 6%;"><input class="form-control ng-untouched ng-pristine ng-invalid"></td> <td style="width: 3%;"><input class="form-control ng-untouched ng-pristine ng-valid"></td> <td style="width: 6%;"><input class="form-control ng-untouched ng-pristine" disabled=""> </td> <td style="width: 5%;"></td> </tr> </tbody>')
+					tableBody = $("#product-table");
+					tableBody.empty();
+					tableBody.append(markup);
+					break;
+
+				case "Customized":
+					markup = $('<thead> <th >Product<span style="color: red;">*</span></th> <th >HSN Code</th> <th >DRW No</th> <th >Due Date</th> <th>Max Order Qty</th> <th >Qty.<span style="color: red;">*</span></th> <th >UOM<span style="color: red;">*</span></th> <th >Rate<span style="color: red;">*</span></th> <th >Disc%</th> <th >Amount (Rs)</th> <th ><a class="btn btn-secondary active " onclick="addofer_customized()"><i class="fa fa-plus"></i></a></th> </thead> <tbody > <tr > <td style="width: 25%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 5%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 5%;"> <input class="form-control ng-untouched ng-pristine ng-valid"> </td> <td style="width: 8%;"> <input type="date" autocomplete="off" class="form-control pull-right ng-untouched ng-pristine ng-valid"> </td> <td style="width: 3%;"> <input class="form-control"> </td> <td style="width: 5%;"> <input class="form-control"> </td> <td style="width: 7%;"> <select class="form-control ng-untouched ng-pristine ng-invalid"> <option value="">UOM </option> <option value="Nos">Nos</option> <option value="Meters">Meters</option> <option value="Millimeter">Millimeter</option> <option value="Bundle">Bundle</option> <option value="Pack">Pack</option> <option value="Kg">Kg</option> <option value="Set">Set</option> </select> </td> <td style="width: 6%;"><input class="form-control ng-untouched ng-pristine ng-invalid"></td> <td style="width: 3%;"><input class="form-control ng-untouched ng-pristine ng-valid"></td> <td style="width: 6%;"><input class="form-control ng-untouched ng-pristine" disabled=""> </td> <td style="width: 5%;"></td> </tr> </tbody>')
+					tableBody = $("#product-table");
+					tableBody.empty();
+					tableBody.append(markup);
+					break;
+			}
+
+		});
+	});
+
+
+	$(document).ready(function () {
+		$('#type-select').change(function () {
+			var selected = $(this).val();
+			if (selected == 1) {
+				$('#oc-type').show();
+				$('#bom-type').hide();
+			} else if (selected == 2) {
+				$('#oc-type').hide();
+				$('#bom-type').show();
+			} else {
+				$('#oc-type').hide();
+				$('#bom-type').hide();
+			}
+		});
+	});
+
+
+	
+
+
+
+</script>
+<style>
+	th,
+	td {
+		border: 1px solid black;
+		padding: 5px;
+	}
+
+	.container[_ngcontent-owj-c93] {
+		width: 100%
+	}
+</style>
+{% endblock javascripts %}

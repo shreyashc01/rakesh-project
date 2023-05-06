@@ -44,7 +44,6 @@ def create():
         users = CustomerMaster.query.all()
         user1 = ProductMaster.query.all()
         user2 = KitMaster.query.all()
-
         user2_json = json.dumps([{'kit_description': user.kit_description, 'kit_no': user.kit_no} for user in user2])
         print(user2_json)
         role_manager_offer = UserModel.query.all()
@@ -52,60 +51,6 @@ def create():
         return render_template('home/add-offer.html',users=users,user1=user1,user2=user2,user2_json=user2_json,role_manager_offer=role_manager_offer,currency_master_offer=currency_master_offer,
                                segment='offer-addoffer')
     if request.method == 'POST':
-        # usr_id = request.form['usr_id']
-        # usr_name = request.form['usr_name']
-        # usr_password = request.form['usr_password']
-        # usr_api_key = request.form['usr_api_key']
-        # usr_api_secret_key = request.form['usr_api_secret_key']
-        # usr_totp_key = request.form['usr_totp_key']
-        # usr_access_key = ""
-        # usr_access_key_time = ""
-        # usr_autologin_status = request.form['usr_autologin_status']
-        # usr_autoverify_status = ""
-        # usr_autologin = ""
-        # usr_autologout_status = ""
-        # usr_aut_prem_to_sell_nifty = ""
-        # usr_aut_prem_to_sell_bank = ""
-        # usr_aut_stike_to_buy_nifty = ""
-        # usr_aut_stike_to_buy_bank = ""
-        # usr_man_odr_1buy_nifty = ""
-        # usr_man_odr_2sell_nifty = ""
-        # usr_man_odr_1buy_bank = ""
-        # usr_man_odr_2sell_bank = ""
-        # usr_funds_not_to_use = ""
-        # usr_max_qty = ""
-        # usr_disp_open_post = ""
-        # usr_disp_net_day = ""
-        # usr_disp_funds_avil = ""
-
-        # # else we can create the user
-        # user = OfferModel(usr_id=usr_id,
-        #     usr_name=usr_name,
-        #     usr_password=usr_password,
-        #     usr_api_key=usr_api_key,
-        #     usr_api_secret_key=usr_api_secret_key,
-        #     usr_totp_key=usr_totp_key,
-        #     usr_access_key=usr_access_key,
-        #     usr_access_key_time=usr_access_key_time,
-        #     usr_autologin_status=usr_autologin_status,
-        #     usr_autoverify_status=usr_autoverify_status,
-        #     usr_autologin=usr_autologin,
-        #     usr_autologout_status = usr_autologout_status,
-        #     usr_aut_prem_to_sell_nifty = usr_aut_prem_to_sell_nifty,
-        #     usr_aut_prem_to_sell_bank = usr_aut_prem_to_sell_bank,
-        #     usr_aut_stike_to_buy_nifty = usr_aut_stike_to_buy_nifty,
-        #     usr_aut_stike_to_buy_bank = usr_aut_stike_to_buy_bank,
-        #     usr_man_odr_1buy_nifty = usr_man_odr_1buy_nifty,
-        #     usr_man_odr_2sell_nifty =usr_man_odr_2sell_nifty,
-        #     usr_man_odr_1buy_bank = usr_man_odr_1buy_bank,
-        #     usr_man_odr_2sell_bank = usr_man_odr_2sell_bank,
-        #     usr_funds_not_to_use = usr_funds_not_to_use,
-        #     usr_max_qty = usr_max_qty,
-        #     usr_disp_open_post =usr_disp_open_post,
-        #     usr_disp_net_day = usr_disp_net_day,
-        #     usr_disp_funds_avil = usr_disp_funds_avil )
-        # db.session.add(user)
-        # db.session.commit()
         return redirect('/offer-offerlist')
 
 
@@ -282,34 +227,21 @@ def listpo():
 @blueprint.route('/BOM-List', methods=['GET', 'POST'])
 @login_required
 def BOM_List():
-    return render_template('home/BOM-Lists.html', segment='BOM-List')
+    return render_template('home/BOM-Lists.html', segment='BOM-List-purchaseorder')
 
 @blueprint.route('/Purchase-Order-Request', methods=['GET', 'POST'])
 @login_required
 def Add_PO_REQ():
-    return render_template('home/ADD-PO-Request.html', segment='Purchase-Order-Request')
+    return render_template('home/ADD-PO-Request.html', segment='purchaseorder-Request')
 
 @blueprint.route('/Purchase-Order-Request-List', methods=['GET', 'POST'])
 @login_required
 def PO_REQ_LIST():
-    return render_template('home/PO-Request-List.html', segment='Purchase-Order-Request-List')
+    return render_template('home/PO-Request-List.html', segment='Request-List-purchaseorder')
 
 @blueprint.route('/offer-offerlist', methods=['GET', 'POST'])
 @login_required
 def retrieve_list():
-    # if MainUser.query.filter_by(id=1).first() == None:
-    #     users = MainUser(
-    #         main_usr_id = "main_usr_id",
-    #         main_usr_name = "main_usr_name")
-    #     db.session.add(users)
-    #     db.session.commit()
-    # if "main_usr_apply" in request.form:
-        # all_users = OfferModel.query.filter_by(usr_id=request.form.get('main_usr_select')).first()
-        # main_user = MainUser.query.filter_by(id=1).first()
-        # if all_users != None:
-        #     main_user.main_usr_id = all_users.usr_id
-        #     main_user.main_usr_name = all_users.usr_name
-        #     db.session.commit()
     users = OfferModel.query.all()
     return render_template('home/users.html', users=users, segment='offer-offerlist')
 
@@ -554,7 +486,7 @@ def Currency_masters():
 def Contract_Review_list():
     if request.method == 'GET':
         users = OfferModel.query.all()
-        return render_template('home/editcontract.html', users=users, segment='contractreview')
+        return render_template('home/Contract-Review.html', users=users, segment='contractreview')
 
 @blueprint.route('/OC-Register-list', methods=['GET', 'POST'])
 @login_required
