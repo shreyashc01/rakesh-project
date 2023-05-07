@@ -49,17 +49,17 @@
 										</tr>
 									</thead>
 									<tbody>
-										{% for user in users %}
+										{% for user in add_user_contractReview %}
 											<tr
 											{% if loop.index %2==0 %}
 											{% else %}
 											{% endif %}
 											>
-											<td>{{user.kit_description}}</td>
-											<td>{{user.kit_no}}</td>
-											<td>{{user.kit_no}}</td>
-											<td>{{user.kit_no}}</td>
-											<td>{{user.hsn_code}}</td>
+											<td>{{user.quotation_number_offer}}</td>
+											<td>{{user.customer_name_offer}}</td>
+											<td>{{user.contract_review_Billing_Address}}</td>
+											<td>{{user.due_date_offer}}</td>
+											<td>{{user.contract_review_approve}}</td>
 											<td>
 											<div class="form-button-action">
 											<span style="font-size: 24px;color:green;">

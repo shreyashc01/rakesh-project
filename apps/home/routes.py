@@ -648,7 +648,8 @@ def Currency_masters():
 @login_required
 def Contract_Review_list():
     if request.method == 'GET':
-        return render_template('home/Contract-Review.html', segment='contractreview')
+        add_user_contractReview = AddOffer.query.all()
+        return render_template('home/Contract-Review.html', add_user_contractReview=add_user_contractReview,segment='contractreview')
 
 @blueprint.route('/OC-Register-list', methods=['GET', 'POST'])
 @login_required
