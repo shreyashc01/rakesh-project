@@ -17,29 +17,27 @@
         <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
 
-        <div>
-          <h2>Quotation</h2>
-          <span>Quotation Date: </span><br>
-          <span>Quotation No: </span><br>
-        </div>
+          <div>
+            <h2><strong style="font-family: Algerian;">Quotation</strong></h2>
+            <span style="font-family: 'Arial Black', sans-serif;">Quotation Date: </span><span style="font-family: Arial, Helvetica, sans-serif;">{{ add_user.due_date_offer }}</span><br>
+            <span style="font-family: 'Arial Black', sans-serif;">Quotation No: </span><br>
+          </div>
+          
+          
         <img src="/static/assets/img/logo.jpg" alt="Company Logo">
       </div>
       <div class="from">
-        <h4>From:</h4>
-        <p>{{ add_user.customer_name_offer }}</p>
-      </div>
-      <div class="to">
-        <h4>To:</h4>
-        <p>{{ add_user.customer_name_offer }}</p>
+        <h4 style="font-family: Algerian;" >To:</h4>
+        <p style="font-family: Arial, Helvetica, sans-serif;">{{ add_user.customer_name_offer }}</p>
       </div>
       <table>
         <thead>
           <tr class="printtr">
-            <th style="text-align: center;">Sl No</th>
-            <th style="text-align: center;">Item</th>
-            <th style="text-align: center;">Quantity</th>
-            <th style="text-align: center;">Unit Price</th>
-            <th style="text-align: center;">Total</th>
+            <th style="font-family: Arial, Helvetica, sans-serif;"  style="text-align: center;">Sl No</th>
+            <th style="font-family: Arial, Helvetica, sans-serif;" style="text-align: center;">Item</th>
+            <th style="font-family: Arial, Helvetica, sans-serif;" style="text-align: center;">Quantity</th>
+            <th style="font-family: Arial, Helvetica, sans-serif;" style="text-align: center;">Unit Price</th>
+            <th style="font-family: Arial, Helvetica, sans-serif;" style="text-align: center;">Total</th>
           </tr>
         </thead>
         <tbody>
@@ -48,40 +46,40 @@
 
         <tfoot>
           <tr>
-            <td colspan="4">Subtotal</td>
-            <td>{{ add_user.total_amount_offer }}</td>
+            <td style="font-family: Arial, Helvetica, sans-serif;" colspan="4">Subtotal:</td>
+            <td style="font-family: Arial, Helvetica, sans-serif;">{{ add_user.total_amount_offer }}</td>
           </tr>
           <tr>
-            <td colspan="4">Freight:</td>
-            <td>{{ add_user.freight_offer }}</td>
+            <td style="font-family: Arial, Helvetica, sans-serif;" colspan="4">Freight:</td>
+            <td style="font-family: Arial, Helvetica, sans-serif;">{{ add_user.freight_offer }}</td>
           </tr>
           <tr>
-            <td colspan="4">P&F Percentage:</td>
-            <td>{{ add_user.pf_percentage_offer }}</td>
+            <td style="font-family: Arial, Helvetica, sans-serif;" colspan="4">P&F Percentage:</td>
+            <td style="font-family: Arial, Helvetica, sans-serif;">{{ add_user.pf_percentage_offer }}</td>
           </tr>
           <tr>
-            <td colspan="4">GST (18%)</td>
-            <td>{{ add_user.gst_offer }}</td>
+            <td style="font-family: Arial, Helvetica, sans-serif;" colspan="4">{{ add_user.cgst_igst_type_offer }}:</td>
+            <td style="font-family: Arial, Helvetica, sans-serif;">{{ add_user.gst_offer }}</td>
           </tr>
           <tr>
-            <td colspan="4">Grand Total:</td>
-            <td>{{ add_user.grand_total_offer }}</td>
+            <td style="font-family: Arial, Helvetica, sans-serif;" colspan="4">Grand Total:</td>
+            <td style="font-family: Arial, Helvetica, sans-serif;">{{ add_user.grand_total_offer }}</td>
           </tr>
         </tfoot>
       </table>
 
       <div class="term-conditions">
-        <h4>Terms and Conditions:</h4>
-        <p>
-          1. Price Basis: {{ add_user.subject_offer }}<br>
-          2. P&F Charges: {{ add_user.PandFcharges_offer }}<br>
-          3. IGST: {{ add_user.igst_terms_offer }}<br>
-          4. HSN CODE: {{ add_user.hsn_code_offer }}<br>
-          5. Payment Terms: {{ add_user.payment_terms_offer }}<br>
-          6. Delivery: {{ add_user.delivery_terms_offer }}<br>
-          7. Freight: {{ add_user.freight_terms_offer }}<br>
-          8. Validity: {{ add_user.validity_terms_offer }}<br>
-          9. Warranty: {{ add_user.warranty_terms_offer }}<br>
+        <h4><strong style="font-family: Algerian;">Terms and Conditions:</strong></h4>
+        <p style="font-family: Arial, Helvetica, sans-serif;">
+          <strong>1.</strong> Price Basis: {{ add_user.subject_offer }}<br>
+          <strong>2.</strong> P&F Charges: {{ add_user.PandFcharges_offer }}<br>
+          <strong>3.</strong> IGST: {{ add_user.igst_terms_offer }}<br>
+          <strong>4.</strong> HSN CODE: {{ add_user.hsn_code_offer }}<br>
+          <strong>5.</strong> Payment Terms: {{ add_user.payment_terms_offer }}<br>
+          <strong>6.</strong> Delivery: {{ add_user.delivery_terms_offer }}<br>
+          <strong>7.</strong> Freight: {{ add_user.freight_terms_offer }}<br>
+          <strong>8.</strong> Validity: {{ add_user.validity_terms_offer }}<br>
+          <strong>9.</strong> Warranty: {{ add_user.warranty_terms_offer }}<br>
         </p>
       </div>
 

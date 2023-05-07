@@ -44,11 +44,14 @@ def create():
         users = CustomerMaster.query.all()
         user1 = ProductMaster.query.all()
         user2 = KitMaster.query.all()
+        addOffer = AddOffer.query.all()
+        Quatationnumber = len(addOffer) 
+        Quatationnumber += 1
         user2_json = json.dumps([{'kit_description': user.kit_description, 'kit_no': user.kit_no} for user in user2])
         role_manager_offer = UserModel.query.all()
         currency_master_offer = CurrencyMaster.query.all()
-        return render_template('home/add-offer.html',users=users,user1=user1,user2=user2,user2_json=user2_json,role_manager_offer=role_manager_offer,currency_master_offer=currency_master_offer,
-                               segment='offer-addoffer')
+        return render_template('home/add-offer.html',users=users,user1=user1,user2=user2,user2_json=user2_json,role_manager_offer=role_manager_offer,
+                               currency_master_offer=currency_master_offer,Quatationnumber=Quatationnumber, segment='offer-addoffer')
     if request.method == 'POST':
        # Retrieve the data from the HTML form and create a new AddOffer object
         customer_name_offer = request.form['customer_name_offer']

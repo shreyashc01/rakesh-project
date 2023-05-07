@@ -40,17 +40,11 @@ class AddOffer(db.Model):
     customer_name_offer = db.Column(db.String())
     due_date_offer = db.Column(db.String())
     offer_type_offer = db.Column(db.String())
-    quotation_number_offer = db.Column(db.Integer())
+    quotation_number_offer = db.Column(db.String())
     marketing_person_offer = db.Column(db.String())
     currency_type_offer = db.Column(db.String())
 
     product_kit_offer_json = db.Column(db.String())
-    # product_offers_json =  db.Column(db.String())
-    # kit_description_offer = db.Column(db.String())
-    # kit_number_offer = db.Column(db.String())
-    # quantity_kit_offer = db.Column(db.Integer())
-    # unit_price_kit_offer = db.Column(db.Float())
-    # total_price_kit_offer = db.Column(db.Float())
 
     total_amount_offer = db.Column(db.Float())
     freight_offer = db.Column(db.Float())
@@ -74,12 +68,46 @@ class AddOffer(db.Model):
     validity_terms_offer = db.Column(db.String())
     warrenty_terms_offer = db.Column(db.String())
 
+    # contractReview Fields
+    contract_review_Order_No = db.Column(db.String())
+    contract_review_Order_Date = db.Column(db.String())
+    contract_review_PO_Qty = db.Column(db.Integer())
+    contract_review_Billing_Address = db.Column(db.String())
+    contract_review_Delivery_Address_1 = db.Column(db.String())
+    contract_review_Delivery_Address_2 = db.Column(db.String())
+    contract_review_Delivery_Address_3 = db.Column(db.String())
+    contract_review_Delivery_Address_4 = db.Column(db.String())
+    contract_review_Delivery_Address_5 = db.Column(db.String())
+    contract_review_Offer_No = db.Column(db.String())
+    contract_review_Total_Cost = db.Column(db.Float())
+    contract_review_price = db.Column(db.Float())
+    contract_review_packing_and_Forwarding = db.Column(db.Float())
+    contract_review_price_gst = db.Column(db.Float())
+    contract_review_price_delivery = db.Column(db.Float())
+    contract_review_price_warrantly = db.Column(db.Float())
+    contract_review_price_terms_of_pay = db.Column(db.String())
+    contract_review_price_freight = db.Column(db.Float())
+    contract_review_price_preferred_transporter = db.Column(db.String())
+    contract_review_price_contact_person = db.Column(db.String())
+    contract_review_price_telephone_number = db.Column(db.String())
+    contract_review_price_email_id = db.Column(db.String())
+    contract_review_price_notes = db.Column(db.String())
+    contract_review_price_approve = db.Column(db.Boolean())
+
     def __init__(self, customer_name_offer, due_date_offer, offer_type_offer, quotation_number_offer, marketing_person_offer,
-                 currency_type_offer, product_kit_offer_json, total_amount_offer, freight_offer, cgst_igst_type_offer,
-                 pf_percentage_offer, gst_offer, grand_total_offer, subject_offer, reference_offer, description_offer,
-                 footer_description_offer, notes_offer, price_basis_offer, PandFcharges_offer, igst_terms_offer,
-                 hsn_code_offer, payment_terms_offer, delivery_terms_offer, freight_terms_offer, validity_terms_offer,
-                 warrenty_terms_offer):
+             currency_type_offer, product_kit_offer_json, total_amount_offer, freight_offer, cgst_igst_type_offer,
+             pf_percentage_offer, gst_offer, grand_total_offer, subject_offer, reference_offer, description_offer,
+             footer_description_offer, notes_offer, price_basis_offer, PandFcharges_offer, igst_terms_offer,
+             hsn_code_offer, payment_terms_offer, delivery_terms_offer, freight_terms_offer, validity_terms_offer,
+             warrenty_terms_offer, contract_review_Order_No, contract_review_Order_Date, contract_review_PO_Qty,
+             contract_review_Billing_Address, contract_review_Delivery_Address_1, contract_review_Delivery_Address_2,
+             contract_review_Delivery_Address_3, contract_review_Delivery_Address_4, contract_review_Delivery_Address_5,
+             contract_review_Offer_No, contract_review_Total_Cost, contract_review_price,
+             contract_review_packing_and_Forwarding, contract_review_price_gst, contract_review_price_delivery,
+             contract_review_price_warrantly, contract_review_price_terms_of_pay, contract_review_price_freight,
+             contract_review_price_preferred_transporter, contract_review_price_contact_person,
+             contract_review_price_telephone_number, contract_review_price_email_id, contract_review_price_notes,
+             contract_review_price_approve):
         self.customer_name_offer = customer_name_offer
         self.due_date_offer = due_date_offer
         self.offer_type_offer = offer_type_offer
@@ -88,13 +116,6 @@ class AddOffer(db.Model):
         self.currency_type_offer = currency_type_offer
 
         self.product_kit_offer_json = product_kit_offer_json
-        # self.product_offers_json = product_offers_json
-
-        # self.kit_description_offer = kit_description_offer
-        # self.kit_number_offer = kit_number_offer
-        # self.quantity_kit_offer = quantity_kit_offer
-        # self.unit_price_kit_offer = unit_price_kit_offer
-        # self.total_price_kit_offer = total_price_kit_offer
 
         self.total_amount_offer = total_amount_offer
         self.freight_offer = freight_offer
@@ -118,6 +139,32 @@ class AddOffer(db.Model):
         self.freight_terms_offer = freight_terms_offer
         self.validity_terms_offer = validity_terms_offer
         self.warrenty_terms_offer = warrenty_terms_offer
+
+        # Set the values for the new fields
+        self.contract_review_Order_No = contract_review_Order_No
+        self.contract_review_Order_Date = contract_review_Order_Date
+        self.contract_review_PO_Qty = contract_review_PO_Qty
+        self.contract_review_Billing_Address = contract_review_Billing_Address
+        self.contract_review_Delivery_Address_1 = contract_review_Delivery_Address_1
+        self.contract_review_Delivery_Address_2 = contract_review_Delivery_Address_2
+        self.contract_review_Delivery_Address_3 = contract_review_Delivery_Address_3
+        self.contract_review_Delivery_Address_4 = contract_review_Delivery_Address_4
+        self.contract_review_Delivery_Address_5 = contract_review_Delivery_Address_5
+        self.contract_review_Offer_No = contract_review_Offer_No
+        self.contract_review_Total_Cost = contract_review_Total_Cost
+        self.contract_review_price = contract_review_price
+        self.contract_review_packing_and_Forwarding = contract_review_packing_and_Forwarding
+        self.contract_review_price_gst = contract_review_price_gst
+        self.contract_review_price_delivery = contract_review_price_delivery
+        self.contract_review_price_warrantly = contract_review_price_warrantly
+        self.contract_review_price_terms_of_pay = contract_review_price_terms_of_pay
+        self.contract_review_price_freight = contract_review_price_freight
+        self.contract_review_price_preferred_transporter = contract_review_price_preferred_transporter
+        self.contract_review_price_contact_person = contract_review_price_contact_person
+        self.contract_review_price_telephone_number = contract_review_price_telephone_number
+        self.contract_review_price_email_id = contract_review_price_email_id
+        self.contract_review_price_notes = contract_review_price_notes
+        self.contract_review_price_approve = contract_review_price_approve
 
     def __repr__(self):
         return f"{self.id}:{self.customer_name_offer}"
