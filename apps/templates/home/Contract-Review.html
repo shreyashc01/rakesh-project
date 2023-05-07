@@ -50,30 +50,31 @@
 									</thead>
 									<tbody>
 										{% for user in add_user_contractReview %}
-											<tr
-											{% if loop.index %2==0 %}
-											{% else %}
-											{% endif %}
-											>
-											<td>{{user.quotation_number_offer}}</td>
-											<td>{{user.customer_name_offer}}</td>
-											<td>{{user.contract_review_Billing_Address}}</td>
-											<td>{{user.due_date_offer}}</td>
-											<td>{{user.contract_review_approve}}</td>
-											<td>
-											<div class="form-button-action">
-											<span style="font-size: 24px;color:green;">
-											<a href="/{{user.id}}/editkit" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fas fa-edit" ></i></a> 
-											</span>
-											<span style="font-size: 24px;color:red;">
-											<a href="/{{user.id}}/deletekit" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fas fa-times"></i></a>
-											</span>
-											</div>
+										  <tr {% if loop.index % 2 == 0 %}{% else %}{% endif %}>
+											<td>{{ user.quotation_number_offer }}</td>
+											<td>{{ user.customer_name_offer }}</td>
+											<td>{{ user.contract_review_Billing_Address }}</td>
+											<td>{{ user.due_date_offer }}</td>
+											<td style="background-color: {% if user.contract_review_approve %}green{% else %}yellow{% endif %}">
+											  {% if user.contract_review_approve %}
+												Approve
+											  {% else %}
+												Pending
+											  {% endif %}
 											</td>
-										</tr>
-									{% endfor %}
-										
-									</tbody>
+											<td>
+											  <div class="form-button-action">
+												<span style="font-size: 24px; color: green;">
+												  <a href="/{{ user.id }}/edit_contractoffer" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
+													<i class="fas fa-edit"></i>
+												  </a> 
+												</span>
+											  </div>
+											</td>
+										  </tr>
+										{% endfor %}
+									  </tbody>
+									  
 								</table>
 							</div>
 						</div>

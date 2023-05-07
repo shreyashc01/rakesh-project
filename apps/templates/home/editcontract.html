@@ -42,66 +42,84 @@
                                 <div class="card-body">
                                     <div class="col-sm-12">
                                         <div class="row">
-
                                             <div class="form-group col-sm-8">
-                                                <label for="bookTitle">Customer Name</label>
-                                                <input class="form-control" style="background-color: #f6f7f9; height: auto;"></input></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-sm-4">
-                                                <label for="bookTitle">Offer No</label>
-                                                <input class="form-control" style="background-color: #f6f7f9; height: auto;"></input>
-                                                </div>
-                                            <div class="form-group col-sm-4">
-                                                <label for="bookTitle">Offer Date</label>
-                                                <input class="form-control" style="background-color: #f6f7f9;"></input>
+                                                <label>Customer Name</label>
+                                                <input class="form-control"
+                                                    style="background-color: #f6f7f9; height: auto;" readonly>
+                                                </input>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-sm-4">
-                                                <label for="bookTitle">Order No</label>
-                                                <input formcontrolname="orderNo" type="text" maxlength="200" autocomplete="off"
-                                                    class="form-control ng-pristine ng-valid ng-touched"></div>
-                                            <div class="form-group col-sm-4"><label for="publisher">Order Date</label>
-                                                <div class="input-group date"><input type="text"
-                                                        formcontrolname="orderDate" bsdatepicker="" autocomplete="off"
+                                                <label>Offer No</label>
+                                                <input class="form-control"
+                                                    style="background-color: #f6f7f9; height: auto;" readonly>
+                                                </input>
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <label>Offer Date</label>
+                                                <input class="form-control" style="background-color: #f6f7f9;" readonly>
+                                                </input>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-4">
+                                                <label>Order No</label>
+                                                <input type="text" maxlength="200" autocomplete="off"
+                                                    class="form-control ng-pristine ng-valid ng-touched">
+                                            </div>
+                                            <div class="form-group col-sm-4">
+                                                <label for="publisher">Order Date</label>
+                                                <div class="input-group date">
+                                                    <input type="date" autocomplete="off"
                                                         class="form-control pull-right ng-pristine ng-valid ng-touched">
-                                                    <div class="input-group-append"><a class="input-group-text"
-                                                            aria-expanded="false"><i class="fa fa-calendar"></i></a>
-                                                    </div>
+
                                                 </div>
                                             </div>
-                                            <div class="form-group col-sm-4"><label for="bookTitle">PO Qty</label><input
-                                                    formcontrolname="poQty" type="text" maxlength="200"
-                                                    autocomplete="off" numberonly=""
-                                                    class="form-control ng-pristine ng-valid ng-touched"></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-sm-6"><label for="billingAddress">Billing Address
-                                                </label><textarea formcontrolname="billingAddress"
-                                                    class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                            <div class="form-group col-sm-4">
+                                                <label>PO Qty</label>
+                                                <input type="text" maxlength="200" autocomplete="off" numberonly=""
+                                                    class="form-control ng-pristine ng-valid ng-touched">
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="form-group col-sm-6"><label for="deliveryAddress">Delivery
-                                                    Address 1 </label><textarea formcontrolname="deliveryAddress"
-                                                    class="form-control ng-pristine ng-valid ng-touched"></textarea>
+                                            <div class="form-group col-sm-6">
+                                                <label>Billing Address</label>
+                                                <textarea class="form-control ng-untouched ng-pristine ng-valid">
+
+                                                </textarea>
                                             </div>
-                                            <div class="form-group col-sm-6"><label for="deliveryAddress">Delivery
-                                                    Address 2 </label><textarea formcontrolname="deliveryAddress2"
-                                                    class="form-control ng-pristine ng-valid ng-touched"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                <label>Delivery Address 1 </label>
+                                                <textarea class="form-control ng-pristine ng-valid ng-touched">
+
+                                                </textarea>
                                             </div>
-                                            <div class="form-group col-sm-6"><label for="deliveryAddress">Delivery
-                                                    Address 3 </label><textarea formcontrolname="deliveryAddress3"
-                                                    class="form-control ng-pristine ng-valid ng-touched"></textarea>
+                                            <div class="form-group col-sm-6">
+                                                <label>Delivery Address 2 </label>
+                                                <textarea class="form-control ng-pristine ng-valid ng-touched">
+
+                                                </textarea>
                                             </div>
-                                            <div class="form-group col-sm-6"><label for="deliveryAddress">Delivery
-                                                    Address 4 </label><textarea formcontrolname="deliveryAddress4"
-                                                    class="form-control ng-pristine ng-valid ng-touched"></textarea>
+                                            <div class="form-group col-sm-6">
+                                                <label>Delivery Address 3 </label>
+                                                <textarea class="form-control ng-pristine ng-valid ng-touched">
+
+                                                </textarea>
                                             </div>
-                                            <div class="form-group col-sm-6"><label for="deliveryAddress">Delivery
-                                                    Address 5 </label><textarea formcontrolname="deliveryAddress5"
-                                                    class="form-control ng-pristine ng-valid ng-touched"></textarea>
+                                            <div class="form-group col-sm-6">
+                                                <label>Delivery Address 4 </label>
+                                                <textarea class="form-control ng-pristine ng-valid ng-touched">
+
+                                                </textarea>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label>Delivery Address 5 </label>
+                                                <textarea class="form-control ng-pristine ng-valid ng-touched">
+
+                                                </textarea>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -110,29 +128,14 @@
                                                     <th
                                                         style="border: 1px solid black; border-collapse: collapse; padding: 15px; text-align: left;">
                                                         Offer No</th>
-                                                    <th
-                                                        style="border: 1px solid black; border-collapse: collapse; padding: 15px; text-align: left;">
-                                                        1</th>
+
                                                 </tr>
                                                 <tr>
                                                     <td
                                                         style="border: 1px solid black; border-collapse: collapse; padding: 15px; text-align: left;">
                                                         Total Cost</td>
-                                                    <td
-                                                        style="border: 1px solid black; border-collapse: collapse; padding: 15px; text-align: left;">
-                                                        </td>
                                                 </tr>
                                             </table>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-sm-4"><br><label for="bookTitle">Upload
-                                                    Attachment</label>
-                                                <div><input type="file" placeholder="Choose file"
-                                                        style="display: none;"><button type="button"
-                                                        class="btn btn-success">Upload
-                                                        File</button></div>
-                                            </div>
-                                            <div class="col-md-4"><br><br></div>
                                         </div>
                                     </div>
                                 </div>
@@ -147,185 +150,217 @@
                                 <div class="card-body">
                                     <div class="col-sm-12">
                                         <div class="row">
-                                            <table id="table1" style="width: 100%;">
+                                            <table id="table1"
+                                                style="width: 100%; background-color: #f2f2f2; border-collapse: collapse; border: 1px solid #ccc; margin-bottom: 20px;">
                                                 <thead>
                                                     <tr>
-                                                        <th>Description</th>
-                                                        <th>Values</th>
-                                                        <th>Order</th>
-                                                        <th>Deviation</th>
+                                                        <th style="text-align: center; height: 50px;">Description</th>
+                                                        <th style="text-align: center; height: 50px;">Values</th>
+                                                        <th style="text-align: center; height: 50px;">Order</th>
+                                                        <th style="text-align: center; height: 50px;">Deviation</th>
                                                     </tr>
                                                 </thead>
+
                                                 <tbody style="padding: 2%;">
-                                                    <tr>
-                                                        <td style="width: 15%;"> 1. Price </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="total"
+                                                    <tr style="background-color: #ffffff; border: 1px solid #ccc;">
+                                                        <td
+                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center; padding: 10px;">
+                                                            Price</td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
                                                                 class="form-control ng-untouched ng-pristine ng-valid"></textarea>
                                                         </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="totalOrder"
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
                                                                 class="form-control ng-untouched ng-pristine ng-valid"></textarea>
                                                         </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="totalDeviation"
+                                                        <td style="width: 28%; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: #ffffff; border: 1px solid #ccc;">
+                                                        <td
+                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                            Packing and Forwarding</td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                        <td style="width: 28%; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: #ffffff; border: 1px solid #ccc;">
+                                                        <td
+                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                            GST</td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                        <td style="width: 28%; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: #ffffff; border: 1px solid #ccc;">
+                                                        <td
+                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                            Delivery</td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                        <td style="width: 28%; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: #ffffff; border: 1px solid #ccc;">
+                                                        <td
+                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                            Warranty</td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                        <td style="width: 28%; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: #ffffff; border: 1px solid #ccc;">
+                                                        <td
+                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                            Terms of Payment</td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                        <td style="width: 28%; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: #ffffff; border: 1px solid #ccc;">
+                                                        <td
+                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                            Freight / DD / Godown</td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                        <td style="width: 28%; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: #ffffff; border: 1px solid #ccc;">
+                                                        <td
+                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                            Preferred Transporter</td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3"
+                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        </td>
+                                                        <td style="width: 28%; padding: 10px;">
+                                                            <textarea rows="3"
                                                                 class="form-control ng-untouched ng-pristine ng-valid"></textarea>
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="width: 15%;"> 2. Packing and Forwarding
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="pfCharges"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="pfChargesOrder"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="pfChargesDeviation"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 15%;"> 3. GST </td>
-                                                        <td style="width: 28%;"><textarea rows="2" formcontrolname="gst"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="gstOrder"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="gstDeviation"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 15%;"> 4. Delivery </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="delivery"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="deliveryOrder"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="deliveryDeviation"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 15%;"> 5. Warranty </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="warranty"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="warrantyOrder"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="warrantyDeviation"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 15%;"> 6. Terms of Payment </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="paymentTerms"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="paymentTermsOrder"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="paymentTermsDeviation"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 15%;"> 7. Freight / DD / Godown
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="freight"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="freightOrder"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="freightDeviation"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 15%;"> 8. Preferred Transporter
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="preferredTransporter"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="preferredTransporterOrder"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                        <td style="width: 28%;"><textarea rows="2"
-                                                                formcontrolname="preferredTransporterDeviation"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="width: 15%;"> 9. Contract Person </td>
-                                                        <td colspan="2" style="width: 70%;"><input
-                                                                formcontrolname="contractPerson" type="text"
-                                                                maxlength="200" autocomplete="off"
+                                                        <td
+                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                            Contract Person</td>
+                                                        <td colspan="2" style="width: 70%;">
+                                                            <input type="text" maxlength="200" autocomplete="off"
                                                                 class="form-control ng-untouched ng-pristine ng-valid"
-                                                                style="width: 50%;"></td>
+                                                                style="width: 50%;">
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <table id="table2" style="width: 100%;">
+
+                                            <table id="table2"
+                                                style="width: 100%; background-color: #f2f2f2; border-collapse: collapse; border: 1px solid #ccc; margin-bottom: 20px;">
                                                 <tbody>
                                                     <tr>
-                                                        <td style="width: 10%;"> Telephone </td>
-                                                        <td style="width: 40%;"><input formcontrolname="telephone"
-                                                                type="text" maxlength="200" autocomplete="off"
+                                                        <td
+                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                            Telephone</td>
+                                                        <td style="width: 40%;">
+                                                            <input type="text" maxlength="200" autocomplete="off"
                                                                 class="form-control ng-untouched ng-pristine ng-valid"
-                                                                style="width: 100%;"></td>
-                                                        <td style="width: 10%;"> E-Mail Id </td>
-                                                        <td style="width: 40%;"><input formcontrolname="emailId"
-                                                                type="text" maxlength="200" autocomplete="off"
+                                                                style="width: 100%;">
+                                                        </td>
+                                                        <td
+                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                            E-Mail Id</td>
+                                                        <td style="width: 40%;">
+                                                            <input type="text" maxlength="200" autocomplete="off"
                                                                 class="form-control ng-untouched ng-pristine ng-valid"
-                                                                style="width: 100%;"></td>
+                                                                style="width: 100%;">
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <table id="table3" style="width: 100%;">
+
+                                            <table id="table3"
+                                                style="width: 100%; background-color: #f2f2f2; border-collapse: collapse; border: 1px solid #ccc; margin-bottom: 20px;">
                                                 <tbody>
                                                     <tr>
-                                                        <td style="width: 10%;"> Notes </td>
-                                                        <td style="width: 80%;"><textarea rows="2"
-                                                                formcontrolname="notes"
+                                                        <td style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                            Notes</td>
+                                                        <td style="width: 80%;">
+                                                            <textarea rows="2"
                                                                 class="form-control ng-untouched ng-pristine ng-valid"></textarea>
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
+
                                         </div>
-                                        <div style="text-align: center;"><label for="vehicle1"> Approve</label> &nbsp;
-                                            <input type="checkbox" name="approve" formcontrolname="approve" value="1"
-                                                class="ng-untouched ng-pristine ng-valid"></div>
+                                        <div style="text-align: center;">
+                                            <label> Approve</label> &nbsp;
+                                            <input type="checkbox" value="1" class="ng-untouched ng-pristine ng-valid">
+                                        </div>
                                         <hr class="mb-4">
-                                        <div style="text-align: center;"><button id="btnSave" type="submit"
+                                        <div style="text-align: center;">
+                                            <button id="btnSave" type="submit"
                                                 class="btn btn-primary btn-sm">Save</button> &nbsp;
-                                             &nbsp; <a routerlink="/Contract_Review_List"
-                                                queryparamshandling="preserve" class="btn btn-danger btn-sm"
-                                                href="/Contract_Review_List?Id=27146&amp;search=R%20K%20CONSTRUCTION%20%26%20EARTH%20MOVERS&amp;p=1">Cancel</a>
+                                            &nbsp;
+                                            <a routerlink="/Contract-Review-list" class="btn btn-danger btn-sm"
+                                                href="/Contract-Review-list">Cancel</a>
                                         </div><br>
                                     </div>
                                 </div>

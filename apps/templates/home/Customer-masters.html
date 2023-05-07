@@ -117,8 +117,8 @@
 															<label>Country</label>
 															<select name="customer_country_name" class="form-control">
 																<option value="None">Select Country</option>
-																{% for user in city_master %}
-																	<option>{{ user.country_name }}</option>
+																{% for user in country_master %}
+																	<option>{{ user.country_name_temp }}</option>
 																{% endfor %}
 															</select>
 														</div>
@@ -128,8 +128,8 @@
 															<label>State</label>
 															<select name="customer_state_name" class="form-control">
 																<option value="None">Select State</option>
-																{% for user in city_master %}
-																	<option>{{ user.state_name }}</option>
+																{% for user in state_masters %}
+																	<option>{{ user.state_name_temp }}</option>
 																{% endfor %}
 															</select>
 														</div>

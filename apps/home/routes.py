@@ -139,19 +139,7 @@ def create():
             quotation_number_offer=quotation_number_offer,
             marketing_person_offer=marketing_person_offer,
             currency_type_offer=currency_type_offer,
-
-            # product_offer=product_offer,
-            # quantity_product_offer=quantity_product_offer,
-            # unit_price_product_offer=unit_price_product_offer,
-            # total_price_product_offer=total_price_product_offer,
             product_kit_offer_json=product_kit_offer_json,
-            # product_offers_json=product_offers_json,
-            # kit_description_offer=kit_description_offer,
-            # kit_number_offer=kit_number_offer,
-            # quantity_kit_offer=quantity_kit_offer,
-            # unit_price_kit_offer=unit_price_kit_offer,
-            # total_price_kit_offer=total_price_kit_offer,
-
             total_amount_offer=total_amount_offer,
             freight_offer=freight_offer,
             cgst_igst_type_offer=cgst_igst_type_offer,
@@ -171,7 +159,32 @@ def create():
             delivery_terms_offer=delivery_terms_offer,
             freight_terms_offer=freight_terms_offer,
             validity_terms_offer=validity_terms_offer,
-            warrenty_terms_offer=warrenty_terms_offer
+            warrenty_terms_offer=warrenty_terms_offer,
+
+            contract_review_Order_No='',  # Provide a default value for the missing arguments
+            contract_review_Order_Date='',
+            contract_review_PO_Qty=0,
+            contract_review_Billing_Address='',
+            contract_review_Delivery_Address_1='',
+            contract_review_Delivery_Address_2='',
+            contract_review_Delivery_Address_3='',
+            contract_review_Delivery_Address_4='',
+            contract_review_Delivery_Address_5='',
+            contract_review_Offer_No='',
+            contract_review_Total_Cost=0.0,
+            contract_review_price=0.0,
+            contract_review_packing_and_Forwarding=0.0,
+            contract_review_gst=0.0,
+            contract_review_delivery=0.0,
+            contract_review_warrantly=0.0,
+            contract_review_terms_of_pay='',
+            contract_review_freight=0.0,
+            contract_review_preferred_transporter='',
+            contract_review_contact_person='',
+            contract_review_telephone_number='',
+            contract_review_email_id='',
+            contract_review_notes='',
+            contract_review_approve=False
         )
 
         # Add the new offer to the database
@@ -509,7 +522,11 @@ def Customer_masters():
     if request.method == 'GET':
         users = CustomerMaster.query.all()
         city_master = CityMaster.query.all()
-        return render_template('home/Customer-masters.html',users=users,city_master=city_master, segment='Customer-masters')
+        state_masters = StateMaster.query.all()
+        country_master = CountryMaster.query.all()
+
+        return render_template('home/Customer-masters.html',users=users,city_master=city_master,state_masters=state_masters,
+                               country_master=country_master, segment='Customer-masters')
     if request.method == 'POST':
         customer_name = request.form['customer_name']
         primary_contact_name = request.form['primary_contact_name']
@@ -650,6 +667,26 @@ def Contract_Review_list():
     if request.method == 'GET':
         add_user_contractReview = AddOffer.query.all()
         return render_template('home/Contract-Review.html', add_user_contractReview=add_user_contractReview,segment='contractreview')
+
+@blueprint.route('/<int:id>/edit_contractoffer', methods=['GET', 'POST'])
+@login_required
+def edit_contractoffer(id):
+    add_user_contractReview = AddOffer.query.filter_by(id=id).first()
+    print("*************************************")
+    print(add_user_contractReview)
+    if request.method == 'POST':
+        # add_user_contractReview.product_name = request.form['product_name']
+        # add_user_contractReview.part_no = request.form['part_no']
+        # add_user_contractReview.rack_no = request.form['rack_no']
+        # add_user_contractReview.bin_no = request.form['bin_no']
+        # add_user_contractReview.minimum_qty = request.form['minimum_qty']
+        # add_user_contractReview.maximum_order = request.form['maximum_order']
+        # add_user_contractReview.description = request.form['description']
+        # add_user_contractReview.product_hsn_no = request.form['product_hsn_no']
+        # db.session.commit()
+        return redirect('/Contract-Review-list')
+
+    return render_template('home/editcontract.html', add_user_contractReview=add_user_contractReview, segment='contractreview')
 
 @blueprint.route('/OC-Register-list', methods=['GET', 'POST'])
 @login_required
