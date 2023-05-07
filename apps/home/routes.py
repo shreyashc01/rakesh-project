@@ -53,15 +53,12 @@ def create():
         return render_template('home/add-offer.html',users=users,user1=user1,user2=user2,user2_json=user2_json,role_manager_offer=role_manager_offer,
                                currency_master_offer=currency_master_offer,Quatationnumber=Quatationnumber, segment='offer-addoffer')
     if request.method == 'POST':
-       # Retrieve the data from the HTML form and create a new AddOffer object
         customer_name_offer = request.form['customer_name_offer']
         due_date_offer = request.form['due_date_offer']
         offer_type_offer = request.form['offer_type_offer']
         quotation_number_offer = request.form['quotation_number_offer']
-        marketing_person_offer = "request.form['marketing_person_offer']"
+        marketing_person_offer = request.form['marketing_Person_offer']
         currency_type_offer = request.form['currency_type_offer']
-        
-        print(offer_type_offer,currency_type_offer,marketing_person_offer,due_date_offer,customer_name_offer)
 
         product_kit_offer = []
         if offer_type_offer == "Spares":
@@ -73,8 +70,12 @@ def create():
 
             product_kit_offer = []
             for i in range(len(product_offers)):
+                product_name = product_offers[i]
+                product = ProductMaster.query.filter_by(product_name=product_name).first() 
+                part_number = product.part_no if product else None
                 product_offer = {
-                    'product_name': product_offers[i],
+                    'product_name': product_name,
+                    'part_number' : part_number,
                     'quantity': quantity_list[i],
                     'unit_price': unit_price_list[i],
                     'total_price': total_price_product_offer,
@@ -95,7 +96,7 @@ def create():
             for i in range(len(kit_description_offer)):
                 kit_offer = {
                     'kit_name': kit_description_offer[i],
-                    'Kit_number': kit_number_offer[i],
+                    'part_number': kit_number_offer[i],
                     'quantity': quantity_kit_offer[i],
                     'unit_price': unit_price_kit_offer[i],
                     'total_price': total_price_kit_offer,
@@ -391,37 +392,47 @@ def retrieve_list():
 def offer_pdf(id):
     if request.method == 'GET':
         add_user = AddOffer.query.filter_by(id=id).first()
-        print(add_user.product_kit_offer_json)
+        print(add_user)
+        print(add_user.marketing_person_offer)
+        
+        role_phone_temp = UserModel.query.filter_by(user_first_name=add_user.marketing_person_offer).first()
 
+        addoffer_Role = role_phone_temp.user_role_master if role_phone_temp.user_role_master else None
+        addoffer_Phonenumber = role_phone_temp.user_contact_no if role_phone_temp.user_contact_no else None
+
+        address_temp = CustomerMaster.query.filter_by(customer_name=add_user.customer_name_offer).first()
+        addoffer_address = address_temp.address if address_temp.address else None
+        
         data = json.loads(add_user.product_kit_offer_json)
-
         html_rows = ""
         counter = 0
         # Access the data as a Python object
         if add_user.offer_type_offer == "Spares":
             for item in data:
                 product_name = item['product_name']
+                part_number = item['part_number']
                 quantity = item['quantity']
                 unit_price = item['unit_price']
-                total_price = "-"
-                # total_price = item['total_price']
+                total_price = item['total_price']
                 counter += 1
-                html_row = f"<tr><td>{counter}</td><td>{product_name}</td><td>{quantity}</td><td>{unit_price}</td><td>{total_price}</td></tr>"
+                html_row = f"<tr><td>{counter}</td><td>{product_name}</td><td>{part_number}</td><td>{quantity}</td><td>{unit_price}</td><td>{total_price}</td></tr>"
                 html_rows += html_row
-            return render_template('home/pdf_add_offer.html',add_user=add_user,html_rows=html_rows, segment='offer-offerlist')
+            return render_template('home/pdf_add_offer.html',add_user=add_user,html_rows=html_rows,addoffer_address=addoffer_address,addoffer_Role=addoffer_Role,
+                                    addoffer_Phonenumber=addoffer_Phonenumber,segment='offer-offerlist')
         else:
             for item in data:
                 kit_name = item['kit_name']
+                kit_number = item['part_number']
                 quantity = item['quantity']
                 unit_price = item['unit_price']
-                total_price = "-"
-                # total_price = item['total_price']
+                total_price = item['total_price']
                 counter += 1
                 kit_name = kit_name.replace(',', '<br>'+"         - ")
-                html_row = f"<tr style='background-color: #f2f2f2;'><td style='border: 1px solid #ccc;'>{counter}</td><td style='border: 1px solid #ccc;'>{kit_name}</td><td style='border: 1px solid #ccc;'>{quantity}</td><td style='border: 1px solid #ccc;'>{unit_price}</td><td style='border: 1px solid #ccc;'>{total_price}</td></tr>"
+                html_row = f"<tr style='background-color: #f2f2f2;'><td style='border: 1px solid #ccc;'>{counter}</td><td style='border: 1px solid #ccc;'>{kit_name}</td><td style='border: 1px solid #ccc;'>{kit_number}</td><td style='border: 1px solid #ccc;'>{quantity}</td><td style='border: 1px solid #ccc;'>{unit_price}</td><td style='border: 1px solid #ccc;'>{total_price}</td></tr>"
 
                 html_rows += html_row
-            return render_template('home/pdf_add_offer.html',add_user=add_user,html_rows=html_rows, segment='offer-offerlist')
+            return render_template('home/pdf_add_offer.html',add_user=add_user,html_rows=html_rows,addoffer_address=addoffer_address,addoffer_Role=addoffer_Role,
+                                    addoffer_Phonenumber=addoffer_Phonenumber, segment='offer-offerlist')
 
 @blueprint.route('/<int:id>/editcustomer', methods=['GET', 'POST'])
 @login_required

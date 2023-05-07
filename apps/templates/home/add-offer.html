@@ -75,6 +75,7 @@
 												<label>Marketing Person</label>
 												<td>
 													<select name="marketing_Person_offer" id="marketing_Person_offer" class="form-control">
+														<option value="" selected>Marketing Person</option>
 														{% for user in role_manager_offer %}
 														<option>{{ user.user_first_name }}</option>
 														{% endfor %}
