@@ -89,7 +89,7 @@ def create():
             total_price_kit_offer = 0
 
             product_kit_offer = []
-            for i in range(len(product_offers)):
+            for i in range(len(kit_description_offer)):
                 kit_offer = {
                     'kit_name': kit_description_offer[i],
                     'Kit_number': kit_number_offer[i],
@@ -97,7 +97,7 @@ def create():
                     'unit_price': unit_price_kit_offer[i],
                     'total_price': total_price_kit_offer,
                 }
-            product_kit_offer.append(kit_offer)
+                product_kit_offer.append(kit_offer)
 
             # Convert the list to JSON
             product_kit_offer_json = json.dumps(product_kit_offer)
@@ -285,7 +285,9 @@ def add_bom_master():
 def add_supplier_master():
     if request.method == 'GET':
         Citymaster_main = CityMaster.query.all()
-        return render_template('home/add-supplier.html',Citymaster_main=Citymaster_main)
+        State_masters = StateMaster.query.all()
+        Country_master = CountryMaster.query.all()
+        return render_template('home/add-supplier.html',State_masters=State_masters,Country_master=Country_master,Citymaster_main=Citymaster_main)
     if request.method == 'POST':
         supplier_name = request.form['supplier_name']
         supplier_primary_contact =  request.form['supplier_primary_contact']
@@ -380,17 +382,30 @@ def offer_pdf(id):
         html_rows = ""
         counter = 0
         # Access the data as a Python object
-        for item in data:
-            product_name = item['product_name']
-            quantity = item['quantity']
-            unit_price = item['unit_price']
-            total_price = item['total_price']
-            counter += 1
-            html_row = f"<tr><td>{counter}</td><td>{product_name}</td><td>{quantity}</td><td>{unit_price}</td><td>{total_price}</td></tr>"
-            html_rows += html_row
-            
+        if add_user.offer_type_offer == "Spares":
+            for item in data:
+                product_name = item['product_name']
+                quantity = item['quantity']
+                unit_price = item['unit_price']
+                total_price = "-"
+                # total_price = item['total_price']
+                counter += 1
+                html_row = f"<tr><td>{counter}</td><td>{product_name}</td><td>{quantity}</td><td>{unit_price}</td><td>{total_price}</td></tr>"
+                html_rows += html_row
+            return render_template('home/pdf_add_offer.html',add_user=add_user,html_rows=html_rows, segment='offer-offerlist')
+        else:
+            for item in data:
+                kit_name = item['kit_name']
+                quantity = item['quantity']
+                unit_price = item['unit_price']
+                total_price = "-"
+                # total_price = item['total_price']
+                counter += 1
+                kit_name = kit_name.replace(',', '<br>'+"         - ")
+                html_row = f"<tr style='background-color: #f2f2f2;'><td style='border: 1px solid #ccc;'>{counter}</td><td style='border: 1px solid #ccc;'>{kit_name}</td><td style='border: 1px solid #ccc;'>{quantity}</td><td style='border: 1px solid #ccc;'>{unit_price}</td><td style='border: 1px solid #ccc;'>{total_price}</td></tr>"
 
-        return render_template('home/pdf_add_offer.html',add_user=add_user,html_rows=html_rows, segment='offer-offerlist')
+                html_rows += html_row
+            return render_template('home/pdf_add_offer.html',add_user=add_user,html_rows=html_rows, segment='offer-offerlist')
 
 @blueprint.route('/<int:id>/editcustomer', methods=['GET', 'POST'])
 @login_required
