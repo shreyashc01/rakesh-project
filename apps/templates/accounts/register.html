@@ -1,108 +1,164 @@
-{% extends "layouts/base.html" %}
+<!DOCTYPE html>
+<html>
 
-{% block title %} Register {% endblock %} 
+<head>
+    <title>Register Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background: linear-gradient(120deg, #2980b9, #8e44ad, #f39c12, #16a085);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+            font-family: Arial, sans-serif;
+        }
 
-<!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+        @keyframes gradientBackground {
+            0% {
+                background-position: 0% 50%;
+            }
 
-{% block content %}
+            50% {
+                background-position: 100% 50%;
+            }
 
-    <div class="page-inner">
-        <div class="page-header">
-            <h4 class="page-title">Login</h4>
-            <ul class="breadcrumbs">
-                <li class="nav-home">
-                    <a href="#">
-                        <i class="flaticon-home"></i>
-                    </a>
-                </li>
-                <li class="separator">
-                    <i class="flaticon-right-arrow"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Authentication</a>
-                </li>
-                <li class="separator">
-                    <i class="flaticon-right-arrow"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Login</a>
-                </li>
-            </ul>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .login-container {
+            margin-top: 100px;
+        }
+
+        .login-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .login-header {
+            background-color: #17a2b8;
+            color: #fff;
+            padding: 15px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .login-title {
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 0;
+        }
+
+        .login-body {
+            padding: 30px;
+        }
+
+        .login-form-group {
+            margin-bottom: 20px;
+        }
+
+        .login-form-group .input-group-text {
+            background-color: #f8f9fa;
+            border-color: #f8f9fa;
+        }
+
+        .login-button {
+            margin-top: 20px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container login-container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card login-card">
+                    <div class="card-header bg-info text-light d-flex align-items-center login-header">
                         <div class="card-title">
-
                             {% if msg %}
-                                <span class="text-danger">{{ msg | safe }}</span>
+                            <span class="text-danger">{{ msg | safe }}</span>
                             {% else %}
-                                <span>Register</span>
+                            <span>Register</span>
                             {% endif %}
-
                         </div>
                     </div>
 
-                    <form method="post" action="">
+                    <div class="logo">
+                        <img src="/static/assets/img/logo.jpg" alt="ORN Logo">
+                    </div>
 
+                    <form role="form" method="post" action="">
                         {{ form.hidden_tag() }}
 
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 col-lg-4">
+                        <div class="card-body login-body">
 
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="icon-user"></i>
-                                                </span>
-                                            </div>
-                                            {{ form.username(placeholder="Username", class="form-control") }}
-                                        </div>
+                            <div class="form-group login-form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-user"></i>
+                                        </span>
                                     </div>
-
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="icon-envelope"></i>
-                                                </span>
-                                            </div>
-                                            {{ form.email(placeholder="eMail Address",class="form-control") }}
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="icon-lock"></i>
-                                                </span>
-                                            </div>
-                                            {{ form.password(placeholder="Password", class="form-control", type="password") }}
-                                        </div>
-                                    </div>
-
+                                    {{ form.username(placeholder="Username", class="form-control") }}
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-action">
-                            <button type="submit" name="register" class="btn btn-success">Submit</button>
-                            &nbsp; &nbsp;
-                            <span>Already have and account?</span> <a href="{{ url_for('authentication_blueprint.login') }}">Login</a>
-                        </div>
 
+                            <div class="form-group login-form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-lock"></i>
+                                        </span>
+                                    </div>
+                                    {{ form.email(placeholder="eMail Address",class="form-control") }}
+                                </div>
+                            </div>
+                            
+                            <div class="form-group login-form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-key"></i>
+                                        </span>
+                                    </div>
+                                    {{ form.password(placeholder="Password", class="form-control", type="password") }}
+                                </div>
+                            </div>
+
+                            <div class="form-group login-form-group">
+                                <button type="submit" name="register" class="btn btn-success">Submit</button>
+                                &nbsp; &nbsp;
+                                <span>Already have an account?</span> <a
+                                    href="{{ url_for('authentication_blueprint.login') }}">Login</a>
+                            </div>
+                        </div>
                     </form>
 
                 </div>
             </div>
         </div>
     </div>
+</body>
 
-{% endblock content %}
-
-<!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+</html>

@@ -37,49 +37,48 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="card-header"> Add Supplier </div>
                         <div class="card-body">
                             <div class="col-sm-12">
                                 <p><b>Supplier Details:-</b></p>
-                                <hr>
-
                                 <div class="row">
-                                    <input type="hidden" formcontrolname="supplierId" value="">
-                                    <input type="hidden" formcontrolname="createdBy" value="">
-                                    <input type="hidden" formcontrolname="modifiedBy" value="">
-
                                     <div class="form-group col-sm-4">
-                                        <label>Supplier Name<spanstyle="color: red;">*</span></label>
-                                        <input name="supplier_name" class="form-control ng-untouched ng-pristine ng-valid" type="text" maxlength="100" autocomplete="off">
+                                        <label>Supplier Name<span style="color: red;">*</span></label>
+                                        <input name="supplier_name" value="{{users.supplier_name}}" class="form-control" type="text" maxlength="100" autocomplete="new-password">
                                     </div>
 
                                     <div class="form-group col-sm-4">
                                         <label>Primary Contact Person<span style="color: red;">*</span></label>
-                                        <input name="supplier_primary_contact" class="form-control ng-untouched ng-pristine ng-valid" type="text" maxlength="100" autocomplete="off">
+                                        <input name="supplier_primary_contact" value="{{users.supplier_primary_contact}}" class="form-control" type="text" maxlength="100" autocomplete="new-password">
                                     </div>
 
                                     <div class="form-group col-sm-4">
                                         <label>Secondary Contact Person</label>
-                                        <input name="supplier_secondary_contact" type="text" maxlength="100" autocomplete="off" class="form-control ng-untouched ng-pristine ng-valid">
+                                        <input name="supplier_secondary_contact" value="{{users.supplier_secondary_contact}}" type="text" maxlength="100" autocomplete="new-password" class="form-control">
                                     </div>
 
                                     <div class="form-group col-sm-4">
                                         <label>Email ID</label>
-                                        <input name="supplier_email_id" type="text" maxlength="200" autocomplete="off" class="form-control ng-untouched ng-pristine ng-valid">
+                                        <input name="supplier_email_id" value="{{users.supplier_email_id}}" type="text" maxlength="200"  autocomplete="new-password" class="form-control">
                                     </div>
 
                                     <div class="form-group col-sm-4">
                                         <label>Contact No</label>
-                                        <input name="supplier_contact_no" type="text" maxlength="200" autocomplete="off" class="form-control ng-untouched ng-pristine ng-valid">
+                                        <input name="supplier_contact_no" value="{{users.supplier_contact_no}}" type="text" maxlength="200"  autocomplete="new-password" class="form-control">
                                     </div>
 
                                     <div class="form-group col-sm-4">
                                         <label>Country</label>
                                         <td>
                                             <select name="supplier_country" class="form-control">
+                                                <option value="">Select Country</option>
                                                 {% for user in Country_master %}
-                                                    <option>{{ user.country_name_temp }}</option>
+                                                    {% if user.country_name_temp == users.supplier_country %}
+                                                        <option value="{{ user.country_name_temp }}" selected>{{ user.country_name_temp }}</option>
+                                                    {% else %}
+                                                        <option value="{{ user.country_name_temp }}">{{ user.country_name_temp }}</option>
+                                                    {% endif %}
                                                 {% endfor %}
+
                                             </select>
                                         </td>
                                     </div>
@@ -91,8 +90,13 @@
                                         <label>State</label>
                                         <td>
                                             <select name="supplier_state" class="form-control">
+                                                <option value="">Select State</option>
                                                 {% for user in State_masters %}
-                                                    <option>{{ user.state_name_temp }}</option>
+                                                    {% if user.state_name_temp == users.supplier_state %}
+                                                        <option value="{{ user.state_name_temp }}" selected>{{ user.state_name_temp }}</option>
+                                                    {% else %}
+                                                        <option value="{{ user.state_name_temp }}">{{ user.state_name_temp }}</option>
+                                                    {% endif %}
                                                 {% endfor %}
                                             </select>
                                         </td>
@@ -101,16 +105,22 @@
                                         <label>City</label>
                                         <td>
                                             <select name="supplier_city" class="form-control">
+                                                <option value="">Select City</option>
                                                 {% for user in Citymaster_main %}
-                                                    <option>{{ user.city_name }}</option>
+                                                    {% if user.city_name == users.supplier_city %}
+                                                        <option value="{{ user.city_name }}" selected>{{ user.city_name }}</option>
+                                                    {% else %}
+                                                        <option value="{{ user.city_name }}">{{ user.city_name }}</option>
+                                                    {% endif %}
                                                 {% endfor %}
+
                                             </select>
                                         </td>
                                     </div>
 
                                     <div class="form-group col-sm-4">
                                         <label>Address</label>
-                                        <textarea name="supplier_address" class="form-control"></textarea>
+                                        <textarea name="supplier_address" class="form-control" autocomplete="new-password">{{users.supplier_address}}</textarea>
                                     </div>
                                 </div>
 
@@ -118,12 +128,12 @@
                                 <div class="row">
                                     <div class="form-group col-sm-4">
                                         <label>GST No</label>
-                                        <input name="supplier_gst_no" type="text" maxlength="200" autocomplete="off" class="form-control ng-untouched ng-pristine ng-valid">
+                                        <input name="supplier_gst_no" value="{{users.supplier_gst_no}}" type="text" maxlength="200"  autocomplete="new-password" class="form-control">
                                     </div>
 
                                     <div class="form-group col-sm-4">
                                         <label>PAN No</label>
-                                        <input name="supplier_pan" type="text" maxlength="200" autocomplete="off" class="form-control ng-untouched ng-pristine ng-valid">
+                                        <input name="supplier_pan" value="{{users.supplier_pan}}" type="text" maxlength="200"  autocomplete="new-password" class="form-control">
                                     </div>
 
                                 </div>
@@ -132,7 +142,7 @@
                             <hr class="mb-4">
                             <div style="text-align: center;">
                                 <button id="btnSave"  type="submit" class="btn btn-primary btn-sm">Save</button> &nbsp; 
-                                <a routerlink="/Supplier_List" queryparamshandling="preserve" class="btn btn-danger btn-sm" href="/Supplier_List?p=1">Cancel</a>
+                                <a routerlink="/Supplier-masters" queryparamshandling="preserve" class="btn btn-danger btn-sm" href="/Supplier-masters">Cancel</a>
                             </div>
                         </div>
                     </div>
@@ -147,32 +157,6 @@
 {% endblock content %}
 
 {% block javascripts %}
-<script>
-	let lineNo = 1;
-
-	function myButtonClick() {
-		console.log("clask")
-			var table = document.getElementById('emptbl');
-			var rowCount = table.rows.length;
-			console.log(rowCount)
-			var cellCount = table.rows[0].cells.length;
-			markup = $('<tr _ngcontent-owj-c93=""> <td _ngcontent-owj-c93="" style="width: 400px;"><ng-select _ngcontent-owj-c93="" bindlabel="value" bindvalue="id" class="ng-select ng-select-single ng-select-searchable ng-select-clearable ng-touched ng-dirty ng-valid ng-select-top"> <input _ngcontent-owj-c93="" numberonly="" class="form-control ng-touched ng-dirty ng-valid"> </ng-select></td> <td _ngcontent-yms-c134="" style="width: 5%;"> <a _ngcontent-yms-c134="" class="btn btn-secondary active" onclick="SomeDeleteRowFunction(this)" id=' + lineNo + '> <i _ngcontent-yms-c134="" class="fas fa-trash-alt"> </i> </a> </td> </tr>')
-			tableBody = $("table tbody");
-			tableBody.append(markup);
-			lineNo++;
-	}
-
-
-	function SomeDeleteRowFunction(btndel) {
-		if (typeof (btndel) == "object") {
-			$(btndel).closest("tr").remove();
-		}
-		else {
-			return false;
-		}
-	}
-</script>
-
 <style>
 	th,
 	td {

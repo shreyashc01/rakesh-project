@@ -31,12 +31,12 @@
                 </li>
             </ul>
         </div>
-        <form action='' method="POST">
-            <section class="content">
+        <form action="" method="POST">
+            <div class="content">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="card">
-                            <div class="card-header"> Kit Details </div>
+                            <div class="card-header">Kit Details</div>
                             <div class="card-body">
                                 <div class="col-sm-12">
                                     <div class="row">
@@ -45,20 +45,20 @@
                                             <textarea rows="2" name="kit_description" class="form-control"></textarea>
                                         </div>
                                     </div>
-
+        
                                     <div class="row">
                                         <div class="form-group col-sm-4">
                                             <label>Kit No</label>
-                                            <input name="kit_no" type="text" maxlength="200" autocomplete="off"
+                                            <input name="kit_no" type="text" maxlength="200" autocomplete="new-password"
                                                 class="form-control">
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label>HSN Code</label>
-                                            <input name="hsn_code" type="text" maxlength="200" autocomplete="off"
+                                            <input name="hsn_code" type="text" maxlength="200" autocomplete="new-password"
                                                 class="form-control">
                                         </div>
                                     </div>
-
+        
                                     <div class="row">
                                         <div class="form-group col-sm-8">
                                             <label>Total No. of lubrication points</label>
@@ -70,44 +70,43 @@
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <section class="content">
+            </div>
+        
+            <div class="content">
                 <div class="page-section">
                     <div class="card card-fluid">
                         <div class="card-body">
-                            <table _ngcontent-owj-c93="" style="width: 100%;" id="emptbl">
-
-                                <thead _ngcontent-owj-c93="">
-                                    <th _ngcontent-owj-c93="">Product<span _ngcontent-owj-c93=""
-                                            style="color: red;">*</span></th>
-                                    <th _ngcontent-owj-c93=""><a _ngcontent-owj-c93="" class="btn btn-secondary active "
-                                            onclick="myButtonClick()"><i _ngcontent-owj-c93=""
-                                                class="fa fa-plus"></i></a></th>
+                            <table style="width: 100%;" id="emptbl">
+                                <thead>
+                                    <th>Product<span style="color: red;">*</span></th>
+                                    <th>
+                                        <a class="btn btn-secondary active" onclick="myButtonClick()">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </th>
                                 </thead>
-                                <tbody _ngcontent-owj-c93="" style="padding: 5%;">
-                                    <tr _ngcontent-owj-c93="">
-                                        <td _ngcontent-owj-c93="" style="width: 400px;">
-                                            <input class="text-input" name="kit_products" autocomplete="off">
+                                <tbody style="padding: 5%;">
+                                    <tr>
+                                        <td style="width: 400px;">
+                                            <input class="text-input" name="kit_products" autocomplete="new-password">
                                         </td>
-                                        <td _ngcontent-yms-c134="" style="width: 5%;"> </td>
+                                        <td style="width: 5%;"></td>
                                     </tr>
                                 </tbody>
-
                             </table>
                         </div>
                         <hr class="mb-4">
-                        <div style="text-align: center;"><button id="btnSave" type="submit"
-                                class="btn btn-primary btn-sm">Save</button> &nbsp; <a routerlink="/Kit-masters"
-                                queryparamshandling="preserve" class="btn btn-danger btn-sm" href="/Kit-masters">Cancel
-                            </a></div>
+                        <div style="text-align: center;">
+                            <button id="btnSave" type="submit" class="btn btn-primary btn-sm">Save</button>
+                            &nbsp;
+                            <a routerlink="/Kit-masters" queryparamshandling="preserve" class="btn btn-danger btn-sm"
+                                href="/Kit-masters">Cancel</a>
+                        </div>
                         <br>
                         <div class="card-footer"></div>
                     </div>
                 </div>
-            </section>
-
-
+            </div>
         </form>
     </div>
 </div>
@@ -123,7 +122,7 @@
         var rowCount = table.rows.length;
         console.log(rowCount)
         var cellCount = table.rows[0].cells.length;
-        markup = $('<tr _ngcontent-owj-c93=""> <td _ngcontent-owj-c93="" style="width: 400px;"> <input class="text-input" name="kit_products"> </td> <td _ngcontent-yms-c134="" style="width: 5%;"> <a _ngcontent-yms-c134="" class="btn btn-secondary active" onclick="SomeDeleteRowFunction(this)"> <i _ngcontent-yms-c134="" class="fas fa-trash-alt"> </i> </a> </td> </tr>')
+        markup = $('<tr> <td style="width: 400px;"> <input class="text-input" name="kit_products" autocomplete="new-password"> </td> <td _ngcontent-yms-c134="" style="width: 5%;"> <a _ngcontent-yms-c134="" class="btn btn-secondary active" onclick="SomeDeleteRowFunction(this)"> <i _ngcontent-yms-c134="" class="fas fa-trash-alt"> </i> </a> </td> </tr>')
         tableBody = $("table tbody");
         tableBody.append(markup);
         lineNo++;

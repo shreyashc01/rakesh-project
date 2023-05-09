@@ -49,7 +49,7 @@
 												<label>Customer Name</label>
 												<select name="customer_name_offer" id="customer_name_offer" class="form-control">
 													{% for user in users %}
-													<option>{{ user.customer_name}}</option>
+													<option>{{user.customer_name}}</option>
 													{% endfor %}
 												</select>
 											</tr>
@@ -77,7 +77,7 @@
 													<select name="marketing_Person_offer" id="marketing_Person_offer" class="form-control">
 														<option value="" selected>Marketing Person</option>
 														{% for user in role_manager_offer %}
-														<option>{{ user.user_first_name }}</option>
+														<option>{{user.user_first_name}}</option>
 														{% endfor %}
 													</select>
 												</td>
@@ -152,8 +152,7 @@
 											<label for="pfpercent">P&amp;F Percentage:</label>
 											<td>
 												<input type="number"
-													class="pfpercent form-control ng-pristine ng-valid ng-touched"
-													id="pf_percentage_offer" name="pf_percentage_offer">
+													class="pfpercent form-control ng-pristine ng-valid ng-touched" autocomplete="new-password" id="pf_percentage_offer" name="pf_percentage_offer">
 											</td>
 										</tr>
 									</div>
@@ -163,7 +162,7 @@
 										<tr>
 											<label for="freight_offer">Freight:</label>
 											<td>
-												<input type="number" name="freight_offer" class="freight form-control ng-pristine ng-valid ng-touched" id="freight_offer">
+												<input type="number" name="freight_offer" autocomplete="new-password" class="freight form-control ng-pristine ng-valid ng-touched" id="freight_offer">
 											</td>
 										</tr>
 									</div>
@@ -171,7 +170,7 @@
 										<tr>
 											<label for="gst">GST:</label>
 											<td>
-												<input type="number" class="form-control ng-pristine ng-valid ng-touched" id="gst_offer" name="gst_offer" readonly>
+												<input type="number" autocomplete="new-password" class="form-control ng-pristine ng-valid ng-touched" id="gst_offer" name="gst_offer" readonly>
 											</td>
 										</tr>
 									</div>
@@ -194,7 +193,7 @@
 										<tr>
 											<label for="grand_total_offer">Grand Total:</label>
 											<td>
-												<input type="number"
+												<input type="number" autocomplete="new-password"
 													class="form-control ng-pristine ng-valid ng-touched"
 													id="grand_total_offer" name="grand_total_offer" readonly>
 											</td>
@@ -215,31 +214,31 @@
 							<div class="form-group">
 								<tr>
 									<label>Subject</label>
-									<td><input type="text" name="subject_offer" id="subject_offer" class="form-control" /></td>
+									<td><input type="text" autocomplete="new-password" name="subject_offer" id="subject_offer" class="form-control" /></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<label>Reference</label>
-									<td><input type="text" name="reference_offer" id="reference_offer" class="form-control" /></td>
+									<td><input type="text" autocomplete="new-password" name="reference_offer" id="reference_offer" class="form-control" /></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<label>Description</label>
-									<td><input type="text" name="description_offer" id="description_offer" class="form-control" /></td>
+									<td><input type="text" autocomplete="new-password" name="description_offer" id="description_offer" class="form-control" /></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<label>Footer Description</label>
-									<td><input type="text" name="footer_description_offer" id="footer_description_offer" class="form-control" /></td>
+									<td><input type="text" autocomplete="new-password" name="footer_description_offer" id="footer_description_offer" class="form-control" /></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<label>Notes</label>
-									<td><input type="text" name="notes_offer" id="notes_offer" class="form-control" /></td>
+									<td><input type="text" autocomplete="new-password" name="notes_offer" id="notes_offer" class="form-control" /></td>
 								</tr>
 							</div>
 						</div>
@@ -258,59 +257,59 @@
 							<div class="form-group">
 								<tr>
 									<label>Price Basis </label>
-									<td><input type="text" name="price_basis_offer" id="price_basis_offer" class="form-control"/></td>
+									<td><input type="text" autocomplete="new-password" name="price_basis_offer" id="price_basis_offer" class="form-control"/></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<label>P&F Charges</label>
-									<td><input type="text" name="PandFcharges_offer" id="PandFcharges_offer" class="form-control"/>
+									<td><input type="text" autocomplete="new-password" name="PandFcharges_offer" id="PandFcharges_offer" class="form-control"/>
 									</td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<label>IGST</label>
-									<td><input type="text" name="igst_terms_offer" id="igst_terms_offer" class="form-control"/></td>
+									<td><input type="text" autocomplete="new-password" name="igst_terms_offer" id="igst_terms_offer" class="form-control"/></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<label>HSN CODE</label>
-									<td><input type="text" name="hsn_code_offer" id="hsn_code_offer" class="form-control"/></td>
+									<td><input type="text" autocomplete="new-password" name="hsn_code_offer" id="hsn_code_offer" class="form-control"/></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<label>Payment Terms</label>
-									<td><input type="text" name="payment_terms_offer" id="payment_terms_offer" class="form-control"/>
+									<td><input type="text" autocomplete="new-password" name="payment_terms_offer" id="payment_terms_offer" class="form-control"/>
 									</td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<label>Delivery</label>
-									<td><input type="text" name="delivery_terms_offer" id="delivery_terms_offer" class="form-control"/></td>
+									<td><input type="text" autocomplete="new-password" name="delivery_terms_offer" id="delivery_terms_offer" class="form-control"/></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<label>Freight</label>
-									<td><input type="text" name="freight_terms_offer" id="freight_terms_offer" class="form-control"/>
+									<td><input type="text" autocomplete="new-password" name="freight_terms_offer" id="freight_terms_offer" class="form-control"/>
 									</td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<label>Validity</label>
-									<td><input type="text" name="validity_terms_offer" id="validity_terms_offer" class="form-control"/></td>
+									<td><input type="text" autocomplete="new-password" name="validity_terms_offer" id="validity_terms_offer" class="form-control"/></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<form>
 										<label>Warranty</label>
-										<td><input type="text" id="warrenty_terms_offer" name="warrenty_terms_offer" class="form-control"/></td>
+										<td><input type="text" autocomplete="new-password" id="warrenty_terms_offer" name="warrenty_terms_offer" class="form-control"/></td>
 									</form>
 								</tr>
 							</div>
@@ -357,7 +356,9 @@
 			<td>
 				<input type="number" name="unit_price_product_offer" class="unit-price form-control" value="0">
 			</td>
-			<td class="total">0</td>
+			<td>
+				<input type="text" id="total" name="total" class="total form-control" value="0" readonly>
+			</td>
 			<td>
 				<button class="btn btn-danger" onclick="removeProductRow(this)">Remove</button>
 			</td>
@@ -409,7 +410,7 @@
 		<td><input id="kit_number_offer" name="kit_number_offer" class="kit_number_offer form-control" value="0" readonly></td>
 		<td><input type="number" id="quantity_kit_offer" name="quantity_kit_offer" class="quantity form-control" value="0"></td>
 		<td><input type="number" id="unit_price_kit_offer" name="unit_price_kit_offer" class="unit-price form-control" value="0"></td>
-		<td id="total" name="total" class="total">0</td>
+		<td><input type="text" id="total" name="total" class="total form-control" value="0" readonly></td>
 		<td><button class="btn btn-danger" onclick="removeProductRow(this)">Remove</button></td>
 		`;
 		tableBody.appendChild(newRow);
@@ -433,65 +434,66 @@
 	}
 
 	function updateTotal() {
-		const rows = document.querySelectorAll('#product-table tbody tr');
-		let total = 0;
-		rows.forEach(row => {
-			const quantity = Number(row.querySelector('.quantity').value);
-			const unitPrice = Number(row.querySelector('.unit-price').value);
-			const rowTotal = quantity * unitPrice;
-			row.querySelector('.total').textContent = `${rowTotal}`;
-			total += rowTotal;
-		});
-		$('#total_amount_offer').val(total);
+    const rows = $('#product-table tbody tr');
+    let total = 0;
 
-		const pfInput = document.querySelector('#pf_percentage_offer');
-		const freightInput = document.querySelector('#freight_offer');
+    rows.each(function() {
+        const quantity = Number($(this).find('.quantity').val());
+        const unitPrice = Number($(this).find('.unit-price').val());
+        const rowTotal = quantity * unitPrice;
+        $(this).find('.total').val(rowTotal);
+        total += rowTotal;
+    });
 
-		let pfAmount = 0;
-		if (pfInput.value) {
-			pfAmount = total * (Number(pfInput.value) / 100);
-		}
+    $('#total_amount_offer').val(total);
 
-		let freightAmount = 0;
-		if (freightInput.value) {
-			freightAmount = Number(freightInput.value);
-		}
+    const pfInput = $('#pf_percentage_offer');
+    const freightInput = $('#freight_offer');
 
-		let subTotal = total + pfAmount + freightAmount;
+    let pfAmount = 0;
+    if (pfInput.val()) {
+        pfAmount = total * (Number(pfInput.val()) / 100);
+    }
 
-		var gst = ((subTotal) * 18) / 100;
-		$('#gst_offer').val(gst.toFixed(2));
+    let freightAmount = 0;
+    if (freightInput.val()) {
+        freightAmount = Number(freightInput.val());
+    }
 
-		var grandTotal = subTotal + gst;
-		$('#grand_total_offer').val(grandTotal.toFixed(2));
+    let subTotal = total + pfAmount + freightAmount;
+    let gst = (subTotal * 18) / 100;
+    let grandTotal = subTotal + gst;
 
-		pfInput.addEventListener('input', () => {
-			const pfPercentage = Number(pfInput.value);
-			pfAmount = total * (pfPercentage / 100);
-			subTotal = total + pfAmount + freightAmount;
-			gst = ((subTotal) * 18) / 100;
-			grandTotal = subTotal + gst;
-			$('#gst_offer').val(gst.toFixed(2));
-			$('#grand_total_offer').val(grandTotal.toFixed(2));
-		});
+    $('#gst_offer').val(gst.toFixed(2));
+    $('#grand_total_offer').val(grandTotal.toFixed(2));
 
-		freightInput.addEventListener('input', () => {
-			freightAmount = Number(freightInput.value);
-			subTotal = total + pfAmount + freightAmount;
-			gst = ((subTotal) * 18) / 100;
-			grandTotal = subTotal + gst;
-			$('#gst_offer').val(gst.toFixed(2));
-			$('#grand_total_offer').val(grandTotal.toFixed(2));
-		});
+    pfInput.on('input', () => {
+        const pfPercentage = Number(pfInput.val());
+        pfAmount = total * (pfPercentage / 100);
+        subTotal = total + pfAmount + freightAmount;
+        gst = (subTotal * 18) / 100;
+        grandTotal = subTotal + gst;
+        $('#gst_offer').val(gst.toFixed(2));
+        $('#grand_total_offer').val(grandTotal.toFixed(2));
+    });
 
-		const newRow = document.querySelector('#product-table tfoot tr');
-		newRow.querySelector('.total').textContent = `${total}`;
-		newRow.querySelectorAll('.quantity, .unit-price').forEach(input => {
-			input.addEventListener('input', updateTotal);
-		});
+    freightInput.on('input', () => {
+        freightAmount = Number(freightInput.val());
+        subTotal = total + pfAmount + freightAmount;
+        gst = (subTotal * 18) / 100;
+        grandTotal = subTotal + gst;
+        $('#gst_offer').val(gst.toFixed(2));
+        $('#grand_total_offer').val(grandTotal.toFixed(2));
+    });
 
-		$('#grand_total_offer').val(grandTotal.toFixed(2));
-	}
+    const newRow = $('#product-table tfoot tr');
+    newRow.find('.total').val(total);
+
+    newRow.find('.quantity, .unit-price').on('input', updateTotal);
+
+    $('#grand_total_offer').val(grandTotal.toFixed(2));
+}
+
 
 
 	document.querySelectorAll('.quantity, .unit-price').forEach(input => {

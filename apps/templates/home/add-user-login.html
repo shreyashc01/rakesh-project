@@ -46,53 +46,62 @@
                                         <div class="form-group col-sm-4">
                                             <label>First Name<span style="color: red;">*</span>
                                             </label>
-                                            <input name="user_first_name" type="text" maxlength="200" autocomplete="off" class="form-control">
+                                            <input name="user_first_name" value="{{users.user_first_name}}" type="text" maxlength="200" autocomplete="new-password" class="form-control">
                                         </div>
 
                                         <div class="form-group col-sm-4">
                                             <label>Last Name</label>
-                                            <input name="user_last_name" type="text" maxlength="200" autocomplete="off" class="form-control">
+                                            <input name="user_last_name" value="{{users.user_last_name}}" type="text" maxlength="200" autocomplete="new-password" class="form-control">
                                         </div>
 
                                         <div class="form-group col-sm-4">
                                             <label>Contact No</label>
-                                            <input name="user_contact_no" type="text" maxlength="200" autocomplete="off" class="form-control">
+                                            <input name="user_contact_no" value="{{users.user_contact_no}}" type="text" maxlength="200" autocomplete="new-password" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-4">
                                             <label>Email ID</label>
-                                            <input name="user_email_id" type="text" maxlength="200" autocomplete="off" class="form-control">
+                                            <input name="user_email_id" value="{{users.user_email_id}}" type="email" maxlength="200" autocomplete="new-password" class="form-control">
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label>User Name<span style="color: red;">*</span></label>
-                                            <input name="user_name_master" type="text" maxlength="200" autocomplete="off" class="form-control">
+                                            <input name="user_name_master" value="{{users.user_name_master}}" type="text" maxlength="200" autocomplete="new-password" class="form-control">
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label>Password<span style="color: red;">*</span></label>
-                                            <input name="password_master" type="password" maxlength="200" autocomplete="off" class="form-control">
+                                            <input name="password_master" value="{{users.password_master}}" type="password" maxlength="200" autocomplete="new-password" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-4">
                                             <label>Confirm Password<span style="color: red;">*</span></label>
-                                            <input name="confirm_password" type="password" maxlength="200" autocomplete="off"class="form-control">
-                                        </div>
+                                            <input name="confirm_password" value="{{users.confirm_password}}" type="password" maxlength="200" autocomplete="new-password"class="form-control">
+                                        </div>  
                                         <div class="form-group col-sm-4">
                                             <label>User Role<span style="color: red;">*</span></label>
                                             <select name="user_role_master" class="form-control">
                                                 <option value="">Select Role</option>
                                                 {% for user in role_master %}
-                                                    <option>{{ user.role_name }}</option>
+                                                    {% if user.role_name == users.user_role_master %}
+                                                        <option value="{{ user.role_name }}" selected>{{ user.role_name }}</option>
+                                                    {% else %}
+                                                        <option value="{{ user.role_name }}">{{ user.role_name }}</option>
+                                                    {% endif %}
                                                 {% endfor %}
                                             </select>
                                         </div>
+
                                         <div class="form-group col-sm-4">
                                             <label>Reporting To</label>
                                             <select name="user_reporting_person" class="form-control">
                                                 <option value="None">Select Reporting Person</option>
                                                 {% for user in user_master_login %}
-                                                    <option>{{ user.user_first_name }}</option>
+                                                    {% if user.user_first_name == users.user_reporting_person %}
+                                                        <option value="{{ user.user_first_name }}" selected>{{ user.user_first_name }}</option>
+                                                    {% else %}
+                                                        <option value="{{ user.user_first_name }}">{{ user.user_first_name }}</option>
+                                                    {% endif %}
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -101,7 +110,7 @@
                                 <hr class="mb-4">
                                 <div style="text-align: center;">
                                     <button id="btnSave" type="submit" class="btn btn-primary btn-sm">Save</button> &nbsp;
-                                    <a routerlink="/" queryparamshandling="preserve" class="btn btn-danger btn-sm" href="/">Cancel</a>
+                                    <a routerlink="/User-masters" queryparamshandling="preserve" class="btn btn-danger btn-sm" href="/User-masters">Cancel</a>
                                 </div>
                             </div>
                         </div>

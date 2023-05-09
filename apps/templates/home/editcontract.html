@@ -44,21 +44,20 @@
                                         <div class="row">
                                             <div class="form-group col-sm-8">
                                                 <label>Customer Name</label>
-                                                <input class="form-control"
-                                                    style="background-color: #f6f7f9; height: auto;" readonly>
+                                                <input class="form-control" value="{{add_user_contractReview.customer_name_offer}}" style="background-color: #f6f7f9; height: auto;" readonly>
                                                 </input>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-sm-4">
                                                 <label>Offer No</label>
-                                                <input class="form-control"
+                                                <input class="form-control" value="{{add_user_contractReview.quotation_number_offer}}" 
                                                     style="background-color: #f6f7f9; height: auto;" readonly>
                                                 </input>
                                             </div>
                                             <div class="form-group col-sm-4">
                                                 <label>Offer Date</label>
-                                                <input class="form-control" style="background-color: #f6f7f9;" readonly>
+                                                <input class="form-control" value="{{add_user_contractReview.due_date_offer}}" style="background-color: #f6f7f9;" readonly>
                                                 </input>
                                             </div>
                                         </div>
@@ -85,54 +84,39 @@
                                         <div class="row">
                                             <div class="form-group col-sm-6">
                                                 <label>Billing Address</label>
-                                                <textarea class="form-control ng-untouched ng-pristine ng-valid">
-
-                                                </textarea>
+                                                    <textarea rows="3" class="form-control">{{add_user_contractReview.contract_review_Billing_Address}}</textarea>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-sm-6">
                                                 <label>Delivery Address 1 </label>
-                                                <textarea class="form-control ng-pristine ng-valid ng-touched">
-
-                                                </textarea>
+                                                <textarea rows="3" class="form-control">{{add_user_contractReview.contract_review_Billing_Address}}</textarea>
                                             </div>
                                             <div class="form-group col-sm-6">
                                                 <label>Delivery Address 2 </label>
-                                                <textarea class="form-control ng-pristine ng-valid ng-touched">
-
-                                                </textarea>
+                                                <textarea rows="3" class="form-control"></textarea>
                                             </div>
                                             <div class="form-group col-sm-6">
                                                 <label>Delivery Address 3 </label>
-                                                <textarea class="form-control ng-pristine ng-valid ng-touched">
-
-                                                </textarea>
+                                                <textarea rows="3" class="form-control"></textarea>
                                             </div>
                                             <div class="form-group col-sm-6">
                                                 <label>Delivery Address 4 </label>
-                                                <textarea class="form-control ng-pristine ng-valid ng-touched">
-
-                                                </textarea>
+                                                <textarea rows="3" class="form-control"></textarea>
                                             </div>
                                             <div class="form-group col-sm-6">
                                                 <label>Delivery Address 5 </label>
-                                                <textarea class="form-control ng-pristine ng-valid ng-touched">
-
-                                                </textarea>
+                                                <textarea rows="3" class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <table id="tableCosts" style="width: 60%; margin-left: 14px;">
                                                 <tr>
-                                                    <th
-                                                        style="border: 1px solid black; border-collapse: collapse; padding: 15px; text-align: left;">
+                                                    <th style="border: 1px solid black; border-collapse: collapse; padding: 15px; text-align: left;">
                                                         Offer No</th>
-
                                                 </tr>
                                                 <tr>
-                                                    <td
-                                                        style="border: 1px solid black; border-collapse: collapse; padding: 15px; text-align: left;">
+                                                    <td style="border: 1px solid black; border-collapse: collapse; padding: 15px; text-align: left;">
                                                         Total Cost</td>
                                                 </tr>
                                             </table>

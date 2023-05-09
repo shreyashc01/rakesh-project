@@ -89,7 +89,7 @@
                                     {% for value in values_list %}
                                     <tr _ngcontent-owj-c93="">
                                         <td _ngcontent-owj-c93="" style="width: 400px;">
-                                            <input class="text-input" name="kit_products" value="{{value}}">
+                                            <input class="text-input" name="kit_products" value="{{ value['kit_name_master'] }}">
                                         </td>
                                         <td _ngcontent-yms-c134="" style="width: 5%;"><a _ngcontent-yms-c134="" class="btn btn-secondary active"
                                             onclick="SomeDeleteRowFunction(this)"> <i _ngcontent-yms-c134="" class="fas fa-trash-alt"> </i> </a> </td>

@@ -54,6 +54,10 @@ def create():
                                currency_master_offer=currency_master_offer,Quatationnumber=Quatationnumber, segment='offer-addoffer')
     if request.method == 'POST':
         customer_name_offer = request.form['customer_name_offer']
+
+        address_temp = CustomerMaster.query.filter_by(customer_name=customer_name_offer).first()
+        billing_address_temp = address_temp.address if address_temp.address else None
+
         due_date_offer = request.form['due_date_offer']
         offer_type_offer = request.form['offer_type_offer']
         quotation_number_offer = request.form['quotation_number_offer']
@@ -65,7 +69,8 @@ def create():
             product_offers = request.form.getlist('product_offer')
             quantity_list = request.form.getlist('quantity_product_offer')
             unit_price_list = request.form.getlist('unit_price_product_offer')
-            total_price_product_offer = 0
+            print(request.form.getlist('total'))
+            total_price_product_offer = request.form.getlist('total')
             # json.loads(request.form.get('total_price_product_offer'))
 
             product_kit_offer = []
@@ -78,19 +83,18 @@ def create():
                     'part_number' : part_number,
                     'quantity': quantity_list[i],
                     'unit_price': unit_price_list[i],
-                    'total_price': total_price_product_offer,
+                    'total_price': total_price_product_offer[i],
                 }
                 product_kit_offer.append(product_offer)
 
             # Convert the list to JSON
             product_kit_offer_json = json.dumps(product_kit_offer)
-            print(product_kit_offer_json)
         if offer_type_offer == "Kits":
             kit_description_offer = request.form.getlist('kit_description_offer')
             kit_number_offer = request.form.getlist('kit_number_offer')
             quantity_kit_offer = request.form.getlist('quantity_kit_offer')
             unit_price_kit_offer = request.form.getlist('unit_price_kit_offer')
-            total_price_kit_offer = 0
+            total_price_kit_offer = request.form.getlist('total')
 
             product_kit_offer = []
             for i in range(len(kit_description_offer)):
@@ -99,16 +103,12 @@ def create():
                     'part_number': kit_number_offer[i],
                     'quantity': quantity_kit_offer[i],
                     'unit_price': unit_price_kit_offer[i],
-                    'total_price': total_price_kit_offer,
+                    'total_price': total_price_kit_offer[i],
                 }
                 product_kit_offer.append(kit_offer)
 
             # Convert the list to JSON
             product_kit_offer_json = json.dumps(product_kit_offer)
-            print(product_kit_offer_json)
-        print("**********************************************************")
-        print(product_kit_offer_json)
-        print("**********************************************************")
 
         total_amount_offer = request.form['total_amount_offer']
         freight_offer = request.form['freight_offer']
@@ -165,7 +165,7 @@ def create():
             contract_review_Order_No='',  # Provide a default value for the missing arguments
             contract_review_Order_Date='',
             contract_review_PO_Qty=0,
-            contract_review_Billing_Address='',
+            contract_review_Billing_Address=billing_address_temp,
             contract_review_Delivery_Address_1='',
             contract_review_Delivery_Address_2='',
             contract_review_Delivery_Address_3='',
@@ -199,14 +199,23 @@ def create():
 def kit_add():
     if request.method == 'GET':
         users = KitMaster.query.all()
-        return render_template('home/add-kit.html',users=users)
+        return render_template('home/add-kit.html',users=users, segment="Kit-masters")
     if request.method == 'POST':
         kit_description = request.form['kit_description']
         kit_no = request.form['kit_no']
         hsn_code = request.form['hsn_code']
         lubricant_points = request.form['lubricant_points']
         kit_products_temp = request.form.getlist('kit_products')
-        kit_products = ','.join(kit_products_temp)
+
+        add_kit_master = []
+        for i in range(len(kit_products_temp)):
+            Kit_offer = {
+                'kit_name_master': kit_products_temp[i]
+            }
+            add_kit_master.append(Kit_offer)
+        print(json.dumps(add_kit_master))
+        
+        kit_products = json.dumps(add_kit_master)
         kit_master_add = KitMaster(kit_description=kit_description,
             kit_no=kit_no,
             hsn_code=hsn_code,
@@ -224,9 +233,9 @@ def add_user_login():
     if request.method == 'GET':
         role_master = RoleMaster.query.all()
         user_master_login = UserModel.query.all()
-        return render_template('home/add-user-login.html',role_master=role_master,user_master_login=user_master_login)
+        return render_template('home/add-user-login.html',role_master=role_master,user_master_login=user_master_login, users=None, segment='User-masters')
     if request.method == 'POST':
-        user_first_name = request.form['user_first_name']
+        user_first_name = request.form['user_first_name'].strip()
         user_last_name = request.form['user_last_name']
         user_contact_no =request.form['user_contact_no']
         user_email_id =request.form['user_email_id']
@@ -250,7 +259,29 @@ def add_user_login():
         db.session.commit()
         return redirect('/User-masters')
         
-    
+@blueprint.route('/<int:id>/edit-user-login', methods=['GET', 'POST'])
+@login_required
+def updateuserlogin(id):
+    users = UserModel.query.filter_by(id=id).first()
+    role_master = RoleMaster.query.all()
+    user_master_login = UserModel.query.all()
+    if request.method == 'POST':
+        users.user_first_name = request.form['user_first_name'].strip()
+        print(users.user_first_name)
+        users.user_last_name = request.form['user_last_name']
+        users.user_contact_no = request.form['user_contact_no']
+        users.user_email_id = request.form['user_email_id']
+        users.user_name_master = request.form['user_name_master']
+        users.password_master = request.form['password_master']
+        users.confirm_password = request.form['confirm_password']
+        users.user_role_master = request.form['user_role_master']
+        users.user_reporting_person = request.form['user_reporting_person']
+
+        db.session.commit()
+        return redirect('/User-masters')
+
+    return render_template('home/add-user-login.html',role_master=role_master,user_master_login=user_master_login, users=users, segment='User-masters')
+
 @blueprint.route('/add-bom-master', methods=['GET', 'POST'])
 @login_required
 def add_bom_master():
@@ -304,9 +335,9 @@ def add_supplier_master():
         Citymaster_main = CityMaster.query.all()
         State_masters = StateMaster.query.all()
         Country_master = CountryMaster.query.all()
-        return render_template('home/add-supplier.html',State_masters=State_masters,Country_master=Country_master,Citymaster_main=Citymaster_main)
+        return render_template('home/add-supplier.html',State_masters=State_masters,Country_master=Country_master,users=None,Citymaster_main=Citymaster_main, segment='Supplier-masters')
     if request.method == 'POST':
-        supplier_name = request.form['supplier_name']
+        supplier_name = request.form['supplier_name'].strip()
         supplier_primary_contact =  request.form['supplier_primary_contact']
         supplier_secondary_contact =  request.form['supplier_secondary_contact']
         supplier_email_id =  request.form['supplier_email_id']
@@ -334,7 +365,36 @@ def add_supplier_master():
         db.session.add(supplier_main)
         db.session.commit()
         return redirect('/Supplier-masters')
-    
+
+
+@blueprint.route('/<int:id>/edit-supplier-master', methods=['GET', 'POST'])
+@login_required
+def updatesupplier(id):
+    users = SupplierMaster.query.filter_by(id=id).first()
+    Citymaster_main = CityMaster.query.all()
+    State_masters = StateMaster.query.all()
+    Country_master = CountryMaster.query.all()
+    if request.method == 'POST':
+        users.supplier_name = request.form['supplier_name'].strip()
+        print(users.supplier_name)
+        users.supplier_primary_contact = request.form['supplier_primary_contact']
+        users.supplier_secondary_contact = request.form['supplier_secondary_contact']
+        users.supplier_email_id = request.form['supplier_email_id']
+        users.supplier_contact_no = request.form['supplier_contact_no']
+        users.supplier_country = request.form['supplier_country']
+        users.supplier_state = request.form['supplier_state']
+        users.supplier_city = request.form['supplier_city']
+        users.supplier_address = request.form['supplier_address']
+        users.supplier_gst_no = request.form['supplier_gst_no']
+        users.supplier_pan = request.form['supplier_pan']
+
+
+        db.session.commit()
+        return redirect('/Supplier-masters')
+
+    return render_template('home/add-supplier.html',State_masters=State_masters,Country_master=Country_master,Citymaster_main=Citymaster_main,users=users, segment='Supplier-masters')
+
+
 @blueprint.route('/invoice-addinvoice', methods=['GET', 'POST'])
 @login_required
 def addinvoice():
@@ -440,7 +500,8 @@ def update(id):
     user = CustomerMaster.query.filter_by(id=id).first()
     city_master = CityMaster.query.all()
     if request.method == 'POST':
-        user.customer_name = request.form['customer_name']
+        user.customer_name = request.form['customer_name'].strip()
+        print(user.customer_name)
         user.primary_contact_name = request.form['primary_contact_name']
         user.secondary_contact_name = request.form['secondary_contact_name']
         user.email_id = request.form['email_id']
@@ -478,14 +539,25 @@ def update2(id):
 @login_required
 def update3(id):
     user = KitMaster.query.filter_by(id=id).first()
-    values_list = user.kit_products.split(',')
+    values_list = json.loads(user.kit_products)
+    print(json.loads(user.kit_products))
+
     if request.method == 'POST':
         user.kit_description = request.form['kit_description']
         user.kit_no = request.form['kit_no']
         user.hsn_code = request.form['hsn_code']
         user.lubricant_points = request.form['lubricant_points']
         kit_products_temp = request.form.getlist('kit_products')
-        user.kit_products = ','.join(kit_products_temp)
+
+        add_kit_master = []
+        for i in range(len(kit_products_temp)):
+            Kit_offer = {
+                'kit_name_master': kit_products_temp[i]
+            }
+            add_kit_master.append(Kit_offer)
+        print(json.dumps(add_kit_master))
+        
+        user.kit_products = json.dumps(add_kit_master)
         db.session.commit()
         return redirect('/Kit-masters')
 
@@ -539,7 +611,8 @@ def Customer_masters():
         return render_template('home/Customer-masters.html',users=users,city_master=city_master,state_masters=state_masters,
                                country_master=country_master, segment='Customer-masters')
     if request.method == 'POST':
-        customer_name = request.form['customer_name']
+        customer_name = request.form['customer_name'].strip()
+        print(customer_name)
         primary_contact_name = request.form['primary_contact_name']
         secondary_contact_name = request.form['secondary_contact_name']
         email_id = request.form['email_id']
@@ -601,7 +674,6 @@ def City_masters():
         users = CityMaster.query.all()
         states = StateMaster.query.all()
         countries = CountryMaster.query.all()
-        print(users,states,countries)
         return render_template('home/City-masters.html', len_country= len(countries), users=users, len_state=len(states), states=states, countries=countries,segment='City-masters')
     if request.method == 'POST':
         country_name = request.form['country_name']
@@ -683,8 +755,6 @@ def Contract_Review_list():
 @login_required
 def edit_contractoffer(id):
     add_user_contractReview = AddOffer.query.filter_by(id=id).first()
-    print("*************************************")
-    print(add_user_contractReview)
     if request.method == 'POST':
         # add_user_contractReview.product_name = request.form['product_name']
         # add_user_contractReview.part_no = request.form['part_no']
