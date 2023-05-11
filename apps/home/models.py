@@ -80,19 +80,52 @@ class AddOffer(db.Model):
     contract_review_Delivery_Address_5 = db.Column(db.String())
     contract_review_Offer_No = db.Column(db.String())
     contract_review_Total_Cost = db.Column(db.Float())
-    contract_review = db.Column(db.Float())
-    contract_review_packing_and_Forwarding = db.Column(db.Float())
-    contract_review_gst = db.Column(db.Float())
-    contract_review_delivery = db.Column(db.Float())
-    contract_review_warrantly = db.Column(db.Float())
+
+    contract_review_price = db.Column(db.String())
+    contract_review_price_1 = db.Column(db.String())
+    contract_review_price_2 = db.Column(db.String())
+
+    contract_review_packing_and_Forwarding = db.Column(db.String())
+    contract_review_packing_and_Forwarding_1 = db.Column(db.String())
+    contract_review_packing_and_Forwarding_2 = db.Column(db.String())
+
+    contract_review_gst = db.Column(db.String())
+    contract_review_gst_1 = db.Column(db.String())
+    contract_review_gst_2 = db.Column(db.String())
+
+
+    contract_review_delivery = db.Column(db.String())
+    contract_review_delivery_1 = db.Column(db.String())
+    contract_review_delivery_2 = db.Column(db.String())
+
+
+    contract_review_warrantly = db.Column(db.String())
+    contract_review_warrantly_1 = db.Column(db.String())
+    contract_review_warrantly_2 = db.Column(db.String())
+
+
     contract_review_terms_of_pay = db.Column(db.String())
-    contract_review_freight = db.Column(db.Float())
+    contract_review_terms_of_pay_1 = db.Column(db.String())
+    contract_review_terms_of_pay_2 = db.Column(db.String())
+
+
+    contract_review_freight = db.Column(db.String())
+    contract_review_freight_1 = db.Column(db.String())
+    contract_review_freight_2 = db.Column(db.String())
+
+
     contract_review_preferred_transporter = db.Column(db.String())
+    contract_review_preferred_transporter_1 = db.Column(db.String())
+    contract_review_preferred_transporter_2 = db.Column(db.String())
+
+
     contract_review_contact_person = db.Column(db.String())
     contract_review_telephone_number = db.Column(db.String())
     contract_review_email_id = db.Column(db.String())
     contract_review_notes = db.Column(db.String())
-    contract_review_approve = db.Column(db.Boolean())
+    contract_review_approve = db.Column(db.INT())
+
+    offer_conformation_number = db.Column(db.String())
 
     def __init__(self, customer_name_offer, due_date_offer, offer_type_offer, quotation_number_offer, marketing_person_offer,
              currency_type_offer, product_kit_offer_json, total_amount_offer, freight_offer, cgst_igst_type_offer,
@@ -102,12 +135,18 @@ class AddOffer(db.Model):
              warrenty_terms_offer, contract_review_Order_No, contract_review_Order_Date, contract_review_PO_Qty,
              contract_review_Billing_Address, contract_review_Delivery_Address_1, contract_review_Delivery_Address_2,
              contract_review_Delivery_Address_3, contract_review_Delivery_Address_4, contract_review_Delivery_Address_5,
-             contract_review_Offer_No, contract_review_Total_Cost, contract_review_price,
-             contract_review_packing_and_Forwarding, contract_review_gst, contract_review_delivery,
-             contract_review_warrantly, contract_review_terms_of_pay, contract_review_freight,
-             contract_review_preferred_transporter, contract_review_contact_person,
+             contract_review_Offer_No, contract_review_Total_Cost, contract_review_price,contract_review_price_1,contract_review_price_2,
+             contract_review_packing_and_Forwarding, contract_review_packing_and_Forwarding_1,contract_review_packing_and_Forwarding_2,
+             contract_review_gst,contract_review_gst_1,contract_review_gst_2,
+             contract_review_delivery,contract_review_delivery_1,contract_review_delivery_2,
+             contract_review_warrantly,contract_review_warrantly_1,contract_review_warrantly_2,
+             contract_review_terms_of_pay,contract_review_terms_of_pay_1,contract_review_terms_of_pay_2,
+             contract_review_freight,contract_review_freight_1,contract_review_freight_2,
+             contract_review_preferred_transporter,
+              contract_review_preferred_transporter_1,contract_review_preferred_transporter_2,
+                contract_review_contact_person,
              contract_review_telephone_number, contract_review_email_id, contract_review_notes,
-             contract_review_approve):
+             contract_review_approve, offer_conformation_number):
         self.customer_name_offer = customer_name_offer
         self.due_date_offer = due_date_offer
         self.offer_type_offer = offer_type_offer
@@ -152,24 +191,84 @@ class AddOffer(db.Model):
         self.contract_review_Delivery_Address_5 = contract_review_Delivery_Address_5
         self.contract_review_Offer_No = contract_review_Offer_No
         self.contract_review_Total_Cost = contract_review_Total_Cost
+
         self.contract_review_price = contract_review_price
+        self.contract_review_price_1 = contract_review_price_1
+        self.contract_review_price_2 = contract_review_price_2
+
         self.contract_review_packing_and_Forwarding = contract_review_packing_and_Forwarding
+        self.contract_review_packing_and_Forwarding_1 = contract_review_packing_and_Forwarding_1
+        self.contract_review_packing_and_Forwarding_2 = contract_review_packing_and_Forwarding_2
+
         self.contract_review_gst = contract_review_gst
+        self.contract_review_gst_1 = contract_review_gst_1
+        self.contract_review_gst_2 = contract_review_gst_2
+
         self.contract_review_delivery = contract_review_delivery
+        self.contract_review_delivery_1 = contract_review_delivery_1
+        self.contract_review_delivery_2 = contract_review_delivery_2
+
+
         self.contract_review_warrantly = contract_review_warrantly
+        self.contract_review_warrantly_1 = contract_review_warrantly_1
+        self.contract_review_warrantly_2 = contract_review_warrantly_2
+
+
         self.contract_review_terms_of_pay = contract_review_terms_of_pay
+        self.contract_review_terms_of_pay_1 = contract_review_terms_of_pay_1
+        self.contract_review_terms_of_pay_2 = contract_review_terms_of_pay_2
+
+
         self.contract_review_freight = contract_review_freight
+        self.contract_review_freight_1 = contract_review_freight_1
+        self.contract_review_freight_2 = contract_review_freight_2
+
+
         self.contract_review_preferred_transporter = contract_review_preferred_transporter
+        self.contract_review_preferred_transporter_1 = contract_review_preferred_transporter_1
+        self.contract_review_preferred_transporter_2 = contract_review_preferred_transporter_2
+
+
         self.contract_review_contact_person = contract_review_contact_person
         self.contract_review_telephone_number = contract_review_telephone_number
         self.contract_review_email_id = contract_review_email_id
         self.contract_review_notes = contract_review_notes
         self.contract_review_approve = contract_review_approve
 
+        self.offer_conformation_number = offer_conformation_number
     def __repr__(self):
         return f"{self.id}:{self.customer_name_offer}"
         
 
+class OCModel(db.Model):
+    __tablename__ = "OfferComfirmation"
+    id = db.Column(db.Integer, primary_key=True)
+    oc_number = db.Column(db.String())
+    oc_customer_name = db.Column(db.String())
+    oc_customer_type = db.Column(db.String())
+    oc_po_number = db.Column(db.String())
+    oc_po_date = db.Column(db.String())
+    oc_po_value = db.Column(db.String())
+    oc_po_qty = db.Column(db.String())
+    oc_dispatch_date = db.Column(db.String())
+    oc_remarks = db.Column(db.String())
+
+    def __init__(self, oc_number, oc_customer_name, oc_customer_type, oc_po_number, oc_po_date, oc_po_value, oc_po_qty,oc_dispatch_date,oc_remarks):
+        self.oc_number = oc_number
+        self.oc_customer_name = oc_customer_name
+        self.oc_customer_type = oc_customer_type
+        self.oc_po_number = oc_po_number
+        self.oc_po_date = oc_po_date
+        self.oc_po_value = oc_po_value
+        self.oc_po_qty = oc_po_qty
+        self.oc_dispatch_date = oc_dispatch_date
+        self.oc_remarks = oc_remarks
+
+        
+
+    def __repr__(self):
+        return f"{self.oc_number}:{self.oc_customer_name}"
+    
 class ProductMaster(db.Model):
     __tablename__ = "productmaster"
 

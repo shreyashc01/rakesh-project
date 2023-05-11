@@ -32,7 +32,7 @@
 			</ul>
 		</div>
 
-		<form action='' method="POST">
+		<form id="myForm" action='' method="POST">
 			<section class="content">
 				<div class="page-section">
 					<div class="card card-fluid">
@@ -48,6 +48,7 @@
 											<tr>
 												<label>Customer Name</label>
 												<select name="customer_name_offer" id="customer_name_offer" class="form-control">
+													<option selected>Select Customer Name</option>
 													{% for user in users %}
 													<option>{{user.customer_name}}</option>
 													{% endfor %}
@@ -72,16 +73,16 @@
 
 										<div class="form-group">
 											<tr>
-												<label>Marketing Person</label>
+												<label for="marketing_Person_offer">Marketing Person</label>
 												<td>
-													<select name="marketing_Person_offer" id="marketing_Person_offer" class="form-control">
-														<option value="" selected>Marketing Person</option>
-														{% for user in role_manager_offer %}
-														<option>{{user.user_first_name}}</option>
-														{% endfor %}
-													</select>
+												  <select name="marketing_Person_offer" id="marketing_Person_offer" class="form-control">
+													<option selected>Select Marketing Person</option>
+													{% for user in role_manager_offer %}
+													<option>{{user.user_first_name}}</option>
+													{% endfor %}
+												  </select>
 												</td>
-											</tr>
+											  </tr>											  
 										</div>
 									</div>
 
@@ -91,7 +92,7 @@
 												<label>Offer Type</label>
 												<td>
 													<select name="offer_type_offer" id="offer_type_offer" class="form-control offer_type_offer">
-														<option value="None" selected>Add offer</option>
+														<option selected>Add offer</option>
 														<option value="Spares">Spares</option>
 														<option value="Kits">Kits</option>
 													</select>
@@ -584,6 +585,37 @@
 		console.log(updatedValue)
         $("#quotation_number_offer").val(updatedValue);
     });
+
+
+	document.getElementById("myForm").addEventListener("submit", function(event) {
+	// Check if "Select Customer Name" option is selected
+	var selectElement = document.getElementById("customer_name_offer");
+	var selectedValue = selectElement.options[selectElement.selectedIndex].value;
+	if (selectedValue === "Select Customer Name") {
+		// Prompt the user to update the selection
+		alert("Please update the Customer Name selection");
+		event.preventDefault(); // Prevent form submission
+	}
+	
+	var selectMarketingElement = document.getElementById("marketing_Person_offer");
+	var selectedValue = selectMarketingElement.options[selectMarketingElement.selectedIndex].value;
+	if (selectedValue === "Select Marketing Person") {
+		// Prompt the user to update the selection
+		alert("Please update the Marketing Person selection");
+		event.preventDefault(); // Prevent form submission
+	}
+	
+
+	var selectoferTypeelement = document.getElementById("offer_type_offer");
+	var selectedValue = selectoferTypeelement.options[selectoferTypeelement.selectedIndex].value;
+	if (selectedValue === "Add Offer") {
+		// Prompt the user to update the selection
+		alert("Please update the Offer Type selection");
+		event.preventDefault(); // Prevent form submission
+	}	
+
+
+});
 
 </script>
 

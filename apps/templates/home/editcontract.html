@@ -44,82 +44,102 @@
                                         <div class="row">
                                             <div class="form-group col-sm-8">
                                                 <label>Customer Name</label>
-                                                <input class="form-control" value="{{add_user_contractReview.customer_name_offer}}" style="background-color: #f6f7f9; height: auto;" readonly>
+                                                <input class="form-control" name="customer_name_offer" value="{{add_user_contractReview.customer_name_offer}}" style="background-color: #f6f7f9; height: auto;" readonly>
                                                 </input>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-sm-4">
                                                 <label>Offer No</label>
-                                                <input class="form-control" value="{{add_user_contractReview.quotation_number_offer}}" 
+                                                <input class="form-control" name="quotation_number_offer" value="{{add_user_contractReview.quotation_number_offer}}" 
                                                     style="background-color: #f6f7f9; height: auto;" readonly>
                                                 </input>
                                             </div>
                                             <div class="form-group col-sm-4">
                                                 <label>Offer Date</label>
-                                                <input class="form-control" value="{{add_user_contractReview.due_date_offer}}" style="background-color: #f6f7f9;" readonly>
+                                                <input class="form-control" name="due_date_offer" value="{{add_user_contractReview.due_date_offer}}" style="background-color: #f6f7f9;" readonly>
                                                 </input>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-sm-4">
                                                 <label>Order No</label>
-                                                <input type="text" maxlength="200" autocomplete="off"
+                                                <input type="text" maxlength="200" autocomplete="new-password" name="contract_review_Order_No" value="{{add_user_contractReview.contract_review_Order_No}}" 
                                                     class="form-control ng-pristine ng-valid ng-touched">
                                             </div>
                                             <div class="form-group col-sm-4">
                                                 <label for="publisher">Order Date</label>
                                                 <div class="input-group date">
-                                                    <input type="date" autocomplete="off"
+                                                    <input type="date" autocomplete="new-password" name="contract_review_Order_Date" value="{{add_user_contractReview.contract_review_Order_Date}}" 
                                                         class="form-control pull-right ng-pristine ng-valid ng-touched">
 
                                                 </div>
                                             </div>
                                             <div class="form-group col-sm-4">
                                                 <label>PO Qty</label>
-                                                <input type="text" maxlength="200" autocomplete="off" numberonly=""
+                                                <input type="text" maxlength="200" autocomplete="new-password" name="contract_review_PO_Qty" value="{{add_user_contractReview.contract_review_PO_Qty}}" 
                                                     class="form-control ng-pristine ng-valid ng-touched">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-sm-6">
                                                 <label>Billing Address</label>
-                                                    <textarea rows="3" class="form-control">{{add_user_contractReview.contract_review_Billing_Address}}</textarea>
+                                                    <textarea rows="3" autocomplete="new-password" name="contract_review_Billing_Address" class="form-control">{{add_user_contractReview.contract_review_Billing_Address}}</textarea>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-sm-6">
                                                 <label>Delivery Address 1 </label>
-                                                <textarea rows="3" class="form-control">{{add_user_contractReview.contract_review_Billing_Address}}</textarea>
+                                                <textarea rows="3" autocomplete="new-password" name="contract_review_Delivery_Address_1" class="form-control">{{add_user_contractReview.contract_review_Delivery_Address_1}}</textarea>
                                             </div>
                                             <div class="form-group col-sm-6">
                                                 <label>Delivery Address 2 </label>
-                                                <textarea rows="3" class="form-control"></textarea>
+                                                <textarea rows="3" autocomplete="new-password" name="contract_review_Delivery_Address_2" class="form-control">{{add_user_contractReview.contract_review_Delivery_Address_2}}</textarea>
                                             </div>
                                             <div class="form-group col-sm-6">
                                                 <label>Delivery Address 3 </label>
-                                                <textarea rows="3" class="form-control"></textarea>
+                                                <textarea rows="3" autocomplete="new-password" name="contract_review_Delivery_Address_3" class="form-control">{{add_user_contractReview.contract_review_Delivery_Address_3}}</textarea>
                                             </div>
                                             <div class="form-group col-sm-6">
                                                 <label>Delivery Address 4 </label>
-                                                <textarea rows="3" class="form-control"></textarea>
+                                                <textarea rows="3" autocomplete="new-password" name="contract_review_Delivery_Address_4" class="form-control">{{add_user_contractReview.contract_review_Delivery_Address_4}}</textarea>
                                             </div>
                                             <div class="form-group col-sm-6">
                                                 <label>Delivery Address 5 </label>
-                                                <textarea rows="3" class="form-control"></textarea>
+                                                <textarea rows="3" autocomplete="new-password" name="contract_review_Delivery_Address_5" class="form-control">{{add_user_contractReview.contract_review_Delivery_Address_5}}</textarea>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <table id="tableCosts" style="width: 60%; margin-left: 14px;">
-                                                <tr>
-                                                    <th style="border: 1px solid black; border-collapse: collapse; padding: 15px; text-align: left;">
-                                                        Offer No</th>
-                                                </tr>
-                                                <tr>
-                                                    <td style="border: 1px solid black; border-collapse: collapse; padding: 15px; text-align: left;">
-                                                        Total Cost</td>
-                                                </tr>
+                                                <thead>
+                                                    <tr>
+                                                        <th style="border: 1px solid black; border-collapse: collapse; padding: 15px; text-align: left;">Offer No</th>
+                                                        <th style="border: 1px solid black; border-collapse: collapse; padding: 15px; text-align: left;">Total Cost</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="border: 1px solid black; border-collapse: collapse; padding: 15px; text-align: left;" rowspan="2">
+                                                            <input class="form-control" name="contract_review_Offer_No" value="1" autocomplete="new-password" readonly style="background-color: #E6F2FF; padding: 10px;">
+                                                            <div style="height: 10px;"></div> 
+                                                            <input class="form-control" name="contract_review_Offer_No" value="2" autocomplete="new-password" readonly style="background-color: #E6F2FF; padding: 10px;">
+                                                            <div style="height: 10px;"></div> 
+                                                            <input class="form-control" name="contract_review_Offer_No" value="3" autocomplete="new-password" readonly style="background-color: #E6F2FF; padding: 10px;">
+                                                        </td>
+                                                        <td style="border: 1px solid black; border-collapse: collapse; padding: 15px; text-align: left;">
+                                                            <input class="form-control" name="contract_review_Total_Cost" value="{{add_user_contractReview.contract_review_price}}" autocomplete="new-password" readonly style="background-color: #E6F2FF; padding: 10px;">
+                                                            <div style="height: 10px;"></div> 
+                                                            <input class="form-control" name="contract_review_Total_Cost" value="{{add_user_contractReview.contract_review_price_1}}" autocomplete="new-password" readonly style="background-color: #E6F2FF; padding: 10px;">
+                                                            <div style="height: 10px;"></div> 
+                                                            <input class="form-control" name="contract_review_Total_Cost" value="{{add_user_contractReview.contract_review_price_2}}" autocomplete="new-password" readonly style="background-color: #E6F2FF; padding: 10px;">
+                                                        </td>
+                                                    </tr>
+                                                                                                    
+                                                    
+                                                </tbody>
                                             </table>
+                                            
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -147,147 +167,116 @@
 
                                                 <tbody style="padding: 2%;">
                                                     <tr style="background-color: #ffffff; border: 1px solid #ccc;">
-                                                        <td
-                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center; padding: 10px;">
+                                                        <td style="width: 15%; border-right: none; font-weight: bold; text-align: center; padding: 10px;">
                                                             Price</td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_price" class="form-control">{{add_user_contractReview.contract_review_price}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_price_1" class="form-control">{{add_user_contractReview.contract_review_price_1}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_price_2" class="form-control">{{add_user_contractReview.contract_review_price_2}}</textarea>
                                                         </td>
                                                     </tr>
                                                     <tr style="background-color: #ffffff; border: 1px solid #ccc;">
-                                                        <td
-                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                        <td style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
                                                             Packing and Forwarding</td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_packing_and_Forwarding" class="form-control">{{add_user_contractReview.contract_review_packing_and_Forwarding}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_packing_and_Forwarding_1" class="form-control">{{add_user_contractReview.contract_review_packing_and_Forwarding_1}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_packing_and_Forwarding_2" class="form-control">{{add_user_contractReview.contract_review_packing_and_Forwarding_2}}</textarea>
                                                         </td>
                                                     </tr>
                                                     <tr style="background-color: #ffffff; border: 1px solid #ccc;">
-                                                        <td
-                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                        <td style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
                                                             GST</td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_gst" class="form-control">{{add_user_contractReview.contract_review_gst}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_gst_1" class="form-control">{{add_user_contractReview.contract_review_gst_1}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_gst_2" class="form-control">{{add_user_contractReview.contract_review_gst_2}}</textarea>
                                                         </td>
                                                     </tr>
                                                     <tr style="background-color: #ffffff; border: 1px solid #ccc;">
-                                                        <td
-                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                        <td style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
                                                             Delivery</td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_delivery" class="form-control">{{add_user_contractReview.contract_review_delivery}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_delivery_1" class="form-control">{{add_user_contractReview.contract_review_delivery_1}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_delivery_2" class="form-control">{{add_user_contractReview.contract_review_delivery_2}}</textarea>
                                                         </td>
                                                     </tr>
                                                     <tr style="background-color: #ffffff; border: 1px solid #ccc;">
-                                                        <td
-                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                        <td style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
                                                             Warranty</td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_warrantly" class="form-control">{{add_user_contractReview.contract_review_warrantly}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_warrantly_1" class="form-control">{{add_user_contractReview.contract_review_warrantly_1}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_warrantly_2" class="form-control">{{add_user_contractReview.contract_review_warrantly_2}}</textarea>
                                                         </td>
                                                     </tr>
                                                     <tr style="background-color: #ffffff; border: 1px solid #ccc;">
-                                                        <td
-                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                        <td style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
                                                             Terms of Payment</td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_terms_of_pay" class="form-control">{{add_user_contractReview.contract_review_terms_of_pay}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_terms_of_pay_1" class="form-control">{{add_user_contractReview.contract_review_terms_of_pay_1}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_terms_of_pay_2" class="form-control">{{add_user_contractReview.contract_review_terms_of_pay_2}}</textarea>
                                                         </td>
                                                     </tr>
                                                     <tr style="background-color: #ffffff; border: 1px solid #ccc;">
-                                                        <td
-                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                        <td style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
                                                             Freight / DD / Godown</td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_freight" class="form-control">{{add_user_contractReview.contract_review_freight}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_freight_1" class="form-control">{{add_user_contractReview.contract_review_freight_1}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_freight_2" class="form-control">{{add_user_contractReview.contract_review_freight_2}}</textarea>
                                                         </td>
                                                     </tr>
                                                     <tr style="background-color: #ffffff; border: 1px solid #ccc;">
-                                                        <td
-                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
-                                                            Preferred Transporter</td>
-                                                        <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                        <td style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                            Preferred Transporter
                                                         </td>
                                                         <td style="width: 28%; border-right: none; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_preferred_transporter" class="form-control">{{add_user_contractReview.contract_review_preferred_transporter}}</textarea>
+                                                        </td>
+                                                        <td style="width: 28%; border-right: none; padding: 10px;">
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_preferred_transporter_1" class="form-control">{{add_user_contractReview.contract_review_preferred_transporter_1}}</textarea>
                                                         </td>
                                                         <td style="width: 28%; padding: 10px;">
-                                                            <textarea rows="3"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="3" autocomplete="new-password" name="contract_review_preferred_transporter_2" class="form-control">{{add_user_contractReview.contract_review_preferred_transporter_2}}</textarea>
                                                         </td>
                                                     </tr>
+                                                    
                                                     <tr>
-                                                        <td
-                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                        <td style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
                                                             Contract Person</td>
                                                         <td colspan="2" style="width: 70%;">
-                                                            <input type="text" maxlength="200" autocomplete="off"
+                                                            <input type="text" maxlength="200" autocomplete="new-password" name="contract_review_contact_person" value="{{add_user_contractReview.contract_review_contact_person}}"
                                                                 class="form-control ng-untouched ng-pristine ng-valid"
                                                                 style="width: 50%;">
                                                         </td>
@@ -297,21 +286,19 @@
 
                                             <table id="table2"
                                                 style="width: 100%; background-color: #f2f2f2; border-collapse: collapse; border: 1px solid #ccc; margin-bottom: 20px;">
-                                                <tbody>
+                                                <tbody> 
                                                     <tr>
-                                                        <td
-                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                        <td style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
                                                             Telephone</td>
                                                         <td style="width: 40%;">
-                                                            <input type="text" maxlength="200" autocomplete="off"
+                                                            <input type="text" maxlength="200" autocomplete="new-password" name="contract_review_telephone_number" value="{{add_user_contractReview.contract_review_telephone_number}}"
                                                                 class="form-control ng-untouched ng-pristine ng-valid"
                                                                 style="width: 100%;">
                                                         </td>
-                                                        <td
-                                                            style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
+                                                        <td style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
                                                             E-Mail Id</td>
                                                         <td style="width: 40%;">
-                                                            <input type="text" maxlength="200" autocomplete="off"
+                                                            <input type="text" maxlength="200" autocomplete="new-password" name="contract_review_email_id" value="{{add_user_contractReview.contract_review_email_id}}"
                                                                 class="form-control ng-untouched ng-pristine ng-valid"
                                                                 style="width: 100%;">
                                                         </td>
@@ -326,8 +313,8 @@
                                                         <td style="width: 15%; border-right: none; font-weight: bold; text-align: center;">
                                                             Notes</td>
                                                         <td style="width: 80%;">
-                                                            <textarea rows="2"
-                                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                                            <textarea rows="2" name="contract_review_notes"
+                                                                class="form-control ng-untouched ng-pristine ng-valid">{{add_user_contractReview.contract_review_notes}}</textarea>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -336,7 +323,7 @@
                                         </div>
                                         <div style="text-align: center;">
                                             <label> Approve</label> &nbsp;
-                                            <input type="checkbox" value="1" class="ng-untouched ng-pristine ng-valid">
+                                            <input type="checkbox" name="contract_review_approve" value="{{add_user_contractReview.contract_review_approve}}" class="ng-untouched ng-pristine ng-valid">
                                         </div>
                                         <hr class="mb-4">
                                         <div style="text-align: center;">
@@ -357,3 +344,10 @@
     </div>
 </div>
 {% endblock content %}
+
+{% block javascripts %}
+
+<script>
+
+  </script>
+{% endblock javascripts %}

@@ -19,11 +19,14 @@ from apps.home.models import SupplierMaster
 from apps.home.models import UserModel
 from apps.home.models import CurrencyMaster
 from apps.home.models import AddOffer
+from apps.home.models import OCModel
 
+import datetime
 
 @blueprint.route('/dashboard')
 @login_required
 def dashboard():
+    # db.metadata.tables['addoffer'].drop(db.engine)
     return render_template('home/dashboard.html', segment='dashboard')
 
 @blueprint.route('/get_kit_details', methods=['POST'])
@@ -69,7 +72,6 @@ def create():
             product_offers = request.form.getlist('product_offer')
             quantity_list = request.form.getlist('quantity_product_offer')
             unit_price_list = request.form.getlist('unit_price_product_offer')
-            print(request.form.getlist('total'))
             total_price_product_offer = request.form.getlist('total')
             # json.loads(request.form.get('total_price_product_offer'))
 
@@ -166,26 +168,59 @@ def create():
             contract_review_Order_Date='',
             contract_review_PO_Qty=0,
             contract_review_Billing_Address=billing_address_temp,
-            contract_review_Delivery_Address_1='',
+            contract_review_Delivery_Address_1=billing_address_temp,
             contract_review_Delivery_Address_2='',
             contract_review_Delivery_Address_3='',
             contract_review_Delivery_Address_4='',
             contract_review_Delivery_Address_5='',
             contract_review_Offer_No='',
-            contract_review_Total_Cost=0.0,
-            contract_review_price=0.0,
-            contract_review_packing_and_Forwarding=0.0,
-            contract_review_gst=0.0,
-            contract_review_delivery=0.0,
-            contract_review_warrantly=0.0,
-            contract_review_terms_of_pay='',
-            contract_review_freight=0.0,
+            contract_review_Total_Cost=grand_total_offer,
+
+            contract_review_price=total_amount_offer,
+            contract_review_price_1='',
+            contract_review_price_2='',
+
+            contract_review_packing_and_Forwarding=PandFcharges_offer,
+            contract_review_packing_and_Forwarding_1='',
+            contract_review_packing_and_Forwarding_2='',
+
+            contract_review_gst=igst_terms_offer,
+            contract_review_gst_1='',
+            contract_review_gst_2='',
+
+
+            contract_review_delivery=delivery_terms_offer,
+            contract_review_delivery_1='',
+            contract_review_delivery_2='',
+
+
+            contract_review_warrantly=warrenty_terms_offer,
+            contract_review_warrantly_1='',
+            contract_review_warrantly_2='',
+
+
+            contract_review_terms_of_pay=payment_terms_offer,
+            contract_review_terms_of_pay_1='',
+            contract_review_terms_of_pay_2='',
+
+
+            contract_review_freight=freight_terms_offer,
+            contract_review_freight_1='',
+            contract_review_freight_2='',
+
+
             contract_review_preferred_transporter='',
+            contract_review_preferred_transporter_1='',
+            contract_review_preferred_transporter_2='',
+
+
             contract_review_contact_person='',
             contract_review_telephone_number='',
             contract_review_email_id='',
             contract_review_notes='',
-            contract_review_approve=False
+            contract_review_approve=0,
+
+            offer_conformation_number = ''
         )
 
         # Add the new offer to the database
@@ -213,7 +248,6 @@ def kit_add():
                 'kit_name_master': kit_products_temp[i]
             }
             add_kit_master.append(Kit_offer)
-        print(json.dumps(add_kit_master))
         
         kit_products = json.dumps(add_kit_master)
         kit_master_add = KitMaster(kit_description=kit_description,
@@ -267,7 +301,6 @@ def updateuserlogin(id):
     user_master_login = UserModel.query.all()
     if request.method == 'POST':
         users.user_first_name = request.form['user_first_name'].strip()
-        print(users.user_first_name)
         users.user_last_name = request.form['user_last_name']
         users.user_contact_no = request.form['user_contact_no']
         users.user_email_id = request.form['user_email_id']
@@ -376,7 +409,6 @@ def updatesupplier(id):
     Country_master = CountryMaster.query.all()
     if request.method == 'POST':
         users.supplier_name = request.form['supplier_name'].strip()
-        print(users.supplier_name)
         users.supplier_primary_contact = request.form['supplier_primary_contact']
         users.supplier_secondary_contact = request.form['supplier_secondary_contact']
         users.supplier_email_id = request.form['supplier_email_id']
@@ -452,9 +484,6 @@ def retrieve_list():
 def offer_pdf(id):
     if request.method == 'GET':
         add_user = AddOffer.query.filter_by(id=id).first()
-        print(add_user)
-        print(add_user.marketing_person_offer)
-        
         role_phone_temp = UserModel.query.filter_by(user_first_name=add_user.marketing_person_offer).first()
 
         addoffer_Role = role_phone_temp.user_role_master if role_phone_temp.user_role_master else None
@@ -501,7 +530,6 @@ def update(id):
     city_master = CityMaster.query.all()
     if request.method == 'POST':
         user.customer_name = request.form['customer_name'].strip()
-        print(user.customer_name)
         user.primary_contact_name = request.form['primary_contact_name']
         user.secondary_contact_name = request.form['secondary_contact_name']
         user.email_id = request.form['email_id']
@@ -540,7 +568,6 @@ def update2(id):
 def update3(id):
     user = KitMaster.query.filter_by(id=id).first()
     values_list = json.loads(user.kit_products)
-    print(json.loads(user.kit_products))
 
     if request.method == 'POST':
         user.kit_description = request.form['kit_description']
@@ -555,7 +582,6 @@ def update3(id):
                 'kit_name_master': kit_products_temp[i]
             }
             add_kit_master.append(Kit_offer)
-        print(json.dumps(add_kit_master))
         
         user.kit_products = json.dumps(add_kit_master)
         db.session.commit()
@@ -612,7 +638,6 @@ def Customer_masters():
                                country_master=country_master, segment='Customer-masters')
     if request.method == 'POST':
         customer_name = request.form['customer_name'].strip()
-        print(customer_name)
         primary_contact_name = request.form['primary_contact_name']
         secondary_contact_name = request.form['secondary_contact_name']
         email_id = request.form['email_id']
@@ -756,15 +781,83 @@ def Contract_Review_list():
 def edit_contractoffer(id):
     add_user_contractReview = AddOffer.query.filter_by(id=id).first()
     if request.method == 'POST':
-        # add_user_contractReview.product_name = request.form['product_name']
-        # add_user_contractReview.part_no = request.form['part_no']
-        # add_user_contractReview.rack_no = request.form['rack_no']
-        # add_user_contractReview.bin_no = request.form['bin_no']
-        # add_user_contractReview.minimum_qty = request.form['minimum_qty']
-        # add_user_contractReview.maximum_order = request.form['maximum_order']
-        # add_user_contractReview.description = request.form['description']
-        # add_user_contractReview.product_hsn_no = request.form['product_hsn_no']
-        # db.session.commit()
+        # Get the values from request.form.get and assign them to the variables
+        add_user_contractReview.contract_review_Order_No = request.form['contract_review_Order_No']
+        add_user_contractReview.contract_review_Order_Date = request.form['contract_review_Order_Date']
+        add_user_contractReview.contract_review_PO_Qty = request.form['contract_review_PO_Qty']
+        add_user_contractReview.contract_review_Billing_Address = request.form['contract_review_Billing_Address']
+        add_user_contractReview.contract_review_Delivery_Address_1 = request.form['contract_review_Delivery_Address_1']
+        add_user_contractReview.contract_review_Delivery_Address_2 = request.form['contract_review_Delivery_Address_2']
+        add_user_contractReview.contract_review_Delivery_Address_3 = request.form['contract_review_Delivery_Address_3']
+        add_user_contractReview.contract_review_Delivery_Address_4 = request.form['contract_review_Delivery_Address_4']
+        add_user_contractReview.contract_review_Delivery_Address_5 = request.form['contract_review_Delivery_Address_5']
+        add_user_contractReview.contract_review_Offer_No = request.form['contract_review_Offer_No']
+        add_user_contractReview.contract_review_Total_Cost = request.form['contract_review_Total_Cost']
+
+        add_user_contractReview.contract_review_price = request.form['contract_review_price']
+        add_user_contractReview.contract_review_price_1 = request.form['contract_review_price_1']
+        add_user_contractReview.contract_review_price_2 = request.form['contract_review_price_2']
+
+        add_user_contractReview.contract_review_packing_and_Forwarding = request.form['contract_review_packing_and_Forwarding']
+        add_user_contractReview.contract_review_packing_and_Forwarding_1 = request.form['contract_review_packing_and_Forwarding_1']
+        add_user_contractReview.contract_review_packing_and_Forwarding_2  = request.form['contract_review_packing_and_Forwarding_2']
+
+        add_user_contractReview.contract_review_gst = request.form['contract_review_gst']
+        add_user_contractReview.contract_review_gst_1 = request.form['contract_review_gst_1']
+        add_user_contractReview.contract_review_gst_2 = request.form['contract_review_gst_2']
+
+        add_user_contractReview.contract_review_delivery = request.form['contract_review_delivery']
+        add_user_contractReview.contract_review_delivery_1 = request.form['contract_review_delivery_1']
+        add_user_contractReview.contract_review_delivery_2 = request.form['contract_review_delivery_2']
+
+
+        add_user_contractReview.contract_review_warrantly = request.form['contract_review_warrantly']
+        add_user_contractReview.contract_review_warrantly_1 = request.form['contract_review_warrantly_1']
+        add_user_contractReview.contract_review_warrantly_2 = request.form['contract_review_warrantly_2']
+
+
+        add_user_contractReview.contract_review_terms_of_pay = request.form['contract_review_terms_of_pay']
+        add_user_contractReview.contract_review_terms_of_pay_1 = request.form['contract_review_terms_of_pay_1']
+        add_user_contractReview.contract_review_terms_of_pay_2 = request.form['contract_review_terms_of_pay_2']
+
+
+        add_user_contractReview.contract_review_freight = request.form['contract_review_freight']
+        add_user_contractReview.contract_review_freight_1 = request.form['contract_review_freight_1']
+        add_user_contractReview.contract_review_freight_2 = request.form['contract_review_freight_2']
+
+
+        add_user_contractReview.contract_review_preferred_transporter = request.form['contract_review_preferred_transporter']
+        add_user_contractReview.contract_review_preferred_transporter_1 = request.form['contract_review_preferred_transporter_1']
+        add_user_contractReview.contract_review_preferred_transporter_2 = request.form['contract_review_preferred_transporter_2']
+
+        
+        add_user_contractReview.contract_review_contact_person = request.form['contract_review_contact_person']
+        add_user_contractReview.contract_review_telephone_number = request.form['contract_review_telephone_number']
+        add_user_contractReview.contract_review_email_id = request.form['contract_review_email_id']
+        
+        add_user_contractReview.contract_review_notes = request.form['contract_review_notes']
+        if 'contract_review_approve' in request.form:
+            checkbox_value = '1'
+            add_user_contractReview.contract_review_approve = checkbox_value
+        else:
+            checkbox_value = '0'
+            add_user_contractReview.contract_review_approve = checkbox_value
+        print(add_user_contractReview.contract_review_approve)
+        if add_user_contractReview.contract_review_approve == "1":
+            oc_model_len = OCModel.query.all()
+            Offer_confirmation_Number = len(oc_model_len)+1000
+            Offer_confirmation_Number += 1
+
+            current_date = datetime.datetime.now()
+            current_year = str(current_date.year)[-2:]
+            next_year = str(current_date.year + 1)[-2:]
+            original_value = Offer_confirmation_Number
+            updated_value = f"ORN/OC/{original_value}/{current_year}-{next_year}"
+            print(updated_value)
+            add_user_contractReview.offer_conformation_number = updated_value
+
+        db.session.commit()
+
         return redirect('/Contract-Review-list')
 
     return render_template('home/editcontract.html', add_user_contractReview=add_user_contractReview, segment='contractreview')
@@ -773,7 +866,8 @@ def edit_contractoffer(id):
 @login_required
 def OC_Register_list():
     if request.method == 'GET':
-        return render_template('home/OC-Register-List.html', segment='OcRegister')
+        users = AddOffer.query.all()
+        return render_template('home/OC-Register-List.html', users=users,segment='OcRegister')
 
 @blueprint.route('/BOM-Register-List', methods=['GET', 'POST'])
 @login_required
