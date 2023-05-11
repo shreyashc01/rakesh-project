@@ -164,7 +164,7 @@ def create():
             validity_terms_offer=validity_terms_offer,
             warrenty_terms_offer=warrenty_terms_offer,
 
-            contract_review_Order_No='',  # Provide a default value for the missing arguments
+            contract_review_Order_No='', 
             contract_review_Order_Date='',
             contract_review_PO_Qty=0,
             contract_review_Billing_Address=billing_address_temp,
@@ -223,7 +223,6 @@ def create():
             offer_conformation_number = ''
         )
 
-        # Add the new offer to the database
         db.session.add(new_offer)
         db.session.commit()
         return redirect('/offer-offerlist')
@@ -495,7 +494,7 @@ def offer_pdf(id):
         data = json.loads(add_user.product_kit_offer_json)
         html_rows = ""
         counter = 0
-        # Access the data as a Python object
+
         if add_user.offer_type_offer == "Spares":
             for item in data:
                 product_name = item['product_name']
@@ -889,17 +888,6 @@ def Marketing_Register_Report():
         return render_template('home/Marketing-Register-Report.html',  segment='MarketingRegisterReport')
 
 
-# @blueprint.route('/<int:id>/delete', methods=['GET', 'POST'])
-# @login_required
-# def profile(id):
-#     users = OfferModel.query.filter_by(id=id).first()
-#     if request.method == 'POST':
-#         if users:
-#             db.session.delete(users)
-#             db.session.commit()
-#             return redirect('/offer-offerlist')
-#     return render_template('home/delete.html')
-
 
 @blueprint.route('/<int:id>/deletecustomer', methods=['GET', 'POST'])
 @login_required
@@ -1009,11 +997,7 @@ def route_template(template):
 
         if not template.endswith('.html'):
             template += '.html'
-
-        # Detect the current page
         segment = get_segment(request)
-
-        # Serve the file (if exists) from app/templates/home/FILE.html
         return render_template("home/" + template, segment=segment)
 
     except TemplateNotFound:
@@ -1022,8 +1006,6 @@ def route_template(template):
     except:
         return render_template('home/page-500.html'), 500
 
-
-# Helper - Extract current page name from request
 def get_segment(request):
 
     try:

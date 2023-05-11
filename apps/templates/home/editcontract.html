@@ -322,17 +322,23 @@
 
                                         </div>
                                         <div style="text-align: center;">
-                                            <label> Approve</label> &nbsp;
-                                            <input type="checkbox" name="contract_review_approve" value="{{add_user_contractReview.contract_review_approve}}" class="ng-untouched ng-pristine ng-valid">
+                                            <label>Approve</label> &nbsp;
+                                            <input type="checkbox" name="contract_review_approve" {% if add_user_contractReview.contract_review_approve == 1 %} checked {% endif %} value="{{ add_user_contractReview.contract_review_approve }}" class="ng-untouched ng-pristine ng-valid">
                                         </div>
+                                        
                                         <hr class="mb-4">
+                                        
                                         <div style="text-align: center;">
-                                            <button id="btnSave" type="submit"
-                                                class="btn btn-primary btn-sm">Save</button> &nbsp;
-                                            &nbsp;
-                                            <a routerlink="/Contract-Review-list" class="btn btn-danger btn-sm"
-                                                href="/Contract-Review-list">Cancel</a>
-                                        </div><br>
+                                            {% if add_user_contractReview.contract_review_approve == 1 %}
+                                                <button id="btnUpdate" type="submit" class="btn btn-primary btn-sm">Update</button> &nbsp;
+                                                <button id="btnRepeatOrder" type="button" class="btn btn-primary btn-sm">Repeat Order</button> &nbsp;
+                                            {% else %}
+                                                <button id="btnSave" type="submit" class="btn btn-primary btn-sm">Save</button> &nbsp;
+                                            {% endif %}
+                                            <a routerlink="/Contract-Review-list" class="btn btn-danger btn-sm" href="/Contract-Review-list">Cancel</a>
+                                        </div>
+                                        <br>
+                                        
                                     </div>
                                 </div>
                             </div>

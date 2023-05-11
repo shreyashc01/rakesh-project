@@ -4,73 +4,10 @@
 <head>
   <title>Color and Style Customization</title>
   <style>
-
-body {
-			font-size: 14px;
-			line-height: 1.5;
-			background-color: #f9f9f9;
-			padding-top: 60px;
-		}
-
-		.invoice-header {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			margin-bottom: 40px;
-		}
-
-		.invoice-header img {
-			max-height: 80px;
-		}
-
-		.invoice-info {
-			max-width: 300px;
-			padding: 0 10px;
-			text-align: right;
-		}
-
-		.invoice-info p {
-			margin-bottom: 5px;
-		}
-
-		.invoice-table table {
-			width: 100%;
-			border-collapse: collapse;
-			margin-bottom: 40px;
-		}
-
-		.invoice-table th,
-		.invoice-table td {
-			padding: 10px;
-			border: 1px solid #dee2e6;
-		}
-
-		.invoice-table th {
-			background-color: #f2f2f2;
-			text-align: center;
-		}
-
-		.invoice-table tfoot td {
-			font-weight: bold;
-			text-align: right;
-		}
-
-		.declaration {
-			margin-top: 40px;
-			padding: 10px;
-			background-color: #f2f2f2;
-		}
-
-		@media print {
-			body {
-				padding-top: 0;
-			}
-		}
-
-		.footer {
-			text-align: center;
-		}
-    
+    body {
+      margin: 0;
+      padding: 0;
+    }
 
     #container {
       display: flex;
@@ -153,85 +90,142 @@ body {
 
     <div id="customizedText">
       <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="invoice-header">
-              <img src="C:\Users\varun\Desktop\Logo12.jpg" alt="Company Logo">
-              <h4>Tax Invoice</h4>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="invoice-info">
-              <p><strong>Invoice No:</strong> 12345</p>
-              <p><strong>Invoice Date:</strong> 2023-04-26</p>
-              <p><strong>e-Way Bill No:</strong> 98439898467</p>
-              <p><strong>Buyer's Order No:</strong> ORN8859PU675</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="invoice-table">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Sl No.</th>
-                    <th>Item</th>
-                    <th>HSN/SAC</th>
-                    <th>Quantity</th>
-                    <th>Rate</th>
-                    <th>Part No.</th>
-                    <th>Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Product 1</td>
-                    <td>12345</td>
-                    <td>2</td>
-                    <td>$10</td>
-                    <td>P1</td>
-                    <td>$20</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Product 2</td>
-                    <td>67890</td>
-                    <td>1</td>
-                    <td>$20</td>
-                    <td>P2</td>
-                    <td>$20</td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="6" style="text-align: right;">Total Accessible Value Discount (..%)</td>
-                    <td>$40</td>
-                  </tr>
-                  <tr>
-                    <td colspan="6" style="text-align: right;">Total After Discount Freight</td>
-                    <td>$40</td>
-                  </tr>
-                  <tr>
-                    <td colspan="6" style="text-align: right;">Output IGST @ 18%</td>
-                    <td>$40</td>
-                  </tr>
-                  <tr>
-                    <td colspan="6" style="text-align: right;">Rounded Off</td>
-                    <td>$40</td>
-                  </tr>
-                  <tr>
-                    <td colspan="6" style="text-align: right;">Grand Total</td>
-                    <td>$40</td>
-                  </tr>
-                </tfoot>
-              </table>
-              <h6><strong>Amount Chargeable (in words): </strong>..............................</h6>
-            </div>
-          </div>
-        </div>
-      </div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="invoice-header">
+					<img src="C:\Users\varun\Desktop\Logo12.jpg" alt="Company Logo">
+					<h4>Tax Invoice</h4>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="invoice-info">
+					<p><strong>Invoice No:</strong> 12345</p>
+					<p><strong>Invoice Date:</strong> 2023-04-26</p>
+					<p><strong>e-Way Bill No:</strong> 98439898467</p>
+					<p><strong>Buyer's Order No:</strong> ORN8859PU675</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="from">
+					<h5>Bill To:</h5>
+					<p>Your Company Name</p>
+					<p>123 Main Street</p>
+					<p>City, State ZIP</p>
+					<p><strong>Email:</strong> your_email@example.com</p>
+					<p><strong>Phone:</strong> +1 123-456-7890</p>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="to">
+					<h5>From:</h5>
+					<p>Client Name</p>
+					<p>123 Main Street</p>
+					<p>City, State ZIP</p>
+					<p><strong>Email:</strong> client_email@example.com</p>
+					<p><strong>Phone:</strong> +1 123-456-7890</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="from">
+					<h5>Ship To:</h5>
+					<p>Your Company Name</p>
+					<p>123 Main Street</p>
+					<p>City, State ZIP</p>
+					<p><strong>Email:</strong> your_email@example.com</p>
+					<p><strong>Phone:</strong> +1 123-456-7890</p>
+					<p><strong>GSTIN/UIN: </strong>..........</p>
+					<p><strong>State Name: </strong>..........</p>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="to">
+					<p><strong>Delivery Note: </strong>...</p>
+					<p><strong>Supplier's Ref: </strong>.....</p>
+					<p><strong>Vendor Code(If Any): </strong></p>
+					<p><strong>Dispatch Document No: </strong>......</p>
+					<p><strong>Delivery Note Date: </strong>........</p>
+					<p><strong>Dispatched through: </strong>.........</p>
+					<p><strong>Place of Supply: </strong>..........</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="invoice-table">
+					<table>
+						<thead>
+							<tr>
+								<th>Sl No.</th>
+								<th>Item</th>
+								<th>HSN/SAC</th>
+								<th>Quantity</th>
+								<th>Rate</th>
+								<th>Part No.</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>Product 1</td>
+								<td>12345</td>
+								<td>2</td>
+								<td>$10</td>
+								<td>P1</td>
+								<td>$20</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Product 2</td>
+								<td>67890</td>
+								<td>1</td>
+								<td>$20</td>
+								<td>P2</td>
+								<td>$20</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="6" style="text-align: right;">Total Accessible Value Discount (..%)</td>
+								<td>$40</td>
+							</tr>
+							<tr>
+								<td colspan="6" style="text-align: right;">Total After Discount Freight</td>
+								<td>$40</td>
+							</tr>
+							<tr>
+								<td colspan="6" style="text-align: right;">Output IGST @ 18%</td>
+								<td>$40</td>
+							</tr>
+							<tr>
+								<td colspan="6" style="text-align: right;">Rounded Off</td>
+								<td>$40</td>
+							</tr>
+							<tr>
+								<td colspan="6" style="text-align: right;">Grand Total</td>
+								<td>$40</td>
+							</tr>
+						</tfoot>
+					</table>
+					<h6><strong>Amount Chargeable (in words): </strong>..............................</h6>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="declaration">
+					<h6>Decleration: </h6>
+					<p>Goods Once sold will not be taken back</p>
+					<h6>Mode/Terms of Payment: </h6>
+					<p>100% Within 30 Days from the date of Invoice</p>
+				</div>
+			</div>
+		</div>
+	</div>
     </div>
   </div>
 
