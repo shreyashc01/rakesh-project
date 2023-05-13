@@ -215,19 +215,19 @@
 							<div class="form-group">
 								<tr>
 									<label>Subject</label>
-									<td><input type="text" autocomplete="new-password" name="subject_offer" id="subject_offer" class="form-control" /></td>
+									<td><input type="text" autocomplete="new-password" name="subject_offer" id="subject_offer" class="form-control" required/></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<label>Reference</label>
-									<td><input type="text" autocomplete="new-password" name="reference_offer" id="reference_offer" class="form-control" /></td>
+									<td><input type="text" autocomplete="new-password" name="reference_offer" id="reference_offer" class="form-control" required/></td>
 								</tr>
 							</div>
 							<div class="form-group">
 								<tr>
 									<label>Description</label>
-									<td><input type="text" autocomplete="new-password" name="description_offer" id="description_offer" class="form-control" /></td>
+									<td><input type="text" autocomplete="new-password" name="description_offer" id="description_offer" class="form-control" required/></td>
 								</tr>
 							</div>
 							<div class="form-group">
@@ -374,27 +374,31 @@
 	}
 
 	function getKitDetails(newRow) {
-		const kitDescription = $('#kit_name_sample').val();
-		$.ajax({
-			url: '/get_kit_details',
-			type: 'POST',
-			data: { kit_description: kitDescription },
-			success: function (response) {
-			// response should be a JSON object containing the kit details
-			const kitNo = response.kit_no;
-			const kitProduct = kitDescription + "\n" + response.kit_product;
+    const kitDescription = $('#kit_name_sample').val();
+    $.ajax({
+        url: '/get_kit_details',
+        type: 'POST',
+        data: { kit_description: kitDescription },
+        success: function (response) {
+            const kitNo = response.kit_no;
+            const kitNames = response.kit_product;
+			
+			kitNames.unshift(kitDescription);
+			
+            // update the HTML elements with the new values
+            const kitProductMainInput = newRow.querySelector('.kit_description_offer');
+            const kitProductNumberInput = newRow.querySelector('.kit_number_offer');
+            kitProductMainInput.value = kitNames.join('\n');
+            kitProductNumberInput.value = kitNo;
 
-			// update the HTML elements with the new values
-			const kitProductMainInput = newRow.querySelector('.kit_description_offer');
-			const kitProductNumberInput = newRow.querySelector('.kit_number_offer');
-			kitProductMainInput.value = kitProduct;
-			kitProductNumberInput.value = kitNo;
-
-			// update the height of the textarea based on the content
-			// kitProductMainInput.style.height = kitProductMainInput.scrollHeight + 'px';
-			},
-		});
+            // Print kit names line by line
+            kitNames.forEach(function (kitName) {
+                console.log(kitName);
+            });
+        },
+    });
 }
+
 
 
 

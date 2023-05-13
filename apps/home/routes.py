@@ -20,13 +20,13 @@ from apps.home.models import UserModel
 from apps.home.models import CurrencyMaster
 from apps.home.models import AddOffer
 from apps.home.models import OCModel
-
+from apps.authentication.models import Users
 import datetime
 
 @blueprint.route('/dashboard')
 @login_required
 def dashboard():
-    # db.metadata.tables['addoffer'].drop(db.engine)
+    # db.metadata.tables['BomMaster'].drop(db.engine)
     return render_template('home/dashboard.html', segment='dashboard')
 
 @blueprint.route('/get_kit_details', methods=['POST'])
@@ -36,8 +36,9 @@ def get_kit_details():
         kit_description = request.form.get('kit_description')
         kit = KitMaster.query.filter_by(kit_description=kit_description).first()
         kit_no = kit.kit_no
-        kit_products = kit.kit_products.replace(",", ",\n") 
-        return jsonify({'kit_no': kit_no, 'kit_product': kit_products})
+        data = json.loads(kit.kit_products)
+        kit_names = [item['kit_name_master'] for item in data]
+        return jsonify({'kit_no': kit_no, 'kit_product': kit_names})
 
 
 @blueprint.route('/offer-addoffer', methods=['GET', 'POST'])
@@ -66,7 +67,7 @@ def create():
         quotation_number_offer = request.form['quotation_number_offer']
         marketing_person_offer = request.form['marketing_Person_offer']
         currency_type_offer = request.form['currency_type_offer']
-
+        product_kit_offer_json = ''
         product_kit_offer = []
         if offer_type_offer == "Spares":
             product_offers = request.form.getlist('product_offer')
@@ -320,46 +321,85 @@ def add_bom_master():
     if request.method == 'GET':
         Bom_category = BomCategoryMaster.query.all()
         Product_category = ProductMaster.query.all()
-        return render_template('home/add-bom-master.html',Bom_category=Bom_category,Product_category=Product_category)
+        return render_template('home/add-bom-master.html',bom_temp_data=None,bom_database=None,Bom_category=Bom_category,Product_category=Product_category, segment='BOM-masters')
     if request.method == 'POST':
-        bom_description = request.form['bom_description']
+        bom_description = request.form['bom_description'].strip()
         bom_no = request.form['bom_no']
         bom_model_no = request.form['bom_model_no']
         bom_cls = request.form['bom_cls']
         bom_lube_points = request.form['bom_lube_points']
         bom_type = request.form['bom_type']
         bom_notes = request.form['bom_notes']
-
+        
         bom_serial_no_temp = request.form.getlist('bom_serial_no')
-        bom_serial_no = ','.join(bom_serial_no_temp)
         bom_category_temp = request.form.getlist('bom_category')
-        bom_category = ','.join(bom_category_temp)
         bom_product_temp = request.form.getlist('bom_product')
-        bom_product = ','.join(bom_product_temp)
         bom_quantity_temp = request.form.getlist('bom_quantity')
-        bom_quantity = ','.join(bom_quantity_temp)
         bom_uom_temp = request.form.getlist('bom_uom')
-        bom_uom = ','.join(bom_uom_temp)
 
+        bom_data = {
+            'bom_serial_no': bom_serial_no_temp,
+            'bom_category': bom_category_temp,
+            'bom_product': bom_product_temp,
+            'bom_quantity': bom_quantity_temp,
+            'bom_uom': bom_uom_temp
+        }
+        bom_data = json.dumps(bom_data)
+        print(bom_data)
         bom_master = BomMaster(
-            bom_description = bom_description,
-        bom_no = bom_no,
-        bom_model_no = bom_model_no,
-        bom_cls = bom_cls,
-        bom_lube_points = bom_lube_points,
-        bom_type = bom_type,
-        bom_notes = bom_notes,
-        bom_serial_no = bom_serial_no,
-        bom_category = bom_category,
-        bom_product = bom_product,
-        bom_quantity = bom_quantity,
-        bom_uom = bom_uom
+                bom_description = bom_description,
+                bom_no = bom_no,
+                bom_model_no = bom_model_no,
+                bom_cls = bom_cls,
+                bom_lube_points = bom_lube_points,
+                bom_type = bom_type,
+                bom_notes = bom_notes,
+                bom_data=bom_data
             )
         
         db.session.add(bom_master)
         db.session.commit()
         return redirect('/BOM-masters')
-    
+
+@blueprint.route('/<int:id>/edit-bom-master', methods=['GET', 'POST'])
+@login_required
+def updatebom_master(id):
+    bom_database = BomMaster.query.filter_by(id=id).first()
+    bom_temp_data = json.loads(bom_database.bom_data)
+    Bom_category = BomCategoryMaster.query.all()
+    Product_category = ProductMaster.query.all()
+    print(type(bom_temp_data))
+    print(bom_temp_data['bom_serial_no'])
+
+    if request.method == 'POST':
+        bom_database.bom_description = request.form['bom_description'].strip()
+        bom_database.bom_no = request.form['bom_no']
+        bom_database.bom_model_no = request.form['bom_model_no']
+        bom_database.bom_cls = request.form['bom_cls']
+        bom_database.bom_lube_points = request.form['bom_lube_points']
+        bom_database.bom_type = request.form['bom_type']
+        bom_database.bom_notes = request.form['bom_notes']
+
+        bom_serial_no_temp = request.form.getlist('bom_serial_no')
+        bom_category_temp = request.form.getlist('bom_category')
+        bom_product_temp = request.form.getlist('bom_product')
+        bom_quantity_temp = request.form.getlist('bom_quantity')
+        bom_uom_temp = request.form.getlist('bom_uom')
+
+        bom_data_temp = {
+            'bom_serial_no': bom_serial_no_temp,
+            'bom_category': bom_category_temp,
+            'bom_product': bom_product_temp,
+            'bom_quantity': bom_quantity_temp,
+            'bom_uom': bom_uom_temp
+        }
+        bom_database.bom_data = json.dumps(bom_data_temp)
+        
+        db.session.commit()
+        return redirect('/BOM-masters')
+
+    return render_template('home/add-bom-master.html',Bom_category=Bom_category,Product_category=Product_category,bom_temp_data=bom_temp_data, bom_database=bom_database, segment='User-masters')
+
 @blueprint.route('/add-supplier-master', methods=['GET', 'POST'])
 @login_required
 def add_supplier_master():
@@ -492,6 +532,7 @@ def offer_pdf(id):
         addoffer_address = address_temp.address if address_temp.address else None
         
         data = json.loads(add_user.product_kit_offer_json)
+        print(data)
         html_rows = ""
         counter = 0
 
@@ -503,7 +544,7 @@ def offer_pdf(id):
                 unit_price = item['unit_price']
                 total_price = item['total_price']
                 counter += 1
-                html_row = f"<tr><td>{counter}</td><td>{product_name}</td><td>{part_number}</td><td>{quantity}</td><td>{unit_price}</td><td>{total_price}</td></tr>"
+                html_row = f"<tr><td><span>{counter}</span></td><td><span>{product_name}</span></td><td><span>{part_number}</span></td><td><span>{quantity}</span></td><td><span>{unit_price}</span></td><td><span>{total_price}</span></td></tr>"
                 html_rows += html_row
             return render_template('home/pdf_add_offer.html',add_user=add_user,html_rows=html_rows,addoffer_address=addoffer_address,addoffer_Role=addoffer_Role,
                                     addoffer_Phonenumber=addoffer_Phonenumber,segment='offer-offerlist')
@@ -515,9 +556,11 @@ def offer_pdf(id):
                 unit_price = item['unit_price']
                 total_price = item['total_price']
                 counter += 1
-                kit_name = kit_name.replace(',', '<br>'+"         - ")
-                html_row = f"<tr style='background-color: #f2f2f2;'><td style='border: 1px solid #ccc;'>{counter}</td><td style='border: 1px solid #ccc;'>{kit_name}</td><td style='border: 1px solid #ccc;'>{kit_number}</td><td style='border: 1px solid #ccc;'>{quantity}</td><td style='border: 1px solid #ccc;'>{unit_price}</td><td style='border: 1px solid #ccc;'>{total_price}</td></tr>"
 
+                kit_name_lines = kit_name.replace('\r\n', '\n').split('\n')
+                kit_name_html = "<br>".join([f"&bull;&nbsp;{line}" if i > 0 else f"<strong>{line}</strong>" for i, line in enumerate(kit_name_lines)])
+                html_row = f"<tr style='background-color: #f2f2f2;'><td style='border: 1px solid #ccc;'><span>{counter}</span></td><td style='border: 1px solid #ccc;'><span>{kit_name_html}</span></td><td style='border: 1px solid #ccc;'><span>{kit_number}</span></td><td style='border: 1px solid #ccc;'><span>{quantity}</span></td><td style='border: 1px solid #ccc;'><span>{unit_price}<span></td><td style='border: 1px solid #ccc;'><span>{total_price}<span></td></tr>"
+                
                 html_rows += html_row
             return render_template('home/pdf_add_offer.html',add_user=add_user,html_rows=html_rows,addoffer_address=addoffer_address,addoffer_Role=addoffer_Role,
                                     addoffer_Phonenumber=addoffer_Phonenumber, segment='offer-offerlist')
@@ -775,6 +818,13 @@ def Contract_Review_list():
         add_user_contractReview = AddOffer.query.all()
         return render_template('home/Contract-Review.html', add_user_contractReview=add_user_contractReview,segment='contractreview')
 
+
+@blueprint.route('/<int:id>/edit_oc_register', methods=['GET', 'POST'])
+@login_required
+def edit_oc_register(id):
+    add_user_contractReview = AddOffer.query.filter_by(id=id).first()
+    return render_template('home/editcontract.html', add_user_contractReview=add_user_contractReview, segment='contractreview')
+    
 @blueprint.route('/<int:id>/edit_contractoffer', methods=['GET', 'POST'])
 @login_required
 def edit_contractoffer(id):
@@ -841,7 +891,6 @@ def edit_contractoffer(id):
         else:
             checkbox_value = '0'
             add_user_contractReview.contract_review_approve = checkbox_value
-        print(add_user_contractReview.contract_review_approve)
         if add_user_contractReview.contract_review_approve == "1":
             oc_model_len = OCModel.query.all()
             Offer_confirmation_Number = len(oc_model_len)+1000
@@ -852,7 +901,6 @@ def edit_contractoffer(id):
             next_year = str(current_date.year + 1)[-2:]
             original_value = Offer_confirmation_Number
             updated_value = f"ORN/OC/{original_value}/{current_year}-{next_year}"
-            print(updated_value)
             add_user_contractReview.offer_conformation_number = updated_value
 
         db.session.commit()
@@ -900,6 +948,17 @@ def delete1(id):
             return redirect('/Customer-masters')
     return render_template('home/deletecustomer.html')
 
+
+@blueprint.route('/<int:id>/delete-bom-master', methods=['GET', 'POST'])
+@login_required
+def delete_bom(id):
+    users = BomMaster.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        if users:
+            db.session.delete(users)
+            db.session.commit()
+            return redirect('/BOM-masters')
+    return render_template('home/delete_bom_master.html')
 
 @blueprint.route('/<int:id>/deleteproduct', methods=['GET', 'POST'])
 @login_required

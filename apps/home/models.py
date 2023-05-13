@@ -469,14 +469,10 @@ class BomMaster(db.Model):
     bom_lube_points = db.Column(db.String())
     bom_type = db.Column(db.String())
     bom_notes = db.Column(db.String())
-    bom_serial_no = db.Column(db.String())
-    bom_category = db.Column(db.String())
-    bom_product = db.Column(db.String())
-    bom_quantity = db.Column(db.String())
-    bom_uom = db.Column(db.String())
+    bom_data = db.Column(db.String())
 
     def __init__(self, bom_description, bom_no, bom_model_no, bom_cls,bom_lube_points,
-                 bom_type,bom_notes,bom_serial_no,bom_category,bom_product,bom_quantity, bom_uom):
+                 bom_type,bom_notes,bom_data):
         self.bom_description = bom_description
         self.bom_no = bom_no
         self.bom_model_no = bom_model_no
@@ -484,11 +480,7 @@ class BomMaster(db.Model):
         self.bom_lube_points = bom_lube_points
         self.bom_type = bom_type
         self.bom_notes = bom_notes
-        self.bom_serial_no = bom_serial_no
-        self.bom_category = bom_category
-        self.bom_product = bom_product
-        self.bom_quantity = bom_quantity
-        self.bom_uom = bom_uom
+        self.bom_data = bom_data
 
     def __repr__(self):
         return f"{self.bom_description}:{self.bom_no}"

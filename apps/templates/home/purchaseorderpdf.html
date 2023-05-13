@@ -2,274 +2,227 @@
 <html>
 
 <head>
-  <title>Color and Style Customization</title>
+  <title>Print Window Example</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-    }
-
-    #container {
-      display: flex;
-      height: 100vh;
-    }
-
-    #colorForm {
-      flex: 0 0 200px;
-      padding: 20px;
-      background-color: #f2f2f2;
-      border-radius: 5px;
-    }
-
-    #customizedText {
-      flex: 1;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-weight: normal;
-      background-color: #ffffff;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    input[type="color"],
-    input[type="text"],
-    select {
-      padding: 5px;
-      width: 100%;
-    }
-
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
   </style>
+  <script>
+    $(document).ready(function () {
+      var selectedText = "";
+
+      $('#customizedText').mouseup(function () {
+        selectedText = getSelectedText();
+      });
+
+      function getSelectedText() {
+        var text = "";
+        if (typeof window.getSelection !== "undefined") {
+          text = window.getSelection().toString();
+        } else if (typeof document.selection !== "undefined" && document.selection.type === "Text") {
+          text = document.selection.createRange().text;
+        }
+        return text;
+      }
+
+      $('#printButton').click(function () {
+        var pageInnerContents = $('.page-inner').html();
+
+        var printWindow = window.open('', '_blank');
+        printWindow.document.open();
+        printWindow.document.write('<html> <head> <title>Print</title> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"> <style>' +
+          '.quotation-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-right: 20px; border-bottom: 2px solid #333; }' +
+          'tfoot tr:nth-child(odd) { background-color: #f2f2f2; }' +
+          '.quotation-header img { max-height: 60px; }' +
+          '#customizedText { flex: 1; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }' +
+          'table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: medium; }' +
+          'table th, table td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; font-size: medium; }' +
+          'table th { background-color: #333; color: #fff; font-weight: bold; font-size: medium; }' +
+          'table tfoot td { text-align: right; border-top: 2px solid #333; }' +
+          '.term-conditions { border: 2px solid #110f0f; padding: 30px; line-height: 1.5; }' +
+          '.term-conditions h4 { margin-top: 0; margin-bottom: 10px; }' +
+          '</style> </head> <body>' +
+          '<div class="content">' + pageInnerContents + '</div>' +
+          '</body> </html>');
+        printWindow.document.close();
+        printWindow.onload = function () {
+          printWindow.print();
+          printWindow.close();
+        };
+      });
+
+      $('#colorInput').change(function () {
+        var color = $(this).val();
+        applyStyleToSelectedText('color', color);
+      });
+
+      $('#fontWeightInput').change(function () {
+        var fontWeight = $(this).val();
+        applyStyleToSelectedText('font-weight', fontWeight);
+      });
+
+      $('#backgroundColorInput').change(function () {
+        var backgroundColor = $(this).val();
+        applyStyleToSelectedText('background-color', backgroundColor);
+      });
+
+      $('#fontFamilyInput').change(function () {
+        var fontFamily = $(this).val();
+        applyStyleToSelectedText('font-family', fontFamily);
+      });
+
+      function applyStyleToSelectedText(styleName, styleValue) {
+        var selection = window.getSelection();
+        if (selection.rangeCount > 0) {
+          var range = selection.getRangeAt(0);
+          var selectedText = range.toString();
+          var modifiedText = '<span style="' + styleName + ':' + styleValue + '">' + selectedText + '</span>';
+          range.deleteContents();
+          var newNode = document.createElement("span");
+          newNode.innerHTML = modifiedText;
+          range.insertNode(newNode);
+        }
+      }
+    });
+  </script>
 </head>
 
 <body>
-  <div id="container">
-    <div id="colorForm">
-      <h2>Color and Style Customization</h2>
-      <form>
-        <label for="backgroundColor">Background Color:</label>
-        <input type="color" id="backgroundColor" name="backgroundColor">
+  <div class="page-inner">
+    <div class="term-conditions">
+      <div class="quotation-header">
+        <title>Quotation</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+        <div>
+          <h2><strong >Quotation</strong></h2>
+          <span >Quotation Date: </span><span>{{ add_user.due_date_offer }}</span><br>
+          <span >Quotation No: </span><span>{{ add_user.quotation_number_offer }}</span><br>
+        </div>
+        <img src="/static/assets/img/logo.jpg" alt="Company Logo">
+      </div>
+      <div class="from">
+        <span>To:</span>
+        <p><strong>{{ add_user.customer_name_offer }}</strong></p>
+        <p>{{ addoffer_address }}</p>
 
-        <label for="textColor">Text Color:</label>
-        <input type="color" id="textColor" name="textColor">
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align: center;">Sl No</th>
+            <th style="text-align: center;">Item</th>
+            <th style="text-align: center;">Part No</th>
+            <th style="text-align: center;">Quantity</th>
+            <th style="text-align: center;">Unit Price</th>
+            <th style="text-align: center;">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ html_rows | safe }}
+        </tbody>
 
-        <label for="fontStyle">Font Style:</label>
-        <select id="fontStyle" name="fontStyle">
-          <option value="Arial">Arial</option>
-          <option value="Verdana">Verdana</option>
-          <option value="Helvetica">Helvetica</option>
-          <option value="Times New Roman">Times New Roman</option>
-          <option value="Courier New">Courier New</option>
-          <option value="Georgia">Georgia</option>
-          <option value="Calibri">Calibri</option>
-          <option value="Impact">Impact</option>
-          <option value="Roboto">Roboto</option>
-          <option value="Garamond">Garamond</option>
-          <option value="Comic Sans MS">Comic Sans MS</option>
-          <option value="Trebuchet MS">Trebuchet MS</option>
-          <option value="Open Sans">Open Sans</option>
-          <option value="Lato">Lato</option>
-          <option value="Montserrat">Montserrat</option>
-          <option value="Palatino Linotype">Palatino Linotype</option>
-          <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
-          <option value="Tahoma">Tahoma</option>
-          <option value="Impact">Impact</option>
-          <!-- Add more font styles here -->
-        </select>
+        <tfoot>
+          <tr>
+            <td colspan="5">Subtotal:</td>
+            <td >{{ add_user.total_amount_offer }}</td>
+          </tr>
+          <tr>
+            <td colspan="5">Freight:</td>
+            <td>{{ add_user.freight_offer }}</td>
+          </tr>
+          <tr>
+            <td colspan="5">P&F Percentage:</td>
+            <td>{{ add_user.pf_percentage_offer }}</td>
+          </tr>
+          <tr>
+            <td colspan="5"><span>{{ add_user.cgst_igst_type_offer }}</span>:</td>
+            <td>{{ add_user.gst_offer }}</td>
+          </tr>
+          <tr>
+            <td colspan="5">Grand Total:</td>
+            <td>{{ add_user.grand_total_offer }}</td>
 
-        <label for="fontSize">Font Size:</label>
-        <input type="text" id="fontSize" name="fontSize">
+          </tr>
+        </tfoot>
 
-        <label for="bold">Bold:</label>
-        <input type="checkbox" id="bold" name="bold">
-      </form>
-    </div>
+      </table>
+      <h4 id="grandTotalOffer">
+      </h4>
+      <div class="term-conditions">
+        <h4><strong style="font-family: Algerian;">Terms and Conditions:</strong></h4>
+        <p>
+          <strong>1. Price Basis :</strong> {{ add_user.subject_offer }}<br>
+          <strong>2. P&F Charges : </strong>{{ add_user.PandFcharges_offer }}<br>
+          <strong>3. <span style="font-weight: bold; text-transform: uppercase;">{{
+              add_user.cgst_igst_type_offer}}</span> : </strong>{{ add_user.igst_terms_offer }}<br>
+          <strong>4. HSN CODE : </strong>{{ add_user.hsn_code_offer }}<br>
+          <strong>5. Payment Terms :</strong> {{ add_user.payment_terms_offer }}<br>
+          <strong>6. Delivery :</strong> {{ add_user.delivery_terms_offer }}<br>
+          <strong>7. Freight : </strong>{{ add_user.freight_terms_offer }}<br>
+          <strong>8. Validity :</strong> {{ add_user.validity_terms_offer }}<br>
+          <strong>9. Warranty : </strong> {{ add_user.warranty_terms_offer }}<br>
+        </p>
+      </div>
 
-    <div id="customizedText">
-      <div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<div class="invoice-header">
-					<img src="C:\Users\varun\Desktop\Logo12.jpg" alt="Company Logo">
-					<h4>Tax Invoice</h4>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="invoice-info">
-					<p><strong>Invoice No:</strong> 12345</p>
-					<p><strong>Invoice Date:</strong> 2023-04-26</p>
-					<p><strong>e-Way Bill No:</strong> 98439898467</p>
-					<p><strong>Buyer's Order No:</strong> ORN8859PU675</p>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="from">
-					<h5>Bill To:</h5>
-					<p>Your Company Name</p>
-					<p>123 Main Street</p>
-					<p>City, State ZIP</p>
-					<p><strong>Email:</strong> your_email@example.com</p>
-					<p><strong>Phone:</strong> +1 123-456-7890</p>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="to">
-					<h5>From:</h5>
-					<p>Client Name</p>
-					<p>123 Main Street</p>
-					<p>City, State ZIP</p>
-					<p><strong>Email:</strong> client_email@example.com</p>
-					<p><strong>Phone:</strong> +1 123-456-7890</p>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="from">
-					<h5>Ship To:</h5>
-					<p>Your Company Name</p>
-					<p>123 Main Street</p>
-					<p>City, State ZIP</p>
-					<p><strong>Email:</strong> your_email@example.com</p>
-					<p><strong>Phone:</strong> +1 123-456-7890</p>
-					<p><strong>GSTIN/UIN: </strong>..........</p>
-					<p><strong>State Name: </strong>..........</p>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="to">
-					<p><strong>Delivery Note: </strong>...</p>
-					<p><strong>Supplier's Ref: </strong>.....</p>
-					<p><strong>Vendor Code(If Any): </strong></p>
-					<p><strong>Dispatch Document No: </strong>......</p>
-					<p><strong>Delivery Note Date: </strong>........</p>
-					<p><strong>Dispatched through: </strong>.........</p>
-					<p><strong>Place of Supply: </strong>..........</p>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="invoice-table">
-					<table>
-						<thead>
-							<tr>
-								<th>Sl No.</th>
-								<th>Item</th>
-								<th>HSN/SAC</th>
-								<th>Quantity</th>
-								<th>Rate</th>
-								<th>Part No.</th>
-								<th>Amount</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Product 1</td>
-								<td>12345</td>
-								<td>2</td>
-								<td>$10</td>
-								<td>P1</td>
-								<td>$20</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Product 2</td>
-								<td>67890</td>
-								<td>1</td>
-								<td>$20</td>
-								<td>P2</td>
-								<td>$20</td>
-							</tr>
-						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="6" style="text-align: right;">Total Accessible Value Discount (..%)</td>
-								<td>$40</td>
-							</tr>
-							<tr>
-								<td colspan="6" style="text-align: right;">Total After Discount Freight</td>
-								<td>$40</td>
-							</tr>
-							<tr>
-								<td colspan="6" style="text-align: right;">Output IGST @ 18%</td>
-								<td>$40</td>
-							</tr>
-							<tr>
-								<td colspan="6" style="text-align: right;">Rounded Off</td>
-								<td>$40</td>
-							</tr>
-							<tr>
-								<td colspan="6" style="text-align: right;">Grand Total</td>
-								<td>$40</td>
-							</tr>
-						</tfoot>
-					</table>
-					<h6><strong>Amount Chargeable (in words): </strong>..............................</h6>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="declaration">
-					<h6>Decleration: </h6>
-					<p>Goods Once sold will not be taken back</p>
-					<h6>Mode/Terms of Payment: </h6>
-					<p>100% Within 30 Days from the date of Invoice</p>
-				</div>
-			</div>
-		</div>
-	</div>
+      <div>
+        <p>
+          <strong>Thanking you,</strong> <br>
+          <strong>Yours faithfully,</strong><br>
+          <strong>Name : </strong> {{ add_user.marketing_person_offer }}<br>
+          <strong>Role : </strong> {{ addoffer_Role }}<br>
+          <strong>Contact No : </strong> {{ addoffer_Phonenumber }}<br>
+          <!-- <strong>Yours faithfully,</strong><br>
+        <strong>Yours faithfully,</strong><br> -->
+        </p>
+      </div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     </div>
   </div>
-
-  <script>
-    // Get inputs
-    var backgroundColorInput = document.querySelector("#backgroundColor");
-    var textColorInput = document.querySelector("#textColor");
-    var fontStyleInput = document.querySelector("#fontStyle");
-    var fontSizeInput = document.querySelector("#fontSize");
-    var boldInput = document.querySelector("#bold");
-
-    // Apply style changes when inputs are changed
-    backgroundColorInput.addEventListener("input", applyStyleChanges);
-    textColorInput.addEventListener("input", applyStyleChanges);
-    fontStyleInput.addEventListener("change", applyStyleChanges);
-    fontSizeInput.addEventListener("input", applyStyleChanges);
-    boldInput.addEventListener("change", applyStyleChanges);
-
-    // Apply style changes function
-    function applyStyleChanges() {
-      // Get user inputs
-      var backgroundColor = backgroundColorInput.value;
-      var textColor = textColorInput.value;
-      var fontStyle = fontStyleInput.value;
-      var fontSize = fontSizeInput.value;
-      var isBold = boldInput.checked;
-
-      // Apply style changes
-      var customizedText = document.querySelector("#customizedText");
-      customizedText.style.backgroundColor = backgroundColor;
-      customizedText.style.color = textColor;
-      customizedText.style.fontFamily = fontStyle;
-      customizedText.style.fontSize = fontSize + "px";
-      customizedText.style.fontWeight = isBold ? "bold" : "normal";
-    }
-
-    // Initialize the form with default values
-    document.querySelector("#backgroundColor").value = "#ffffff";
-    document.querySelector("#textColor").value = "#000000";
-    document.querySelector("#fontStyle").value = "Arial";
-    document.querySelector("#fontSize").value = "16";
-    document.querySelector("#bold").checked = false;
-  </script>
+  <div>
+    <label for="colorInput">Color:</label>
+    <input type="color" id="colorInput" value="#000000">
+  </div>
+  <div>
+    <label for="fontWeightInput">Font Weight:</label>
+    <select id="fontWeightInput">
+      <option value="normal">Normal</option>
+      <option value="bold">Bold</option>
+      <option value="bolder">Bolder</option>
+      <option value="lighter">Lighter</option>
+    </select>
+  </div>
+  <div>
+    <label for="backgroundColorInput">Background Color:</label>
+    <input type="color" id="backgroundColorInput" value="#ffffff">
+  </div>
+  <div>
+    <label for="fontFamilyInput">Font Family:</label>
+    <select id="fontFamilyInput">
+      <option value="Arial, sans-serif">Arial</option>
+      <option value="Helvetica, sans-serif">Helvetica</option>
+      <option value="Times New Roman, serif">Times New Roman</option>
+      <option value="Courier New, monospace">Courier New</option>
+      <option value="Verdana, sans-serif">Verdana</option>
+      <option value="Georgia, serif">Georgia</option>
+      <option value="Palatino, serif">Palatino</option>
+      <option value="Garamond, serif">Garamond</option>
+      <option value="Comic Sans MS, cursive">Comic Sans MS</option>
+      <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
+      <option value="Arial Black, sans-serif">Arial Black</option>
+      <option value="Impact, sans-serif">Impact</option>
+      <option value="Lucida Sans Unicode, sans-serif">Lucida Sans Unicode</option>
+      <option value="Tahoma, sans-serif">Tahoma</option>
+    </select>
+  </div>
+  <div>
+    <button id="printButton">Print</button>
+  </div>
 </body>
 
 </html>
-

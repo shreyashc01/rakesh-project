@@ -43,59 +43,50 @@
                                 <div class="col-sm-12">
                                     <div class="row">
 
-                                        <input type="hidden" formcontrolname="bom_Id" value=""
-                                            class="ng-untouched ng-pristine ng-valid">
-                                        <input type="hidden" formcontrolname="createdBy" value=""
-                                            class="ng-untouched ng-pristine ng-valid">
-                                        <input type="hidden" formcontrolname="modifiedBy" value=""
-                                            class="ng-untouched ng-pristine ng-valid">
-
-
-                                        <div class="form-group col-sm-8"><label for="serialNo">BOM Description<span
-                                                    style="color: red;">*</span></label>
-                                            <textarea rows="2" name="bom_description"
-                                                class="form-control ng-untouched ng-pristine ng-invalid"></textarea>
+                                        <div class="form-group col-sm-8">
+                                            <label for="serialNo">BOM Description<span style="color: red;">*</span>
+                                            </label>
+                                            <textarea rows="2" name="bom_description" class="form-control ng-untouched ng-pristine ng-invalid">{{bom_database.bom_description}}</textarea>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-sm-4"><label for="partNo">BOM No<span
-                                                    style="color: red;">*</span></label>
-                                            <input name="bom_no" type="text" maxlength="200" autocomplete="off"
+                                        <div class="form-group col-sm-4"><label for="partNo">BOM No<span style="color: red;">*</span>
+                                        </label>
+                                            <input name="bom_no" type="text" maxlength="200" autocomplete="new-password" value="{{bom_database.bom_no}}"
                                                 class="form-control ng-untouched ng-pristine ng-invalid">
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label>Model No</label>
-                                            <input name="bom_model_no" type="text" maxlength="200" autocomplete="off"
+                                            <input name="bom_model_no" type="text" maxlength="200" autocomplete="new-password" value="{{bom_database.bom_model_no}}"
                                                 class="form-control ng-untouched ng-pristine ng-valid">
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label>CLS</label>
-                                            <input name="bom_cls" type="text" maxlength="200" autocomplete="off"
+                                            <input name="bom_cls" type="text" maxlength="200" autocomplete="new-password" value="{{bom_database.bom_cls}}"
                                                 class="form-control ng-untouched ng-pristine ng-valid">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-4">
                                             <label>No of Lube Points</label>
-                                            <input name="bom_lube_points" type="text" maxlength="200" autocomplete="off"
+                                            <input name="bom_lube_points" type="text" maxlength="200" autocomplete="new-password" value="{{bom_database.bom_lube_points}}"
                                                 class="form-control ng-untouched ng-pristine ng-valid">
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label>Type</label>
-                                            <select name="bom_type"
-                                                class="form-control ng-untouched ng-pristine ng-valid">
+                                            <select name="bom_type" class="form-control ng-untouched ng-pristine ng-valid">
                                                 <option value="">Select Type</option>
-                                                <option value="hydraulic">hydraulic</option>
-                                                <option value="Pneumatic">Pneumatic</option>
-                                                <option value="Electrical">Electrical</option>
+                                                <option value="hydraulic" {% if bom_database.bom_type == 'hydraulic' %}selected{% endif %}>hydraulic</option>
+                                                <option value="Pneumatic" {% if bom_database.bom_type == 'Pneumatic' %}selected{% endif %}>Pneumatic</option>
+                                                <option value="Electrical" {% if bom_database.bom_type == 'Electrical' %}selected{% endif %}>Electrical</option>
                                             </select>
                                         </div>
+                                        
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
                                             <label>Notes</label>
-                                            <textarea rows="2" name="bom_notes"
-                                                class="form-control ng-untouched ng-pristine ng-valid"></textarea>
+                                            <textarea rows="2" name="bom_notes" class="form-control ng-untouched ng-pristine ng-valid" autocomplete="new-password">{{bom_database.bom_notes}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -123,42 +114,56 @@
                                                 class="fa fa-plus"></i></a></th>
                                 </thead>
                                 <tbody style="padding: 5%;">
-                                    <tr>
-                                        <td style="width: 150px;">
-                                            <input numberonly="" name="bom_serial_no" class="form-control">
-                                        </td>
-                                        <td>
-                                            <select name="bom_category" class="form-control">
-                                                {% for user in Bom_category %}
-                                                <option>{{ user.bom_category_name }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </td>
-                                        <td>
+                                    {% set bom_serial_no = bom_temp_data['bom_serial_no'] %}
+                                    {% set bom_category = bom_temp_data['bom_category'] %}
+                                    {% set bom_product = bom_temp_data['bom_product'] %}
+                                    {% set bom_quantity = bom_temp_data['bom_quantity'] %}
+                                    {% set bom_uom = bom_temp_data['bom_uom'] %}
+
+                                    {% for i in range(bom_serial_no|length) %}
+                                        {% set serial_no = bom_serial_no[i] %}
+                                        {% set category = bom_category[i] %}
+                                        {% set product = bom_product[i] %}
+                                        {% set quantity = bom_quantity[i] %}
+                                        {% set uom = bom_uom[i] %}
+                                        <tr>
+											<td style="width: 150px;">
+                                            <input numberonly="" name="bom_serial_no" value="{{serial_no}}" autocomplete="new-password" class="form-control">
+											</td>
+											<td>
+                                                <select name="bom_category" class="form-control">
+                                                    {% for user in Bom_category %}
+                                                    <option {% if user.bom_category_name == category %}selected{% endif %}>{{ user.bom_category_name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                                                            
+											</td>
+											<td>
                                             <select name="bom_product" class="form-control">
                                                 {% for user in Product_category %}
-                                                <option>{{ user.product_name }}</option>
+                                                    <option {% if user.product_name == product %}selected{% endif %}>{{ user.product_name }}</option>
                                                 {% endfor %}
                                             </select>
+											</td>
+											<td style="width: 150px;">
+                                            <input numberonly="" name="bom_quantity" value="{{quantity}}" autocomplete="new-password" class="form-control">
                                         </td>
-                                        <td style="width: 150px;">
-                                            <input numberonly="" name="bom_quantity" class="form-control">
-                                        </td>
-                                        <td style="width: 13%;">
-                                            <select name="bom_uom"
-                                                class="form-control ng-untouched ng-pristine ng-invalid">
-                                                <option value="">Select UOM</option>
-                                                <option value="Nos">Nos</option>
-                                                <option value="Meters">Meters</option>
-                                                <option value="Millimeter">Millimeter</option>
-                                                <option value="Bundle">Bundle</option>
-                                                <option value="Pack">Pack</option>
-                                                <option value="Kg">Kg</option>
-                                                <option value="Set">Set</option>
-                                            </select>
-                                        </td>
-                                        <td style="width: 5%;"> </td>
-                                    </tr>
+                                            <td>
+                                                <select name="bom_uom" class="form-control ng-untouched ng-pristine ng-invalid">
+                                                    <option value="">Select UOM</option>
+                                                    <option value="Nos" {% if uom == 'Nos' %}selected{% endif %}>Nos</option>
+                                                    <option value="Meters" {% if uom == 'Meters' %}selected{% endif %}>Meters</option>
+                                                    <option value="Millimeter" {% if uom == 'Millimeter' %}selected{% endif %}>Millimeter</option>
+                                                    <option value="Bundle" {% if uom == 'Bundle' %}selected{% endif %}>Bundle</option>
+                                                    <option value="Pack" {% if uom == 'Pack' %}selected{% endif %}>Pack</option>
+                                                    <option value="Kg" {% if uom == 'Kg' %}selected{% endif %}>Kg</option>
+                                                    <option value="Set" {% if uom == 'Set' %}selected{% endif %}>Set</option>
+                                                </select>
+                                            </td>
+											<td style="width: 5%;"> <a class="btn btn-secondary active" onclick="SomeDeleteRowFunction(this)">
+                                                <i class="fas fa-trash-alt"> </i> </a> </td>
+                                        </tr>
+                                    {% endfor %}
                                 </tbody>
 
                             </table>
@@ -190,7 +195,7 @@
         var cellCount = table.rows[0].cells.length;
         markup = $(`<tr>
                         <td style="width: 150px;">
-                            <input numberonly="" name="bom_serial_no" class="form-control">
+                            <input numberonly="" name="bom_serial_no" autocomplete="new-password" class="form-control">
                         </td>
                         <td>
                             <select name="bom_category" class="form-control">
@@ -207,7 +212,7 @@
                             </select>
                         </td>
                         <td style="width: 150px;">
-                            <input numberonly="" name="bom_quantity" class="form-control">
+                            <input numberonly="" name="bom_quantity" autocomplete="new-password" class="form-control">
                         </td>
                         <td style="width: 13%;">
                             <select name="bom_uom" class="form-control ng-untouched ng-pristine ng-invalid">
