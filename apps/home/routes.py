@@ -2,7 +2,7 @@ import imp
 import json
 from re import U
 from apps.home import blueprint
-from flask import render_template, request, redirect, jsonify
+from flask import render_template, request, redirect, jsonify, flash
 from flask_login import login_required
 from jinja2 import TemplateNotFound
 from apps import db
@@ -26,7 +26,7 @@ import datetime
 @blueprint.route('/dashboard')
 @login_required
 def dashboard():
-    # db.metadata.tables['BomMaster'].drop(db.engine)
+    # db.metadata.tables['UserModel'].drop(db.engine)
     return render_template('home/dashboard.html', segment='dashboard')
 
 @blueprint.route('/get_kit_details', methods=['POST'])
@@ -73,6 +73,7 @@ def create():
             product_offers = request.form.getlist('product_offer')
             quantity_list = request.form.getlist('quantity_product_offer')
             unit_price_list = request.form.getlist('unit_price_product_offer')
+            uom_type_list = request.form.getlist('uom_type')
             total_price_product_offer = request.form.getlist('total')
             # json.loads(request.form.get('total_price_product_offer'))
 
@@ -86,6 +87,7 @@ def create():
                     'part_number' : part_number,
                     'quantity': quantity_list[i],
                     'unit_price': unit_price_list[i],
+                    'uom' : uom_type_list[i],
                     'total_price': total_price_product_offer[i],
                 }
                 product_kit_offer.append(product_offer)
@@ -97,6 +99,7 @@ def create():
             kit_number_offer = request.form.getlist('kit_number_offer')
             quantity_kit_offer = request.form.getlist('quantity_kit_offer')
             unit_price_kit_offer = request.form.getlist('unit_price_kit_offer')
+            uom_type_list = request.form.getlist('uom_type')
             total_price_kit_offer = request.form.getlist('total')
 
             product_kit_offer = []
@@ -106,6 +109,7 @@ def create():
                     'part_number': kit_number_offer[i],
                     'quantity': quantity_kit_offer[i],
                     'unit_price': unit_price_kit_offer[i],
+                    'uom' : uom_type_list[i],
                     'total_price': total_price_kit_offer[i],
                 }
                 product_kit_offer.append(kit_offer)
@@ -267,6 +271,8 @@ def add_user_login():
     if request.method == 'GET':
         role_master = RoleMaster.query.all()
         user_master_login = UserModel.query.all()
+        data = Users.query.all()
+        print(data)
         return render_template('home/add-user-login.html',role_master=role_master,user_master_login=user_master_login, users=None, segment='User-masters')
     if request.method == 'POST':
         user_first_name = request.form['user_first_name'].strip()
@@ -279,6 +285,11 @@ def add_user_login():
         user_role_master =request.form['user_role_master']
         user_reporting_person =request.form['user_reporting_person']
 
+        password_data = Users(
+            username = user_name_master,
+            email = user_email_id,
+            password = password_master
+        )
         user_master_add = UserModel(user_first_name = user_first_name,
             user_last_name = user_last_name,
             user_contact_no =user_contact_no,
@@ -289,6 +300,8 @@ def add_user_login():
             user_role_master =user_role_master,
             user_reporting_person =user_reporting_person
         )
+
+        db.session.add(password_data)
         db.session.add(user_master_add)
         db.session.commit()
         return redirect('/User-masters')
@@ -516,6 +529,10 @@ def PO_REQ_LIST():
 @login_required
 def retrieve_list():
     add_user = AddOffer.query.all()
+
+    # address_temp = CustomerMaster.query.filter_by(customer_name=add_user.customer_name_offer).first()
+    # addoffer_address = address_temp.address if address_temp.address else None
+    print(add_user)
     return render_template('home/users.html',add_user=add_user, segment='offer-offerlist')
 
 @blueprint.route('/<int:id>/offer_pdf', methods=['GET', 'POST'])
@@ -524,9 +541,15 @@ def offer_pdf(id):
     if request.method == 'GET':
         add_user = AddOffer.query.filter_by(id=id).first()
         role_phone_temp = UserModel.query.filter_by(user_first_name=add_user.marketing_person_offer).first()
-
-        addoffer_Role = role_phone_temp.user_role_master if role_phone_temp.user_role_master else None
-        addoffer_Phonenumber = role_phone_temp.user_contact_no if role_phone_temp.user_contact_no else None
+  
+        try:
+            addoffer_Role = role_phone_temp.user_role_master
+            addoffer_Phonenumber = role_phone_temp.user_contact_no
+        except AttributeError:
+            flash("The user's role is not available. User may have been deleted.", "warning")
+            print("AttributeError")
+            addoffer_Role = None
+            addoffer_Phonenumber = None
 
         address_temp = CustomerMaster.query.filter_by(customer_name=add_user.customer_name_offer).first()
         addoffer_address = address_temp.address if address_temp.address else None

@@ -34,7 +34,7 @@
         <section class="content">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="card">
+                    <div class="card ">
                         <div class="card-header"> Invoice Details </div>
                         <div class="card-body">
                             <div class="col-sm-12">
@@ -182,116 +182,88 @@
         <section class="content">
             <div class="page-section">
                 <div class="card card-fluid">
+                    <div class="card-header"> Claculations </div>
                     <div class="card-body">
 
+                        <link rel="stylesheet"
+                            href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css">
 
-                        <table style="width: 100%;">
-                            <tbody>
-                                <tr>
-                                    <td> Gross Amount </td>
-                                    <td style="width: 20%;"></td>
-                                    <td style="width: 30%;">
-                                        <input type="number" id="total_amount" maxlength="50" autocomplete="off"
-                                            decimalonly="" class="form-control ng-pristine ng-valid ng-touched"
-                                            disabled>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> Discount </td>
-                                    <td>
-                                        <select id="discount_type" class="form-control ng-valid ng-touched ng-dirty">
-                                            <option value="Percentage_discount">Percentage</option>
-                                            <option value="Value_discount">Value</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <table>
-                                            <tr>
-                                                <input type="number" id="discount_value" maxlength="50"
-                                                    autocomplete="off" decimalonly=""
-                                                    class="form-control ng-untouched ng-pristine ng-valid">
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> Total Assessable Value </td>
-                                    <td></td>
-                                    <td>
-                                        <input type="number" id="assessable_value" maxlength="50" autocomplete="off"
-                                            decimalonly="" class="form-control ng-untouched ng-pristine ng-valid">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> P &amp; F % </td>
-                                    <td>
-                                        <select id="pf_type" class="form-control ng-valid ng-dirty ng-touched">
-                                            <option value="Percentage">Percentage</option>
-                                            <option value="Value">Value</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <table>
-                                            <tr>
-                                                <input type="number" id="pf_value" maxlength="50" autocomplete="off"
-                                                    decimalonly=""
-                                                    class="form-control ng-untouched ng-pristine ng-valid">
-
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> Freight </td>
-                                    <td></td>
-                                    <td>
-                                        <input type="number" id="freight" maxlength="50" autocomplete="off"
-                                            decimalonly="" class="form-control ng-pristine ng-valid ng-touched">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> TCS Charges </td>
-                                    <td>
-                                        <input type="number" id="tcs_charges" maxlength="50" autocomplete="off"
-                                            decimalonly="" class="form-control ng-pristine ng-valid ng-touched">
-                                    </td>
-                                    <td>
-                                        <input type="number" id="tcs_value"
-                                            class="form-control ng-untouched ng-pristine ng-valid">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> Total </td>
-                                    <td></td>
-                                    <td>
-                                        <input type="number" id="total_with_tcs"
-                                            class="form-control ng-untouched ng-pristine ng-valid">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> Round off </td>
-                                    <td>
-                                        <select id="round_off_type" class="form-control ng-valid ng-dirty ng-touched">
-                                            <option value="Add">Add</option>
-                                            <option value="Subtract">Subtract</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="number" id="round_off_value"
-                                            class="form-control ng-pristine ng-valid ng-touched">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> Grand Total </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        <input id="grand_total" type="number"
-                                            class="form-control ng-pristine ng-valid ng-touched" disabled>
-                                    </td>
-                                </tr>
-                            </tbody>
+                        <table class="table table-dark table-striped">
+                            <tr>
+                                <th>Gross Amount:</th>
+                                <td></td>
+                                <td><input type="number"
+                                        style="height: 50px !important; background-color: transparent !important; color: white !important;"
+                                        class="form-control" id="grossAmount" step="0.01" disabled></td>
+                            </tr>
+                            <tr>
+                                <th>Discount Type:</th>
+                                <td>
+                                    <input type="radio" name="discountType" value="percentage" checked>Percentage
+                                    <input type="radio" name="discountType" value="value">Value
+                                </td>
+                                <td><input type="number" style="height: 50px !important;" class="form-control"
+                                        id="discountValue" step="0.01" required></td>
+                            </tr>
+                            <tr>
+                                <th>Total Assessable Value:</th>
+                                <td></td>
+                                <td><input type="number"
+                                        style="height: 50px !important; background-color: transparent !important; color: white !important;"
+                                        class="form-control" id="assessableValue" disabled></td>
+                            </tr>
+                            <tr>
+                                <th>P & F %:</th>
+                                <td><input type="number" style="height: 50px !important;" class="form-control"
+                                        id="pfPercentage" step="0.01" required></td>
+                                <td><input type="number"
+                                        style="height: 50px !important; background-color: transparent !important; color: white !important;"
+                                        class="form-control" id="pfValue" disabled></td>
+                            </tr>
+                            <tr>
+                                <th>Freight:</th>
+                                <td><input type="number" style="height: 50px !important;" class="form-control"
+                                        id="freightValue" step="0.01" required></td>
+                                <td><input type="number"
+                                        style="height: 50px !important; background-color: transparent !important; color: white !important;"
+                                        class="form-control" id="totalFreight" disabled></td>
+                            </tr>
+                            <tr>
+                                <th>TCS %:</th>
+                                <td><input type="number" style="height: 50px !important;" class="form-control"
+                                        id="tcsPercentage" step="0.01" required></td>
+                                <td><input type="number" class="form-control"
+                                        style="height: 50px !important; background-color: transparent !important; color: white !important;"
+                                        id="tcsValue" disabled></td>
+                            </tr>
+                            <tr>
+                                <th>GST %:</th>
+                                <td><input type="number" class="form-control" style="height: 50px !important;"
+                                        id="gstPercentage" step="0.01" required></td>
+                                <td><input type="number"
+                                        style="height: 50px !important; background-color: transparent !important; color: white !important;"
+                                        class="form-control" id="gstValue" disabled></td>
+                            </tr>
+                            <tr>
+                                <th>Round Off Type:</th>
+                                <td>
+                                    <input type="radio" name="roundOffType" value="addition" checked>Addition
+                                    <input type="radio" name="roundOffType" value="subtraction">Subtraction
+                                </td>
+                                <td><input type="number" class="form-control" style="height: 50px !important;"
+                                        id="roundOffValue" step="0.01" required></td>
+                            </tr>
+                            <tr>
+                                <th>Grand Total:</th>
+                                <td></td>
+                                <td><input type="number" class="form-control"
+                                        style="height: 50px !important; background-color: transparent !important; color: white !important;"
+                                        id="grandTotal" disabled></td>
+                            </tr>
                         </table>
+                        <script
+                            src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+
 
                     </div>
                 </div>
@@ -512,7 +484,51 @@
 
         });
     });
+    $(document).ready(function () {
+        // Function to calculate and update the total
+        function calculateTotal() {
+            var grossAmount = parseFloat($('#grossAmount').val());
+            var discountType = $('input[name="discountType"]:checked').val();
+            var discountValue = parseFloat($('#discountValue').val());
+            var assessableValue = 0;
 
+            if (discountType === 'percentage') {
+                assessableValue = grossAmount - (grossAmount * discountValue / 100);
+            } else if (discountType === 'value') {
+                assessableValue = grossAmount - discountValue;
+            }
+
+            var pfPercentage = parseFloat($('#pfPercentage').val());
+            var pfValue = assessableValue * pfPercentage / 100;
+            var freightValue = parseFloat($('#freightValue').val());
+            var tcsPercentage = parseFloat($('#tcsPercentage').val());
+            var tcsValue = (assessableValue + freightValue + pfValue) + tcsPercentage / 100;
+            var gstPercentage = parseFloat($('#gstPercentage').val());
+            var gstValue = tcsValue * gstPercentage / 100;
+            var roundOffType = $('input[name="roundOffType"]:checked').val();
+            var roundOffValue = parseFloat($('#roundOffValue').val());
+            var grandTotal = tcsValue + gstValue;
+
+            if (roundOffType === 'addition') {
+                grandTotal += roundOffValue;
+            } else if (roundOffType === 'subtraction') {
+                grandTotal -= roundOffValue;
+            }
+
+            $('#assessableValue').val(assessableValue.toFixed(2));
+            $('#pfValue').val(pfValue.toFixed(2));
+            $('#totalFreight').val(freightValue.toFixed(2));
+            $('#tcsValue').val(tcsValue.toFixed(2));
+            $('#gstValue').val(gstValue.toFixed(2));
+            $('#grandTotal').val(grandTotal.toFixed(2));
+        }
+
+        // Bind event handlers to calculate the total when input values change
+        $('#grossAmount, input[name="discountType"], #discountValue, #pfPercentage, #freightValue, #tcsPercentage, #gstPercentage, input[name="roundOffType"], #roundOffValue').on('input', calculateTotal);
+
+        // Trigger initial calculation
+        calculateTotal();
+    });
 
     function updateTotal() {
         const rows = document.querySelectorAll('#product-table tbody tr');
@@ -524,99 +540,7 @@
             row.querySelector('.total').textContent = `${rowTotal}`;
             total += rowTotal;
         });
-        $('#total_amount').val(total);
-
-        const pfInput = document.querySelector('#pf_value');
-        const freightInput = document.querySelector('#freight');
-        const discountTypeSelect = document.querySelector('#discount_type');
-        const discountInput = document.querySelector('#discount_value');
-        const roundOffTypeSelect = document.querySelector('#round_off_type');
-        const roundOffValueInput = document.querySelector('#round_off_value');
-
-
-        let pfAmount = 0;
-        if (pfInput.value) {
-            pfAmount = total * (Number(pfInput.value) / 100);
-        }
-
-        let freightAmount = 0;
-        if (freightInput.value) {
-            freightAmount = Number(freightInput.value);
-        }
-
-        let discountAmount = 0;
-        if (discountInput.value) {
-            discountAmount = Number(discountInput.value);
-            if (discountTypeSelect.value === 'Percentage_discount') {
-                discountAmount = total * (discountAmount / 100);
-            }
-        }
-
-        let roundOffAmount = 0;
-        if (roundOffValueInput.value) {
-            if (roundOffTypeSelect.value === 'Add' && roundOffValueInput.value) {
-                roundOffAmount = Number(roundOffValueInput.value);
-            }
-            else if (roundOffTypeSelect.value === 'Subtract' && roundOffValueInput.value) {
-                roundOffAmount = -Number(roundOffValueInput.value);
-            }
-        }
-
-        roundOffValueInput.addEventListener('input', () => {
-            const totalWithRoundOff = total + roundOffAmount;
-            $('#grand_total').val(totalWithRoundOff.toFixed(2));
-        });
-
-
-        pfInput.addEventListener('input', () => {
-            const pfPercentage = Number(pfInput.value);
-            pfAmount = total * (pfPercentage / 100);
-            subTotal = total + pfAmount + freightAmount - discountAmount;
-            grandTotal = subTotal;
-            $('#total_with_tcs').val(grandTotal.toFixed(2));
-        });
-
-        discountInput.addEventListener('input', () => {
-            const discount_temp = Number(discountInput.value);
-            if (discountTypeSelect.value === 'Percentage_discount') {
-                discountAmount = total * (discount_temp / 100);
-            } else {
-                discountAmount = discount_temp;
-            }
-            subTotal = total + pfAmount + freightAmount - discountAmount;
-            grandTotal = subTotal;
-            $('#total_with_tcs').val(grandTotal.toFixed(2));
-        });
-
-        freightInput.addEventListener('input', () => {
-            freightAmount = Number(freightInput.value);
-            subTotal = total + pfAmount + freightAmount - discountAmount;
-            grandTotal = subTotal;
-            $('#total_with_tcs').val(grandTotal.toFixed(2));
-        });
-
-        discountTypeSelect.addEventListener('change', () => {
-            const discount_temp = Number(discountInput.value);
-            if (discountTypeSelect.value === 'Percentage_discount') {
-                discountAmount = total * (discount_temp / 100);
-            } else {
-                discountAmount = discount_temp;
-            }
-            subTotal = total + pfAmount + freightAmount - discountAmount;
-            grandTotal = subTotal;
-            $('#total_with_tcs').val(grandTotal.toFixed(2));
-        });
-
-        const newRow = document.querySelector('#product-table tfoot tr');
-        newRow.querySelector('.total').textContent = `${total}`;
-        newRow.querySelectorAll('.quantity, .unit-price').forEach(input => {
-            input.addEventListener('input', updateTotal);
-        });
-
-        subTotal = total + pfAmount + freightAmount - discountAmount;
-        grandTotal = subTotal;
-        $('#total_with_tcs').val(grandTotal.toFixed(2));
-        
+        $('#grossAmount').val(total);
 
     }
 

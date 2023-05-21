@@ -26,7 +26,26 @@ class Users(db.Model, UserMixin):
     def __repr__(self):
         return str(self.username)
 
+    @classmethod
+    def create_admin_user(cls):
+        admin_username = 'admin'
+        admin_email = 'admin@gmail.com'
+        admin_password = 'A$trongP@ssw0rd'
 
+        admin_user = cls(
+            username=admin_username,
+            email=admin_email,
+            password=admin_password
+        )
+        db.session.add(admin_user)
+        db.session.commit()
+
+# Event listener for creating the admin user when Users table is created
+@db.event.listens_for(Users.__table__, 'after_create')
+def create_admin_user(*args, **kwargs):
+    Users.create_admin_user()
+
+    
 @login_manager.user_loader
 def user_loader(id):
     return Users.query.filter_by(id=id).first()
