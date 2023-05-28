@@ -26,7 +26,7 @@ import datetime
 @blueprint.route('/dashboard')
 @login_required
 def dashboard():
-    # db.metadata.tables['UserModel'].drop(db.engine)
+    # db.metadata.tables['addoffer'].drop(db.engine)
     return render_template('home/dashboard.html', segment='dashboard')
 
 @blueprint.route('/get_kit_details', methods=['POST'])
@@ -117,12 +117,27 @@ def create():
             # Convert the list to JSON
             product_kit_offer_json = json.dumps(product_kit_offer)
 
-        total_amount_offer = request.form['total_amount_offer']
-        freight_offer = request.form['freight_offer']
-        cgst_igst_type_offer = request.form['cgst_igst_type_offer']
-        pf_percentage_offer = request.form['pf_percentage_offer']
-        gst_offer = request.form['gst_offer']
-        grand_total_offer = request.form['grand_total_offer']
+        # total_amount_offer = request.form['total_amount_offer']
+        # freight_offer = request.form['freight_offer']
+        # cgst_igst_type_offer = request.form['cgst_igst_type_offer']
+        # pf_percentage_offer = request.form['pf_percentage_offer']
+        # gst_offer = request.form['gst_offer']
+        # grand_total_offer = request.form['grand_total_offer']
+        grossAmount = request.form['grossAmount']
+        discountType = request.form['discountType']
+        discountValue = request.form['discountValue']
+        assessableValue = request.form['assessableValue']
+        pfPercentage = request.form['pfPercentage']
+        pfValue = request.form['pfValue']
+        freightValue = request.form['freightValue']
+        totalFreight = request.form['totalFreight']
+        tcsPercentage = request.form['tcsPercentage']
+        tcsValue = request.form['tcsValue']
+        gstPercentage = request.form['gstPercentage']
+        gstValue = request.form['gstValue']
+        roundOffType = request.form['roundOffType']
+        roundOffValue = request.form['roundOffValue']
+        grandTotal = request.form['grandTotal']
 
         subject_offer = request.form['subject_offer']
         reference_offer = request.form['reference_offer']
@@ -148,12 +163,21 @@ def create():
             marketing_person_offer=marketing_person_offer,
             currency_type_offer=currency_type_offer,
             product_kit_offer_json=product_kit_offer_json,
-            total_amount_offer=total_amount_offer,
-            freight_offer=freight_offer,
-            cgst_igst_type_offer=cgst_igst_type_offer,
-            pf_percentage_offer=pf_percentage_offer,
-            gst_offer=gst_offer,
-            grand_total_offer=grand_total_offer,
+            grossAmount = grossAmount,
+            discountType = discountType,
+            discountValue = discountValue,
+            assessableValue = assessableValue,
+            pfPercentage = pfPercentage,
+            pfValue = pfValue,
+            freightValue = freightValue,
+            totalFreight = totalFreight,
+            tcsPercentage = tcsPercentage,
+            tcsValue = tcsValue,
+            gstPercentage = gstPercentage,
+            gstValue = gstValue,
+            roundOffType = roundOffType,
+            roundOffValue = roundOffValue,
+            grandTotal = grandTotal,
             subject_offer=subject_offer,
             reference_offer=reference_offer,
             description_offer=description_offer,
@@ -179,9 +203,9 @@ def create():
             contract_review_Delivery_Address_4='',
             contract_review_Delivery_Address_5='',
             contract_review_Offer_No='',
-            contract_review_Total_Cost=grand_total_offer,
+            contract_review_Total_Cost=grandTotal,
 
-            contract_review_price=total_amount_offer,
+            contract_review_price=grossAmount,
             contract_review_price_1='',
             contract_review_price_2='',
 
@@ -936,7 +960,7 @@ def edit_contractoffer(id):
 @login_required
 def OC_Register_list():
     if request.method == 'GET':
-        users = AddOffer.query.all()
+        users = OCModel.query.all()
         return render_template('home/OC-Register-List.html', users=users,segment='OcRegister')
 
 @blueprint.route('/BOM-Register-List', methods=['GET', 'POST'])

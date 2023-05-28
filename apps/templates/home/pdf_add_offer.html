@@ -16,7 +16,8 @@
     background-color: #fff;
     border: 1px solid #ccc;
     z-index: 9999;
-    cursor: move; /* Add cursor style for draggable */
+    cursor: move;
+    /* Add cursor style for draggable */
   }
 
   /* CSS for the print button and cancel link container */
@@ -24,7 +25,7 @@
     text-align: center;
     margin-top: 10px;
   }
-  
+
   /* CSS for the print button */
   #printButton {
     margin-right: 10px;
@@ -40,38 +41,10 @@
       <label for="colorInput">Text Color:</label>
       <input type="color" id="colorInput" value="#000000">
     </div>
-    <!-- <div>
-      <label for="fontWeightInput">Font Weight:</label>
-      <select id="fontWeightInput">
-        <option value="normal">Normal</option>
-        <option value="bold">Bold</option>
-        <option value="bolder">Bolder</option>
-        <option value="lighter">Lighter</option>
-      </select>
-    </div> -->
     <div>
       <label for="backgroundColorInput">Highlight Text:</label>
       <input type="color" id="backgroundColorInput" value="#ffffff">
     </div>
-    <!-- <div>
-      <label for="fontFamilyInput">Font Family:</label>
-      <select id="fontFamilyInput">
-        <option value="Arial, sans-serif">Arial</option>
-        <option value="Helvetica, sans-serif">Helvetica</option>
-        <option value="Times New Roman, serif">Times New Roman</option>
-        <option value="Courier New, monospace">Courier New</option>
-        <option value="Verdana, sans-serif">Verdana</option>
-        <option value="Georgia, serif">Georgia</option>
-        <option value="Palatino, serif">Palatino</option>
-        <option value="Garamond, serif">Garamond</option>
-        <option value="Comic Sans MS, cursive">Comic Sans MS</option>
-        <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
-        <option value="Arial Black, sans-serif">Arial Black</option>
-        <option value="Impact, sans-serif">Impact</option>
-        <option value="Lucida Sans Unicode, sans-serif">Lucida Sans Unicode</option>
-        <option value="Tahoma, sans-serif">Tahoma</option>
-      </select>
-    </div> -->
 
     <div>
       <label for="commonFontStyleInput">Common Font Style:</label>
@@ -101,7 +74,7 @@
         <option value="Copperplate Gothic Bold, sans-serif">Copperplate Gothic Bold</option>
       </select>
     </div>
-    
+
     <div class="button-container">
       <button id="printButton" type="submit" class="btn btn-primary btn-sm">Print</button>
       <a routerlink="/offer-offerlist" class="btn btn-danger btn-sm" href="/offer-offerlist">Cancel</a>
@@ -129,8 +102,42 @@
         <span><strong>To:</strong></span>
         <p><span><strong>{{ add_user.customer_name_offer }}</strong></span></p>
         <p><span>{{ addoffer_address }}</span></p>
-
       </div>
+
+      <style>
+        .from {
+          border-collapse: collapse;
+        }
+        
+        .from td {
+          border: 1px solid #ddd;
+          padding: 5px;
+        }
+        
+        .from p {
+          margin: 0;
+        }
+      </style>
+      
+      <table class="from">
+        <tr>
+          <td><span>Subject</span></td>
+          <td><span>{{ add_user.subject_offer }}</span></td>
+        </tr>
+        <tr>
+          <td><span>Reference</span></td>
+          <td><span>{{ add_user.reference_offer }}</span></td>
+        </tr>
+        <tr>
+          <td><span>Description</span></td>
+          <td><span>{{ add_user.description_offer }}</span></td>
+        </tr>
+        <tr>
+          <td><span>Notes</span></td>
+          <td><span>{{ add_user.notes_offer }}</span></td>
+        </tr>
+      </table>
+      
       <table>
         <thead>
           <tr>
@@ -143,35 +150,45 @@
           </tr>
         </thead>
         <tbody>
-         <span> {{ html_rows | safe }}</span>
+          <span> {{ html_rows | safe }}</span>
         </tbody>
 
         <tfoot>
           <tr>
-            <td colspan="5"><span>Subtotal:</span></td>
-            <td><span>{{ add_user.total_amount_offer }}</span></td>
+            <td colspan="5"><span>Grost Amount :</span></td>
+            <td><span>{{ add_user.grossAmount }}</span></td>
           </tr>
           <tr>
-            <td colspan="5"><span>Freight:</span></td>
-            <td><span>{{ add_user.freight_offer }}</span></td>
+            <td colspan="5"><span>Discount in {{ add_user.discountType }} :</span></td>
+            <td><span>{{ add_user.discountValue }}</span></td>
           </tr>
           <tr>
-            <td colspan="5"><span>P&F Percentage:</span></td>
-            <td><span>{{ add_user.pf_percentage_offer }}</span></td>
+            <td colspan="5"><span>P&F in %:</span></td>
+            <td><span>{{ add_user.pfPercentage }}</span></td>
           </tr>
           <tr>
-            <td colspan="5"><span>{{ add_user.cgst_igst_type_offer }}</span>:</td>
-            <td><span>{{ add_user.gst_offer }}</span></td>
+            <td colspan="5"><span>Frieght:</span></td>
+            <td><span>{{ add_user.freightValue }}</span></td>
           </tr>
           <tr>
-            <td colspan="5"><span>Grand Total:</span></td>
-            <td><span>{{ add_user.grand_total_offer }}</span></td>
-
+            <td colspan="5"><span>GST:</span></td>
+            <td><span>{{ add_user.gstPercentage }}</span></td>
+          </tr>
+          <tr>
+            <td colspan="5"><span>Round Off [ {% if add_user.roundOffType == 'addition' %}+{% else %}-{% endif %}
+                ]</span></td>
+            <td><span>{{ add_user.roundOffValue }}</span></td>
+          </tr>
+          <tr>
+            <td colspan="5"><span>Grand Total: </span></td>
+            <td><span>{{ add_user.grandTotal }}</span></td>
           </tr>
         </tfoot>
 
       </table>
-      <span><h id="grandTotalOffer"></h></span>
+      <span>
+        <h id="grandTotalOffer"></h>
+      </span>
       <div class="term-conditions">
         <h4><span><strong>Terms and Conditions:</strong></span></h4>
         <p>
@@ -179,7 +196,7 @@
 
           <span><strong>2. P&F Charges : </strong>{{ add_user.PandFcharges_offer }}</span><br>
 
-          <strong><span style="font-weight: bold; text-transform: uppercase;">3. {{ add_user.cgst_igst_type_offer}}</span> : </strong> <span>{{ add_user.igst_terms_offer }}</span><br>
+          <strong><span style="font-weight: bold; text-transform: uppercase;">3. GST:</span></strong> <span>{{ add_user.igst_terms_offer }}</span><br>
 
           <span><strong>4. HSN CODE : </strong>{{ add_user.hsn_code_offer }}</span><br>
 
@@ -198,13 +215,12 @@
 
       <div>
         <p>
-          <span><strong>Thanking you,</strong></span>  <br>
-          <span><strong>Yours faithfully,</strong> </span>  <br>
-          <span><strong>Name : </strong> {{ add_user.marketing_person_offer }}  </span> <br>
-          <span><strong>Role : </strong> {{ addoffer_Role }} </span>  <br>
-          <span><strong>Contact No : </strong> {{ addoffer_Phonenumber }}  </span> <br>
-          <!-- <strong>Yours faithfully,</strong><br>
-        <strong>Yours faithfully,</strong><br> -->
+          <span>{{ add_user.footer_description_offer }}<span> <br>
+          <span><strong>Thanking you,</strong></span> <br>
+          <span><strong>Yours faithfully,</strong> </span> <br>
+          <span><strong>Name : </strong> {{ add_user.marketing_person_offer }} </span> <br>
+          <span><strong>Role : </strong> {{ addoffer_Role }} </span> <br>
+          <span><strong>Contact No : </strong> {{ addoffer_Phonenumber }} </span> <br>
         </p>
       </div>
 
@@ -333,7 +349,7 @@
       var fontWeight = $(this).val();
       applyStyleToSelectedText('font-weight', fontWeight);
     });
-    
+
     $('#commonFontStyleInput').change(function () {
       var commonFontStyle = $(this).val();
       convertAllTextToCommonFontStyle(commonFontStyle);
@@ -427,9 +443,9 @@
   var grandTotalOffer = parseInt("{{ add_user.grand_total_offer }}");
   grandTotalOfferElement.innerHTML = numberToWords(grandTotalOffer);
 
-  $(function() {
-  $(".popup").draggable(); // Make the popup draggable
-});
+  $(function () {
+    $(".popup").draggable(); // Make the popup draggable
+  });
 
 
 </script>

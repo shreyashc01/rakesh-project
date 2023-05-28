@@ -46,12 +46,21 @@ class AddOffer(db.Model):
 
     product_kit_offer_json = db.Column(db.String())
 
-    total_amount_offer = db.Column(db.Float())
-    freight_offer = db.Column(db.Float())
-    cgst_igst_type_offer = db.Column(db.String())
-    pf_percentage_offer = db.Column(db.Float())
-    gst_offer = db.Column(db.Float())
-    grand_total_offer = db.Column(db.Float())
+    grossAmount = db.Column(db.Float())
+    discountType = db.Column(db.String())
+    discountValue = db.Column(db.Float())
+    assessableValue = db.Column(db.Float())
+    pfPercentage = db.Column(db.Float())
+    pfValue = db.Column(db.Float())
+    freightValue = db.Column(db.Float())
+    totalFreight = db.Column(db.Float())
+    tcsPercentage = db.Column(db.Float())
+    tcsValue = db.Column(db.Float())
+    gstPercentage = db.Column(db.Float())
+    gstValue = db.Column(db.Float())
+    roundOffType = db.Column(db.String())
+    roundOffValue = db.Column(db.Float())
+    grandTotal = db.Column(db.Float())
 
     subject_offer = db.Column(db.String())
     reference_offer = db.Column(db.String())
@@ -128,8 +137,8 @@ class AddOffer(db.Model):
     offer_conformation_number = db.Column(db.String())
 
     def __init__(self, customer_name_offer, due_date_offer, offer_type_offer, quotation_number_offer, marketing_person_offer,
-             currency_type_offer, product_kit_offer_json, total_amount_offer, freight_offer, cgst_igst_type_offer,
-             pf_percentage_offer, gst_offer, grand_total_offer, subject_offer, reference_offer, description_offer,
+             currency_type_offer, product_kit_offer_json,grossAmount,discountType,discountValue,assessableValue,pfPercentage,pfValue,
+             freightValue,totalFreight,tcsPercentage,tcsValue,gstPercentage,gstValue,roundOffType,roundOffValue,grandTotal, subject_offer, reference_offer, description_offer,
              footer_description_offer, notes_offer, price_basis_offer, PandFcharges_offer, igst_terms_offer,
              hsn_code_offer, payment_terms_offer, delivery_terms_offer, freight_terms_offer, validity_terms_offer,
              warrenty_terms_offer, contract_review_Order_No, contract_review_Order_Date, contract_review_PO_Qty,
@@ -156,12 +165,21 @@ class AddOffer(db.Model):
 
         self.product_kit_offer_json = product_kit_offer_json
 
-        self.total_amount_offer = total_amount_offer
-        self.freight_offer = freight_offer
-        self.cgst_igst_type_offer = cgst_igst_type_offer
-        self.pf_percentage_offer = pf_percentage_offer
-        self.gst_offer = gst_offer
-        self.grand_total_offer = grand_total_offer
+        self.grossAmount = grossAmount
+        self.discountType = discountType
+        self.discountValue = discountValue
+        self.assessableValue = assessableValue
+        self.pfPercentage = pfPercentage
+        self.pfValue = pfValue
+        self.freightValue = freightValue
+        self.totalFreight = totalFreight
+        self.tcsPercentage = tcsPercentage
+        self.tcsValue = tcsValue
+        self.gstPercentage = gstPercentage
+        self.gstValue = gstValue
+        self.roundOffType = roundOffType
+        self.roundOffValue = roundOffValue
+        self.grandTotal = grandTotal
 
         self.subject_offer = subject_offer
         self.reference_offer = reference_offer
