@@ -869,8 +869,8 @@ def Contract_Review_list():
 @blueprint.route('/<int:id>/edit_oc_register', methods=['GET', 'POST'])
 @login_required
 def edit_oc_register(id):
-    add_user_contractReview = AddOffer.query.filter_by(id=id).first()
-    return render_template('home/editcontract.html', add_user_contractReview=add_user_contractReview, segment='contractreview')
+    add_user_contractReview = OCModel.query.filter_by(id=id).first()
+    return render_template('home/editocfile.html', add_user_contractReview=add_user_contractReview, segment='OcRegister')
     
 @blueprint.route('/<int:id>/edit_contractoffer', methods=['GET', 'POST'])
 @login_required
@@ -949,6 +949,42 @@ def edit_contractoffer(id):
             original_value = Offer_confirmation_Number
             updated_value = f"ORN/OC/{original_value}/{current_year}-{next_year}"
             add_user_contractReview.offer_conformation_number = updated_value
+            
+            oc_date = ""
+            oc_number = updated_value
+            oc_customer_name = add_user_contractReview.customer_name_offer
+            oc_po_value = 0
+            oc_customer_type = add_user_contractReview.offer_type_offer
+            oc_po_number = ""
+
+            oc_po_date = ""
+            oc_quotation_no = add_user_contractReview.quotation_number_offer
+            oc_dispatch_date = 0
+            oc_invoice_no = 0
+            oc_invoice_date= ""
+            oc_po_qty = 0
+            oc_remarks = 0
+            oc_confirmation_offer = ""
+
+            add_oc = OCModel(
+                oc_date = oc_date,
+                oc_number = oc_number,
+                oc_customer_name = oc_customer_name,
+                oc_po_value = oc_po_value,
+                oc_customer_type = oc_customer_type,
+                oc_po_number = oc_po_number,
+                oc_po_date = oc_po_date,
+                oc_quotation_no = oc_quotation_no,
+                oc_dispatch_date = oc_dispatch_date,
+                oc_invoice_no = oc_invoice_no,
+                oc_invoice_date= oc_invoice_date,
+                oc_po_qty = oc_po_qty,
+                oc_remarks = oc_remarks,
+                oc_confirmation_offer = oc_confirmation_offer
+            )
+
+            db.session.add(add_oc)
+            db.session.commit()
 
         db.session.commit()
 

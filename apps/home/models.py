@@ -261,27 +261,37 @@ class AddOffer(db.Model):
 class OCModel(db.Model):
     __tablename__ = "OfferComfirmation"
     id = db.Column(db.Integer, primary_key=True)
+    oc_date = db.Column(db.String())
     oc_number = db.Column(db.String())
     oc_customer_name = db.Column(db.String())
+    oc_po_value = db.Column(db.String())
     oc_customer_type = db.Column(db.String())
     oc_po_number = db.Column(db.String())
     oc_po_date = db.Column(db.String())
-    oc_po_value = db.Column(db.String())
-    oc_po_qty = db.Column(db.String())
+    oc_quotation_no = db.Column(db.String())
     oc_dispatch_date = db.Column(db.String())
+    oc_invoice_no = db.Column(db.String())
+    oc_invoice_date= db.Column(db.String())
+    oc_po_qty = db.Column(db.String())
     oc_remarks = db.Column(db.String())
+    oc_confirmation_offer = db.Column(db.String())
 
-    def __init__(self, oc_number, oc_customer_name, oc_customer_type, oc_po_number, oc_po_date, oc_po_value, oc_po_qty,oc_dispatch_date,oc_remarks):
+    def __init__(self, oc_date,oc_number, oc_customer_name, oc_customer_type, oc_po_number, oc_po_date, oc_po_value, oc_quotation_no,
+                 oc_invoice_no,oc_invoice_date, oc_po_qty,oc_dispatch_date,oc_remarks, oc_confirmation_offer):
+        self.oc_date = oc_date
         self.oc_number = oc_number
         self.oc_customer_name = oc_customer_name
         self.oc_customer_type = oc_customer_type
         self.oc_po_number = oc_po_number
         self.oc_po_date = oc_po_date
         self.oc_po_value = oc_po_value
+        self.oc_quotation_no = oc_quotation_no
+        self.oc_invoice_no = oc_invoice_no
+        self.oc_invoice_date = oc_invoice_date
         self.oc_po_qty = oc_po_qty
         self.oc_dispatch_date = oc_dispatch_date
         self.oc_remarks = oc_remarks
-
+        self.oc_confirmation_offer = oc_confirmation_offer
         
 
     def __repr__(self):

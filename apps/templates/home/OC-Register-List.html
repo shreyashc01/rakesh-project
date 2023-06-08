@@ -37,53 +37,49 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="table-responsive">
-								<table id="add-row" class="display table table-striped table-hover" >
+								<table id="add-row" class="display table table-striped table-hover">
 									<thead>
-										<tr>
-											<th>Date</th>
-											<th>OC No</th>
-											<th>Customer Name</th>
-											<th>PO Value</th>
-											<th>Order Type</th>
-											<th>PO Number</th>
-											<th>PO Date</th>
-											<th>Quotation No</th>
-											<th>Dispatch Date</th>
-											<th>Invoice No</th>
-											<th>Invoice Date</th>
-											<th style="width: 10%">Action</th>
-										</tr>
+									  <tr>
+										<th>Date</th>
+										<th>OC No</th>
+										<th>Customer Name</th>
+										<th>PO Value</th>
+										<th>Order Type</th>
+										<th>PO Number</th>
+										<th>PO Date</th>
+										<th>Quotation No</th>
+										<th>Dispatch Date</th>
+										<th>Invoice No</th>
+										<th>Invoice Date</th>
+										<th style="width: 10%">Action</th>
+									  </tr>
 									</thead>
 									<tbody>
-										{% for user in users %}
-											<tr
-											{% if loop.index %2==0 %}
-											{% else %}
-											{% endif %}
-											>
-											<td>{{user.contract_review_Order_Date}}</td>
-											<td>{{user.offer_conformation_number}}</td>
-											<td>{{user.customer_name_offer}}</td>
-											<td>{{user.contract_review_PO_Qty}}</td>
-											<td>{{user.offer_type_offer}}</td>
-											<td>{{user.hsn_code}}</td>
-											<td>{{user.hsn_code}}</td>
-											<td>{{user.quotation_number_offer}}</td>
-											<td>{{user.hsn_code}}</td>
-											<td>{{user.hsn_code}}</td>
-											<td>{{user.hsn_code}}</td>
-											<td>
+									  {% for user in users %}
+										<tr style="background-color: {% if user.oc_date == '' %}yellow{% else %}rgba(144, 238, 144, 0.5){% endif %}">
+										  <td>{{ user.oc_date }}</td>
+										  <td>{{ user.oc_number }}</td>
+										  <td>{{ user.oc_customer_name }}</td>
+										  <td>{{ user.contract_review_PO_Qty }}</td>
+										  <td>{{ user.oc_customer_type }}</td>
+										  <td>{{ user.hsn_code }}</td>
+										  <td>{{ user.oc_po_value }}</td>
+										  <td>{{ user.oc_quotation_no }}</td>
+										  <td>{{ user.oc_dispatch_date }}</td>
+										  <td>{{ user.oc_invoice_no }}</td>
+										  <td>{{ user.oc_invoice_date }}</td>
+										  <td>
 											<div class="form-button-action">
-											<span style="font-size: 24px;color:green;">
-											<a href="/{{user.id}}/edit_oc_register" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fas fa-edit" ></i></a> 
-											</span>
+											  <span style="font-size: 24px;color:green;">
+												<a href="/{{ user.id }}/edit_oc_register" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fas fa-edit"></i></a> 
+											  </span>
 											</div>
-											</td>
+										  </td>
 										</tr>
-									{% endfor %}
-										
+									  {% endfor %}
 									</tbody>
-								</table>
+								  </table>
+								  
 							</div>
 						</div>
 					</div>

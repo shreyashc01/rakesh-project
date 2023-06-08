@@ -1,0 +1,257 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add User {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">Contract Review</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+                    <a href="/">
+                        <i class="flaticon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="/offer-addoffer">Offer Register</a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="/offer-offerlist">Offer Confirmation</a>
+                </li>
+            </ul>
+        </div>
+        <form action="" method="POST">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="content-wrapper">
+                            <section class="content">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="card">
+                                            <div class="card-header"> Order Confirmation Register </div>
+                                            <div class="card-body">
+                                                <div class="col-sm-12">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-8">
+                                                            <label>Customer Name</label>
+                                                            <input class="form-control"
+                                                                value="{{add_user_contractReview.oc_customer_name}}"
+                                                                readonly>
+                                                        </div>
+                                                        <div class="form-group col-sm-4">
+                                                            <label for="bookTitle">Order Type</label>
+                                                            <input class="form-control"
+                                                                value="{{add_user_contractReview.oc_customer_type}}"
+                                                                readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-4">
+                                                            <label>PO No</label>
+                                                            <input type="text"
+                                                                value="{{add_user_contractReview.oc_po_number}}"
+                                                                maxlength="200" autocomplete="new-password"
+                                                                class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-4">
+                                                            <label for="publisher">PO Date</label>
+                                                            <div class="input-group date">
+                                                                <input value="{{add_user_contractReview.oc_po_date}}"
+                                                                    autocomplete="new-password"
+                                                                    class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-4">
+                                                            <label>PO Value</label>
+                                                            <input type="text" autocomplete="new-password"
+                                                                name="oc_po_value" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-4">
+                                                            <label for="serialNo">PO Qty</label>
+                                                            <input type="text" autocomplete="new-password"
+                                                                name="oc_po_qty" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-4">
+                                                            <label for="publisher">Dispatch Date</label>
+                                                            <div class="input-group date">
+                                                                <input type="date" autocomplete="new-password"
+                                                                    name="oc_dispatch_date"
+                                                                    class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-8">
+                                                            <label>Remarks</label>
+                                                            <textarea rows="2" class="form-control"
+                                                                name="oc_remarks"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            {% if add_user_contractReview.oc_customer_type == 'Kits' %}
+                            <section class="content">
+                                <div class="page-section">
+                                    <div class="card card-fluid">
+                                        <div class="card-body">
+                                            <table id="product-table">
+                                                <thead>
+                                                    <th>Kit Type</th>
+                                                    <th>Equipment</th>
+                                                    <th>Qty</th>
+                                                    <th>Invoice Value</th>
+                                                    <th>PO Value</th>
+                                                    <th>Machine</th>
+                                                    <th>Remarks</th>
+                                                    <th>
+                                                        <a class="btn btn-success" onclick="addProductRow()"
+                                                            value="">Add KIT</a>
+                                                    </th>
+                                                </thead>
+                                                <tbody style="padding: 5%;">
+                                                    <tr>
+                                                        <td style="width: 10%;">
+                                                            <select name="oc_kit_type"
+                                                                class="form-control ng-untouched ng-pristine ng-valid">
+                                                                <option value="">Select Kit</option>
+                                                                <option value="ECLS">ECLS</option>
+                                                                <option value="HCLS">HCLS</option>
+                                                                <option value="PCLS">PCLS</option>
+                                                                <option value="Spares">Spares</option>
+                                                                <option value="Others">Others</option>
+                                                                <option value="Exports">Exports</option>
+                                                                <option value="Services">Services</option>
+                                                            </select>
+                                                        </td>
+                                                        <td style="width: 20%;">
+                                                            <input name="oc_equipment"
+                                                                class="form-control ng-untouched ng-pristine ng-valid">
+                                                        </td>
+                                                        <td style="width: 7%;">
+                                                            <input numberonly="" name="oc_qty"
+                                                                class="form-control ng-untouched ng-pristine ng-valid">
+                                                        </td>
+                                                        <td style="width: 10%;">
+                                                            <input decimalonly="" name="oc_invoice_value"
+                                                                class="form-control ng-untouched ng-pristine ng-valid">
+                                                        </td>
+                                                        <td style="width: 10%;">
+                                                            <input decimalonly="" name="oc_po_value"
+                                                                class="form-control ng-untouched ng-pristine ng-valid">
+                                                        </td>
+                                                        <td style="width: 20%;">
+                                                            <input name="oc_machine"
+                                                                class="form-control ng-untouched ng-pristine ng-valid">
+                                                        </td>
+                                                        <td style="width: 20%;">
+                                                            <input name="oc_remarks"
+                                                                class="form-control ng-untouched ng-pristine ng-valid">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            {% endif %}
+                            <div style="text-align: center;">
+                                <button id="btnSave" type="submit"
+                                    class="btn btn-primary btn-sm ng-star-inserted">Save</button>
+                                &nbsp;
+                                <a routerlink="/OC-Register-list" queryparamshandling="preserve"
+                                    class="btn btn-danger btn-sm" href="/OC-Register-list">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script>
+    function addProductRow() {
+        const tableBody = document.querySelector('#product-table tbody');
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+		<tbody style="padding: 5%;">
+            <tr>
+                <td style="width: 10%;">
+                    <select class="form-control ng-untouched ng-pristine ng-valid">
+                        <option value="">Select Kit</option>
+                        <option value="ECLS">ECLS</option>
+                        <option value="HCLS">HCLS</option>
+                        <option value="PCLS">PCLS</option>
+                        <option value="Spares">Spares</option>
+                        <option value="Others">Others</option>
+                        <option value="Exports">Exports</option>
+                        <option value="Services">Services</option>
+                    </select>
+                </td>
+                <td style="width: 20%;">
+                    <input class="form-control ng-untouched ng-pristine ng-valid">
+                </td>
+                <td style="width: 7%;">
+                    <input numberonly=""
+                        class="form-control ng-untouched ng-pristine ng-valid">
+                </td>
+                <td style="width: 10%;">
+                    <input decimalonly=""
+                        class="form-control ng-untouched ng-pristine ng-valid">
+                </td>
+                <td style="width: 10%;">
+                    <input decimalonly=""
+                        class="form-control ng-untouched ng-pristine ng-valid">
+                </td>
+                <td style="width: 20%;">
+                    <input class="form-control ng-untouched ng-pristine ng-valid">
+                </td>
+                <td style="width: 20%;">
+                    <input class="form-control ng-untouched ng-pristine ng-valid">
+                </td>
+                <td>
+                    <button class="btn btn-danger" onclick="removeProductRow(this)">Remove</button>
+                </td>
+            </tr>
+            
+        </tbody>
+
+		`;
+        tableBody.appendChild(newRow);
+        newRow.querySelectorAll('.quantity, .unit-price').forEach(input => {
+            input.addEventListener('input', updateTotal);
+        });
+        updateTotal();
+    }
+
+
+    function removeProductRow(button) {
+        const row = button.closest('tr');
+        row.remove();
+        updateTotal();
+    }
+</script>
+{% endblock javascripts %}
