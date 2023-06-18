@@ -207,12 +207,23 @@
 								</tr>
 								<tr>
 									<th>GST %:</th>
-									<td><input type="number" class="form-control" style="height: 50px !important;"
-										value="{{addOffer_database.gstPercentage}}" id="gstPercentage" name="gstPercentage" step="0.01" required></td>
-									<td><input type="number"
-											style="height: 50px !important; background-color: transparent !important; color: black !important;"
-											value="{{addOffer_database.gstValue}}" class="form-control" name="gstValue" id="gstValue" readonly></td>
-								</tr>
+									<td>
+									  <div class="d-flex align-items-center">
+										<select class="form-control mr-2" id="gstType" name="gstType">
+										  <option value="IGST" {% if addOffer_database.gstType == 'IGST' %}selected{% endif %}>IGST</option>
+										  <option value="CGST" {% if addOffer_database.gstType == 'CGST' %}selected{% endif %}>CGST</option>
+										</select>
+										<input type="number" class="form-control" style="height: 50px !important;"
+											   value="{{ addOffer_database.gstPercentage }}" id="gstPercentage" name="gstPercentage" step="0.01" required>
+									  </div>
+									</td>
+									<td>
+									  <input type="number" style="height: 50px !important; background-color: transparent !important; color: black !important;"
+											 value="{{ addOffer_database.gstValue }}" class="form-control" name="gstValue" id="gstValue" readonly>
+									</td>
+								  </tr>
+								  
+								  
 								<tr>
 									<th>Round Off Type:</th>
 									<td>

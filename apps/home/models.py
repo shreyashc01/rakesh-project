@@ -55,6 +55,7 @@ class AddOffer(db.Model):
     freightValue = db.Column(db.Float())
     totalFreight = db.Column(db.Float())
     tcsPercentage = db.Column(db.Float())
+    gstType = db.Column(db.String())
     tcsValue = db.Column(db.Float())
     gstPercentage = db.Column(db.Float())
     gstValue = db.Column(db.Float())
@@ -138,7 +139,7 @@ class AddOffer(db.Model):
 
     def __init__(self, customer_name_offer, due_date_offer, offer_type_offer, quotation_number_offer, marketing_person_offer,
              currency_type_offer, product_kit_offer_json,grossAmount,discountType,discountValue,assessableValue,pfPercentage,pfValue,
-             freightValue,totalFreight,tcsPercentage,tcsValue,gstPercentage,gstValue,roundOffType,roundOffValue,grandTotal, subject_offer, reference_offer, description_offer,
+             freightValue,totalFreight,tcsPercentage,gstType,tcsValue,gstPercentage,gstValue,roundOffType,roundOffValue,grandTotal, subject_offer, reference_offer, description_offer,
              footer_description_offer, notes_offer, price_basis_offer, PandFcharges_offer, igst_terms_offer,
              hsn_code_offer, payment_terms_offer, delivery_terms_offer, freight_terms_offer, validity_terms_offer,
              warrenty_terms_offer, contract_review_Order_No, contract_review_Order_Date, contract_review_PO_Qty,
@@ -174,6 +175,7 @@ class AddOffer(db.Model):
         self.freightValue = freightValue
         self.totalFreight = totalFreight
         self.tcsPercentage = tcsPercentage
+        self.gstType = gstType
         self.tcsValue = tcsValue
         self.gstPercentage = gstPercentage
         self.gstValue = gstValue

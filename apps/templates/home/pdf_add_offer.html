@@ -166,36 +166,56 @@
         </tbody>
 
         <tfoot>
-          <tr>
-            <td colspan="5"><span>Grost Amount :</span></td>
-            <td><span>{{ add_user.grossAmount }}</span></td>
-          </tr>
-          <tr>
-            <td colspan="5"><span>Discount in {{ add_user.discountType }} :</span></td>
-            <td><span>{{ add_user.discountValue }}</span></td>
-          </tr>
-          <tr>
-            <td colspan="5"><span>P&F in %:</span></td>
-            <td><span>{{ add_user.pfPercentage }}</span></td>
-          </tr>
-          <tr>
-            <td colspan="5"><span>Frieght:</span></td>
-            <td><span>{{ add_user.freightValue }}</span></td>
-          </tr>
-          <tr>
-            <td colspan="5"><span>GST:</span></td>
-            <td><span>{{ add_user.gstPercentage }}</span></td>
-          </tr>
-          <tr>
-            <td colspan="5"><span>Round Off [ {% if add_user.roundOffType == 'addition' %}+{% else %}-{% endif %}
-                ]</span></td>
-            <td><span>{{ add_user.roundOffValue }}</span></td>
-          </tr>
-          <tr>
-            <td colspan="5"><span>Grand Total: </span></td>
-            <td><span>{{ add_user.grandTotal }}</span></td>
-          </tr>
+          {% if add_user.grossAmount %}
+            <tr style="background-color: #EAF6FD;">
+              <td colspan="5"><span>Gross Amount :</span></td>
+              <td><span>{{ add_user.grossAmount }}</span></td>
+            </tr>
+          {% endif %}
+          {% if add_user.discountValue %}
+            <tr style="background-color: #EAF6FD;">
+              <td colspan="5"><span>Discount in {{ add_user.discountType }} :</span></td>
+              <td><span>{{ add_user.discountValue }}</span></td>
+            </tr>
+          {% endif %}
+          {% if add_user.pfPercentage %}
+            <tr style="background-color: #EAF6FD;">
+              <td colspan="5"><span>P&F in %:</span></td>
+              <td><span>{{ add_user.pfPercentage }}</span></td>
+            </tr>
+          {% endif %}
+          {% if add_user.freightValue %}
+            <tr style="background-color: #EAF6FD;">
+              <td colspan="5"><span>Freight:</span></td>
+              <td><span>{{ add_user.freightValue }}</span></td>
+            </tr>
+          {% endif %}
+          {% if add_user.gstType %}
+            <tr style="background-color: #EAF6FD;">
+              <td colspan="5"><span>GST:</span></td>
+              <td>
+                {% if add_user.gstType == 'IGST' %}
+                  <span>{{ add_user.gstPercentage }}</span>
+                {% elif add_user.gstType == 'CGST' %}
+                  <span>{{ add_user.gstPercentage // 2 }}% & {{ add_user.gstPercentage // 2 }}%</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% endif %}
+          {% if add_user.roundOffValue %}
+            <tr style="background-color: #EAF6FD;">
+              <td colspan="5"><span>Round Off [ {% if add_user.roundOffType == 'addition' %}+{% else %}-{% endif %}]</span></td>
+              <td><span>{{ add_user.roundOffValue }}</span></td>
+            </tr>
+          {% endif %}
+          {% if add_user.grandTotal %}
+            <tr style="background-color: #EAF6FD;">
+              <td colspan="5"><span>Grand Total:</span></td>
+              <td><span>{{ add_user.grandTotal }}</span></td>
+            </tr>
+          {% endif %}
         </tfoot>
+        
 
       </table>
       <span>

@@ -132,6 +132,7 @@ def create():
         freightValue = request.form['freightValue']
         totalFreight = request.form['totalFreight']
         tcsPercentage = request.form['tcsPercentage']
+        gstType = request.form['gstType']
         tcsValue = request.form['tcsValue']
         gstPercentage = request.form['gstPercentage']
         gstValue = request.form['gstValue']
@@ -172,6 +173,7 @@ def create():
             freightValue = freightValue,
             totalFreight = totalFreight,
             tcsPercentage = tcsPercentage,
+            gstType = gstType,
             tcsValue = tcsValue,
             gstPercentage = gstPercentage,
             gstValue = gstValue,
@@ -290,7 +292,6 @@ def update_add_offer(id):
             unit_price_list = request.form.getlist('unit_price_product_offer')
             uom_type_list = request.form.getlist('uom_type')
             total_price_product_offer = request.form.getlist('total')
-            # json.loads(request.form.get('total_price_product_offer'))
             print(product_offers,quantity_list,unit_price_list,uom_type_list,total_price_product_offer)
             product_kit_offer = []
             for i in range(len(product_offers)):
@@ -341,6 +342,7 @@ def update_add_offer(id):
         addOffer_database.freightValue = request.form['freightValue']
         addOffer_database.totalFreight = request.form['totalFreight']
         addOffer_database.tcsPercentage = request.form['tcsPercentage']
+        addOffer_database.gstType = request.form['gstType']
         addOffer_database.tcsValue = request.form['tcsValue']
         addOffer_database.gstPercentage = request.form['gstPercentage']
         addOffer_database.gstValue = request.form['gstValue']
