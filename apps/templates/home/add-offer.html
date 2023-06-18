@@ -59,7 +59,7 @@
 												<select name="customer_name_offer" id="customer_name_offer" class="form-control select2">
 													<option selected>Select Customer Name</option>
 													{% for user in users %}
-													<option value="{{ user.customer_name }}">{{ user.customer_name }}</option>
+													<option {% if user.customer_name == addOffer_database.customer_name_offer %}selected{% endif %}>{{ user.customer_name }}</option>
 													{% endfor %}
 												</select>
 											</tr>
@@ -72,8 +72,9 @@
 										</div>
 										<div class="form-group">
 											<label>Reference No</label>
-											<input type="text" name="quotation_number_offer" id="quotation_number_offer"
-												class="form-control" value="{{ Quatationnumber }}" readonly />
+											<input type="text" name="quotation_number_offer" id="quotation_number_offer" class="form-control"
+												value="{% if Quatationnumber == 0 %}{{ addOffer_database.quotation_number_offer }}{% else %}{{ Quatationnumber }}{% endif %}"
+												readonly />
 										</div>
 									</div>
 
@@ -83,7 +84,7 @@
 												<label>Due Date</label>
 												<td>
 													<input type="date" name="due_date_offer" id="due_date_offer"
-														class="form-control">
+													value="{{addOffer_database.due_date_offer}}" class="form-control">
 												</td>
 											</tr>
 										</div>
@@ -92,13 +93,12 @@
 											<tr>
 												<label for="marketing_Person_offer">Marketing Person</label>
 												<td>
-													<select name="marketing_Person_offer" id="marketing_Person_offer"
-														class="form-control">
-														<option selected>Select Marketing Person</option>
+													<select name="marketing_Person_offer" id="marketing_Person_offer" class="form-control">
+														<option >Select Marketing Person</option>
 														{% for user in role_manager_offer %}
-														<option>{{user.user_first_name}}</option>
+														  <option {% if user.user_first_name == addOffer_database.marketing_person_offer %}selected{% endif %}>{{ user.user_first_name }}</option>
 														{% endfor %}
-													</select>
+													  </select>													  
 												</td>
 											</tr>
 										</div>
@@ -109,12 +109,11 @@
 											<tr>
 												<label>Offer Type</label>
 												<td>
-													<select name="offer_type_offer" id="offer_type_offer"
-														class="form-control offer_type_offer">
+													<select name="offer_type_offer" id="offer_type_offer" class="form-control offer_type_offer">
 														<option selected>Add offer</option>
-														<option value="Spares">Spares</option>
-														<option value="Kits">Kits</option>
-													</select>
+														<option {% if "Spares" == addOffer_database.offer_type_offer %}selected{% endif %} value="Spares">Spares</option>
+														<option {% if "Kits" == addOffer_database.offer_type_offer %}selected{% endif %} value="Kits">Kits</option>
+													  </select>													  
 												</td>
 											</tr>
 										</div>
@@ -126,7 +125,7 @@
 														class="form-control">
 														<option value="" selected>Select Currency Type</option>
 														{% for user in currency_master_offer %}
-														<option>{{ user.currency_name }}</option>
+														<option {% if user.currency_name == addOffer_database.currency_type_offer %}selected{% endif %}>{{ user.currency_name }}</option>
 														{% endfor %}
 													</select>
 												</td>
@@ -164,7 +163,7 @@
 									<td></td>
 									<td><input type="number"
 											style="height: 50px !important; background-color: transparent !important; color: black !important;"
-											class="form-control" id="grossAmount" name="grossAmount" step="0.01" readonly></td>
+											value="{{addOffer_database.grossAmount}}" class="form-control" id="grossAmount" name="grossAmount" step="0.01" readonly></td>
 								</tr>
 								<tr>
 									<th>Discount Type:</th>
@@ -173,46 +172,46 @@
 										<input type="radio" name="discountType" value="value">Value
 									</td>
 									<td><input type="number" style="height: 50px !important;" class="form-control" name="discountValue"
-											id="discountValue" step="0.01" required></td>
+										value="{{addOffer_database.discountValue}}" id="discountValue" step="0.01" required></td>
 								</tr>
 								<tr>
 									<th>Total Assessable Value:</th>
 									<td></td>
 									<td><input type="number"
 											style="height: 50px !important; background-color: transparent !important; color: black !important;"
-											class="form-control" name="assessableValue" id="assessableValue" readonly></td>
+											value="{{addOffer_database.assessableValue}}" class="form-control" name="assessableValue" id="assessableValue" readonly></td>
 								</tr>
 								<tr>
 									<th>P & F %:</th>
 									<td><input type="number" style="height: 50px !important;" class="form-control"
-											id="pfPercentage" name="pfPercentage" step="0.01" required></td>
+										value="{{addOffer_database.pfPercentage}}" id="pfPercentage" name="pfPercentage" step="0.01" required></td>
 									<td><input type="number"
 											style="height: 50px !important; background-color: transparent !important; color: black !important;"
-											class="form-control" id="pfValue" name="pfValue" readonly></td>
+											value="{{addOffer_database.pfValue}}" class="form-control" id="pfValue" name="pfValue" readonly></td>
 								</tr>
 								<tr>
 									<th>Freight:</th>
 									<td><input type="number" style="height: 50px !important;" class="form-control"
-											id="freightValue" name="freightValue" step="0.01" required></td>
+										value="{{addOffer_database.freightValue}}" id="freightValue" name="freightValue" step="0.01" required></td>
 									<td><input type="number"
 											style="height: 50px !important; background-color: transparent !important; color: black !important;"
-											class="form-control" name="totalFreight" id="totalFreight" readonly></td>
+											value="{{addOffer_database.totalFreight}}" class="form-control" name="totalFreight" id="totalFreight" readonly></td>
 								</tr>
 								<tr>
 									<th>TCS %:</th>
 									<td><input type="number" style="height: 50px !important;" class="form-control"
-											id="tcsPercentage" name="tcsPercentage" step="0.01" required></td>
+										value="{{addOffer_database.tcsPercentage}}" id="tcsPercentage" name="tcsPercentage" step="0.01" required></td>
 									<td><input type="number" class="form-control"
 											style="height: 50px !important; background-color: transparent !important; color: black !important;"
-											id="tcsValue" name="tcsValue" readonly></td>
+											value="{{addOffer_database.tcsValue}}" id="tcsValue" name="tcsValue" readonly></td>
 								</tr>
 								<tr>
 									<th>GST %:</th>
 									<td><input type="number" class="form-control" style="height: 50px !important;"
-											id="gstPercentage" name="gstPercentage" step="0.01" required></td>
+										value="{{addOffer_database.gstPercentage}}" id="gstPercentage" name="gstPercentage" step="0.01" required></td>
 									<td><input type="number"
 											style="height: 50px !important; background-color: transparent !important; color: black !important;"
-											class="form-control" name="gstValue" id="gstValue" readonly></td>
+											value="{{addOffer_database.gstValue}}" class="form-control" name="gstValue" id="gstValue" readonly></td>
 								</tr>
 								<tr>
 									<th>Round Off Type:</th>
@@ -221,14 +220,14 @@
 										<input type="radio" name="roundOffType" value="subtraction">Subtraction
 									</td>
 									<td><input type="number" class="form-control" style="height: 50px !important;"
-											id="roundOffValue" name="roundOffValue"step="0.01" required></td>
+										value="{{addOffer_database.roundOffValue}}" id="roundOffValue" name="roundOffValue"step="0.01" required></td>
 								</tr>
 								<tr>
 									<th>Grand Total:</th>
 									<td></td>
 									<td><input type="number" class="form-control"
 											style="height: 50px !important; background-color: transparent !important; color: black !important;"
-											id="grandTotal" name="grandTotal" readonly></td>
+											value="{{addOffer_database.grandTotal}}" id="grandTotal" name="grandTotal" readonly></td>
 								</tr>
 							</table>
 						</div>
@@ -246,35 +245,35 @@
 						<tr>
 							<label>Subject</label>
 							<td><input type="text" autocomplete="new-password" name="subject_offer" id="subject_offer"
-									class="form-control" required /></td>
+								value="{{addOffer_database.subject_offer}}" class="form-control" required /></td>
 						</tr>
 					</div>
 					<div class="form-group">
 						<tr>
 							<label>Reference</label>
 							<td><input type="text" autocomplete="new-password" name="reference_offer"
-									id="reference_offer" class="form-control" required /></td>
+								value="{{addOffer_database.reference_offer}}" id="reference_offer" class="form-control" required /></td>
 						</tr>
 					</div>
 					<div class="form-group">
 						<tr>
 							<label>Description</label>
 							<td><input type="text" autocomplete="new-password" name="description_offer"
-									id="description_offer" class="form-control" required /></td>
+								value="{{addOffer_database.description_offer}}" id="description_offer" class="form-control" required /></td>
 						</tr>
 					</div>
 					<div class="form-group">
 						<tr>
 							<label>Footer Description</label>
 							<td><input type="text" autocomplete="new-password" name="footer_description_offer"
-									id="footer_description_offer" class="form-control" /></td>
+								value="{{addOffer_database.footer_description_offer}}" id="footer_description_offer" class="form-control" /></td>
 						</tr>
 					</div>
 					<div class="form-group">
 						<tr>
 							<label>Notes</label>
 							<td><input type="text" autocomplete="new-password" name="notes_offer" id="notes_offer"
-									class="form-control" /></td>
+								value="{{addOffer_database.notes_offer}}" class="form-control" /></td>
 						</tr>
 					</div>
 				</div>
@@ -294,14 +293,14 @@
 						<tr>
 							<label>Price Basis </label>
 							<td><input type="text" autocomplete="new-password" name="price_basis_offer"
-									id="price_basis_offer" class="form-control" /></td>
+								value="{{addOffer_database.price_basis_offer}}" id="price_basis_offer" class="form-control" /></td>
 						</tr>
 					</div>
 					<div class="form-group">
 						<tr>
 							<label>P&F Charges</label>
 							<td><input type="text" autocomplete="new-password" name="PandFcharges_offer"
-									id="PandFcharges_offer" class="form-control" />
+								value="{{addOffer_database.PandFcharges_offer}}" id="PandFcharges_offer" class="form-control" />
 							</td>
 						</tr>
 					</div>
@@ -309,21 +308,21 @@
 						<tr>
 							<label>IGST</label>
 							<td><input type="text" autocomplete="new-password" name="igst_terms_offer"
-									id="igst_terms_offer" class="form-control" /></td>
+								value="{{addOffer_database.igst_terms_offer}}" id="igst_terms_offer" class="form-control" /></td>
 						</tr>
 					</div>
 					<div class="form-group">
 						<tr>
 							<label>HSN CODE</label>
 							<td><input type="text" autocomplete="new-password" name="hsn_code_offer" id="hsn_code_offer"
-									class="form-control" /></td>
+								value="{{addOffer_database.hsn_code_offer}}" class="form-control" /></td>
 						</tr>
 					</div>
 					<div class="form-group">
 						<tr>
 							<label>Payment Terms</label>
 							<td><input type="text" autocomplete="new-password" name="payment_terms_offer"
-									id="payment_terms_offer" class="form-control" />
+								value="{{addOffer_database.payment_terms_offer}}" id="payment_terms_offer" class="form-control" />
 							</td>
 						</tr>
 					</div>
@@ -331,14 +330,14 @@
 						<tr>
 							<label>Delivery</label>
 							<td><input type="text" autocomplete="new-password" name="delivery_terms_offer"
-									id="delivery_terms_offer" class="form-control" /></td>
+								value="{{addOffer_database.delivery_terms_offer}}" id="delivery_terms_offer" class="form-control" /></td>
 						</tr>
 					</div>
 					<div class="form-group">
 						<tr>
 							<label>Freight</label>
 							<td><input type="text" autocomplete="new-password" name="freight_terms_offer"
-									id="freight_terms_offer" class="form-control" />
+								value="{{addOffer_database.freight_terms_offer}}" id="freight_terms_offer" class="form-control" />
 							</td>
 						</tr>
 					</div>
@@ -346,14 +345,14 @@
 						<tr>
 							<label>Validity</label>
 							<td><input type="text" autocomplete="new-password" name="validity_terms_offer"
-									id="validity_terms_offer" class="form-control" /></td>
+								value="{{addOffer_database.validity_terms_offer}}" id="validity_terms_offer" class="form-control" /></td>
 						</tr>
 					</div>
 					<div class="form-group">
 						<tr>
 								<label>Warranty</label>
 								<td><input type="text" autocomplete="new-password" id="warrenty_terms_offer"
-										name="warrenty_terms_offer" class="form-control" /></td>
+									value="{{addOffer_database.warrenty_terms_offer}}" name="warrenty_terms_offer" class="form-control" /></td>
 						</tr>
 					</div>
 					<div class="form-group">
@@ -380,18 +379,28 @@
 
 <script>
 	var addressMap = {
-		{% for user in users %}
-		"{{ user.customer_name }}": "{{ user.address }}",
-		{% endfor %}
-	};
+  {% for user in users %}
+  "{{ user.customer_name }}": "{{ user.address }}",
+  {% endfor %}
+};
 
-	var customerNameSelect = document.getElementById('customer_name_offer');
-	var customerAddressInput = document.getElementById('customer_address');
+var customerNameSelect = document.getElementById('customer_name_offer');
+var customerAddressInput = document.getElementById('customer_address');
 
-	customerNameSelect.addEventListener('change', function() {
-		var selectedCustomer = customerNameSelect.value;
-		customerAddressInput.value = addressMap[selectedCustomer];
-	});
+$(document).ready(function() {
+  customerNameSelect.onchange = function() {
+    var selectedCustomer = customerNameSelect.value;
+    if (selectedCustomer === "Select Customer Name") {
+      customerAddressInput.value = "";
+    } else {
+      customerAddressInput.value = addressMap[selectedCustomer];
+    }
+  };
+
+  customerNameSelect.onchange(); // Call the onchange function initially to set the customer_address based on the default option
+});
+
+
 </script>
 
 
@@ -405,48 +414,53 @@
 
 
 	function addProductRow() {
-		const tableBody = document.querySelector('#product-table tbody');
-		const newRow = document.createElement('tr');
-		newRow.innerHTML = `
-		<tr>
-			<td>
-				<select name="product_offer" class="form-control">
-					{% for user in user1 %}
-					<option>{{ user.product_name }}</option>
-					{% endfor %}
-				</select>
-			</td>
-			<td>
-				<input type="number" name="quantity_product_offer" class="quantity form-control" value="0">
-			</td>
-			<td>
-				<input type="number" name="unit_price_product_offer" class="unit-price form-control" value="0">
-			</td>
-			<td><select name="uom_type" class="form-control ng-untouched ng-pristine ng-invalid" style="width: auto; background-color: #f2f2f2; color: #333; padding: 5px;">
-				<option value="">UOM </option>
-				<option value="Nos">Nos</option>
-				<option value="Meters">Meters</option>
-				<option value="Millimeter">Millimeter</option>
-				<option value="Bundle">Bundle</option>
-				<option value="Pack">Pack</option>
-				<option value="Kg">Kg</option>
-				<option value="Set">Set</option>
-			</select></td>
-			<td>
-				<input type="text" id="total" name="total" class="total form-control" value="0" readonly>
-			</td>
-			<td>
-				<button class="btn btn-danger" onclick="removeProductRow(this)">Remove</button>
-			</td>
-		</tr>
+	const tableBody = document.querySelector('#product-table tbody');
+	const newRow = document.createElement('tr');
+	newRow.innerHTML = `
+		<td>
+		<select name="product_offer" class="form-control">
+			{% for user in user1 %}
+			<option>{{ user.product_name }}</option>
+			{% endfor %}
+		</select>
+		</td>
+		<td>
+		<input type="number" name="quantity_product_offer" id="quantity" class="quantity form-control" value="0">
+		</td>
+		<td>
+		<input type="number" name="unit_price_product_offer" id="quantity" class="unit-price form-control" value="0">
+		</td>
+		<td>
+		<select name="uom_type" class="form-control ng-untouched ng-pristine ng-invalid" style="width: auto; background-color: #f2f2f2; color: #333; padding: 5px;">
+			<option value="">UOM </option>
+			<option value="Nos">Nos</option>
+			<option value="Meters">Meters</option>
+			<option value="Millimeter">Millimeter</option>
+			<option value="Bundle">Bundle</option>
+			<option value="Pack">Pack</option>
+			<option value="Kg">Kg</option>
+			<option value="Set">Set</option>
+		</select>
+		</td>
+		<td>
+		<input type="text" id="total" name="total" class="total form-control" value="0" readonly>
+		</td>
+		<td>
+		<button class="btn btn-danger" onclick="removeProductRow(this)">Remove</button>
+		</td>
+	`;
 
-		`;
-		tableBody.appendChild(newRow);
-		newRow.querySelectorAll('.quantity, .unit-price').forEach(input => {
-			input.addEventListener('input', updateTotal);
-		});
-		updateTotal();
+	tableBody.appendChild(newRow);
+
+	const quantityInput = newRow.querySelector('.quantity');
+	const unitPriceInput = newRow.querySelector('.unit-price');
+
+	quantityInput.addEventListener('input', updateTotal);
+	unitPriceInput.addEventListener('input', updateTotal);
+
+	updateTotal();
 	}
+
 
 	function getKitDetails(newRow) {
 		const kitDescription = $('#kit_name_sample').val();
@@ -484,8 +498,8 @@
 		// ${selectedKitNo}	
 		newRow.innerHTML = `
 		<td style="width: 350px; padding: 10px !important;">
-    <textarea id="kit_description_offer" name="kit_description_offer" class="kit_description_offer form-control" readonly style="height: 360px !important; width: 100%; resize: none;"></textarea>
-</td>
+			<textarea id="kit_description_offer" name="kit_description_offer" class="kit_description_offer form-control" readonly style="height: 360px !important; width: 100%; resize: none;"></textarea>
+		</td>
 
 		<td><input id="kit_number_offer" name="kit_number_offer" class="kit_number_offer form-control" value="0" readonly></td>
 		<td><input type="number" id="quantity_kit_offer" name="quantity_kit_offer" class="quantity form-control" value="0"></td>
@@ -592,90 +606,168 @@
 	});
 
 	$(document).ready(function () {
-		$(".offer_type_offer").on("change", function () {
-			var selectedOption = $(this).val();
-			switch (selectedOption) {
-				case "Spares":
-					var table = document.getElementById('#product-table');
-					markup = $(`
-								<thead>
-									<tr>
-										<th>Product</th>
-										<th>Quantity</th>
-										<th>Unit Price</th>
-										<th>UOM</th>
-										<th>Total</th>
-										<th><a class="btn btn-success" onclick="addProductRow()" value="">Add Product</a></th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-					`)
-					tableBody = $("#product-table");
-					tableBody.empty();
-					tableBody.append(markup);
-					break;
+    function offerTypeOnChange() {
+        var selectedOption = $(".offer_type_offer").val();
 
-				case "Kits":
-					var table = document.getElementById('#product-table');
-					markup = $(`
-					<div class="card">
-						<div class="card-body">
-							<label for="kit_name_sample">Select a user:</label>
+        switch (selectedOption) {
+            case "Spares":
+                var table = document.getElementById('#product-table');
+                var markup = $(`
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>UOM</th>
+                            <th>Total</th>
+                            <th><a class="btn btn-success" onclick="addProductRow()" value="">Add Product</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+					{% if offer_json is not none %}
+					{% for offer in offer_json %}
+						<tr>
+							<td>
+								<select name="product_offer" class="form-control">
+									{% for user in user1 %}
+										<option {% if user.product_name == offer['product_name'] %}selected{% endif %}>{{ user.product_name }}</option>
+									{% endfor %}
+								</select>
+							</td>
+							<td>
+								<input type="number" value="{{ offer['quantity'] }}" name="quantity_product_offer" id="quantity" class="quantity form-control" onchange="updateTotalPrice(this)"  >
+							</td>
+							<td>
+								<input type="number" value="{{ offer['unit_price'] }}" name="unit_price_product_offer" id="unit-price" class="unit-price form-control" value="0" onchange="updateTotalPrice(this)">
+							</td>
+							<td>
+								<select name="uom_type" class="form-control ng-untouched ng-pristine ng-invalid" style="width: auto; background-color: #f2f2f2; color: #333; padding: 5px;">
+									<option value="">UOM </option>
+									<option {% if offer['uom'] == 'Nos' %}selected{% endif %} value="Nos">Nos</option>
+									<option {% if offer['uom'] == 'Meters' %}selected{% endif %} value="Meters">Meters</option>
+									<option {% if offer['uom'] == 'Millimeter' %}selected{% endif %} value="Millimeter">Millimeter</option>
+									<option {% if offer['uom'] == 'Bundle' %}selected{% endif %} value="Bundle">Bundle</option>
+									<option {% if offer['uom'] == 'Pack' %}selected{% endif %} value="Pack">Pack</option>
+									<option {% if offer['uom'] == 'Kg' %}selected{% endif %} value="Kg">Kg</option>
+									<option {% if offer['uom'] == 'Set' %}selected{% endif %} value="Set">Set</option>
+								</select>
+							</td>
+							<td>
+								<input type="number" value="{{ offer['total_price'] }}" id="total" name="total" class="total form-control" readonly>
+							</td>
+							<td>
+								<button class="btn btn-danger" onclick="removeProductRow(this)">Remove</button>
+							</td>
+						</tr>
+					{% endfor %}
+				{% endif %}
+				</tbody>
 
-							<select name="kit_name_sample" id="kit_name_sample" class="form-control">
-							{% for user in user2 %}
-								<option value="{{ user.kit_description }}">{{ user.kit_description }}</option>
-							{% endfor %}
-							</select>
+                `);
+                var tableBody = $("#product-table");
+                tableBody.empty();
+                tableBody.append(markup);
+                break;
 
-							<a class="btn btn-success" onclick="addKitRow()" value="">Add kit</a>
-						</div>
-						</div>
+            case "Kits":
+                var table = document.getElementById('#product-table');
+                var markup = $(`
+                    <div class="card">
+                        <div class="card-body">
+                            <label for="kit_name_sample">Select a user:</label>
 
-						<div class="card">
-						<div class="card-body">
-							<table>
-							<thead>
-								<tr>
-								<th>Kit description*</th>
-								<th>Kit No*</th>
-								<th>Quantity*</th>
-								<th>Unit Price*</th>
-								<th>UOM</th>
-								<th>Total Price</th>
-								<th>Actions</th>
+                            <select name="kit_name_sample" id="kit_name_sample" class="form-control">
+                                {% for user in user2 %}
+                                <option value="{{ user.kit_description }}">{{ user.kit_description }}</option>
+                                {% endfor %}
+                            </select>
 
-								</tr>
-							</thead>
-							<tbody>
-								<!-- table rows go here -->
-							</tbody>
-							</table>
-						</div>
-					</div>
+                            <a class="btn btn-success" onclick="addKitRow()" value="">Add kit</a>
+                        </div>
+                    </div>
 
-								`)
+                    <div class="card">
+                        <div class="card-body">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Kit description*</th>
+                                        <th>Kit No*</th>
+                                        <th>Quantity*</th>
+                                        <th>Unit Price*</th>
+                                        <th>UOM</th>
+                                        <th>Total Price</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+								{% if offer_json is not none %}
+								{% for offer in offer_json %}
+                                <tbody>
+                                    <td style="width: 350px; padding: 10px !important;">
+										<textarea id="kit_description_offer" name="kit_description_offer" class="kit_description_offer form-control" readonly style="height: 360px !important; width: 100%; resize: none;">{{ offer['kit_name'] }}"</textarea>
+									</td>
 
-					tableBody = $("#product-table");
-					tableBody.empty();
-					tableBody.append(markup);
-					break;
-			}
+									<td><input value="{{ offer['part_number'] }}" id="kit_number_offer" name="kit_number_offer" class="kit_number_offer form-control" value="0" readonly></td>
+									<td><input value="{{ offer['quantity'] }}" type="number" id="quantity_kit_offer" name="quantity_kit_offer" class="quantity form-control" value="0" onchange="updateTotalPrice(this)"></td>
+									
+									<td><input value="{{ offer['unit_price'] }}" type="number" id="unit_price_kit_offer" name="unit_price_kit_offer" class="unit-price form-control" value="0" onchange="updateTotalPrice(this)"></td>
+									<td><select name="uom_type" style="width: auto; background-color: #f2f2f2; color: #333; padding: 5px;" class="form-control ng-untouched ng-pristine ng-invalid">
+											<option value="">UOM </option>
+											<option {% if offer['uom'] == 'Nos' %}selected{% endif %} value="Nos">Nos</option>
+											<option {% if offer['uom'] == 'Meters' %}selected{% endif %} value="Meters">Meters</option>
+											<option {% if offer['uom'] == 'Millimeter' %}selected{% endif %} value="Millimeter">Millimeter</option>
+											<option {% if offer['uom'] == 'Bundle' %}selected{% endif %} value="Bundle">Bundle</option>
+											<option {% if offer['uom'] == 'Pack' %}selected{% endif %} value="Pack">Pack</option>
+											<option {% if offer['uom'] == 'Kg' %}selected{% endif %} value="Kg">Kg</option>
+											<option {% if offer['uom'] == 'Set' %}selected{% endif %} value="Set">Set</option>
+										</select></td>
+									<td><input value="{{ offer['total_price'] }}" type="number" id="total" name="total" class="total form-control" value="0" readonly></td>
+									<td><button class="btn btn-danger" onclick="removeProductRow(this)">Remove</button></td>
+                                </tbody>
+								{% endfor %}
+								{% endif %}
+                            </table>
+                        </div>
+                    </div>
+                `);
+                var tableBody = $("#product-table");
+                tableBody.empty();
+                tableBody.append(markup);
+                break;
+        }
+    }
 
-		});
-	});
+    // Call the offerTypeOnChange function initially
+    offerTypeOnChange();
+
+    // Bind the offerTypeOnChange function to the onchange event of .offer_type_offer
+    $(".offer_type_offer").on("change", offerTypeOnChange);
+});
+
 
 	$(document).ready(function () {
 		var currentDate = new Date();
 		var currentYear = currentDate.getFullYear().toString().substr(-2);
 		var nextYear = (currentDate.getFullYear() + 1).toString().substr(-2);
 		var originalValue = $("#quotation_number_offer").val();
-
-		console.log("ORN/QTN/" + originalValue + "/" + currentYear + "-" + nextYear)
-		var updatedValue = "ORN/QTN/" + originalValue + "/" + currentYear + "-" + nextYear
-		console.log(updatedValue)
-		$("#quotation_number_offer").val(updatedValue);
+		
+		if (isNaN(originalValue)) {
+			// Handle the case when originalValue is a string
+			var updatedValue;
+			if (originalValue.match(/_R_\d+$/)) {
+				var number = parseInt(originalValue.match(/\d+$/)[0]);
+				updatedValue = originalValue.replace(/\d+$/, number + 1);
+			} else {
+				updatedValue = originalValue + "_R_1";
+			}
+			console.log(updatedValue);
+			$("#quotation_number_offer").val(updatedValue);
+		} else {
+			// Handle the case when originalValue is a number
+			var updatedValue = "ORN/QTN/" + originalValue + "/" + currentYear + "-" + nextYear;
+			console.log(updatedValue);
+			$("#quotation_number_offer").val(updatedValue);
+		}
 	});
 
 
@@ -711,6 +803,24 @@
 
 </script>
 
+<!-- * -->
+<script>
+
+function updateTotalPrice(inputElement) {
+    const row = inputElement.closest('tr');
+    const quantity = row.querySelector('.quantity').value;
+    const unitPrice = row.querySelector('.unit-price').value;
+    const totalElement = row.querySelector('.total');
+
+    // Calculate the total price based on the quantity and unit price
+    const totalPrice = quantity * unitPrice;
+
+    // Update the total price value in the input element
+    totalElement.value = totalPrice;
+  }
+  </script>
+
+<!-- * -->
 <style>
 	th,
 	td {

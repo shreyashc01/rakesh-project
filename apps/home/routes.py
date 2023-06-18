@@ -55,7 +55,7 @@ def create():
         role_manager_offer = UserModel.query.all()
         currency_master_offer = CurrencyMaster.query.all()
         return render_template('home/add-offer.html',users=users,user1=user1,user2=user2,user2_json=user2_json,role_manager_offer=role_manager_offer,
-                               currency_master_offer=currency_master_offer,Quatationnumber=Quatationnumber, segment='offer-addoffer')
+                               offer_json=None,currency_master_offer=currency_master_offer,Quatationnumber=Quatationnumber, addOffer_database=None,segment='offer-addoffer')
     if request.method == 'POST':
         customer_name_offer = request.form['customer_name_offer']
 
@@ -256,6 +256,117 @@ def create():
         db.session.commit()
         return redirect('/offer-offerlist')
 
+@blueprint.route('/<int:id>/edit-addoffer', methods=['GET', 'POST'])
+@login_required
+def update_add_offer(id):
+    addOffer_database = AddOffer.query.filter_by(id=id).first()
+    if request.method == 'GET':
+        users = CustomerMaster.query.all()
+        user1 = ProductMaster.query.all()
+        user2 = KitMaster.query.all()
+        # addOffer_database = AddOffer.query.filter_by(id=id).first()
+        offer_json = json.loads(addOffer_database.product_kit_offer_json)
+        # print(offer_json['kit_name'])
+        user2_json = json.dumps([{'kit_description': user.kit_description, 'kit_no': user.kit_no} for user in user2])
+        role_manager_offer = UserModel.query.all()
+        currency_master_offer = CurrencyMaster.query.all()
+    if request.method == 'POST':
+        addOffer_database.customer_name_offer = request.form['customer_name_offer']
+
+        address_temp = CustomerMaster.query.filter_by(customer_name=addOffer_database.customer_name_offer).first()
+        billing_address_temp = address_temp.address if address_temp.address else None
+
+        addOffer_database.due_date_offer = request.form['due_date_offer']
+        addOffer_database.offer_type_offer = request.form['offer_type_offer']
+        addOffer_database.quotation_number_offer = request.form['quotation_number_offer']
+        addOffer_database.marketing_person_offer = request.form['marketing_Person_offer']
+        addOffer_database.currency_type_offer = request.form['currency_type_offer']
+        product_kit_offer_json = ''
+        product_kit_offer = []
+        if addOffer_database.offer_type_offer == "Spares":
+            print(addOffer_database.offer_type_offer)
+            product_offers = request.form.getlist('product_offer')
+            quantity_list = request.form.getlist('quantity_product_offer')
+            unit_price_list = request.form.getlist('unit_price_product_offer')
+            uom_type_list = request.form.getlist('uom_type')
+            total_price_product_offer = request.form.getlist('total')
+            # json.loads(request.form.get('total_price_product_offer'))
+            print(product_offers,quantity_list,unit_price_list,uom_type_list,total_price_product_offer)
+            product_kit_offer = []
+            for i in range(len(product_offers)):
+                product_name = product_offers[i]
+                product = ProductMaster.query.filter_by(product_name=product_name).first() 
+                part_number = product.part_no if product else None
+                product_offer = {
+                    'product_name': product_name,
+                    'part_number' : part_number,
+                    'quantity': quantity_list[i],
+                    'unit_price': unit_price_list[i],
+                    'uom' : uom_type_list[i],
+                    'total_price': total_price_product_offer[i],
+                }
+                product_kit_offer.append(product_offer)
+
+            # Convert the list to JSON
+            product_kit_offer_json = json.dumps(product_kit_offer)
+        if addOffer_database.offer_type_offer == "Kits":
+            kit_description_offer = request.form.getlist('kit_description_offer')
+            kit_number_offer = request.form.getlist('kit_number_offer')
+            quantity_kit_offer = request.form.getlist('quantity_kit_offer')
+            unit_price_kit_offer = request.form.getlist('unit_price_kit_offer')
+            uom_type_list = request.form.getlist('uom_type')
+            total_price_kit_offer = request.form.getlist('total')
+
+            product_kit_offer = []
+            for i in range(len(kit_description_offer)):
+                kit_offer = {
+                    'kit_name': kit_description_offer[i],
+                    'part_number': kit_number_offer[i],
+                    'quantity': quantity_kit_offer[i],
+                    'unit_price': unit_price_kit_offer[i],
+                    'uom' : uom_type_list[i],
+                    'total_price': total_price_kit_offer[i],
+                }
+                product_kit_offer.append(kit_offer)
+
+            product_kit_offer_json = json.dumps(product_kit_offer)
+        print(product_kit_offer_json)
+        addOffer_database.product_kit_offer_json = product_kit_offer_json
+        addOffer_database.grossAmount = request.form['grossAmount']
+        addOffer_database.discountType = request.form['discountType']
+        addOffer_database.discountValue = request.form['discountValue']
+        addOffer_database.assessableValue = request.form['assessableValue']
+        addOffer_database.pfPercentage = request.form['pfPercentage']
+        addOffer_database.pfValue = request.form['pfValue']
+        addOffer_database.freightValue = request.form['freightValue']
+        addOffer_database.totalFreight = request.form['totalFreight']
+        addOffer_database.tcsPercentage = request.form['tcsPercentage']
+        addOffer_database.tcsValue = request.form['tcsValue']
+        addOffer_database.gstPercentage = request.form['gstPercentage']
+        addOffer_database.gstValue = request.form['gstValue']
+        addOffer_database.roundOffType = request.form['roundOffType']
+        addOffer_database.roundOffValue = request.form['roundOffValue']
+        addOffer_database.grandTotal = request.form['grandTotal']
+
+        addOffer_database.subject_offer = request.form['subject_offer']
+        addOffer_database.reference_offer = request.form['reference_offer']
+        addOffer_database.description_offer = request.form['description_offer']
+        addOffer_database.footer_description_offer = request.form['footer_description_offer']
+        addOffer_database.notes_offer = request.form['notes_offer']
+
+        addOffer_database.price_basis_offer = request.form['price_basis_offer']
+        addOffer_database.PandFcharges_offer = request.form['PandFcharges_offer']
+        addOffer_database.igst_terms_offer = request.form['igst_terms_offer']
+        addOffer_database.hsn_code_offer = request.form['hsn_code_offer']
+        addOffer_database.payment_terms_offer = request.form['payment_terms_offer']
+        addOffer_database.delivery_terms_offer = request.form['delivery_terms_offer']
+        addOffer_database.freight_terms_offer = request.form['freight_terms_offer']
+        addOffer_database.validity_terms_offer = request.form['validity_terms_offer']
+        addOffer_database.warrenty_terms_offer = request.form['warrenty_terms_offer']
+        db.session.commit()
+        return redirect('/offer-offerlist')
+    return render_template('home/add-offer.html',users=users,user1=user1,user2=user2,user2_json=user2_json,role_manager_offer=role_manager_offer,
+                               Quatationnumber=0,offer_json=offer_json,currency_master_offer=currency_master_offer, addOffer_database=addOffer_database,segment='offer-offerlist')
 
 @blueprint.route('/add-kits', methods=['GET', 'POST'])
 @login_required
@@ -296,7 +407,6 @@ def add_user_login():
         role_master = RoleMaster.query.all()
         user_master_login = UserModel.query.all()
         data = Users.query.all()
-        print(data)
         return render_template('home/add-user-login.html',role_master=role_master,user_master_login=user_master_login, users=None, segment='User-masters')
     if request.method == 'POST':
         user_first_name = request.form['user_first_name'].strip()
@@ -382,7 +492,6 @@ def add_bom_master():
             'bom_uom': bom_uom_temp
         }
         bom_data = json.dumps(bom_data)
-        print(bom_data)
         bom_master = BomMaster(
                 bom_description = bom_description,
                 bom_no = bom_no,
@@ -405,8 +514,6 @@ def updatebom_master(id):
     bom_temp_data = json.loads(bom_database.bom_data)
     Bom_category = BomCategoryMaster.query.all()
     Product_category = ProductMaster.query.all()
-    print(type(bom_temp_data))
-    print(bom_temp_data['bom_serial_no'])
 
     if request.method == 'POST':
         bom_database.bom_description = request.form['bom_description'].strip()
@@ -554,9 +661,6 @@ def PO_REQ_LIST():
 def retrieve_list():
     add_user = AddOffer.query.all()
 
-    # address_temp = CustomerMaster.query.filter_by(customer_name=add_user.customer_name_offer).first()
-    # addoffer_address = address_temp.address if address_temp.address else None
-    print(add_user)
     return render_template('home/users.html',add_user=add_user, segment='offer-offerlist')
 
 @blueprint.route('/<int:id>/offer_pdf', methods=['GET', 'POST'])
@@ -579,7 +683,6 @@ def offer_pdf(id):
         addoffer_address = address_temp.address if address_temp.address else None
         
         data = json.loads(add_user.product_kit_offer_json)
-        print(data)
         html_rows = ""
         counter = 0
 

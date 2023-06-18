@@ -120,23 +120,35 @@
       </style>
       
       <table class="from">
-        <tr>
-          <td><span>Subject</span></td>
-          <td><span>{{ add_user.subject_offer }}</span></td>
-        </tr>
-        <tr>
-          <td><span>Reference</span></td>
-          <td><span>{{ add_user.reference_offer }}</span></td>
-        </tr>
-        <tr>
-          <td><span>Description</span></td>
-          <td><span>{{ add_user.description_offer }}</span></td>
-        </tr>
-        <tr>
-          <td><span>Notes</span></td>
-          <td><span>{{ add_user.notes_offer }}</span></td>
-        </tr>
+        {% if add_user.subject_offer %}
+          <tr>
+            <td><span>Subject</span></td>
+            <td><span>{{ add_user.subject_offer }}</span></td>
+          </tr>
+        {% endif %}
+      
+        {% if add_user.reference_offer %}
+          <tr>
+            <td><span>Reference</span></td>
+            <td><span>{{ add_user.reference_offer }}</span></td>
+          </tr>
+        {% endif %}
+      
+        {% if add_user.description_offer %}
+          <tr>
+            <td><span>Description</span></td>
+            <td><span>{{ add_user.description_offer }}</span></td>
+          </tr>
+        {% endif %}
+      
+        {% if add_user.notes_offer %}
+          <tr>
+            <td><span>Notes</span></td>
+            <td><span>{{ add_user.notes_offer }}</span></td>
+          </tr>
+        {% endif %}
       </table>
+      
       
       <table>
         <thead>
@@ -192,26 +204,54 @@
       <div class="term-conditions">
         <h4><span><strong>Terms and Conditions:</strong></span></h4>
         <p>
-          <span><strong>1. Price Basis :</strong> {{ add_user.subject_offer }}</span><br>
-
-          <span><strong>2. P&F Charges : </strong>{{ add_user.PandFcharges_offer }}</span><br>
-
-          <strong><span style="font-weight: bold; text-transform: uppercase;">3. GST:</span></strong> <span>{{ add_user.igst_terms_offer }}</span><br>
-
-          <span><strong>4. HSN CODE : </strong>{{ add_user.hsn_code_offer }}</span><br>
-
-          <span><strong>5. Payment Terms :</strong> {{ add_user.payment_terms_offer }}</span><br>
-
-          <span><strong>6. Delivery :</strong> {{ add_user.delivery_terms_offer }}</span><br>
-
-          <span><strong>7. Freight : </strong>{{ add_user.freight_terms_offer }}</span><br>
-
-          <span><strong>8. Validity :</strong> {{ add_user.validity_terms_offer }}</span><br>
-
-          <span><strong>9. Warranty : </strong> {{ add_user.contract_review_warrantly }}</span><br>
-
+          {% if add_user.price_basis_offer %}
+            <span><strong>1. Price Basis :</strong> {{ add_user.price_basis_offer }}</span><br>
+            {% set count = 2 %}
+          {% else %}
+            {% set count = 1 %}
+          {% endif %}
+      
+          {% if add_user.PandFcharges_offer %}
+            <span><strong>{{ count }}. P&F Charges :</strong> {{ add_user.PandFcharges_offer }}</span><br>
+            {% set count = count + 1 %}
+          {% endif %}
+      
+          {% if add_user.igst_terms_offer %}
+            <span><strong>{{ count }}. GST :</strong> {{ add_user.igst_terms_offer }}</span><br>
+            {% set count = count + 1 %}
+          {% endif %}
+      
+          {% if add_user.hsn_code_offer %}
+            <span><strong>{{ count }}. HSN CODE :</strong> {{ add_user.hsn_code_offer }}</span><br>
+            {% set count = count + 1 %}
+          {% endif %}
+      
+          {% if add_user.payment_terms_offer %}
+            <span><strong>{{ count }}. Payment Terms :</strong> {{ add_user.payment_terms_offer }}</span><br>
+            {% set count = count + 1 %}
+          {% endif %}
+      
+          {% if add_user.delivery_terms_offer %}
+            <span><strong>{{ count }}. Delivery :</strong> {{ add_user.delivery_terms_offer }}</span><br>
+            {% set count = count + 1 %}
+          {% endif %}
+      
+          {% if add_user.freight_terms_offer %}
+            <span><strong>{{ count }}. Freight :</strong> {{ add_user.freight_terms_offer }}</span><br>
+            {% set count = count + 1 %}
+          {% endif %}
+      
+          {% if add_user.validity_terms_offer %}
+            <span><strong>{{ count }}. Validity :</strong> {{ add_user.validity_terms_offer }}</span><br>
+            {% set count = count + 1 %}
+          {% endif %}
+      
+          {% if add_user.contract_review_warrantly %}
+            <span><strong>{{ count }}. Warranty :</strong> {{ add_user.contract_review_warrantly }}</span><br>
+          {% endif %}
         </p>
       </div>
+          
 
       <div>
         <p>
