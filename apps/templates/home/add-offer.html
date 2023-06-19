@@ -711,6 +711,7 @@ $(document).ready(function() {
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
+								<tbody>
 								{% if offer_json is not none %}
 								{% for offer in offer_json %}
                                 <tbody>
@@ -737,6 +738,7 @@ $(document).ready(function() {
                                 </tbody>
 								{% endfor %}
 								{% endif %}
+								</tbody>
                             </table>
                         </div>
                     </div>

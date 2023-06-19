@@ -26,7 +26,7 @@ import datetime
 @blueprint.route('/dashboard')
 @login_required
 def dashboard():
-    # db.metadata.tables['addoffer'].drop(db.engine)
+    # db.metadata.tables['OfferComfirmation'].drop(db.engine)
     return render_template('home/dashboard.html', segment='dashboard')
 
 @blueprint.route('/get_kit_details', methods=['POST'])
@@ -618,8 +618,9 @@ def addinvoice():
     if request.method == 'GET':
         users = CustomerMaster.query.all()
         user1 = ProductMaster.query.all()
+        oc_list = OCModel.query.all()
         currency_user_invoice = CurrencyMaster.query.all()
-        return render_template('home/add-invoice.html',users=users,user1=user1,currency_user_invoice=currency_user_invoice,segment='add-invoice')
+        return render_template('home/add-invoice.html',oc_list=oc_list,users=users,user1=user1,currency_user_invoice=currency_user_invoice,segment='add-invoice')
 
 @blueprint.route('/invoice-invoiceslist', methods=['GET', 'POST'])
 @login_required
@@ -696,7 +697,13 @@ def offer_pdf(id):
                 unit_price = item['unit_price']
                 total_price = item['total_price']
                 counter += 1
-                html_row = f"<tr><td><span>{counter}</span></td><td><span>{product_name}</span></td><td><span>{part_number}</span></td><td><span>{quantity}</span></td><td><span>{unit_price}</span></td><td><span>{total_price}</span></td></tr>"
+                if counter % 2 == 0:
+                    background_color = 'white'
+                else:
+                    background_color = 'lightblue'
+
+                html_row = f"<tr style='background-color: {background_color};'><td style='border: 1px solid #ccc; text-align: center;'><span>{counter}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{product_name}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{part_number}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{quantity}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{unit_price}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{total_price}</span></td></tr>"
+
                 html_rows += html_row
             return render_template('home/pdf_add_offer.html',add_user=add_user,html_rows=html_rows,addoffer_address=addoffer_address,addoffer_Role=addoffer_Role,
                                     addoffer_Phonenumber=addoffer_Phonenumber,segment='offer-offerlist')
@@ -711,8 +718,8 @@ def offer_pdf(id):
 
                 kit_name_lines = kit_name.replace('\r\n', '\n').split('\n')
                 kit_name_html = "<br>".join([f"&bull;&nbsp;{line}" if i > 0 else f"<strong>{line}</strong>" for i, line in enumerate(kit_name_lines)])
-                html_row = f"<tr style='background-color: #f2f2f2;'><td style='border: 1px solid #ccc;'><span>{counter}</span></td><td style='border: 1px solid #ccc;'><span>{kit_name_html}</span></td><td style='border: 1px solid #ccc;'><span>{kit_number}</span></td><td style='border: 1px solid #ccc;'><span>{quantity}</span></td><td style='border: 1px solid #ccc;'><span>{unit_price}<span></td><td style='border: 1px solid #ccc;'><span>{total_price}<span></td></tr>"
-                
+                html_row = f"<tr style='background-color: #f2f2f2;'><td style='border: 1px solid #ccc; text-align: center;'><span>{counter}</span></td><td style='border: 1px solid #ccc;'><span>{kit_name_html}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{kit_number}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{quantity}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{unit_price}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{total_price}</span></td></tr>"
+
                 html_rows += html_row
             return render_template('home/pdf_add_offer.html',add_user=add_user,html_rows=html_rows,addoffer_address=addoffer_address,addoffer_Role=addoffer_Role,
                                     addoffer_Phonenumber=addoffer_Phonenumber, segment='offer-offerlist')
@@ -975,8 +982,61 @@ def Contract_Review_list():
 @login_required
 def edit_oc_register(id):
     add_user_contractReview = OCModel.query.filter_by(id=id).first()
-    return render_template('home/editocfile.html', add_user_contractReview=add_user_contractReview, segment='OcRegister')
-    
+    oc_confirmation_offer = add_user_contractReview.oc_confirmation_offer
+
+    if oc_confirmation_offer:
+        oc_temp_data = json.loads(oc_confirmation_offer)
+    else:
+        # Handle the case when oc_confirmation_offer is empty
+        oc_temp_data = {}  # Set oc_temp_data to an empty dictionary or any default value
+    print(oc_temp_data)
+    print(oc_confirmation_offer)
+    odoffer_database = AddOffer.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        add_oc_confo = OCModel.query.filter_by(id=id).first()
+        current_date = datetime.datetime.now().date()
+        add_oc_confo.oc_date = current_date
+        add_oc_confo.oc_customer_name = request.form['oc_customer_name']
+        add_oc_confo.oc_po_value = request.form['oc_po_value']
+        add_oc_confo.oc_customer_type = request.form['oc_customer_type']
+        add_oc_confo.oc_po_number = request.form['oc_po_number']
+        add_oc_confo.oc_po_date = request.form['oc_po_date']
+        add_oc_confo.oc_dispatch_date = request.form['oc_dispatch_date']
+        add_oc_confo.oc_po_qty = request.form['oc_po_qty']
+        add_oc_confo.oc_remarks = request.form['oc_remarks']
+
+        oc_confirmation_json = ''
+        oc_confirmation_list = []
+        # print(add_user_contractReview.oc_customer_type)
+        if add_oc_confo.oc_customer_type == "Kits":
+            oc_kit_type = request.form.getlist('oc_kit_type')
+            oc_equipment = request.form.getlist('oc_equipment')
+            oc_qty = request.form.getlist('oc_qty')
+            oc_invoice_value = request.form.getlist('oc_invoice_value')
+            oc_po_value = request.form.getlist('oc_po_value')
+            oc_machine = request.form.getlist('oc_machine')
+            oc_remark = request.form.getlist('oc_remark')
+
+            oc_confirmation_list = []
+            for i in range(len(oc_kit_type)):
+                kit_offer = {
+                    'oc_kit_type': oc_kit_type[i],
+                    'oc_equipment': oc_equipment[i],
+                    'oc_qty': oc_qty[i],
+                    'oc_invoice_value': oc_invoice_value[i],
+                    'oc_po_value' : oc_po_value[i],
+                    'oc_machine': oc_machine[i],
+                    'oc_remark': oc_remark[i]
+                }
+                oc_confirmation_list.append(kit_offer)
+            print(oc_confirmation_list)
+            # Convert the list to JSON
+            oc_confirmation_json = json.dumps(oc_confirmation_list)
+        add_oc_confo.oc_confirmation_offer = oc_confirmation_json
+        db.session.commit()
+        return redirect('/OC-Register-List')
+    return render_template('home/editocfile.html', oc_temp_data=oc_temp_data,odoffer_database=odoffer_database,add_user_contractReview=add_user_contractReview, segment='OcRegister')
+        
 @blueprint.route('/<int:id>/edit_contractoffer', methods=['GET', 'POST'])
 @login_required
 def edit_contractoffer(id):
@@ -1058,17 +1118,17 @@ def edit_contractoffer(id):
             oc_date = ""
             oc_number = updated_value
             oc_customer_name = add_user_contractReview.customer_name_offer
-            oc_po_value = 0
+            oc_po_value = ""
             oc_customer_type = add_user_contractReview.offer_type_offer
             oc_po_number = ""
 
-            oc_po_date = ""
+            oc_po_date = add_user_contractReview.contract_review_Order_Date
             oc_quotation_no = add_user_contractReview.quotation_number_offer
-            oc_dispatch_date = 0
-            oc_invoice_no = 0
+            oc_dispatch_date = ""
+            oc_invoice_no = ""
             oc_invoice_date= ""
-            oc_po_qty = 0
-            oc_remarks = 0
+            oc_po_qty = add_user_contractReview.contract_review_PO_Qty
+            oc_remarks = ""
             oc_confirmation_offer = ""
 
             add_oc = OCModel(

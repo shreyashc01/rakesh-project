@@ -30,7 +30,45 @@
   #printButton {
     margin-right: 10px;
   }
+
+  /* CSS for page breaks and borders */
+  .page-inner {
+    page-break-inside: avoid;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  /* Hide border for the first page */
+  .page-inner:first-child {
+    border: none;
+  }
+
+  /* Footer styles */
+  .container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .code {
+    font-size: 30px;
+    color: #14568A; /* Dark blue color */
+    margin-bottom: 5px;
+  }
+
+  .address {
+    font-size: 10px;
+    color: #14568A; /* Dark blue color */
+  }
+
+  .additional-info {
+    font-size: 10px;
+    color: #14568A; /* Dark blue color */
+    margin-top: 5px;
+  }
 </style>
+
 
 {% endblock stylesheets %}
 
@@ -100,9 +138,17 @@
       </div>
       <div class="from">
         <span><strong>To:</strong></span>
-        <p><span><strong>{{ add_user.customer_name_offer }}</strong></span></p>
-        <p><span>{{ addoffer_address }}</span></p>
+        <p><strong>{{ add_user.customer_name_offer }}</strong></p>
+        <p><span id="address"></span></p>
       </div>
+      
+      <script>
+        var address = "{{ addoffer_address }}";
+        var formattedAddress = address.replace(/,/g, ",<br>");
+        document.getElementById("address").innerHTML = formattedAddress;
+      </script>
+      
+      
 
       <style>
         .from {
@@ -192,12 +238,12 @@
           {% endif %}
           {% if add_user.gstType %}
             <tr style="background-color: #EAF6FD;">
-              <td colspan="5"><span>GST:</span></td>
+              <td colspan="5"><span>{{add_user.gstType}} [{{ add_user.gstPercentage }}]</span></td>
               <td>
                 {% if add_user.gstType == 'IGST' %}
-                  <span>{{ add_user.gstPercentage }}</span>
+                  <span>{{ add_user.gstValue }}</span>
                 {% elif add_user.gstType == 'CGST' %}
-                  <span>{{ add_user.gstPercentage // 2 }}% & {{ add_user.gstPercentage // 2 }}%</span>
+                  <span>{{ add_user.gstValue}}</span>
                 {% endif %}
               </td>
             </tr>
@@ -218,8 +264,8 @@
         
 
       </table>
-      <span>
-        <h id="grandTotalOffer"></h>
+      <span><strong>Total (in words):</strong>
+        <strong><h id="grandTotalOffer"></h></strong>
       </span>
       <div class="term-conditions">
         <h4><span><strong>Terms and Conditions:</strong></span></h4>
@@ -284,6 +330,78 @@
         </p>
       </div>
 
+      <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .code {
+            font-size: 30px;
+            color: #14568A; /* Dark blue color */
+            margin-bottom: 5px;
+        }
+
+        .address {
+            font-size: 10px;
+            color: #14568A; /* Dark blue color */
+        }
+
+        .additional-info {
+            font-size: 10px;
+            color: #14568A; /* Dark blue color */
+            margin-top: 5px;
+        }
+    </style>
+    
+    <style>
+      /* CSS for the popup */
+      .popup {
+        position: fixed;
+        top: 87px;
+        left: 850px;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        z-index: 9999;
+        cursor: move;
+        /* Add cursor style for draggable */
+      }
+    
+      /* CSS for the print button and cancel link container */
+      .button-container {
+        text-align: center;
+        margin-top: 10px;
+      }
+    
+      /* CSS for the print button */
+      #printButton {
+        margin-right: 10px;
+      }
+    
+      /* CSS for the footer */
+      .footer {
+        border-top: 1px solid #ccc;
+        page-break-after: always;
+      }
+    </style>
+
+
+      <div class="container">
+      
+          <div class="code">
+            <span><strong>ORN INDIA</strong></span>
+          </div>
+          <div class="address">
+            <span><strong>#800, Shiv Krupa Nilaya, 3rd Cross, 7th Main Road, KempeGowda Nagar, T Dasarahalli, Bangalore-560057</strong></span>
+          </div>
+          <div class="additional-info">
+            <span>Banglore-560057 Mail ID: info@ornindia.com</span><br>
+            <span>GSTN No. 29CATPD5857R1ZH</span>
+          </div>
+      </div>
+
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     </div>
@@ -346,10 +464,11 @@
   }
 
   .term-conditions {
-    border: 2px solid #110f0f;
-    padding: 30px;
-    line-height: 1.5;
-  }
+  border: 2px solid #110f0f;
+  padding: 30px;
+  line-height: 1.5;
+  page-break-inside: avoid;
+}
 
   .term-conditions h4 {
     margin-top: 0;
@@ -388,7 +507,7 @@
         'table th, table td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; font-size: medium; }' +
         'table th { background-color: #333; color: #fff; font-weight: bold; font-size: medium; }' +
         'table tfoot td { text-align: right; border-top: 2px solid #333; }' +
-        '.term-conditions { border: 2px solid #110f0f; padding: 30px; line-height: 1.5; }' +
+        '.term-conditions { border: 2px solid #110f0f; padding: 30px; line-height: 1.5; page-break-inside: avoid;}' +
         '.term-conditions h4 { margin-top: 0; margin-bottom: 10px; }' +
         '</style> </head> <body>' +
         '<div class="content">' + pageInnerContents + '</div>' +
@@ -500,8 +619,8 @@
   }
 
   var grandTotalOfferElement = document.getElementById("grandTotalOffer");
-  var grandTotalOffer = parseInt("{{ add_user.grand_total_offer }}");
-  grandTotalOfferElement.innerHTML = numberToWords(grandTotalOffer);
+  var grandTotalOffer = parseInt("{{ add_user.grandTotal }}");
+  grandTotalOfferElement.innerHTML = numberToWords(grandTotalOffer).toUpperCase();
 
   $(function () {
     $(".popup").draggable(); // Make the popup draggable

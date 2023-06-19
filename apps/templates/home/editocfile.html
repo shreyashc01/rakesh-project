@@ -3,7 +3,31 @@
 {% block title %} Add User {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+
+<style>
+    th,
+    td {
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    .container[_ngcontent-owj-c93] {
+        width: 100%
+    }
+</style>
+
+<style>
+    .bs-example {
+        margin: 20px;
+    }
+
+    .form-control:focus {
+        border-color: #ff80ff;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+    }
+</style>
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -46,30 +70,25 @@
                                                     <div class="row">
                                                         <div class="form-group col-sm-8">
                                                             <label>Customer Name</label>
-                                                            <input class="form-control"
-                                                                value="{{add_user_contractReview.oc_customer_name}}"
+                                                            <input class="form-control" name="oc_customer_name" id="oc_customer_name" value="{{add_user_contractReview.oc_customer_name}}"
                                                                 readonly>
                                                         </div>
                                                         <div class="form-group col-sm-4">
-                                                            <label for="bookTitle">Order Type</label>
-                                                            <input class="form-control"
-                                                                value="{{add_user_contractReview.oc_customer_type}}"
-                                                                readonly>
+                                                            <label >Order Type</label>
+                                                            <input class="form-control" name="oc_customer_type" value="{{add_user_contractReview.oc_customer_type}}" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group col-sm-4">
                                                             <label>PO No</label>
-                                                            <input type="text"
-                                                                value="{{add_user_contractReview.oc_po_number}}"
+                                                            <input type="text" name="oc_po_number" value="{{add_user_contractReview.oc_po_number}}"
                                                                 maxlength="200" autocomplete="new-password"
                                                                 class="form-control">
                                                         </div>
                                                         <div class="form-group col-sm-4">
                                                             <label for="publisher">PO Date</label>
                                                             <div class="input-group date">
-                                                                <input value="{{add_user_contractReview.oc_po_date}}"
-                                                                    autocomplete="new-password"
+                                                                <input value="{{add_user_contractReview.oc_po_date}}" name="oc_po_date" autocomplete="new-password"
                                                                     class="form-control">
                                                             </div>
                                                         </div>
@@ -78,18 +97,18 @@
                                                         <div class="form-group col-sm-4">
                                                             <label>PO Value</label>
                                                             <input type="text" autocomplete="new-password"
-                                                                name="oc_po_value" class="form-control">
+                                                            value="{{add_user_contractReview.oc_po_value}}" name="oc_po_value" class="form-control">
                                                         </div>
                                                         <div class="form-group col-sm-4">
                                                             <label for="serialNo">PO Qty</label>
                                                             <input type="text" autocomplete="new-password"
-                                                                name="oc_po_qty" class="form-control">
+                                                            value="{{add_user_contractReview.oc_po_qty}}" name="oc_po_qty" class="form-control">
                                                         </div>
                                                         <div class="form-group col-sm-4">
                                                             <label for="publisher">Dispatch Date</label>
                                                             <div class="input-group date">
                                                                 <input type="date" autocomplete="new-password"
-                                                                    name="oc_dispatch_date"
+                                                                value="{{add_user_contractReview.oc_dispatch_date}}" name="oc_dispatch_date"
                                                                     class="form-control">
                                                             </div>
                                                         </div>
@@ -97,8 +116,7 @@
                                                     <div class="row">
                                                         <div class="form-group col-sm-8">
                                                             <label>Remarks</label>
-                                                            <textarea rows="2" class="form-control"
-                                                                name="oc_remarks"></textarea>
+                                                            <textarea rows="2" class="form-control" name="oc_remarks">{{add_user_contractReview.oc_remarks}}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -112,7 +130,7 @@
                                 <div class="page-section">
                                     <div class="card card-fluid">
                                         <div class="card-body">
-                                            <table id="product-table">
+                                            <table id="emptbl">
                                                 <thead>
                                                     <th>Kit Type</th>
                                                     <th>Equipment</th>
@@ -121,52 +139,51 @@
                                                     <th>PO Value</th>
                                                     <th>Machine</th>
                                                     <th>Remarks</th>
-                                                    <th>
-                                                        <a class="btn btn-success" onclick="addProductRow()"
-                                                            value="">Add KIT</a>
-                                                    </th>
+                                                    <th><a class="btn btn-secondary active " onclick="myButtonClick()"><i
+                                                        class="fa fa-plus"></i></a></th>
                                                 </thead>
                                                 <tbody style="padding: 5%;">
-                                                    <tr>
-                                                        <td style="width: 10%;">
-                                                            <select name="oc_kit_type"
-                                                                class="form-control ng-untouched ng-pristine ng-valid">
-                                                                <option value="">Select Kit</option>
-                                                                <option value="ECLS">ECLS</option>
-                                                                <option value="HCLS">HCLS</option>
-                                                                <option value="PCLS">PCLS</option>
-                                                                <option value="Spares">Spares</option>
-                                                                <option value="Others">Others</option>
-                                                                <option value="Exports">Exports</option>
-                                                                <option value="Services">Services</option>
-                                                            </select>
-                                                        </td>
-                                                        <td style="width: 20%;">
-                                                            <input name="oc_equipment"
-                                                                class="form-control ng-untouched ng-pristine ng-valid">
-                                                        </td>
-                                                        <td style="width: 7%;">
-                                                            <input numberonly="" name="oc_qty"
-                                                                class="form-control ng-untouched ng-pristine ng-valid">
-                                                        </td>
-                                                        <td style="width: 10%;">
-                                                            <input decimalonly="" name="oc_invoice_value"
-                                                                class="form-control ng-untouched ng-pristine ng-valid">
-                                                        </td>
-                                                        <td style="width: 10%;">
-                                                            <input decimalonly="" name="oc_po_value"
-                                                                class="form-control ng-untouched ng-pristine ng-valid">
-                                                        </td>
-                                                        <td style="width: 20%;">
-                                                            <input name="oc_machine"
-                                                                class="form-control ng-untouched ng-pristine ng-valid">
-                                                        </td>
-                                                        <td style="width: 20%;">
-                                                            <input name="oc_remarks"
-                                                                class="form-control ng-untouched ng-pristine ng-valid">
-                                                        </td>
-                                                    </tr>
+                                                    {% for data in oc_temp_data %}
+                                                        <tr>
+                                                            <td style="width: 10%;">
+                                                                <select name="oc_kit_type" class="form-control ng-untouched ng-pristine ng-valid">
+                                                                    <option value="">Select Kit</option>
+                                                                    <option value="ECLS" {% if data['oc_kit_type'] == 'ECLS' %}selected{% endif %}>ECLS</option>
+                                                                    <option value="HCLS" {% if data['oc_kit_type'] == 'HCLS' %}selected{% endif %}>HCLS</option>
+                                                                    <option value="PCLS" {% if data['oc_kit_type'] == 'PCLS' %}selected{% endif %}>PCLS</option>
+                                                                    <option value="Spares" {% if data['oc_kit_type'] == 'Spares' %}selected{% endif %}>Spares</option>
+                                                                    <option value="Others" {% if data['oc_kit_type'] == 'Others' %}selected{% endif %}>Others</option>
+                                                                    <option value="Exports" {% if data['oc_kit_type'] == 'Exports' %}selected{% endif %}>Exports</option>
+                                                                    <option value="Services" {% if data['oc_kit_type'] == 'Services' %}selected{% endif %}>Services</option>
+                                                                </select>
+                                                            </td>
+                                                            <td style="width: 20%;">
+                                                                <input class="form-control ng-untouched ng-pristine ng-valid" name="oc_equipment" value="{{ data['oc_equipment'] }}">
+                                                            </td>
+                                                            <td style="width: 7%;">
+                                                                <input numberonly="" class="form-control ng-untouched ng-pristine ng-valid" name="oc_qty" value="{{ data['oc_qty'] }}">
+                                                            </td>
+                                                            <td style="width: 10%;">
+                                                                <input decimalonly="" class="form-control ng-untouched ng-pristine ng-valid" name="oc_invoice_value" value="{{ data['oc_invoice_value'] }}">
+                                                            </td>
+                                                            <td style="width: 10%;">
+                                                                <input decimalonly="" class="form-control ng-untouched ng-pristine ng-valid" name="oc_po_value" value="{{ data['oc_po_value'] }}">
+                                                            </td>
+                                                            <td style="width: 20%;">
+                                                                <input class="form-control ng-untouched ng-pristine ng-valid" name="oc_machine" value="{{ data['oc_machine'] }}">
+                                                            </td>
+                                                            <td style="width: 20%;">
+                                                                <input class="form-control ng-untouched ng-pristine ng-valid" name="oc_remark" value="{{ data['oc_remark'] }}">
+                                                            </td>
+                                                            <td style="width: 5%;">
+                                                                <a class="btn btn-secondary active" onclick="SomeDeleteRowFunction(this)" id="{{ loop.index }}">
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
                                                 </tbody>
+                                                
                                             </table>
                                         </div>
                                     </div>
@@ -193,65 +210,64 @@
 {% block javascripts %}
 
 <script>
-    function addProductRow() {
-        const tableBody = document.querySelector('#product-table tbody');
-        const newRow = document.createElement('tr');
-        newRow.innerHTML = `
-		<tbody style="padding: 5%;">
-            <tr>
-                <td style="width: 10%;">
-                    <select class="form-control ng-untouched ng-pristine ng-valid">
-                        <option value="">Select Kit</option>
-                        <option value="ECLS">ECLS</option>
-                        <option value="HCLS">HCLS</option>
-                        <option value="PCLS">PCLS</option>
-                        <option value="Spares">Spares</option>
-                        <option value="Others">Others</option>
-                        <option value="Exports">Exports</option>
-                        <option value="Services">Services</option>
-                    </select>
-                </td>
-                <td style="width: 20%;">
-                    <input class="form-control ng-untouched ng-pristine ng-valid">
-                </td>
-                <td style="width: 7%;">
-                    <input numberonly=""
-                        class="form-control ng-untouched ng-pristine ng-valid">
-                </td>
-                <td style="width: 10%;">
-                    <input decimalonly=""
-                        class="form-control ng-untouched ng-pristine ng-valid">
-                </td>
-                <td style="width: 10%;">
-                    <input decimalonly=""
-                        class="form-control ng-untouched ng-pristine ng-valid">
-                </td>
-                <td style="width: 20%;">
-                    <input class="form-control ng-untouched ng-pristine ng-valid">
-                </td>
-                <td style="width: 20%;">
-                    <input class="form-control ng-untouched ng-pristine ng-valid">
-                </td>
-                <td>
-                    <button class="btn btn-danger" onclick="removeProductRow(this)">Remove</button>
-                </td>
-            </tr>
-            
-        </tbody>
-
-		`;
-        tableBody.appendChild(newRow);
-        newRow.querySelectorAll('.quantity, .unit-price').forEach(input => {
-            input.addEventListener('input', updateTotal);
-        });
-        updateTotal();
+    let lineNo = 1;
+    function myButtonClick() {
+        var table = document.getElementById('emptbl');
+        var rowCount = table.rows.length;
+        console.log(rowCount)
+        var cellCount = table.rows[0].cells.length;
+        markup = $(`
+    <tr>
+        <td style="width: 10%;">
+            <select name="oc_kit_type" class="form-control ng-untouched ng-pristine ng-valid">
+                <option value="">Select Kit</option>
+                <option value="ECLS">ECLS</option>
+                <option value="HCLS">HCLS</option>
+                <option value="PCLS">PCLS</option>
+                <option value="Spares">Spares</option>
+                <option value="Others">Others</option>
+                <option value="Exports">Exports</option>
+                <option value="Services">Services</option>
+            </select>
+        </td>
+        <td style="width: 20%;">
+            <input name="oc_equipment" class="form-control ng-untouched ng-pristine ng-valid">
+        </td>
+        <td style="width: 7%;">
+            <input name="oc_qty" numberonly="" class="form-control ng-untouched ng-pristine ng-valid">
+        </td>
+        <td style="width: 10%;">
+            <input name="oc_invoice_value" decimalonly="" class="form-control ng-untouched ng-pristine ng-valid">
+        </td>
+        <td style="width: 10%;">
+            <input name="oc_po_value" decimalonly="" class="form-control ng-untouched ng-pristine ng-valid">
+        </td>
+        <td style="width: 20%;">
+            <input name="oc_machine" class="form-control ng-untouched ng-pristine ng-valid">
+        </td>
+        <td style="width: 20%;">
+            <input name="oc_remark" class="form-control ng-untouched ng-pristine ng-valid">
+        </td>
+        <td style="width: 5%;"> <a class="btn btn-secondary active" onclick="SomeDeleteRowFunction(this)" id=' + lineNo + '>
+                                <i class="fas fa-trash-alt"> </i> </a> </td>
+    </tr>`)
+        tableBody = $("table tbody");
+        tableBody.append(markup);
+        lineNo++;
     }
+    function SomeDeleteRowFunction(btndel) {
+        if (typeof (btndel) == "object") {
+            $(btndel).closest("tr").remove();
+        }
+        else {
+            return false;
+        }
+        }
 
-
-    function removeProductRow(button) {
-        const row = button.closest('tr');
-        row.remove();
-        updateTotal();
-    }
+    // function removeProductRow(button) {
+    //     const row = button.closest('tr');
+    //     row.remove();
+    //     updateTotal();
+    // }
 </script>
 {% endblock javascripts %}

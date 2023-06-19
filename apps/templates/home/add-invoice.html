@@ -297,55 +297,65 @@
     });
 
     $(document).ready(function () {
-        $('#oc_name_change').on('change', function () {
-            if ($(this).val() === 'OC') {
-                $('#oc_number').html(`
-                <label>OC Number<span style="color: red;">*</span>
-                                        </label>
-                                        <div class="ng-select-container ng-has-value">
-                                            <div class="ng-value-container">
-                                                <div class="ng-placeholder">
-                                                    <select name="main_usr_select" class="form-control">
-                                                        {% for user in users %}
-                                                        <option>{{ user.customer_name }}
-                                                        </option>
-                                                        {% endfor %}
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>`);
-                $('#buyers_name').html(`<label>Buyer's Name<span style="color: red;">*</span>
-                                        </label>
-                                        <div class="ng-select-container ng-has-value">
-                                            <div class="ng-value-container">
-                                                <div class="ng-placeholder">
-                                                    <input class="form-control ng-untouched ng-pristine ng-valid" disabled>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        `)
-            }
-
-            else {
-                $('#oc_number').empty();
-                $('#buyers_name').html(`<label>Buyer's Name<span style="color: red;">*</span>
-                                        </label>
-                                        <div class="ng-select-container ng-has-value">
-                                            <div class="ng-value-container">
-                                                <div class="ng-placeholder">
-                                                    <select name="main_usr_select" class="form-control">
-                                                        {% for user in users %}
-                                                        <option>{{ user.customer_name }}
-                                                        </option>
-                                                        {% endfor %}
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        `)
-            }
-        });
+    $('#oc_name_change').on('change', function () {
+        if ($(this).val() === 'OC') {
+            $('#oc_number').html(`
+                <label>OC Number<span style="color: red;">*</span></label>
+                <div class="ng-select-container ng-has-value">
+                    <div class="ng-value-container">
+                        <div class="ng-placeholder">
+                            <select id="main_oc_select" name="main_oc_select" class="form-control">
+                                {% for user in oc_list %}
+                                <option>{{ user.oc_number }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>`);
+            $('#buyers_name').html(`
+                <label>Buyer's Name<span style="color: red;">*</span></label>
+                <div class="ng-select-container ng-has-value">
+                    <div class="ng-value-container">
+                        <div class="ng-placeholder">
+                            <input id="buyer_input" class="form-control ng-untouched ng-pristine ng-valid" disabled>
+                        </div>
+                    </div>
+                </div>`);
+        } else {
+            $('#oc_number').empty();
+            $('#buyers_name').html(`
+                <label>Buyer's Name<span style="color: red;">*</span></label>
+                <div class="ng-select-container ng-has-value">
+                    <div class="ng-value-container">
+                        <div class="ng-placeholder">
+                            <select id="main_usr_select" name="main_usr_select" class="form-control">
+                                {% for user in users %}
+                                <option>{{ user.customer_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>`);
+        }
     });
+
+    // $(document).on('change', '#main_oc_select', function() {
+    //     // Get the selected oc_number
+    //     var selectedOcNumber = $(this).val();
+        
+    //     // Find the corresponding buyer data
+    //     var selectedBuyer = null;
+    //     {% for user in oc_list %}
+    //         if ('{{ user.oc_number }}' === selectedOcNumber) {
+    //             selectedBuyer = '{{ user.buyer }}';
+    //             break;
+    //         }
+    //     {% endfor %}
+        
+    //     // Update the input value with the selected buyer
+    //     $('#buyer_input').val(selectedBuyer);
+    // });
+});
 
     function addProductRow() {
         const tableBody = document.querySelector('#product-table tbody');
