@@ -718,7 +718,12 @@ def offer_pdf(id):
 
                 kit_name_lines = kit_name.replace('\r\n', '\n').split('\n')
                 kit_name_html = "<br>".join([f"&bull;&nbsp;{line}" if i > 0 else f"<strong>{line}</strong>" for i, line in enumerate(kit_name_lines)])
-                html_row = f"<tr style='background-color: #f2f2f2;'><td style='border: 1px solid #ccc; text-align: center;'><span>{counter}</span></td><td style='border: 1px solid #ccc;'><span>{kit_name_html}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{kit_number}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{quantity}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{unit_price}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{total_price}</span></td></tr>"
+                if counter % 2 == 0:
+                    background_color = 'white'
+                else:
+                    background_color = 'lightblue'
+
+                html_row = f"<tr style='background-color: {background_color};'><td style='border: 1px solid #ccc; text-align: center;'><span>{counter}</span></td><td style='border: 1px solid #ccc;'><span>{kit_name_html}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{kit_number}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{quantity}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{unit_price}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{total_price}</span></td></tr>"
 
                 html_rows += html_row
             return render_template('home/pdf_add_offer.html',add_user=add_user,html_rows=html_rows,addoffer_address=addoffer_address,addoffer_Role=addoffer_Role,
