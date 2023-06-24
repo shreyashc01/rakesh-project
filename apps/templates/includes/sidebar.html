@@ -93,6 +93,29 @@
 								</ul>
 							</div>
 						</li>
+						
+						
+						<li class="nav-item {% if 'Perfoma' in segment %} active {% endif %}">
+							<a data-toggle="collapse" href="#Perfoma">
+								<i  style="color:black;" class="fas fa-file-invoice"></i>
+								<p  style="color:black;">Perfoma Invoice</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse {% if 'Perfoma' in segment %} show {% endif %}" id="Perfoma">
+								<ul class="nav nav-collapse">
+									<li class="{% if 'add-Perfoma' in segment %} active {% endif %}">
+										<a href="/Perfoma-addinvoice">
+											<span  style="color:black;" class="sub-item">Perfoma invoice</span>
+										</a>
+									</li>
+									<li class="{% if 'list-Perfoma' in segment %} active {% endif %}">
+										<a href="/Perfoma-invoiceslist">
+											<span  style="color:black;"class="sub-item">Perfoma Invoice List</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
 
 						<li class="nav-item {% if 'purchaseorder' in segment %} active {% endif %}">
 							<a data-toggle="collapse" href="#purchaseorder">
@@ -274,6 +297,11 @@
 									<li class="{% if 'Currency-masters' in segment %} active {% endif %}">
 										<a href="/Currency-masters">
 											<span  style="color:black;" class="sub-item">Currency Master</span>
+										</a>
+									</li>
+									<li class="{% if 'Bank-masters' in segment %} active {% endif %}">
+										<a href="/Bank-Master">
+											<span  style="color:black;" class="sub-item">Bank Master</span>
 										</a>
 									</li>
 								</ul>

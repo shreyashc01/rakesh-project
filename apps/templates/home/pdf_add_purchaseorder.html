@@ -123,33 +123,26 @@
   <div class="page-inner">
     <div class="term-conditions">
       <div class="quotation-header">
-        <title>Quotation</title>
+        <title>Invoice</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
         <div>
-          <h2><span><strong>Quotation</strong></span></h2>
-          <span><strong>Quotation Date: </strong></span><span>{{ add_user.due_date_offer }}</span><br>
-          <span><strong>Quotation No: </strong></span><span>{{ add_user.quotation_number_offer }}</span><br>
+          <h2><span><strong>Invoice</strong></span></h2>
+          <span><strong>Invoice Date: </strong></span><span>{{ add_user.invoiceNo }}</span><br>
+          <span><strong>Invoice No: </strong></span><span>{{ add_user.invoiceDate }}</span><br>
         </div>
         <img src="/static/assets/img/logo.jpg" alt="Company Logo">
       </div>
       <div class="from">
-        <span><strong>To:</strong></span>
-        <p><strong>{{ add_user.customer_name_offer }}</strong></p>
+        <span><strong>Supplier Code:</strong></span>
+        <p><strong>{{ add_user.supplierCode }}</strong></p>
         <p><span id="address"></span></p>
       </div>
       
-      <script>
-        var address = "{{ addoffer_address }}";
-        var formattedAddress = address.replace(/,/g, ",<br>");
-        document.getElementById("address").innerHTML = formattedAddress;
-      </script>
-      
-      
-
+    
       <style>
         .from {
           border-collapse: collapse;
@@ -166,31 +159,52 @@
       </style>
       
       <table class="from">
-        {% if add_user.subject_offer %}
+        {% if add_user.buyers_name %}
           <tr>
-            <td><span>Subject</span></td>
-            <td><span>{{ add_user.subject_offer }}</span></td>
+            <td><span>Buyer's Name:</span></td>
+            <td><span>{{ add_user.buyers_name }}</span></td>
           </tr>
         {% endif %}
       
-        {% if add_user.reference_offer %}
+        {% if add_user.buyersGSTIN %}
           <tr>
-            <td><span>Reference</span></td>
-            <td><span>{{ add_user.reference_offer }}</span></td>
+            <td><span>Buyer's GSTIN:</span></td>
+            <td><span>{{ add_user.buyersGSTIN }}</span></td>
           </tr>
         {% endif %}
       
-        {% if add_user.description_offer %}
+        {% if add_user.billingAddress %}
           <tr>
-            <td><span>Description</span></td>
-            <td><span>{{ add_user.description_offer }}</span></td>
+            <td><span>Billing Address:</span></td>
+            <td><span>{{ add_user.billingAddress }}</span></td>
           </tr>
         {% endif %}
       
-        {% if add_user.notes_offer %}
+        {% if add_user.buyersOrderNo %}
           <tr>
-            <td><span>Notes</span></td>
-            <td><span>{{ add_user.notes_offer }}</span></td>
+            <td><span>Buyer's Order Number:</span></td>
+            <td><span>{{ add_user.buyersOrderNo }}</span></td>
+          </tr>
+        {% endif %}
+
+        {% if add_user.buyersOrderNo %}
+          <tr>
+            <td><span>Buyer's Order Date:</span></td>
+            <td><span>{{ add_user.buyersOrderNo }}</span></td>
+          </tr>
+        {% endif %}
+
+        {% if add_user.placeOfSupply %}
+          <tr>
+            <td><span>Place of Supply:</span></td>
+            <td><span>{{ add_user.placeOfSupply }}</span></td>
+          </tr>
+        {% endif %}
+
+        {% if add_user.transporterDetails %}
+          <tr>
+            <td><span>Transporter Details:</span></td>
+            <td><span>{{ add_user.transporterDetails }}</span></td>
           </tr>
         {% endif %}
       </table>
@@ -199,12 +213,14 @@
       <table>
         <thead>
           <tr>
-            <th style="text-align: center;"><span>Sl No</span></th>
-            <th style="text-align: center;"><span>Item</span></th>
-            <th style="text-align: center;"><span>Part No</span></th>
-            <th style="text-align: center;"><span>Quantity</span></th>
-            <th style="text-align: center;"><span>Unit Price</span></th>
-            <th style="text-align: center;"><span>Total</span></th>
+            <th>SL No</th>
+            <th>part no</th>
+            <th>product</th>
+            <th>hsn code</th>
+            <th>quantity</th>
+            <th>invoice uom</th>
+            <th>unit price</th>
+          <th>totalPrice</th>
           </tr>
         </thead>
         <tbody>
@@ -212,16 +228,16 @@
         </tbody>
 
         <tfoot>
-          {% if add_user.grossAmount %}
+          {% if add_user.invoice_grossAmount %}
             <tr style="background-color: #EAF6FD;">
               <td colspan="5"><span>Gross Amount :</span></td>
-              <td><span>{{ add_user.grossAmount }}</span></td>
+              <td><span>{{ add_user.invoice_grossAmount }}</span></td>
             </tr>
           {% endif %}
-          {% if add_user.discountValue %}
+          {% if add_user.invoice_discountValue %}
             <tr style="background-color: #EAF6FD;">
-              <td colspan="5"><span>Discount in {{ add_user.discountType }} :</span></td>
-              <td><span>{{ add_user.discountValue }}</span></td>
+              <td colspan="5"><span>Discount in {{ add_user.invoice_discountValue }} :</span></td>
+              <td><span>{{ add_user.invoice_discountValue }}</span></td>
             </tr>
           {% endif %}
           {% if add_user.pfPercentage %}
@@ -238,7 +254,7 @@
           {% endif %}
           {% if add_user.gstType %}
             <tr style="background-color: #EAF6FD;">
-              <td colspan="5"><span>{{add_user.gstType}} [{{ add_user.gstPercentage }}]</span></td>
+              <td colspan="5"><span>{{add_user.gstType}} [{{ add_user.invoice_gstValue }}]</span></td>
               <td>
                 {% if add_user.gstType == 'IGST' %}
                   <span>{{ add_user.gstValue }}</span>
@@ -248,16 +264,16 @@
               </td>
             </tr>
           {% endif %}
-          {% if add_user.roundOffValue %}
+          {% if add_user.invoice_roundOffValue %}
             <tr style="background-color: #EAF6FD;">
               <td colspan="5"><span>Round Off [ {% if add_user.roundOffType == 'addition' %}+{% else %}-{% endif %}]</span></td>
-              <td><span>{{ add_user.roundOffValue }}</span></td>
+              <td><span>{{ add_user.invoice_roundOffValue }}</span></td>
             </tr>
           {% endif %}
-          {% if add_user.grandTotal %}
+          {% if add_user.invoice_grandTotal %}
             <tr style="background-color: #EAF6FD;">
               <td colspan="5"><span>Grand Total:</span></td>
-              <td><span>{{ add_user.grandTotal }}</span></td>
+              <td><span>{{ add_user.invoice_grandTotal }}</span></td>
             </tr>
           {% endif %}
         </tfoot>
@@ -267,7 +283,7 @@
       <span><strong>Total (in words):</strong>
         <strong><h id="grandTotalOffer"></h></strong>
       </span>
-      <div class="term-conditions">
+      <!-- <div class="term-conditions">
         <h4><span><strong>Terms and Conditions:</strong></span></h4>
         <p>
           {% if add_user.price_basis_offer %}
@@ -316,7 +332,7 @@
             <span><strong>{{ count }}. Warranty :</strong> {{ add_user.contract_review_warrantly }}</span><br>
           {% endif %}
         </p>
-      </div>
+      </div> -->
           
 
       <div>

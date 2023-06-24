@@ -55,29 +55,34 @@
 									  </tr>
 									</thead>
 									<tbody>
-									  {% for user in users %}
-										<tr style="background-color: {% if user.oc_date == '' %}yellow{% else %}rgba(144, 238, 144, 0.5){% endif %}">
-										  <td>{{ user.oc_date }}</td>
-										  <td>{{ user.oc_number }}</td>
-										  <td>{{ user.oc_customer_name }}</td>
-										  <td>{{ user.oc_po_value }}</td>
-										  <td>{{ user.oc_customer_type }}</td>
-										  <td>{{ user.oc_po_number }}</td>
-										  <td>{{ user.oc_po_date }}</td>
-										  <td>{{ user.oc_quotation_no }}</td>
-										  <td>{{ user.oc_dispatch_date }}</td>
-										  <td>{{ user.oc_invoice_no }}</td>
-										  <td>{{ user.oc_invoice_date }}</td>
-										  <td>
-											<div class="form-button-action">
-											  <span style="font-size: 24px;color:green;">
-												<a href="/{{ user.id }}/edit_oc_register" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fas fa-edit"></i></a> 
-											  </span>
-											</div>
-										  </td>
-										</tr>
-									  {% endfor %}
-									</tbody>
+										{% for user in users %}
+										  <tr style="background-color: {% if user.oc_date == '' %}yellow{% else %}rgba(144, 238, 144, 0.5){% endif %}">
+											<td>{{ user.oc_date }}</td>
+											<td>
+											  {% if user.oc_date != '' %}
+												{{ user.oc_number }}
+											  {% endif %}
+											</td>
+											<td>{{ user.oc_customer_name }}</td>
+											<td>{{ user.oc_po_value }}</td>
+											<td>{{ user.oc_customer_type }}</td>
+											<td>{{ user.oc_po_number }}</td>
+											<td>{{ user.oc_po_date }}</td>
+											<td>{{ user.oc_quotation_no }}</td>
+											<td>{{ user.oc_dispatch_date }}</td>
+											<td>{{ user.oc_invoice_no }}</td>
+											<td>{{ user.oc_invoice_date }}</td>
+											<td>
+											  <div class="form-button-action">
+												<span style="font-size: 24px;color:green;">
+												  <a href="/{{ user.id }}/edit_oc_register" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fas fa-edit"></i></a> 
+												</span>
+											  </div>
+											</td>
+										  </tr>
+										{% endfor %}
+									  </tbody>
+									  
 								  </table>
 								  
 							</div>

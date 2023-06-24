@@ -327,6 +327,95 @@ class ProductMaster(db.Model):
         return f"{self.product_name}:{self.part_no}"
 
 
+class Invoices(db.Model):
+    __tablename__ = "InvoiceList"
+
+    id = db.Column(db.Integer, primary_key=True)
+    invoiceNo = db.Column(db.String())
+    invoiceDate = db.Column(db.String())
+    supplierCode = db.Column(db.String())
+    invoiceType = db.Column(db.String())
+    oc_name_change = db.Column(db.String())
+    buyers_name = db.Column(db.String())
+    oc_number = db.Column(db.String())
+    billingAddress1 = db.Column(db.String())
+    billingAddress = db.Column(db.String())
+    buyersGSTIN = db.Column(db.String())
+    buyersPAN = db.Column(db.String())
+    buyersOrderNo = db.Column(db.String())
+    buyersOrderDate = db.Column(db.String())
+    buyersStateCode = db.Column(db.String())
+    placeOfSupply = db.Column(db.String())
+    transporterDetails = db.Column(db.String())
+    exportFields = db.Column(db.String())
+    paymentTerms = db.Column(db.String())
+    kitSpare = db.Column(db.String())
+
+    invoice_grossAmount = db.Column(db.Float)
+    discountType = db.Column(db.String())
+    invoice_discountValue = db.Column(db.Float)
+    assessableValue = db.Column(db.Float)
+    pfPercentage = db.Column(db.Float)
+    invoice_pfValue = db.Column(db.Float)
+    freightValue = db.Column(db.Float)
+    invoice_totalFreight = db.Column(db.Float)
+    tcsPercentage = db.Column(db.Float)
+    invoice_tcsValue = db.Column(db.Float)
+    gstPercentage = db.Column(db.Float)
+    invoice_gstValue = db.Column(db.Float)
+    roundOffType = db.Column(db.String())
+    invoice_roundOffValue = db.Column(db.Float)
+    invoice_grandTotal = db.Column(db.Float)
+    invoice_status = db.Column(db.String())
+    product_kit_Json = db.Column(db.String())
+
+    def __init__(self, invoiceNo, invoiceDate, supplierCode, invoiceType, oc_name_change, buyers_name, oc_number,
+                 billingAddress1, billingAddress, buyersGSTIN, buyersPAN, buyersOrderNo, buyersOrderDate,
+                 buyersStateCode, placeOfSupply, transporterDetails, exportFields, paymentTerms, kitSpare,
+                 invoice_grossAmount, discountType, invoice_discountValue, assessableValue, pfPercentage,
+                 invoice_pfValue, freightValue, invoice_totalFreight, tcsPercentage, invoice_tcsValue,
+                 gstPercentage, invoice_gstValue, roundOffType, invoice_roundOffValue, invoice_grandTotal,
+                 invoice_status,product_kit_Json):
+        self.invoiceNo = invoiceNo
+        self.invoiceDate = invoiceDate
+        self.supplierCode = supplierCode
+        self.invoiceType = invoiceType
+        self.oc_name_change = oc_name_change
+        self.buyers_name = buyers_name
+        self.oc_number = oc_number
+        self.billingAddress1 = billingAddress1
+        self.billingAddress = billingAddress
+        self.buyersGSTIN = buyersGSTIN
+        self.buyersPAN = buyersPAN
+        self.buyersOrderNo = buyersOrderNo
+        self.buyersOrderDate = buyersOrderDate
+        self.buyersStateCode = buyersStateCode
+        self.placeOfSupply = placeOfSupply
+        self.transporterDetails = transporterDetails
+        self.exportFields = exportFields
+        self.paymentTerms = paymentTerms
+        self.kitSpare = kitSpare
+        self.invoice_grossAmount = invoice_grossAmount
+        self.discountType = discountType
+        self.invoice_discountValue = invoice_discountValue
+        self.assessableValue = assessableValue
+        self.pfPercentage = pfPercentage
+        self.invoice_pfValue = invoice_pfValue
+        self.freightValue = freightValue
+        self.invoice_totalFreight = invoice_totalFreight
+        self.tcsPercentage = tcsPercentage
+        self.invoice_tcsValue = invoice_tcsValue
+        self.gstPercentage = gstPercentage
+        self.invoice_gstValue = invoice_gstValue
+        self.roundOffType = roundOffType
+        self.invoice_roundOffValue = invoice_roundOffValue
+        self.invoice_grandTotal = invoice_grandTotal
+        self.invoice_status = invoice_status
+        self.product_kit_Json = product_kit_Json
+
+    def __repr__(self):
+        return f"{self.invoiceNo}:{self.invoiceDate}"
+
 class KitMaster(db.Model):
     __tablename__ = "kitmaster"
 
@@ -514,3 +603,52 @@ class BomMaster(db.Model):
 
     def __repr__(self):
         return f"{self.bom_description}:{self.bom_no}"
+
+
+class BankDetails(db.Model):
+    __tablename__ = "BankDetails"
+
+    id = db.Column(db.Integer, primary_key=True)
+    suppliers_gstin_number = db.Column(db.String())
+    suppliers_pan_number = db.Column(db.String())
+    suppliers_hsn_code = db.Column(db.String())
+    suppliers_state_code = db.Column(db.String())
+    suppliers_bank = db.Column(db.String())
+    suppliers_account_no = db.Column(db.String())
+    suppliers_ifsc_code = db.Column(db.String())
+    nature_of_account = db.Column(db.String())
+
+    def __init__(self, suppliers_gstin_number, suppliers_pan_number, suppliers_hsn_code,
+                 suppliers_state_code, suppliers_bank, suppliers_account_no,
+                 suppliers_ifsc_code, nature_of_account):
+        self.suppliers_gstin_number = suppliers_gstin_number
+        self.suppliers_pan_number = suppliers_pan_number
+        self.suppliers_hsn_code = suppliers_hsn_code
+        self.suppliers_state_code = suppliers_state_code
+        self.suppliers_bank = suppliers_bank
+        self.suppliers_account_no = suppliers_account_no
+        self.suppliers_ifsc_code = suppliers_ifsc_code
+        self.nature_of_account = nature_of_account
+
+    def __repr__(self):
+        return f"<BankDetails {self.id}>"
+
+    @classmethod
+    def create_bank_details(cls):
+        bank_detail = cls(
+            suppliers_gstin_number="29AADCF1488R1ZT",
+            suppliers_pan_number="AADCF1488R",
+            suppliers_hsn_code="84798999",
+            suppliers_state_code="29",
+            suppliers_bank="BANK OF BARODA - JALAHALLI BRANCH",
+            suppliers_account_no="89550200001031",
+            suppliers_ifsc_code="BARB0VJJAHA (5th Digit is Zero)",
+            nature_of_account="CURRENT ACCOUNT"
+        )
+        db.session.add(bank_detail)
+        db.session.commit()
+
+@db.event.listens_for(BankDetails.__table__, 'after_create')
+def create_bank_details(*args, **kwargs):
+    BankDetails.create_bank_details()
+

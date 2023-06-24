@@ -1,0 +1,103 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+    <div class="page-inner">
+        <form action='' method="POST">
+            <div class="page-header">
+                <h4 class="page-title">BANK MASTER</h4>
+                <ul class="breadcrumbs">
+                    <li class="nav-home">
+                        <a href="/">
+                            <i class="flaticon-home"></i>
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="flaticon-right-arrow"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/offer-addoffer">master</a>
+                    </li>
+                    <li class="separator">
+                        <i class="flaticon-right-arrow"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/offer-offerlist">Bank master</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="suppliers_gstin_number">Suppliers GSTIN Number</label>
+                                <input type="text" id="suppliers_gstin_number" name="suppliers_gstin_number" class="form-control"
+                                    value="{{ bank_detail.suppliers_gstin_number }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="suppliers_pan_number">Suppliers PAN Number</label>
+                                <input type="text" id="suppliers_pan_number" name="suppliers_pan_number" class="form-control"
+                                    value="{{ bank_detail.suppliers_pan_number }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="suppliers_hsn_code">Suppliers HSN Code</label>
+                                <input type="text" id="suppliers_hsn_code" name="suppliers_hsn_code" class="form-control"
+                                    value="{{ bank_detail.suppliers_hsn_code }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="suppliers_state_code">Suppliers State Code</label>
+                                <input type="text" id="suppliers_state_code" name="suppliers_state_code" class="form-control"
+                                    value="{{ bank_detail.suppliers_state_code }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="suppliers_bank">Suppliers Bank</label>
+                                <input type="text" id="suppliers_bank" name="suppliers_bank" class="form-control"
+                                    value="{{ bank_detail.suppliers_bank }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="suppliers_account_no">Suppliers Account No</label>
+                                <input type="text" id="suppliers_account_no" name="suppliers_account_no" class="form-control"
+                                    value="{{ bank_detail.suppliers_account_no }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="suppliers_ifsc_code">Suppliers IFSC Code</label>
+                                <input type="text" id="suppliers_ifsc_code" name="suppliers_ifsc_code" class="form-control"
+                                    value="{{ bank_detail.suppliers_ifsc_code }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="nature_of_account">Nature of Account</label>
+                                <input type="text" id="nature_of_account" name="nature_of_account" class="form-control"
+                                    value="{{ bank_detail.nature_of_account }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

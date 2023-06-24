@@ -19,14 +19,14 @@ from apps.home.models import SupplierMaster
 from apps.home.models import UserModel
 from apps.home.models import CurrencyMaster
 from apps.home.models import AddOffer
-from apps.home.models import OCModel
+from apps.home.models import OCModel,Invoices,BankDetails
 from apps.authentication.models import Users
 import datetime
 
 @blueprint.route('/dashboard')
 @login_required
 def dashboard():
-    # db.metadata.tables['OfferComfirmation'].drop(db.engine)
+    # db.metadata.tables['BankDetails'].drop(db.engine)
     return render_template('home/dashboard.html', segment='dashboard')
 
 @blueprint.route('/get_kit_details', methods=['POST'])
@@ -39,6 +39,26 @@ def get_kit_details():
         data = json.loads(kit.kit_products)
         kit_names = [item['kit_name_master'] for item in data]
         return jsonify({'kit_no': kit_no, 'kit_product': kit_names})
+
+@blueprint.route('/get_selected_value', methods=['POST'])
+@login_required
+def get_selected_value():
+    oc_number = request.form.get('selectedValue')
+    data = OCModel.query.filter_by(oc_number=oc_number).first()
+    oc_customer_name = data.oc_customer_name
+    oc_quotation_no = data.oc_quotation_no
+    data1 = AddOffer.query.filter_by(quotation_number_offer=oc_quotation_no).first()
+    role_phone_temp = UserModel.query.filter_by(user_first_name=data1.marketing_person_offer).first()
+  
+    try:
+        addoffer_Role = role_phone_temp.user_role_master
+        addoffer_Phonenumber = role_phone_temp.user_contact_no
+    except AttributeError:
+        flash("The user's role is not available. User may have been deleted.", "warning")
+        print("AttributeError")
+        addoffer_Role = None
+        addoffer_Phonenumber = None
+    return jsonify({'buyer_input': oc_customer_name, 'billingAddress1':data1.contract_review_Billing_Address, 'transporterDetails':data1.contract_review_preferred_transporter })
 
 
 @blueprint.route('/offer-addoffer', methods=['GET', 'POST'])
@@ -621,12 +641,191 @@ def addinvoice():
         oc_list = OCModel.query.all()
         currency_user_invoice = CurrencyMaster.query.all()
         return render_template('home/add-invoice.html',oc_list=oc_list,users=users,user1=user1,currency_user_invoice=currency_user_invoice,segment='add-invoice')
+    if request.method == 'POST':
+        invoiceNo = request.form['invoiceNo']
+        invoiceDate = request.form['invoiceDate']
+        supplierCode = request.form['supplierCode']
+        invoiceType = request.form['invoiceType']
+        oc_name_change = request.form['oc_name_change']
+        buyers_name = request.form['buyer_input']
+        oc_number = request.form['main_oc_select']
+        billingAddress1 = request.form['billingAddress1']
+        billingAddress = request.form['billingAddress']
+        buyersGSTIN = request.form['buyersGSTIN']
+        buyersPAN = request.form['buyersPAN']
+        buyersOrderNo = request.form['buyersOrderNo']
+        buyersOrderDate = request.form['buyersOrderDate']
+        buyersStateCode = request.form['buyersStateCode']
+        placeOfSupply = request.form['placeOfSupply']
+        transporterDetails = request.form['transporterDetails']
+        exportFields = request.form['export_standard']
+        paymentTerms = request.form['paymentTerms']
+        kitSpare = request.form['kitSpare']
+        product_kit_offer_json = ''
+        product_kit_offer = []
+        if kitSpare == "Spares":
+            part_no = request.form.getlist('part_no')
+            product = request.form.getlist('product')
+            hsn_code = request.form.getlist('hsn_code')
+            quantity = request.form.getlist('quantity')
+            invoice_uom = request.form.getlist('invoice_uom')
+            unit_price = request.form.getlist('unit_price')
+            totalPrice = request.form.getlist('totalPrice')
+            print(totalPrice)
+            product_kit_offer = []
+            for i in range(len(part_no)):
+                product_offer = {
+                    'part_no': part_no[i],
+                    'product' : product[i],
+                    'hsn_code': hsn_code[i],
+                    'quantity': quantity[i],
+                    'invoice_uom' : invoice_uom[i],
+                    'unit_price': unit_price[i],
+                    'totalPrice': totalPrice[i]
+                }
+                product_kit_offer.append(product_offer)
 
+            product_kit_offer_json = json.dumps(product_kit_offer)
+            print(product_kit_offer_json)
+        if kitSpare == "Kits":
+            kit_description_offer = request.form.getlist('kit_description_offer')
+            kit_number_offer = request.form.getlist('kit_number_offer')
+            quantity_kit_offer = request.form.getlist('quantity_kit_offer')
+            unit_price_kit_offer = request.form.getlist('unit_price_kit_offer')
+            uom_type_list = request.form.getlist('uom_type')
+            total_price_kit_offer = request.form.getlist('total')
+
+            product_kit_offer = []
+            for i in range(len(kit_description_offer)):
+                kit_offer = {
+                    'kit_name': kit_description_offer[i],
+                    'part_number': kit_number_offer[i],
+                    'quantity': quantity_kit_offer[i],
+                    'unit_price': unit_price_kit_offer[i],
+                    'uom' : uom_type_list[i],
+                    'total_price': total_price_kit_offer[i],
+                }
+                product_kit_offer.append(kit_offer)
+
+            product_kit_offer_json = json.dumps(product_kit_offer)
+
+        invoice_grossAmount = request.form['invoice_grossAmount']
+        discountType = request.form['discountType']
+        invoice_discountValue = request.form['invoice_discountValue']
+        assessableValue = request.form['invoice_assessableValue']
+        pfPercentage = request.form['invoice_pfPercentage']
+        invoice_pfValue = request.form['invoice_pfValue']
+        freightValue = request.form['invoice_freightValue']
+        invoice_totalFreight = request.form['invoice_totalFreight']
+        tcsPercentage = request.form['invoice_tcsPercentage']
+        invoice_tcsValue = request.form['invoice_tcsValue']
+        gstPercentage = request.form['invoice_gstPercentage']
+        invoice_gstValue = request.form['invoice_gstValue']
+        roundOffType = request.form['roundOffType']
+        invoice_roundOffValue = request.form['invoice_roundOffValue']
+        invoice_grandTotal = request.form['invoice_grandTotal']
+
+        product_kit_Json = product_kit_offer_json
+
+        new_invoice = Invoices(invoiceNo=invoiceNo, invoiceDate=invoiceDate, supplierCode=supplierCode,
+                               invoiceType=invoiceType, oc_name_change=oc_name_change, buyers_name=buyers_name,
+                               oc_number=oc_number, billingAddress1=billingAddress1, billingAddress=billingAddress,
+                               buyersGSTIN=buyersGSTIN, buyersPAN=buyersPAN, buyersOrderNo=buyersOrderNo,
+                               buyersOrderDate=buyersOrderDate, buyersStateCode=buyersStateCode,
+                               placeOfSupply=placeOfSupply, transporterDetails=transporterDetails,
+                               exportFields=exportFields, paymentTerms=paymentTerms, kitSpare=kitSpare,
+                               invoice_grossAmount=invoice_grossAmount, discountType=discountType,
+                               invoice_discountValue=invoice_discountValue, assessableValue=assessableValue,
+                               pfPercentage=pfPercentage, invoice_pfValue=invoice_pfValue,
+                               freightValue=freightValue, invoice_totalFreight=invoice_totalFreight,
+                               tcsPercentage=tcsPercentage, invoice_tcsValue=invoice_tcsValue,
+                               gstPercentage=gstPercentage, invoice_gstValue=invoice_gstValue,
+                               roundOffType=roundOffType, invoice_roundOffValue=invoice_roundOffValue,
+                               invoice_grandTotal=invoice_grandTotal, invoice_status=0,product_kit_Json=product_kit_Json)
+
+        db.session.add(new_invoice)
+        db.session.commit()
+        return redirect('/invoice-invoiceslist')
+    
 @blueprint.route('/invoice-invoiceslist', methods=['GET', 'POST'])
 @login_required
 def listinvoices():
-    return render_template('home/invoices.html', segment='list-invoice')
+    invoice = Invoices.query.all()
+    return render_template('home/invoices.html', invoice=invoice,segment='list-invoice')
 
+@blueprint.route('/Perfoma-addinvoice', methods=['GET', 'POST'])
+@login_required
+def addperfomainvoice():
+    if request.method == 'GET':
+        users = CustomerMaster.query.all()
+        user1 = ProductMaster.query.all()
+        oc_list = OCModel.query.all()
+        currency_user_invoice = CurrencyMaster.query.all()
+        return render_template('home/add-perfoma-offer.html',oc_list=oc_list,users=users,user1=user1,currency_user_invoice=currency_user_invoice,segment='add-Perfoma')
+    # if request.method == 'POST':
+    #     invoiceNo = request.form['invoiceNo']
+    #     invoiceDate = request.form['invoiceDate']
+    #     supplierCode = request.form['supplierCode']
+    #     invoiceType = request.form['invoiceType']
+    #     oc_name_change = request.form['oc_name_change']
+    #     buyers_name = request.form['buyers_name']
+    #     oc_number = request.form['oc_number']
+    #     billingAddress1 = request.form['billingAddress1']
+    #     billingAddress = request.form['billingAddress']
+    #     buyersGSTIN = request.form['buyersGSTIN']
+    #     buyersPAN = request.form['buyersPAN']
+    #     buyersOrderNo = request.form['buyersOrderNo']
+    #     buyersOrderDate = request.form['buyersOrderDate']
+    #     buyersStateCode = request.form['buyersStateCode']
+    #     placeOfSupply = request.form['placeOfSupply']
+    #     transporterDetails = request.form['transporterDetails']
+    #     exportFields = request.form['exportFields']
+    #     paymentTerms = request.form['paymentTerms']
+    #     kitSpare = request.form['kitSpare']
+
+    #     invoice_grossAmount = request.form['invoice_grossAmount'])
+    #     discountType = request.form['discountType']
+    #     invoice_discountValue = request.form['invoice_discountValue'])
+    #     assessableValue = request.form['assessableValue'])
+    #     pfPercentage = request.form['pfPercentage'])
+    #     invoice_pfValue = request.form['invoice_pfValue'])
+    #     freightValue = request.form['freightValue'])
+    #     invoice_totalFreight = request.form['invoice_totalFreight'])
+    #     tcsPercentage = request.form['tcsPercentage'])
+    #     invoice_tcsValue = request.form['invoice_tcsValue'])
+    #     gstPercentage = request.form['gstPercentage'])
+    #     invoice_gstValue = request.form['invoice_gstValue'])
+    #     roundOffType = request.form['roundOffType']
+    #     invoice_roundOffValue = request.form['invoice_roundOffValue'])
+    #     invoice_grandTotal = request.form['invoice_grandTotal'])
+
+    #     product_kit_Json = request.form['product_kit_Json']
+
+    #     # Create a new Invoices object and add it to the database
+    #     new_invoice = Invoices(invoiceNo=invoiceNo, invoiceDate=invoiceDate, supplierCode=supplierCode,
+    #                            invoiceType=invoiceType, oc_name_change=oc_name_change, buyers_name=buyers_name,
+    #                            oc_number=oc_number, billingAddress1=billingAddress1, billingAddress=billingAddress,
+    #                            buyersGSTIN=buyersGSTIN, buyersPAN=buyersPAN, buyersOrderNo=buyersOrderNo,
+    #                            buyersOrderDate=buyersOrderDate, buyersStateCode=buyersStateCode,
+    #                            placeOfSupply=placeOfSupply, transporterDetails=transporterDetails,
+    #                            exportFields=exportFields, paymentTerms=paymentTerms, kitSpare=kitSpare,
+    #                            invoice_grossAmount=invoice_grossAmount, discountType=discountType,
+    #                            invoice_discountValue=invoice_discountValue, assessableValue=assessableValue,
+    #                            pfPercentage=pfPercentage, invoice_pfValue=invoice_pfValue,
+    #                            freightValue=freightValue, invoice_totalFreight=invoice_totalFreight,
+    #                            tcsPercentage=tcsPercentage, invoice_tcsValue=invoice_tcsValue,
+    #                            gstPercentage=gstPercentage, invoice_gstValue=invoice_gstValue,
+    #                            roundOffType=roundOffType, invoice_roundOffValue=invoice_roundOffValue,
+    #                            invoice_grandTotal=invoice_grandTotal, product_kit_Json=product_kit_Json)
+
+    #     db.session.add(new_invoice)
+    #     db.session.commit()
+
+
+@blueprint.route('/Perfoma-invoiceslist', methods=['GET', 'POST'])
+@login_required
+def listperfomainvoices():
+    return render_template('home/perfoma-offer.html', segment='Perfoma-invoiceslist')
 
 
 @blueprint.route('/PO-addpo', methods=['GET', 'POST'])
@@ -666,6 +865,64 @@ def retrieve_list():
 
     return render_template('home/users.html',add_user=add_user, segment='offer-offerlist')
 
+@blueprint.route('/<int:id>/invoice_pdf', methods=['GET', 'POST'])
+@login_required
+def invoice_pdf(id):
+    if request.method == 'GET':
+        add_user = Invoices.query.filter_by(id=id).first()
+        
+        data = json.loads(add_user.product_kit_Json)
+        print(data)
+        html_rows = ""
+        counter = 0
+
+        if add_user.kitSpare == "Spares":
+            html_rows = ""
+            counter = 0
+
+            for item in data:
+                part_no = item['part_no']
+                product = item['product']
+                hsn_code = item['hsn_code']
+                quantity = item['quantity']
+                invoice_uom = item['invoice_uom']
+                unit_price = item['unit_price']
+                totalPrice = item['totalPrice']
+
+                counter += 1
+                if counter % 2 == 0:
+                    background_color = 'white'
+                else:
+                    background_color = '#b18ae4'
+
+                html_row = f"<tr style='background-color: {background_color};'><td style='border: 1px solid #ccc; text-align: center;'><span>{counter}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{product}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{part_no}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{hsn_code}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{quantity}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{invoice_uom}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{unit_price}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{totalPrice}</span></td></tr>"
+
+                html_rows += html_row
+
+            return render_template('home/pdf_add_invoice.html', add_user=add_user, html_rows=html_rows, segment='list-invoice')
+
+
+        else:
+            for item in data:
+                kit_name = item['kit_name']
+                kit_number = item['part_number']
+                quantity = item['quantity']
+                unit_price = item['unit_price']
+                total_price = item['total_price']
+                counter += 1
+
+                kit_name_lines = kit_name.replace('\r\n', '\n').split('\n')
+                kit_name_html = "<br>".join([f"&bull;&nbsp;{line}" if i > 0 else f"<strong>{line}</strong>" for i, line in enumerate(kit_name_lines)])
+                if counter % 2 == 0:
+                    background_color = 'white'
+                else:
+                    background_color = 'lightblue'
+
+                html_row = f"<tr style='background-color: {background_color};'><td style='border: 1px solid #ccc; text-align: center;'><span>{counter}</span></td><td style='border: 1px solid #ccc;'><span>{kit_name_html}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{kit_number}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{quantity}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{unit_price}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{total_price}</span></td></tr>"
+
+                html_rows += html_row
+            return render_template('home/pdf_add_invoice.html',add_user=add_user,html_rows=html_rows, segment='list-invoice')
+        
 @blueprint.route('/<int:id>/offer_pdf', methods=['GET', 'POST'])
 @login_required
 def offer_pdf(id):
@@ -915,6 +1172,24 @@ def City_masters():
         db.session.commit()
         return redirect('/City-masters')
 
+@blueprint.route('/Bank-Master', methods=['GET', 'POST'])
+@login_required
+def Bank_master():
+    if request.method == 'GET':
+        bank_detail = BankDetails.query.filter_by(id=1).first()
+        return render_template('home/Bank-master.html',segment='Bank-masters',bank_detail=bank_detail)
+    if request.method == 'POST':
+        bank_detail = BankDetails.query.filter_by(id=1).first()
+        bank_detail.suppliers_gstin_number = request.form['suppliers_gstin_number']
+        bank_detail.suppliers_pan_number = request.form['suppliers_pan_number']
+        bank_detail.suppliers_hsn_code = request.form['suppliers_hsn_code']
+        bank_detail.suppliers_state_code = request.form['suppliers_state_code']
+        bank_detail.suppliers_bank = request.form['suppliers_bank']
+        bank_detail.suppliers_account_no = request.form['suppliers_account_no']
+        bank_detail.suppliers_ifsc_code = request.form['suppliers_ifsc_code']
+        bank_detail.nature_of_account = request.form['nature_of_account']
+        db.session.commit()
+        return redirect('/Bank-Master')
 @blueprint.route('/Role-masters', methods=['GET', 'POST'])
 @login_required
 def Role_masters():

@@ -61,30 +61,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>{{"address"}}</td>
-                                        <td>{{"address"}}</td>
-                                        <td>{{"primary_contact_name"}}</td>
-                                        <td>{{"email_id"}}</td>
-                                        <td>{{"contact_number"}}</td>
-                                        <td>{{"contact_number"}}</td>
+                                    {% for user in invoice %}
+                                    <tr
+                                    {% if loop.index %2==0 %}
+                                    {% else %}
+                                    {% endif %}>
+                                        <td>{{user.invoiceNo}}</td>
+                                        <td>{{user.invoiceDate}}</td>
+                                        <td>{{user.buyers_name}}</td>
+                                        <td>{{user.billingAddress1}}</td>
+                                        <td>{{user.invoiceType}}</td>
+                                        <td>{{user.invoice_status}}</td>
                                         <td>
                                             <div class="form-button-action">
                                                 <span style="font-size: 24px;color:green;">
-                                                    <a  type="button"
-                                                        data-toggle="tooltip" title=""
-                                                        class="btn btn-link btn-primary btn-lg"
-                                                        data-original-title="Edit Task"> <i class="fas fa-edit"></i></a>
+                                                <a href="/" type="button" class="btn btn-link btn-primary btn-lg"> <i class="fas fa-edit" ></i></a> 
                                                 </span>
                                                 <span style="font-size: 24px;color:red;">
-                                                    <a type="button" href="/"
-                                                        data-toggle="tooltip" title="" class="btn btn-link btn-danger"
-                                                        data-original-title="view"> <i class="fa fa-eye"></i></a>
+                                                <a href="/{{user.id}}/invoice_pdf" type="button" class="btn btn-link btn-danger"> <i class="fa fa-eye"></i></a>
                                                 </span>
-                                            </div>
+                                                </div>
                                         </td>
                                     </tr>
-
+                                    {% endfor %}
                                 </tbody>
 
                             </table>
