@@ -115,7 +115,7 @@
 
     <div class="button-container">
       <button id="printButton" type="submit" class="btn btn-primary btn-sm">Print</button>
-      <a routerlink="/offer-offerlist" class="btn btn-danger btn-sm" href="/offer-offerlist">Cancel</a>
+      <a routerlink="/invoice-invoiceslist" class="btn btn-danger btn-sm" href="/invoice-invoiceslist">Cancel</a>
     </div>
   </div>
 
@@ -134,7 +134,8 @@
           <span><strong>Invoice Date: </strong></span><span>{{ add_user.invoiceNo }}</span><br>
           <span><strong>Invoice No: </strong></span><span>{{ add_user.invoiceDate }}</span><br>
         </div>
-        <img src="/static/assets/img/logo.jpg" alt="Company Logo">
+        <img src="/static/assets/img/logo.jpg" alt="Company Logo" width="125" height="200">
+
       </div>
       
       <style>
@@ -228,14 +229,14 @@
       <table>
         <thead>
           <tr>
-            <th>SL No</th>
-            <th>Part No</th>
-            <th>Product</th>
-            <th>Hsn Code</th>
-            <th>Quantity</th>
-            <th>UOM</th>
-            <th>Unit Price</th>
-            <th>Total</th>
+            <th style="text-align: center;">SL No</th>
+            <th style="text-align: center;">Product</th>
+            <th style="text-align: center;">Part No</th>
+            <th style="text-align: center;">Hsn Code</th>
+            <th style="text-align: center;">Quantity</th>
+            <th style="text-align: center;">UOM</th>
+            <th style="text-align: center;">Unit Price</th>
+            <th style="text-align: center;">Total</th>
           </tr>
         </thead>
         <tbody>
@@ -292,69 +293,36 @@
             </tr>
           {% endif %}
         </tfoot>
-        
-
       </table>
-      <span><strong>Total (in words):</strong>
+      <span><strong>Total (in Rupees):</strong>
         <strong><h id="grandTotalOffer"></h></strong>
       </span>
-      <!-- <div class="term-conditions">
-        <h4><span><strong>Terms and Conditions:</strong></span></h4>
-        <p>
-          {% if add_user.price_basis_offer %}
-            <span><strong>1. Price Basis :</strong> {{ add_user.price_basis_offer }}</span><br>
-            {% set count = 2 %}
-          {% else %}
-            {% set count = 1 %}
-          {% endif %}
       
-          {% if add_user.PandFcharges_offer %}
-            <span><strong>{{ count }}. P&F Charges :</strong> {{ add_user.PandFcharges_offer }}</span><br>
-            {% set count = count + 1 %}
-          {% endif %}
+      <table class="from">
+        <tbody>
+          <tr>
+            <td><strong>Supplier GSTIN Number:</strong> {{ bank_details.suppliers_gstin_number }}</td>
+            <td><strong>Supplier PAN Number:</strong> {{ bank_details.suppliers_pan_number }}</td>
+            <td><strong>Supplier HSN Code:</strong> {{ bank_details.suppliers_hsn_code }}</td>
+            <td><strong>Supplier State Code:</strong> {{ bank_details.suppliers_state_code }}</td>
+          </tr>
+          <tr>
+            <td><strong>Supplier Bank:</strong> {{ bank_details.suppliers_bank }}</td>
+            <td><strong>Supplier Account Number:</strong> {{ bank_details.suppliers_account_no }}</td>
+            <td><strong>Supplier IFSC Code:</strong> {{ bank_details.suppliers_ifsc_code }}</td>
+            <td><strong>Nature of Account:</strong> {{ bank_details.nature_of_account }}</td>
+          </tr>
+        </tbody>
+      </table>
       
-          {% if add_user.igst_terms_offer %}
-            <span><strong>{{ count }}. GST :</strong> {{ add_user.igst_terms_offer }}</span><br>
-            {% set count = count + 1 %}
-          {% endif %}
       
-          {% if add_user.hsn_code_offer %}
-            <span><strong>{{ count }}. HSN CODE :</strong> {{ add_user.hsn_code_offer }}</span><br>
-            {% set count = count + 1 %}
-          {% endif %}
-      
-          {% if add_user.payment_terms_offer %}
-            <span><strong>{{ count }}. Payment Terms :</strong> {{ add_user.payment_terms_offer }}</span><br>
-            {% set count = count + 1 %}
-          {% endif %}
-      
-          {% if add_user.delivery_terms_offer %}
-            <span><strong>{{ count }}. Delivery :</strong> {{ add_user.delivery_terms_offer }}</span><br>
-            {% set count = count + 1 %}
-          {% endif %}
-      
-          {% if add_user.freight_terms_offer %}
-            <span><strong>{{ count }}. Freight :</strong> {{ add_user.freight_terms_offer }}</span><br>
-            {% set count = count + 1 %}
-          {% endif %}
-      
-          {% if add_user.validity_terms_offer %}
-            <span><strong>{{ count }}. Validity :</strong> {{ add_user.validity_terms_offer }}</span><br>
-            {% set count = count + 1 %}
-          {% endif %}
-      
-          {% if add_user.contract_review_warrantly %}
-            <span><strong>{{ count }}. Warranty :</strong> {{ add_user.contract_review_warrantly }}</span><br>
-          {% endif %}
-        </p>
-      </div> -->
-          
 
+      
       <div>
         <p>
           <span><strong>Thanking you,</strong></span> <br>
           <span><strong>Yours faithfully,</strong> </span> <br>
-          <span><strong>Name : </strong> {{ add_user.marketing_person_offer }} </span> <br>
+          <span><strong>Name : </strong> {{ marketing_person_offer }} </span> <br>
           <span><strong>Role : </strong> {{ addoffer_Role }} </span> <br>
           <span><strong>Contact No : </strong> {{ addoffer_Phonenumber }} </span> <br>
         </p>
@@ -643,7 +611,7 @@
       if (remaining > 0) {
         words += convertThreeDigits(remaining);
       }
-      return words.trim();
+      return words.trim()+' ONLY';
     }
   }
 

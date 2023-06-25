@@ -26,7 +26,7 @@ import datetime
 @blueprint.route('/dashboard')
 @login_required
 def dashboard():
-    # db.metadata.tables['BankDetails'].drop(db.engine)
+    # db.metadata.tables['InvoiceList'].drop(db.engine)
     return render_template('home/dashboard.html', segment='dashboard')
 
 @blueprint.route('/get_kit_details', methods=['POST'])
@@ -870,16 +870,27 @@ def retrieve_list():
 def invoice_pdf(id):
     if request.method == 'GET':
         add_user = Invoices.query.filter_by(id=id).first()
-        
+        oc_data = OCModel.query.filter_by(oc_number=add_user.oc_number).first()
+        data1 = AddOffer.query.filter_by(quotation_number_offer=oc_data.oc_quotation_no).first()
+        marketing_person_offer = data1.marketing_person_offer
+        role_phone_temp = UserModel.query.filter_by(user_first_name=data1.marketing_person_offer).first()
+        try:
+            addoffer_Role = role_phone_temp.user_role_master
+            addoffer_Phonenumber = role_phone_temp.user_contact_no
+        except AttributeError:
+            flash("The user's role is not available. User may have been deleted.", "warning")
+            print("AttributeError")
+            addoffer_Role = None
+            addoffer_Phonenumber = None
+        print(marketing_person_offer,addoffer_Role,addoffer_Phonenumber)
+        bank_details = BankDetails.query.filter_by(id=1).first()
         data = json.loads(add_user.product_kit_Json)
-        print(data)
         html_rows = ""
         counter = 0
 
         if add_user.kitSpare == "Spares":
             html_rows = ""
             counter = 0
-
             for item in data:
                 part_no = item['part_no']
                 product = item['product']
@@ -895,11 +906,11 @@ def invoice_pdf(id):
                 else:
                     background_color = '#b18ae4'
 
-                html_row = f"<tr style='background-color: {background_color};'><td style='border: 1px solid #ccc; text-align: center;'><span>{counter}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{product}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{part_no}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{hsn_code}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{quantity}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{invoice_uom}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{unit_price}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{totalPrice}</span></td></tr>"
+                html_row = f"<tr style='background-color: {background_color};'><td style='border: 1px solid #ccc; text-align: center;'><span>{counter}</span></td><td style='border: 1px solid #ccc;'><span>{product}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{part_no}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{hsn_code}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{quantity}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{invoice_uom}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{unit_price}</span></td><td style='border: 1px solid #ccc; text-align: right;'><span>{totalPrice}</span></td></tr>"
 
                 html_rows += html_row
 
-            return render_template('home/pdf_add_invoice.html', add_user=add_user, html_rows=html_rows, segment='list-invoice')
+            return render_template('home/pdf_add_invoice.html',marketing_person_offer=marketing_person_offer,addoffer_Role=addoffer_Role,addoffer_Phonenumber=addoffer_Phonenumber, bank_details=bank_details,add_user=add_user, html_rows=html_rows, segment='list-invoice')
 
 
         else:
@@ -921,7 +932,7 @@ def invoice_pdf(id):
                 html_row = f"<tr style='background-color: {background_color};'><td style='border: 1px solid #ccc; text-align: center;'><span>{counter}</span></td><td style='border: 1px solid #ccc;'><span>{kit_name_html}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{kit_number}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{quantity}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{unit_price}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{total_price}</span></td></tr>"
 
                 html_rows += html_row
-            return render_template('home/pdf_add_invoice.html',add_user=add_user,html_rows=html_rows, segment='list-invoice')
+            return render_template('home/pdf_add_invoice.html',marketing_person_offer=marketing_person_offer,addoffer_Role=addoffer_Role,addoffer_Phonenumber=addoffer_Phonenumber,bank_details=bank_details,add_user=add_user,html_rows=html_rows, segment='list-invoice')
         
 @blueprint.route('/<int:id>/offer_pdf', methods=['GET', 'POST'])
 @login_required
