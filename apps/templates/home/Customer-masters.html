@@ -112,39 +112,6 @@
 															<input name="address" type="text" autocomplete="new-password" class="form-control">
 														</div>
 													</div>
-													<div class="col-md-6">
-														<div class="form-group form-group-default">
-															<label>Country</label>
-															<select name="customer_country_name" class="form-control">
-																<option value="None">Select Country</option>
-																{% for user in country_master %}
-																	<option>{{ user.country_name_temp }}</option>
-																{% endfor %}
-															</select>
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group form-group-default">
-															<label>State</label>
-															<select name="customer_state_name" class="form-control">
-																<option value="None">Select State</option>
-																{% for user in state_masters %}
-																	<option>{{ user.state_name_temp }}</option>
-																{% endfor %}
-															</select>
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group form-group-default">
-															<label>City</label>
-															<select name="customer_city_name" class="form-control">
-																<option value="None">Select City</option>
-																{% for user in city_master %}
-																	<option>{{ user.city_name }}</option>
-																{% endfor %}
-															</select>
-														</div>
-													</div>
 												</div>
 										</div>
 										<div class="card-action">

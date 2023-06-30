@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
-            background: linear-gradient(120deg, #2980b9, #8e44ad, #f39c12, #16a085);
+            background: linear-gradient(120deg, #000, #fff);
             background-size: 400% 400%;
             animation: gradientBackground 15s ease infinite;
             font-family: Arial, sans-serif;
@@ -34,17 +34,19 @@
         .login-card {
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border: 1px solid #ddd;
+            border: 1px solid #fff;
             transition: transform 0.3s ease;
+            background-color: #fff;
+            color: #000;
         }
 
-        .card:hover {
+        .login-card:hover {
             transform: scale(1.05);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         }
-        
+
         .login-header {
-            background-color: #17a2b8;
+            background-color: #000;
             color: #fff;
             padding: 15px;
             border-top-left-radius: 10px;
@@ -59,6 +61,25 @@
 
         .login-body {
             padding: 30px;
+            position: relative;
+        }
+
+        .floating-label {
+            position: absolute;
+            pointer-events: none;
+            left: 15px;
+            top: 15px;
+            transition: 0.2s ease all;
+            font-size: 16px;
+            color: #aaa;
+        }
+
+        .form-control:focus + .floating-label,
+        .form-control:not(:placeholder-shown) + .floating-label {
+            top: -20px;
+            left: 0;
+            font-size: 12px;
+            color: #17a2b8;
         }
 
         .login-form-group {
@@ -66,17 +87,27 @@
         }
 
         .login-form-group .input-group-text {
-            background-color: #f8f9fa;
-            border-color: #f8f9fa;
+            background-color: #fff;
+            border-color: #fff;
+            color: #000;
         }
 
         .login-button {
             margin-top: 20px;
+            background-color: #17a2b8;
+            color: #fff;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-button:hover {
+            background-color: #138496;
         }
 
         .logo {
             text-align: center;
             margin-bottom: 20px;
+            transition: transform 0.3s ease;
         }
 
         .logo img {
@@ -84,7 +115,11 @@
             height: 100px;
             border-radius: 50%;
             border: 2px solid #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -101,7 +136,7 @@
                     </div>
 
                     <div class="logo">
-                        <img src="/static/assets/img/logo.jpg" alt="ORN Logo">
+                        <img src="/static/assets/img/sr_springs.jpg" alt="SRS Logo">
                     </div>
 
                     <form role="form" method="post" action="">
@@ -109,28 +144,20 @@
 
                             <div class="form-group login-form-group">
                                 <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-user"></i>
-                                        </span>
-                                    </div>
-                                    {{ form.username(placeholder="Username", class="form-control") }}
+                                    <input type="text" name="username" class="form-control" required>
+                                    <label class="floating-label">Username</label>
                                 </div>
                             </div>
 
                             <div class="form-group login-form-group">
                                 <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-lock"></i>
-                                        </span>
-                                    </div>
-                                    {{ form.password(placeholder="Password", class="form-control", type="password") }}
+                                    <input type="password" name="password" class="form-control" required>
+                                    <label class="floating-label">Password</label>
                                 </div>
                             </div>
 
                             <div class="form-group login-form-group">
-                                <button type="submit" name="login" class="btn btn-success btn-block">Submit</button>
+                                <button type="submit" name="login" class="btn btn-block login-button">Submit</button>
                             </div>
                         </div>
                     </form>

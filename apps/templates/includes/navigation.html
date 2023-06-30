@@ -2,16 +2,10 @@
   <!-- Logo Header -->
   <div class="logo-header" data-background-color="white">
     <a href="" class="logo">
-      <h style="font-family: Arial">ORNAPP</h>
+      <h style="font-family: Arial">S.R Springs</h>
     </a>
-    <button
-      class="navbar-toggler sidenav-toggler ml-auto"
-      type="button"
-      data-toggle="collapse"
-      data-target="collapse"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse"
+      aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon">
         <i class="icon-menu"></i>
       </span>
@@ -28,10 +22,7 @@
   <!-- End Logo Header -->
 
   <!-- Navbar Header -->
-  <nav
-    class="navbar navbar-header navbar-expand-lg"
-    data-background-color="white"
-  >
+  <nav class="navbar navbar-header navbar-expand-lg" data-background-color="white">
     {% if current_user.is_authenticated %}
     <div class="container-fluid">
       <div class="collapse" id="search-nav">
@@ -48,31 +39,16 @@
       </div>
       <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
         <li class="nav-item toggle-nav-search hidden-caret">
-          <a
-            class="nav-link"
-            data-toggle="collapse"
-            href="#search-nav"
-            role="button"
-            aria-expanded="false"
-            aria-controls="search-nav"
-          >
+          <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false"
+            aria-controls="search-nav">
             <i class="fa fa-search"></i>
           </a>
         </li>
         <li class="nav-item dropdown hidden-caret"></li>
         <li class="nav-item dropdown hidden-caret">
-          <a
-            class="dropdown-toggle profile-pic"
-            data-toggle="dropdown"
-            href="#"
-            aria-expanded="false"
-          >
+          <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
             <div class="avatar-sm">
-              <img
-                src="/static/assets/img/logo.jpg"
-                alt="..."
-                class="avatar-img rounded-circle"
-              />
+              <img src="/static/assets/img/sr_springs.jpg" alt="..." class="avatar-img rounded-circle" />
             </div>
           </a>
           <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -80,11 +56,7 @@
               <li>
                 <div class="user-box">
                   <div class="avatar-lg">
-                    <img
-                      src="/static/assets/img/logo.jpg"
-                      alt="image profile"
-                      class="avatar-img rounded"
-                    />
+                    <img src="/static/assets/img/sr_springs.jpg" alt="image profile" class="avatar-img rounded" />
                   </div>
                   <div class="u-text">
                     <h4>{{ current_user.username }}</h4>
@@ -93,11 +65,7 @@
                 </div>
               </li>
               <li>
-                <a
-                  class="dropdown-item"
-                  href="{{ url_for('authentication_blueprint.logout') }}"
-                  >Logout</a
-                >
+                <a class="dropdown-item" href="{{ url_for('authentication_blueprint.logout') }}">Logout</a>
               </li>
             </div>
           </ul>

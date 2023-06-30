@@ -28,9 +28,9 @@ class Users(db.Model, UserMixin):
 
     @classmethod
     def create_admin_user(cls):
-        admin_username = 'admin'
-        admin_email = 'admin@gmail.com'
-        admin_password = 'A$trongP@ssw0rd'
+        admin_username = 'rakesh'
+        admin_email = 'rakeshd2024@gmail.com'
+        admin_password = 'rakesh$trongP@ssw0rd'
 
         admin_user = cls(
             username=admin_username,
