@@ -74,52 +74,6 @@
 
 {% block content %}
 <div class="content">
-  <div class="popup">
-    <div>
-      <label for="colorInput">Text Color:</label>
-      <input type="color" id="colorInput" value="#000000">
-    </div>
-    <div>
-      <label for="backgroundColorInput">Highlight Text:</label>
-      <input type="color" id="backgroundColorInput" value="#ffffff">
-    </div>
-
-    <div>
-      <label for="commonFontStyleInput">Common Font Style:</label>
-      <select id="commonFontStyleInput">
-        <option value="Arial, sans-serif">Arial</option>
-        <option value="Helvetica, sans-serif">Helvetica</option>
-        <option value="Times New Roman, serif">Times New Roman</option>
-        <option value="Courier New, monospace">Courier New</option>
-        <option value="Verdana, sans-serif">Verdana</option>
-        <option value="Georgia, serif">Georgia</option>
-        <option value="Palatino, serif">Palatino</option>
-        <option value="Garamond, serif">Garamond</option>
-        <option value="Comic Sans MS, cursive">Comic Sans MS</option>
-        <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
-        <option value="Arial Black, sans-serif">Arial Black</option>
-        <option value="Impact, sans-serif">Impact</option>
-        <option value="Lucida Sans Unicode, sans-serif">Lucida Sans Unicode</option>
-        <option value="Tahoma, sans-serif">Tahoma</option>
-        <option value="Courier, monospace">Courier</option>
-        <option value="Brush Script MT, cursive">Brush Script MT</option>
-        <option value="Arial Narrow, sans-serif">Arial Narrow</option>
-        <option value="Bookman Old Style, serif">Bookman Old Style</option>
-        <option value="Century Gothic, sans-serif">Century Gothic</option>
-        <option value="Franklin Gothic Medium, sans-serif">Franklin Gothic Medium</option>
-        <option value="Arial Rounded MT Bold, sans-serif">Arial Rounded MT Bold</option>
-        <option value="Rockwell, serif">Rockwell</option>
-        <option value="Copperplate Gothic Bold, sans-serif">Copperplate Gothic Bold</option>
-      </select>
-    </div>
-
-    <div class="button-container">
-      <button id="printButton" type="submit" class="btn btn-primary btn-sm">Print</button>
-      <a routerlink="/offer-offerlist" class="btn btn-danger btn-sm" href="/offer-offerlist">Cancel</a>
-    </div>
-  </div>
-
-
   <div class="page-inner">
     <div class="term-conditions">
       <div class="quotation-header">
@@ -134,7 +88,7 @@
           <span><strong>Quotation Date: </strong></span><span>{{ add_user.due_date_offer }}</span><br>
           <span><strong>Quotation No: </strong></span><span>{{ add_user.quotation_number_offer }}</span><br>
         </div>
-        <img src="/static/assets/img/logo.jpg" alt="Company Logo">
+        <img src="/static/assets/img/sr_springs.jpg" alt="Company Logo">
       </div>
       <div class="from">
         <span><strong>To:</strong></span>
@@ -153,15 +107,27 @@
       <style>
         .from {
           border-collapse: collapse;
+          background-color: #f2e8ff; /* Light purple background color */
+          width: 100%;
+          margin-bottom: 20px;
         }
         
         .from td {
           border: 1px solid #ddd;
-          padding: 5px;
+          padding: 10px;
+          font-family: Arial, sans-serif;
+          text-align: left;
         }
         
         .from p {
           margin: 0;
+          color: #444; /* Darker text color */
+          font-size: 14px;
+          font-weight: bold;
+        }
+        
+        .from td:first-child p {
+          font-size: 16px; /* Larger font size for the first column */
         }
       </style>
       
@@ -195,75 +161,99 @@
         {% endif %}
       </table>
       
+      <style>
+        .from1 {
+          border-collapse: collapse;
+          background-color: #a37ada; /* Light purple background color */
+          width: 100%;
+          margin-bottom: 20px;
+        }
+        
+        .from1 td {
+          border: 1px solid #ddd;
+          padding: 10px;
+          font-family: Arial, sans-serif;
+          text-align: left;
+        }
+        
+        .from1 p {
+          margin: 0;
+          color: #444; /* Darker text color */
+          font-size: 14px;
+          font-weight: bold;
+        }
+        
+        .from1 td:first-child p {
+          font-size: 16px; /* Larger font size for the first column */
+        }
+      </style>
       
-      <table>
+      <table class="from1">
         <thead>
           <tr>
             <th style="text-align: center;"><span>Sl No</span></th>
             <th style="text-align: center;"><span>Item</span></th>
-            <th style="text-align: center;"><span>Part No</span></th>
+            <th style="text-align: center;"><span>UOM</span></th>
             <th style="text-align: center;"><span>Quantity</span></th>
             <th style="text-align: center;"><span>Unit Price</span></th>
-            <th style="text-align: center;"><span>Total</span></th>
+            <th style="text-align: right;"><span>Total</span></th>
           </tr>
         </thead>
         <tbody>
           <span> {{ html_rows | safe }}</span>
         </tbody>
 
-        <tfoot>
+        <table class="from">
           {% if add_user.grossAmount %}
-            <tr style="background-color: #EAF6FD;">
-              <td colspan="5"><span>Gross Amount :</span></td>
-              <td><span>{{ add_user.grossAmount }}</span></td>
+            <tr>
+              <td style="text-align: right;"><span>Gross Amount :</span></td>
+              <td style="text-align: right;"><span>{{ add_user.grossAmount }}</span></td>
             </tr>
           {% endif %}
           {% if add_user.discountValue %}
-            <tr style="background-color: #EAF6FD;">
-              <td colspan="5"><span>Discount in {{ add_user.discountType }} :</span></td>
-              <td><span>{{ add_user.discountValue }}</span></td>
+            <tr>
+              <td style="text-align: right;"><span>Discount in {{ add_user.discountType }} :</span></td>
+              <td style="text-align: right;"><span>{{ add_user.discountValue }}</span></td>
             </tr>
           {% endif %}
           {% if add_user.pfPercentage %}
-            <tr style="background-color: #EAF6FD;">
-              <td colspan="5"><span>P&F in %:</span></td>
-              <td><span>{{ add_user.pfPercentage }}</span></td>
+            <tr>
+              <td style="text-align: right;"><span>P&F in %:</span></td>
+              <td style="text-align: right;"><span>{{ add_user.pfPercentage }}</span></td>
             </tr>
           {% endif %}
           {% if add_user.freightValue %}
-            <tr style="background-color: #EAF6FD;">
-              <td colspan="5"><span>Freight:</span></td>
-              <td><span>{{ add_user.freightValue }}</span></td>
+            <tr>
+              <td style="text-align: right;"><span>Freight:</span></td>
+              <td style="text-align: right;"><span>{{ add_user.freightValue }}</span></td>
             </tr>
           {% endif %}
-          {% if add_user.gstType %}
-            <tr style="background-color: #EAF6FD;">
-              <td colspan="5"><span>{{add_user.gstType}} [{{ add_user.gstPercentage }}]</span></td>
-              <td>
-                {% if add_user.gstType == 'IGST' %}
-                  <span>{{ add_user.gstValue }}</span>
-                {% elif add_user.gstType == 'CGST' %}
+          {% if add_user.gstValue %}
+            <tr>
+              <td style="text-align: right;"><span>GST [{{ add_user.gstPercentage }}]</span></td>
+              <td style="text-align: right;">
                   <span>{{ add_user.gstValue}}</span>
-                {% endif %}
               </td>
             </tr>
           {% endif %}
           {% if add_user.roundOffValue %}
-            <tr style="background-color: #EAF6FD;">
-              <td colspan="5"><span>Round Off [ {% if add_user.roundOffType == 'addition' %}+{% else %}-{% endif %}]</span></td>
-              <td><span>{{ add_user.roundOffValue }}</span></td>
+            <tr>
+              <td style="text-align: right;"><span>Round Off [ {% if add_user.roundOffType == 'addition' %}+{% else %}-{% endif %}]</span></td>
+              <td style="text-align: right;"><span>{{ add_user.roundOffValue }}</span></td>
             </tr>
           {% endif %}
           {% if add_user.grandTotal %}
-            <tr style="background-color: #EAF6FD;">
-              <td colspan="5"><span>Grand Total:</span></td>
-              <td><span>{{ add_user.grandTotal }}</span></td>
+            <tr>
+              <td style="text-align: right;"><span>Grand Total:</span></td>
+              <td style="text-align: right;"><span>{{ add_user.grandTotal }}</span></td>
             </tr>
           {% endif %}
-        </tfoot>
+          </table>
         
 
       </table>
+
+      
       <span><strong>Total (in words):</strong>
         <strong><h id="grandTotalOffer"></h></strong>
       </span>
@@ -325,8 +315,8 @@
           <span><strong>Thanking you,</strong></span> <br>
           <span><strong>Yours faithfully,</strong> </span> <br>
           <span><strong>Name : </strong> {{ add_user.marketing_person_offer }} </span> <br>
-          <span><strong>Role : </strong> {{ addoffer_Role }} </span> <br>
-          <span><strong>Contact No : </strong> {{ addoffer_Phonenumber }} </span> <br>
+          <span><strong>Role : </strong> {{ Role }} </span> <br>
+          <span><strong>Contact No : </strong> {{ contact_no }} </span> <br>
         </p>
       </div>
 
@@ -387,27 +377,16 @@
       }
     </style>
 
-
-      <div class="container">
-          <div class="code">
-            <span><strong>ORN INDIA</strong></span>
-          </div>
-          <div class="address">
-            <span><strong>#800, Shiv Krupa Nilaya, 3rd Cross, 7th Main Road, KempeGowda Nagar, T Dasarahalli, Bangalore-560057</strong></span>
-          </div>
-          <div class="additional-info">
-            <span>Banglore-560057 Mail ID: info@ornindia.com</span><br>
-            <span>GSTN No. 29CATPD5857R1ZH</span>
-          </div>
-      </div>
-
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     </div>
   </div>
 
 </div>
-
+<div class="button-container">
+  <button id="printButton" type="submit" class="btn btn-primary btn-sm">Print</button>
+  <a routerlink="/offer-offerlist" class="btn btn-danger btn-sm" href="/offer-offerlist">Cancel</a>
+</div>
 <style>
   .quotation-header {
     display: flex;

@@ -11,25 +11,6 @@
 	<div class="page-inner">
 		<div class="page-header">
 			<h4 class="page-title">Add Users</h4>
-			<ul class="breadcrumbs">
-				<li class="nav-home">
-					<a href="#">
-						<i class="flaticon-home"></i>
-					</a>
-				</li>
-				<li class="separator">
-					<i class="flaticon-right-arrow"></i>
-				</li>
-				<li class="nav-item">
-					<a href="">Users</a>
-				</li>
-				<li class="separator">
-					<i class="flaticon-right-arrow"></i>
-				</li>
-				<li class="nav-item">
-					<a href="">Add Users</a>
-				</li>
-			</ul>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
@@ -37,87 +18,59 @@
 					<div class="card-header">
 						<div class="card-title">Update Customer</div>
 					</div>
-
 					<form action='' method="POST">
 						<div class="card-body">
 							<div class="row">
 								<div class="col-md-6 col-lg-4">
-
 									<div class="form-group">
 										<tr>
 											<label>Customer Name</label>
 											<td><input type="text" name="customer_name" value="{{user.customer_name}}"
-													class="form-control" /></td>
+													autocomplete="new-password" class="form-control" /></td>
 										</tr>
 									</div>
-
 
 									<div class="form-group">
 										<tr>
 											<label>Primary Contact Person</label>
 											<td><input type="text" name="primary_contact_name"
-													value="{{user.primary_contact_name}}" class="form-control" /></td>
+													autocomplete="new-password" value="{{user.primary_contact_name}}"
+													class="form-control" /></td>
 										</tr>
 									</div>
-
 
 									<div class="form-group">
 										<tr>
 											<label>Secondary Contact Person</label>
-											<td><input type="text" name="secondary_contact_name"
+											<td><input type="text" autocomplete="new-password"
+													name="secondary_contact_name"
 													value="{{user.secondary_contact_name}}" class="form-control" /></td>
 										</tr>
 									</div>
-									<div class="form-group">
-										<tr>
-											<label>State</label>
-											<td>
-
-										</tr>
-									</div>
-
 								</div>
-
-
 
 								<div class="col-md-6 col-lg-4">
 									<div class="form-group">
 										<tr>
 											<label>Email ID</label>
-											<td><input type="text" name="email_id" value="{{user.email_id}}"
-													class="form-control" /></td>
+											<td><input type="text" name="email_id" autocomplete="new-password"
+													value="{{user.email_id}}" class="form-control" /></td>
 										</tr>
 									</div>
 									<div class="form-group">
 										<tr>
 											<label>CONTACT NO</label>
-											<td><input type="text" name="contact_number" value="{{user.contact_number}}"
-													class="form-control" /></td>
+											<td><input type="text" name="contact_number" autocomplete="new-password"
+													value="{{user.contact_number}}" class="form-control" /></td>
 										</tr>
 									</div>
 									<div class="form-group">
 										<tr>
 											<label>PAN NO</label>
-											<td><input type="text" name="pan_number" value="{{user.pan_number}}"
-													class="form-control" /></td>
+											<td><input type="text" name="pan_number" autocomplete="new-password"
+													value="{{user.pan_number}}" class="form-control" /></td>
 										</tr>
 									</div>
-									<div class="form-group">
-										<tr>
-											<label>City</label>
-											<td>
-												<select name="customer_city_name" value="{{user.customer_city_name}}"
-													class="form-control">
-													<option value="None">Select City</option>
-													{% for user in city_master %}
-													<option>{{ user.city_name }}</option>
-													{% endfor %}
-												</select>
-
-											</td>
-										</tr>
-									</div>
-
 								</div>
 
 
@@ -125,37 +78,23 @@
 									<div class="form-group">
 										<tr>
 											<label>GST NO</label>
-											<td><input type="text" name="gst_number" value="{{user.gst_number}}"
-													class="form-control" /></td>
+											<td><input type="text" name="gst_number" autocomplete="new-password"
+													value="{{user.gst_number}}" class="form-control" /></td>
 										</tr>
 									</div>
 									<div class="form-group">
 										<tr>
 											<label>ADDRESS</label>
-											<td><input type="text" name="address" value="{{user.address}}"
-													class="form-control" /></td>
-										</tr>
-									</div>
-									<div class="form-group">
-										<tr>
-											<label>Country</label>
-											<td>
-												<select name="customer_country_name"
-													value="{{user.customer_country_name}}" class="form-control">
-													<option value="None">Select City</option>
-													{% for user in city_master %}
-													<option>{{ user.country_name }}</option>
-													{% endfor %}
-												</select>
-
-											</td>
+											<td><input type="text" name="address" autocomplete="new-password"
+													value="{{user.address}}" class="form-control" /></td>
 										</tr>
 									</div>
 								</div>
 								<div class="card-action">
 									<tr>
 										<td colspan="3">
-											<input type="submit" name="submit" value="submit" class="btn btn-success">
+											<input type="submit" name="submit" autocomplete="new-password"
+												value="submit" class="btn btn-success">
 										</td>
 									</tr>
 								</div>

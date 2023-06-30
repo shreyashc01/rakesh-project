@@ -97,9 +97,9 @@
 												<label for="marketing_Person_offer">Marketing Person</label>
 												<td>
 													<select name="marketing_Person_offer" id="marketing_Person_offer" class="form-control">
-														<option >Select Marketing Person</option>
+														<option >{{ details.supplier_name }}</option>
 														{% for user in role_manager_offer %}
-														  <option {% if user.user_first_name == addOffer_database.marketing_person_offer %}selected{% endif %}>{{ user.user_first_name }}</option>
+														  <option {% if user.user_first_name == details.supplier_name %}selected{% endif %}>{{ details.supplier_name }}</option>
 														{% endfor %}
 													  </select>													  
 												</td>

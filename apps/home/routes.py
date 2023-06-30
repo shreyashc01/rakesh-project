@@ -17,10 +17,11 @@ def dashboard():
 def create():
     if request.method == 'GET':
         users = CustomerMaster.query.all()
+        details = BankDetails.query.filter_by(id=1).first()
         addOffer = AddOffer.query.all()
         Quatationnumber = len(addOffer) 
         Quatationnumber += 1
-        return render_template('home/add-offer.html',users=users, offer_json=None,Quatationnumber=Quatationnumber, addOffer_database=None,segment='offer-addoffer')
+        return render_template('home/add-offer.html',details=details,users=users, offer_json=None,Quatationnumber=Quatationnumber, addOffer_database=None,segment='offer-addoffer')
     if request.method == 'POST':
         customer_name_offer = request.form['customer_name_offer']
 
@@ -130,6 +131,7 @@ def create():
 @login_required
 def update_add_offer(id):
     addOffer_database = AddOffer.query.filter_by(id=id).first()
+    details = BankDetails.query.filter_by(id=1).first()
     if request.method == 'GET':
         users = CustomerMaster.query.all()
         offer_json = json.loads(addOffer_database.product_kit_offer_json)
@@ -141,11 +143,12 @@ def update_add_offer(id):
         addOffer_database.currency_type_offer = request.form['currency_type_offer']
         product_kit_offer_json = ''
         product_kit_offer = []
-        product_offers = request.form.getlist('product_offer')
-        quantity_list = request.form.getlist('quantity_product_offer')
-        unit_price_list = request.form.getlist('unit_price_product_offer')
-        uom_type_list = request.form.getlist('uom_type')
-        total_price_product_offer = request.form.getlist('total')
+        product_offers = request.form.getlist('product')
+        quantity_list = request.form.getlist('quantity')
+        unit_price_list = request.form.getlist('unit_price')
+        uom_type_list = request.form.getlist('offer_uom')
+        total_price_product_offer = request.form.getlist('totalPrice')
+
         product_kit_offer = []
         for i in range(len(product_offers)):
             product_offer = {
@@ -159,22 +162,22 @@ def update_add_offer(id):
 
         product_kit_offer_json = json.dumps(product_kit_offer)
         addOffer_database.product_kit_offer_json = product_kit_offer_json
-        addOffer_database.grossAmount = request.form['grossAmount']
+        addOffer_database.grossAmount = request.form['offer_grossAmount']
         addOffer_database.discountType = request.form['discountType']
-        addOffer_database.discountValue = request.form['discountValue']
-        addOffer_database.assessableValue = request.form['assessableValue']
-        addOffer_database.pfPercentage = request.form['pfPercentage']
-        addOffer_database.pfValue = request.form['pfValue']
-        addOffer_database.freightValue = request.form['freightValue']
-        addOffer_database.totalFreight = request.form['totalFreight']
-        addOffer_database.tcsPercentage = request.form['tcsPercentage']
-        addOffer_database.gstType = request.form['gstType']
-        addOffer_database.tcsValue = request.form['tcsValue']
-        addOffer_database.gstPercentage = request.form['gstPercentage']
-        addOffer_database.gstValue = request.form['gstValue']
+        addOffer_database.discountValue = request.form['offer_discountValue']
+        addOffer_database.assessableValue = request.form['offer_assessableValue']
+        addOffer_database.pfPercentage = request.form['offer_pfPercentage']
+        addOffer_database.pfValue = request.form['offer_pfValue']
+        addOffer_database.freightValue = request.form['offer_freightValue']
+        addOffer_database.totalFreight = request.form['offer_totalFreight']
+        addOffer_database.tcsPercentage = request.form['offer_tcsPercentage']
+        addOffer_database.gstType = ""
+        addOffer_database.tcsValue = request.form['offer_tcsValue']
+        addOffer_database.gstPercentage = request.form['offer_gstPercentage']
+        addOffer_database.gstValue = request.form['offer_gstValue']
         addOffer_database.roundOffType = request.form['roundOffType']
-        addOffer_database.roundOffValue = request.form['roundOffValue']
-        addOffer_database.grandTotal = request.form['grandTotal']
+        addOffer_database.roundOffValue = request.form['offer_roundOffValue']
+        addOffer_database.grandTotal = request.form['offer_grandTotal']
 
         addOffer_database.subject_offer = request.form['subject_offer']
         addOffer_database.reference_offer = request.form['reference_offer']
@@ -193,7 +196,7 @@ def update_add_offer(id):
         addOffer_database.warrenty_terms_offer = request.form['warrenty_terms_offer']
         db.session.commit()
         return redirect('/offer-offerlist')
-    return render_template('home/add-offer.html',users=users, Quatationnumber=0,offer_json=offer_json, addOffer_database=addOffer_database,segment='offer-offerlist')
+    return render_template('home/add-offer.html',details=details,users=users, Quatationnumber=0,offer_json=offer_json, addOffer_database=addOffer_database,segment='offer-offerlist')
 
 @blueprint.route('/invoice-addinvoice', methods=['GET', 'POST'])
 @login_required
@@ -345,7 +348,9 @@ def offer_pdf(id):
         add_user = AddOffer.query.filter_by(id=id).first()
         address_temp = CustomerMaster.query.filter_by(customer_name=add_user.customer_name_offer).first()
         addoffer_address = address_temp.address if address_temp.address else None
-        
+        Bank_detail = BankDetails.query.filter_by(id=1).first()
+        Role = Bank_detail.supplier_role
+        contact_no = Bank_detail.supplier_contact_no
         data = json.loads(add_user.product_kit_offer_json)
         html_rows = ""
         counter = 0
@@ -361,12 +366,12 @@ def offer_pdf(id):
             if counter % 2 == 0:
                 background_color = 'white'
             else:
-                background_color = 'lightblue'
+                background_color = '#b18ae4'
 
-            html_row = f"<tr style='background-color: {background_color};'><td style='border: 1px solid #ccc; text-align: center;'><span>{counter}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{product_name}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{part_number}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{quantity}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{unit_price}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{total_price}</span></td></tr>"
+            html_row = f"<tr style='background-color: {background_color};'><td style='border: 1px solid #ccc; text-align: center;'><span>{counter}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{product_name}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{uom}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{quantity}</span></td><td style='border: 1px solid #ccc; text-align: center;'><span>{unit_price}</span></td><td style='border: 1px solid #ccc; text-align: right;'><span>{total_price}</span></td></tr>"
 
             html_rows += html_row
-        return render_template('home/pdf_add_offer.html',add_user=add_user,html_rows=html_rows,addoffer_address=addoffer_address,segment='offer-offerlist')
+        return render_template('home/pdf_add_offer.html',Role=Role,contact_no=contact_no,add_user=add_user,html_rows=html_rows,addoffer_address=addoffer_address,segment='offer-offerlist')
 
 @blueprint.route('/<int:id>/editcustomer', methods=['GET', 'POST'])
 @login_required
@@ -425,6 +430,9 @@ def Bank_master():
         return render_template('home/Bank-master.html',segment='Bank-details',bank_detail=bank_detail)
     if request.method == 'POST':
         bank_detail = BankDetails.query.filter_by(id=1).first()
+        bank_detail.supplier_name = request.form['supplier_name']
+        bank_detail.supplier_role = request.form['supplier_role']
+        bank_detail.supplier_contact_no = request.form['supplier_contact_no']
         bank_detail.suppliers_gstin_number = request.form['suppliers_gstin_number']
         bank_detail.suppliers_pan_number = request.form['suppliers_pan_number']
         bank_detail.suppliers_hsn_code = request.form['suppliers_hsn_code']
@@ -434,7 +442,7 @@ def Bank_master():
         bank_detail.suppliers_ifsc_code = request.form['suppliers_ifsc_code']
         bank_detail.nature_of_account = request.form['nature_of_account']
         db.session.commit()
-        return redirect('/Bank-Master')
+        return redirect('/Bank-details')
 
 @blueprint.route('/<int:id>/deletecustomer', methods=['GET', 'POST'])
 @login_required
